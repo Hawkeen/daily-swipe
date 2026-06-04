@@ -1,0 +1,14 @@
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+desktop.ini
+
+# macOS
+.DS_Store
+
+# Office temp/lock files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+*.tmp
