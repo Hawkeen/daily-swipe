@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "schemaVersion": 1,
+  "description": "Daily swipe for Simon. Today: Charles C. Mann — '1491: New Revelations of the Americas Before Columbus' (Knopf, 2005; National Academies Communication Award 2006). The Americas of 1491 may have held more people than Europe — and what Europeans called wilderness was a depopulated garden."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Survivors — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <!-- CARD 1 — COVER -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f1d0a, #78350f);">
+        <div class="pageno">1 / 10 →</div>
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 18px; opacity: 0.95;">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Book of the day · 📖</div>
+        <div style="font-size: 36px; font-weight: 800; line-height: 1.05; margin-bottom: 16px;">The Survivors</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.4; margin-bottom: 24px;">Charles C. Mann — <em>1491: New Revelations of the Americas Before Columbus</em> · Alfred A. Knopf · 2005</div>
+        <div style="font-size: 15px; opacity: 0.85; margin-bottom: 12px;">National Academies Communication Award, 2006 · 465 pages · followed in 2011 by <em>1493</em></div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 36px;">"The survivors of shattered civilizations" — what the colonists actually walked into.</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
+      </div>
+    </section>
+
+    <!-- CARD 2 — HOOK -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #7c2d12);">
+        <div class="pageno">2 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M12 2v20M2 12h20"/>
+          <circle cx="12" cy="12" r="9"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The hook</div>
+        <div style="font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">What if there were more people living in the Americas in 1491 than in Europe?</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Old textbooks put the pre-Columbian population at 8–10 million. Newer estimates from demography, palynology and soil science push it to <strong>90–112 million</strong>. By those numbers, Mann argues, the Americas were not a sparsely populated wilderness — they were one of the most densely settled places on Earth.</div>
+      </div>
+    </section>
+
+    <!-- CARD 3 — CORE THESIS -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
+        <div class="pageno">3 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M3 12h18M12 3v18"/>
+          <circle cx="12" cy="12" r="10"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The core argument</div>
+        <div style="font-size: 28px; font-weight: 800; line-height: 1.25; margin-bottom: 28px;">Three claims, drawn from new evidence across a dozen fields.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Mann distills the recent scholarship into three reversals: <strong>(1)</strong> indigenous populations were far larger than once thought; <strong>(2)</strong> humans arrived in the Americas earlier and in multiple waves, not only over the Bering land bridge around 13,000 years ago; <strong>(3)</strong> the New World at contact was <em>not</em> wilderness but a landscape Indigenous peoples had been actively shaping — mostly with fire — for thousands of years.</div>
+      </div>
+    </section>
+
+    <!-- CARD 4 — FINDING 1 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #be123c);">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M16 3.13a4 4 0 0 1 0 7.75M22 21v-2a4 4 0 0 0-3-3.87"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 1 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">High counters vs. low counters</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Mann walks through a generation-long fight among historians and anthropologists. Anthropologist <strong>Henry F. Dobyns</strong> — the most prominent "high counter" — estimated close to 100 million Native Americans before contact. Critics like <strong>David Henige</strong> (<em>Numbers from Nowhere</em>, 1998) argue the math is built on too many compounding guesses.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Mann doesn't resolve the dispute. He shows that the trend in the evidence — new dig sites, soil chemistry, pollen records — keeps moving in the high counters' direction.</div>
+      </div>
+    </section>
+
+    <!-- CARD 5 — FINDING 2 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #92400e);">
+        <div class="pageno">5 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M12 2v6M12 22v-4M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M16 12h6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 2 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Smallpox arrived before the colonists did</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Mann's chapter on the Inca turns on a single fact: smallpox and other Eurasian epidemics swept through the continent <em>ahead</em> of European armies. By the time Pizarro confronted the Inca in force, cities were already hollow. Native Americans had no inherited immunity. Disease, not warfare or horses or guns, did most of the demographic work.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Estimated mortality in the worst-hit areas: <strong>80 to 95%</strong>. The "empty" America the next wave of settlers walked into was a society that had just lost nine of every ten people.</div>
+      </div>
+    </section>
+
+    <!-- CARD 6 — FINDING 3 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #14532d, #166534);">
+        <div class="pageno">6 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21V12h6v9"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 3 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Cahokia, Tenochtitlan, Caral-Supe</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;"><strong>Cahokia</strong> — near modern St. Louis — was the biggest city north of the Rio Grande. Estimates run from <strong>15,000 to 100,000</strong> people. It rose around 1000 AD and collapsed around 1350. <strong>Tenochtitlan</strong> in the Valley of Mexico had running water and clean streets and rivalled the largest cities of contemporary Europe.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Mann notes that two of the world's first six independent cradles of civilization arose in the Americas: <strong>Norte Chico / Caral-Supe</strong> in northern Peru and <strong>formative-era Mesoamerica</strong> in southern Mexico.</div>
+      </div>
+    </section>
+
+    <!-- CARD 7 — FINDING 4 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #155e75);">
+        <div class="pageno">7 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M12 2C8 6 6 10 6 14a6 6 0 0 0 12 0c0-4-2-8-6-12z"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 4 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Indigenous peoples as a keystone species</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Mann argues that Native Americans were a <strong>keystone species</strong>: a population that "affects the survival and abundance of many other species." Most groups shaped their environments with <strong>slash-and-burn fire</strong> — clearing forests, encouraging grasslands, herding game animals into managed landscapes.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">After the population collapse, fire-clearing stopped. Forests expanded and grew denser. Bison and passenger pigeons exploded in numbers. The "primeval wilderness" later settlers saw was, in Mann's reading, <em>the new ecology of a continent without its gardeners</em>.</div>
+      </div>
+    </section>
+
+    <!-- CARD 8 — FINDING 5 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #6b21a8);">
+        <div class="pageno">8 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M9 9h.01M15 9h.01M9 16c1-1 2-1.5 3-1.5s2 .5 3 1.5"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 5 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">"Inferior technology" was a story Europeans told themselves</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Mann opens with New England in the 17th century. Native Americans thought European guns were "noisemakers" — harder to aim than a bow and shorter-ranged. Jamestown's John Smith conceded as an "awful truth" that <em>a gun "could not shoot as far as an arrow could fly."</em> Moccasins beat boots for warfare. Indian canoes outpaced European small boats.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">The colonists' assumption of technological superiority, Mann shows, doesn't survive a careful look at what each side actually used.</div>
+      </div>
+    </section>
+
+    <!-- CARD 9 — WHY NOW -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #134e4a, #115e59);">
+        <div class="pageno">9 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Why this matters in 2026</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">LiDAR is now proving Mann right under the Amazon canopy</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">In 2026, machine-learning frameworks (notably <em>GlyphTrack</em>) paired with spaceborne LiDAR from <strong>NASA's GEDI</strong> instrument are sweeping millions of square kilometres of Amazon canopy and surfacing roads, geoglyphs, and patterned settlements buried under the trees.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">May 2026 digs along the BR-156 highway in Amapá turned up nine sites with funerary urns and face-pottery. The picture that's emerging looks a lot like the one Mann argued for in 2005: <em>not a pristine forest, but a managed and densely settled landscape</em>.</div>
+      </div>
+    </section>
+
+    <!-- CARD 10 — CLOSING -->
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity: 0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">The line that stays</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; font-style: italic; border-left: 4px solid #7c2d12; padding-left: 18px; color: #2d1810;">"Settlers mistook overgrown farms for pristine wilderness and saw Indians as primitive people trapped in the Stone Age instead of as what they really were: the survivors of shattered civilizations."</div>
+        <div style="font-size: 13px; opacity: 0.6; margin-bottom: 32px; padding-left: 22px;">— Charles C. Mann, <em>1491</em></div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Concrete next step</div>
+        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">📖 If you only read one chapter, start with Mann's own 2002 <em>Atlantic</em> essay "1491" — the article that became the book. Then jump to the Inca and the Cahokia chapters; the rest of the argument hangs off those two case studies.</div>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://www.theatlantic.com/magazine/archive/2002/03/1491/2445/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>The Atlantic · Mann's original 2002 essay "1491"</b></a>
+          <a href="https://www.penguinrandomhouse.com/books/107178/1491-second-edition-by-charles-c-mann/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Penguin Random House · 1491 (Second Edition)</b></a>
+          <a href="https://en.wikipedia.org/wiki/1491:_New_Revelations_of_the_Americas_Before_Columbus" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · book entry &amp; reception</b></a>
+          <a href="https://www.npr.org/2011/08/08/138924127/in-1493-columbus-shaped-a-world-to-be" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>NPR Fresh Air · Mann interviewed on 1491/1493</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px; color: #5c2d12;">Daily Swipe · 21 June 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

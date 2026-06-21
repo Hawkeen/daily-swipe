@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "schemaVersion": 1,
+  "description": "Daily swipe for Simon. Today: Anish Kapoor at the Hayward Gallery, London (16 June – 18 October 2026). Curated by Ralph Rugoff for his final show as director, the artist's first major UK survey at the Hayward in nearly 30 years — Vantablack voids, mirror sculptures, and a six-metre inflatable that swallows the room."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Into the Void — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <!-- CARD 1 — COVER -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0a0a0a, #18181b);">
+        <div class="pageno">1 / 10 →</div>
+        <img src="https://bynder.southbankcentre.co.uk/transform/ffca4788-f2b3-43c6-b71a-0b9139e71b08/Anish-Kapoor_Email-header?io=transform%3Afill%2Cwidth%3A1200%2Cheight%3A800" alt="Anish Kapoor at Hayward Gallery" style="display:block; width:100%; max-height:180px; object-fit:cover; border-radius:12px; margin-bottom:18px;" loading="lazy">
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Creative topic · 🎨</div>
+        <div style="font-size: 36px; font-weight: 800; line-height: 1.05; margin-bottom: 16px;">Into the Void</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.4; margin-bottom: 24px;">Anish Kapoor · Hayward Gallery, Southbank Centre, London · 16 June – 18 October 2026</div>
+        <div style="font-size: 15px; opacity: 0.85; margin-bottom: 12px;">Curated by Ralph Rugoff · his final show as director after 20 years · 75th anniversary of the Southbank Centre</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 36px;">Vantablack voids · mirror sculptures · a six-metre inflatable that fills the gallery.</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
+      </div>
+    </section>
+
+    <!-- CARD 2 — HOOK -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #18181b, #000000);">
+        <div class="pageno">2 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/>
+          <circle cx="12" cy="12" r="5" fill="#000" stroke="#000"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The hook</div>
+        <div style="font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">What does it look like when an object absorbs 99.965% of all visible light?</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Like a shape-shaped hole in reality. The Hayward show is the largest UK gathering of Kapoor's <em>Vantablack</em> works yet — mysterious objects coated in what is, by absorption, the blackest known substance in the world, mystifying viewers "with their extraordinary light-absorbing properties." Critics call the result <em>"work that moves, frightens and stuns"</em> (The Guardian, ★★★★★).</div>
+      </div>
+    </section>
+
+    <!-- CARD 3 — CORE THESIS -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
+        <div class="pageno">3 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 3a9 9 0 0 1 0 18"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The core argument</div>
+        <div style="font-size: 28px; font-weight: 800; line-height: 1.25; margin-bottom: 28px;">Kapoor's sculpture is about what isn't there — the void, the mirror, the inflated emptiness.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Three families of work fill the Hayward: <strong>flawless steel mirror sculptures</strong> that warp the viewer back at themselves; <strong>Vantablack voids</strong> that look like holes; and <strong>seemingly depthless openings</strong> set into floors and walls "drawing us in with a thrilling sense of vertigo." Across all three, the subject is perception — what the eye does when its usual cues for depth, scale, and edge are removed.</div>
+      </div>
+    </section>
+
+    <!-- CARD 4 — FINDING 1 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #991b1b);">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 1 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Mumbai, Doon, Hornsey, Chelsea</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Sir Anish Mikhail Kapoor CBE RA was born in <strong>Mumbai on 12 March 1954</strong> — Indian Punjabi Hindu father (a hydrographer in the Indian Navy), Iraqi Jewish mother. After The Doon School he moved to the UK to train at <strong>Hornsey College of Art</strong>, then <strong>Chelsea School of Art and Design</strong>.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">He has stayed in Britain since. The Hayward staged his first major UK survey almost 30 years ago, in 1998. The 2026 show is the return.</div>
+      </div>
+    </section>
+
+    <!-- CARD 5 — FINDING 2 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #b45309);">
+        <div class="pageno">5 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <ellipse cx="12" cy="14" rx="9" ry="5"/>
+          <path d="M3 14V9a9 5 0 0 1 18 0v5"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 2 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">The Bean, the Orbit, Leviathan</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Kapoor's big public objects are the work most people have walked past or under. <strong>Cloud Gate</strong> (2006) in Chicago's Millennium Park — 33 × 66 × 42 feet, <em>168 stainless steel plates</em>, 110 short tons, no visible seams. Inspired by liquid mercury, locally nicknamed <em>The Bean</em>. <strong>Sky Mirror</strong> at Rockefeller Center (2006) and Kensington Gardens (2010).</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;"><strong>Leviathan</strong> at the Grand Palais (2011). <strong>ArcelorMittal Orbit</strong> in London's Olympic Park (2012). The Hayward show puts the iconic series alongside new work where you can see the line of thought running through them.</div>
+      </div>
+    </section>
+
+    <!-- CARD 6 — FINDING 3 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #000000, #18181b);">
+        <div class="pageno">6 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <rect x="3" y="3" width="18" height="18" rx="2" fill="#000"/>
+          <circle cx="12" cy="12" r="4" fill="#000"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 3 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Vantablack: not paint, a process</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">In interviews Kapoor is careful about what Vantablack actually is. <em>"This black material, the blackest material in the universe, isn't a paint. So it's not just a thing you paint on. It's a highly technical, complicated physical process… I've been working with it for nearly ten years now and in ten years I've only made a few objects."</em></div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">On what the coating <em>does</em> to a sculpture: <em>"the Vantablack version is more about introspection, about becoming disoriented, lost, and enveloped in an overwhelming void of nothingness."</em> The Hayward stages this in dedicated low-lit rooms.</div>
+      </div>
+    </section>
+
+    <!-- CARD 7 — FINDING 4 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #be123c);">
+        <div class="pageno">7 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M2 12c4-6 16-6 20 0-4 6-16 6-20 0z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 4 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">A six-metre inflatable, monumental reds, suggested blood and entrails</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">At the heart of the show are three monumental works, each filling an entire section. Visitors first enter "a gallery completely transformed by an atmospheric new commission: an inflatable installation that fills the six-metre-high space, challenging our sense of scale and self."</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">A pair of new monumental installations appear in Kapoor's signature <strong>red</strong>. The Hayward's own content warning is unusually frank: <em>"This exhibition contains artworks suggestive of blood and entrails."</em> Wallpaper* and The Telegraph both single out the "visceral" recent paintings.</div>
+      </div>
+    </section>
+
+    <!-- CARD 8 — FINDING 5 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #0c4a6e);">
+        <div class="pageno">8 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 5 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Turner Prize, Padma Bhushan, knighthood, Genesis Prize</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Kapoor's recognition stack reads like a survey of every kind of art establishment: <strong>Premio Duemila at the 44th Venice Biennale (1990)</strong>, the <strong>Turner Prize (1991)</strong>, the <strong>Unilever Commission at Tate Modern's Turbine Hall</strong>, the <strong>Padma Bhushan</strong> from India (2012), a <strong>knighthood</strong> in the 2013 Birthday Honours, an honorary doctorate from <strong>Oxford</strong> (2014), and the <strong>2017 Genesis Prize</strong>.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Notably, the Genesis Prize was given partly "for his many years of advocacy for refugees and displaced people" — a thread that runs through his public posture as much as the studio work.</div>
+      </div>
+    </section>
+
+    <!-- CARD 9 — WHY NOW -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #4c1d95);">
+        <div class="pageno">9 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Why this matters in 2026</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Open now · 18 weeks · Rugoff's last act</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">The show opened <strong>Tue 16 June 2026</strong> and runs through <strong>Sun 18 October 2026</strong> — eighteen weeks. Tickets are £22 (members free). The Telegraph, Independent and Guardian have all filed early reviews (★★★★, ★★★★, ★★★★★). The Art Newspaper interviewed Kapoor in conjunction with the opening on 15 June.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">It is also <strong>Ralph Rugoff's final exhibition as Director of the Hayward Gallery after 20 years</strong>, the centrepiece of the Southbank Centre's 75th anniversary programme, and the largest Kapoor survey in the UK in nearly three decades. None of those things converge again.</div>
+      </div>
+    </section>
+
+    <!-- CARD 10 — CLOSING -->
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity: 0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">The line that stays</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; font-style: italic; border-left: 4px solid #18181b; padding-left: 18px; color: #2d1810;">"Just because a thing is big, it doesn't mean it's of any interest or even good."</div>
+        <div style="font-size: 13px; opacity: 0.6; margin-bottom: 32px; padding-left: 22px;">— Anish Kapoor, The Art Newspaper, 15 June 2026</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Concrete next step</div>
+        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">🎨 Book a weekday morning slot at the Hayward — the inflatable and Vantablack rooms reward an empty gallery. While there, listen to <em>Anish Kapoor in Conversation with Darian Leader</em> at the Queen Elizabeth Hall on Wed 8 July, 8pm — a psychoanalyst questioning Kapoor on the work, in the gallery's sister venue.</div>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://www.southbankcentre.co.uk/whats-on/anish-kapoor/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Hayward Gallery · exhibition page &amp; tickets</b></a>
+          <a href="https://www.theartnewspaper.com/2026/06/15/anish-kapoor-just-because-a-thing-is-big-it-doesnt-mean-its-of-any-interest-or-even-good" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>The Art Newspaper · opening interview, 15 June 2026</b></a>
+          <a href="https://en.wikipedia.org/wiki/Anish_Kapoor" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · Anish Kapoor (full biography)</b></a>
+          <a href="https://anishkapoor.com/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>anishkapoor.com · artist's own catalogue raisonné</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px; color: #5c2d12;">Daily Swipe · 21 June 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
