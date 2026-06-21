@@ -1,7 +1,31 @@
 {
   "updated": "2026-06-21",
-  "count": 8,
+  "count": 11,
   "swipes": [
+    {
+      "file": "Swipe – Power and Progress – 2026-06-21.html",
+      "title": "Power and Progress",
+      "date": "2026-06-21",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Daily swipe for Simon. Today: Daron Acemoglu & Simon Johnson — 'Power and Progress: Our Thousand-Year Struggle Over Technology and Prosperity' (Public Affairs, 2023). The book that won the 2024 Nobel team a global hearing: technology has no preordained direction, and shared prosperity is a political choice."
+    },
+    {
+      "file": "Swipe – How Progress Ends – 2026-06-21.html",
+      "title": "How Progress Ends",
+      "date": "2026-06-21",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Daily swipe for Simon. Today: Mark Leonard's World in 30 Minutes — 'How progress ends' with Carl Benedikt Frey (ECFR, June 2026). Computing, the internet, AI — and productivity is still stagnating. The Oxford economist on why stagnation, not innovation, is the historical default."
+    },
+    {
+      "file": "Swipe – Carving the Essence – 2026-06-21.html",
+      "title": "Carving the Essence",
+      "date": "2026-06-21",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Daily swipe for Simon. Today: Constantin Brâncuși at the Neue Nationalgalerie, Berlin (20 March – 9 August 2026, in cooperation with Centre Pompidou). The first comprehensive German Brâncuși show in over 50 years — 150+ works, plus a partial reconstruction of the Paris studio. The man who taught modern sculpture to subtract."
+    },
     {
       "file": "Swipe – The Making of an Icon – 2026-06-21.html",
       "title": "The Making of an Icon",
@@ -40,31 +64,4 @@
       "date": "2026-06-08",
       "kicker": "Podcast of the day · 🎧",
       "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: The Ezra Klein Show — Helena Rosenblatt on 'The Lost History of Liberalism' (5 May 2026). For 2,000 years before the word existed, being 'liberal' meant something very different — and the Cold War quietly stripped it away."
-    },
-    {
-      "file": "Swipe – The Dinner-Plate Chip – 2026-06-08.html",
-      "title": "The Dinner-Plate Chip",
-      "date": "2026-06-08",
-      "kicker": "Podcast of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: Odd Lots with Andrew Feldman — 'Why Cerebras CEO Andrew Feldman Built The World's Largest Computer Chip' (21 May 2026). A dinner-plate-sized chip, a $20B OpenAI contract, and a $56B IPO bet against Nvidia's GPU orthodoxy."
-    },
-    {
-      "file": "Swipe – The Lost Virtue – 2026-06-04.html",
-      "title": "The Lost Virtue",
-      "date": "2026-06-04",
-      "kicker": "Podcast of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: The Ezra Klein Show with Helena Rosenblatt — 'The Book That Changed How I Think About Liberalism' (5 May 2026). Liberalism began as a virtue, not a political philosophy. The history was lost. That's why the defence feels so arid."
-    },
-    {
-      "file": "Swipe – Born in Bohemia – 2026-06-04.html",
-      "title": "Born in Bohemia",
-      "date": "2026-06-04",
-      "kicker": "Podcast of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: Odd Lots — Brendan Greeley on the 500-year history of the dollar. The dollar is older than the United States — and never really belonged to it."
-    }
-  ]
-}
+      "description": "Daily swipe for Simon. Today: Th
