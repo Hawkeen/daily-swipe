@@ -1,357 +1,225 @@
 <!DOCTYPE html>
-<script type="application/json" id="cowork-artifact-meta">
-{
-  "name": "Daily Swipe Summary",
-  "schemaVersion": 1,
-  "description": "Daily swipe for Simon. Today: Frida Kahlo, ahead of Tate Modern's 'Frida: The Making of an Icon' (25 June 2026 – 3 January 2027). How a chronically ill painter from a blue house in Coyoacán became the most reproduced female artist on Earth — and what she lost in the translation."
-}
-</script>
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>The Making of an Icon — Daily Swipe</title>
+<title>Daily Swipe — Library</title>
+<!-- Home-screen app install -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0b0b0d">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Daily Swipe">
 <style>
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; padding: 0; height: 100%; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #0b0b0d;
-    color: #fff;
-    overflow: hidden;
-    overscroll-behavior: none;
+    background: #0b0b0d; color: #fff;
     -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
   }
-  /* ---- swipe framework ---- */
-  .swipe {
-    position: fixed; inset: 0;
-    display: flex; flex-direction: column;
-    width: 100%; max-width: 540px; margin: 0 auto;
-    background: #0b0b0d;
+  a { color: inherit; }
+
+  /* ---------- shared shell ---------- */
+  .wrap { max-width: 540px; margin: 0 auto; min-height: 100%;
+          display: flex; flex-direction: column;
+          padding: calc(22px + env(safe-area-inset-top)) 20px
+                   calc(28px + env(safe-area-inset-bottom)); }
+
+  /* ---------- home ---------- */
+  .brand { font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+           color: rgba(255,255,255,.5); }
+  h1 { font-size: clamp(30px, 8vw, 44px); line-height: 1.05; margin: 10px 0 6px;
+       font-weight: 800; letter-spacing: -0.02em; }
+  .sub { color: rgba(255,255,255,.6); font-size: 15px; margin-bottom: 30px; }
+  .count b { color: #fff; }
+
+  .draw {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 20px; border: none; border-radius: 18px; cursor: pointer;
+    font-size: 19px; font-weight: 700; color: #0b0b0d;
+    background: linear-gradient(135deg,#fff, #d8d8de);
+    box-shadow: 0 8px 30px rgba(0,0,0,.5);
+    transition: transform .12s ease, box-shadow .12s ease;
   }
-  .dots {
-    display: flex; gap: 6px; align-items: center; justify-content: center;
-    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
-    flex-wrap: wrap;
+  .draw:active { transform: scale(.98); box-shadow: 0 4px 16px rgba(0,0,0,.5); }
+  .draw .emoji { font-size: 22px; }
+  .progress { text-align: center; color: rgba(255,255,255,.4); font-size: 12.5px;
+              margin-top: 12px; letter-spacing: .02em; }
+
+  .row { display: flex; align-items: center; gap: 12px; margin: 34px 0 14px; }
+  .row h2 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+            color: rgba(255,255,255,.5); margin: 0; flex: 1; }
+  .row .reset { font-size: 12px; color: rgba(255,255,255,.4);
+                background: none; border: none; cursor: pointer; }
+
+  /* ---------- library list ---------- */
+  .list { display: flex; flex-direction: column; gap: 10px; }
+  .item {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 16px; border-radius: 15px; cursor: pointer; text-align: left;
+    background: #15151a; border: 1px solid rgba(255,255,255,.06);
+    transition: background .12s ease, transform .12s ease;
   }
-  .dot {
-    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
-    border-radius: 100px; background: rgba(255,255,255,0.22);
-    transition: background .25s ease; cursor: pointer;
-  }
-  .dot.active { background: rgba(255,255,255,0.92); }
-  .track {
-    flex: 1; min-height: 0;
-    display: flex;
-    overflow-x: auto; overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .track::-webkit-scrollbar { display: none; }
-  .card {
-    flex: 0 0 100%; width: 100%; height: 100%;
-    scroll-snap-align: center;
-    overflow-y: auto; overflow-x: hidden;
-    -webkit-overflow-scrolling: touch; scrollbar-width: none;
-    display: flex;
-    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
-  }
-  .card::-webkit-scrollbar { display: none; }
-  .panel {
-    width: 100%; margin: auto; min-height: 100%;
-    border-radius: 26px; padding: 40px 32px;
-    display: flex; flex-direction: column; justify-content: center;
-    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
-  }
-  .pageno {
-    position: absolute; top: 24px; right: 28px;
-    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
-  }
-  /* ---- desktop nav chevrons (hidden on touch) ---- */
-  .nav {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    width: 46px; height: 46px; border-radius: 100px;
-    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
-    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
-    color: #fff; user-select: none;
-  }
-  .swipe:hover .nav { opacity: 0.9; }
-  .nav.prev { left: 16px; } .nav.next { right: 16px; }
-  .nav.hidden { display: none; }
-  @media (hover: none) { .nav { display: none; } }
+  .item:active { transform: scale(.99); background: #1c1c23; }
+  .item .ic { font-size: 24px; line-height: 1.2; flex: 0 0 auto; }
+  .item .body { min-width: 0; flex: 1; }
+  .item .t { font-weight: 700; font-size: 16.5px; margin-bottom: 3px; }
+  .item .meta { font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase;
+                color: rgba(255,255,255,.42); margin-bottom: 6px; }
+  .item .d { font-size: 13px; line-height: 1.45; color: rgba(255,255,255,.62);
+             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+             overflow: hidden; }
+  .item.seen .ic, .item.seen .t { opacity: .5; }
+  .item .tick { color: #6ee7a8; font-size: 12px; margin-left: 6px; }
+
+  /* ---------- player overlay ---------- */
+  .player { position: fixed; inset: 0; background: #0b0b0d; z-index: 50;
+            display: none; flex-direction: column; }
+  .player.on { display: flex; }
+  .bar { display: flex; align-items: center; gap: 8px;
+         padding: calc(8px + env(safe-area-inset-top)) 10px 8px;
+         background: #0b0b0d; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .bar button { background: #1a1a20; color: #fff; border: 1px solid rgba(255,255,255,.1);
+                border-radius: 11px; padding: 9px 13px; font-size: 14px; font-weight: 600;
+                cursor: pointer; white-space: nowrap; }
+  .bar button:active { background: #25252e; }
+  .bar .label { flex: 1; min-width: 0; font-size: 13px; color: rgba(255,255,255,.55);
+                overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; }
+  .bar .again { background: #fff; color: #0b0b0d; border-color: #fff; }
+  iframe { flex: 1; width: 100%; border: 0; background: #0b0b0d; }
+
+  .err { color: #ff8f8f; font-size: 14px; margin-top: 20px; }
 </style>
 </head>
 <body>
+  <div class="wrap" id="home">
+    <div class="brand">Daily Swipe</div>
+    <h1>Your Library</h1>
+    <div class="sub count" id="count">Loading…</div>
 
-<div class="swipe">
-  <div class="dots" id="dots"></div>
+    <button class="draw" id="drawBtn" onclick="drawNext()">
+      <span class="emoji">🎲</span> Draw a swipe
+    </button>
+    <div class="progress" id="progress"></div>
 
-  <div class="track" id="track">
-
-    <!-- CARD 1 — COVER -->
-    <section class="card">
-      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #0c4a6e);">
-        <div class="pageno">1 / 10 →</div>
-        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 18px; opacity: 0.95;">
-          <circle cx="12" cy="9" r="4"/>
-          <path d="M6 21v-1a6 6 0 0 1 12 0v1"/>
-          <path d="M8 6c0-2 1.5-3.5 4-3.5s4 1.5 4 3.5"/>
-          <path d="M9 9.5h6"/>
-        </svg>
-        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Creative topic · 🎨</div>
-        <div style="font-size: 36px; font-weight: 800; line-height: 1.05; margin-bottom: 16px;">The Making of an Icon</div>
-        <div style="font-size: 18px; opacity: 0.95; line-height: 1.4; margin-bottom: 24px;">Frida Kahlo · <em>Frida: The Making of an Icon</em> at Tate Modern, London</div>
-        <div style="font-size: 15px; opacity: 0.85; margin-bottom: 12px;">25 June 2026 – 3 January 2027 · Curated by Tobias Ostrander &amp; Beatriz García-Velasco</div>
-        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 36px;">Coyoacán · Casa Azul · Tehuana · self-portraiture · 200+ merchandise categories</div>
-        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
-      </div>
-    </section>
-
-    <!-- CARD 2 — HOOK -->
-    <section class="card">
-      <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #831843);">
-        <div class="pageno">2 / 10 →</div>
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
-          <path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10z"/>
-        </svg>
-        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The hook</div>
-        <div style="font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">She produced 143 paintings in 47 years. Fifty-five of them were of herself.</div>
-        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">A chronically ill woman in a blue house in Coyoacán turned her own face into the most reproduced female artist&rsquo;s image on the planet. The Tate calls the new show &ldquo;<em>The Making of an Icon</em>&rdquo; — past tense, deliberately. The interesting question isn&rsquo;t who Frida was. It&rsquo;s who she has been <em>made into</em>.</div>
-      </div>
-    </section>
-
-    <!-- CARD 3 — CORE THESIS -->
-    <section class="card">
-      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
-        <div class="pageno">3 / 10 →</div>
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
-          <path d="M3 3h18v18H3z"/>
-          <path d="M3 9h18M9 3v18"/>
-        </svg>
-        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The core argument</div>
-        <div style="font-size: 28px; font-weight: 800; line-height: 1.25; margin-bottom: 28px;">Kahlo was the first artist to <em>curate her own persona</em> with the discipline of a brand — long before there were brands.</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Tate&rsquo;s curators frame it precisely this way: the show examines &ldquo;how the image of Kahlo was constructed, claimed, and eventually mass-produced.&rdquo; She painted her face, photographed her face, dressed her face, wrote letters to it. The unibrow and the flower crown were design decisions. The market did the rest.</div>
-      </div>
-    </section>
-
-    <!-- CARD 4 — FINDING 1: Casa Azul -->
-    <section class="card">
-      <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #155e75);">
-        <div class="pageno">4 / 10 →</div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
-          <path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/>
-        </svg>
-        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 1 / 5</div>
-        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">One blue house, almost an entire life</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Born 6 July 1907 to a German father (Guillermo Kahlo) and a mestiza mother of Purépecha descent, Frida spent most of her childhood and adult life at <strong>La Casa Azul</strong> — the cobalt-blue house at Londres 247 in Coyoacán, Mexico City. She lived there with Diego Rivera from 1931. She died there on 13 July 1954, age 47.</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">In 1958, four years after her death, the house opened as the <strong>Museo Frida Kahlo</strong>. The biography is literally <em>locatable</em> — one address, one set of walls, one painter&rsquo;s entire working life.</div>
-      </div>
-    </section>
-
-    <!-- CARD 5 — FINDING 2: Self-portraits -->
-    <section class="card">
-      <div class="panel" style="background: linear-gradient(135deg, #422006, #92400e);">
-        <div class="pageno">5 / 10 →</div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
-          <circle cx="12" cy="8" r="4"/>
-          <path d="M4 21a8 8 0 0 1 16 0"/>
-          <path d="M6 5l3-2M18 5l-3-2"/>
-        </svg>
-        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 2 / 5</div>
-        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">The arithmetic of self-portraiture</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Of Kahlo&rsquo;s roughly 143 paintings, <strong>55 are self-portraits</strong> — more than a third of the entire output. Her own explanation: &ldquo;<em>I paint myself because I am so often alone because I am the subject I know best.</em>&rdquo;</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Her 1940 self-portrait <em>The Dream (The Bed)</em> currently holds the record for the most expensive work by a female artist ever auctioned, at <strong>$54.7 million</strong>. The painter who reportedly worked &ldquo;because I am so often alone&rdquo; ended up with the priciest hammer price of any woman in art history.</div>
-      </div>
-    </section>
-
-    <!-- CARD 6 — FINDING 3: Tehuana dress -->
-    <section class="card">
-      <div class="panel" style="background: linear-gradient(135deg, #4a044e, #86198f);">
-        <div class="pageno">6 / 10 →</div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
-          <path d="M8 3l4 4 4-4"/>
-          <path d="M5 21l3-14h8l3 14z"/>
-          <path d="M9 11h6M8 16h8"/>
-        </svg>
-        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 3 / 5</div>
-        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">The Tehuana dress as politics, not costume</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Kahlo&rsquo;s adoption of the <strong>Tehuana</strong> dress — the elaborate embroidered <em>huipil</em> and long skirt of the Zapotec women from the Isthmus of Tehuantepec — was a deliberate political statement. The Tehuantepec region is known for its matriarchal social structures; the outfit proclaimed allegiance to indigenous, matrilineal Mexico and rejected European colonial aesthetics.</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">It also concealed her physical disabilities from the 1925 bus accident that shattered her pelvis and spine. Aesthetic, biographical, ideological &mdash; the same length of fabric did all three jobs at once.</div>
-      </div>
-    </section>
-
-    <!-- CARD 7 — FINDING 4: The Tate's argument -->
-    <section class="card">
-      <div class="panel" style="background: linear-gradient(135deg, #052e16, #166534);">
-        <div class="pageno">7 / 10 →</div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
-          <path d="M3 21h18"/>
-          <path d="M5 21V8l7-5 7 5v13"/>
-          <path d="M9 21v-7h6v7"/>
-        </svg>
-        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 4 / 5</div>
-        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">What the Tate is actually showing</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">The exhibition presents <strong>over 30 of Kahlo&rsquo;s most iconic works</strong> — introducing her &ldquo;many selves&rdquo;: the dedicated wife, the intellectual, the modern artist, the political activist. Alongside the paintings: treasured garments, jewellery, photographs, memorabilia.</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Plus &mdash; and this is the unusual move &mdash; <strong>over 200 works by her contemporaries and the artists she inspired</strong>, and more than 200 commercial objects encompassing her art, image, style, and persona. The argument is structural: Kahlo as a node in a network that includes Vogue, Barbie, Coyoacán, and her own letters.</div>
-      </div>
-    </section>
-
-    <!-- CARD 8 — FINDING 5: Commodification -->
-    <section class="card">
-      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #be123c);">
-        <div class="pageno">8 / 10 →</div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
-          <path d="M3 3h2l3 13h11l3-9H7"/>
-          <circle cx="10" cy="20" r="1.5"/>
-          <circle cx="17" cy="20" r="1.5"/>
-        </svg>
-        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 5 / 5</div>
-        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">The anti-capitalist who became 200+ categories of merch</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">The <strong>Frida Kahlo Corporation</strong>, formed with the heirs to protect her likeness, later licensed it onto tote bags, cushions, Shein collections, a Barbie. In 2019 her great-grandniece <strong>Mara Romeo</strong> sued to stop a Frida Barbie that had light skin, a thin figure, and inauthentic Mexican dress.</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">The friction Tate is dramatising: a Communist Party member whose image now sells fast fashion. Critics argue commodification &ldquo;reduces Frida&rsquo;s complex identity to a superficial brand, stripping her work of its deeper political and social meanings.&rdquo;</div>
-      </div>
-    </section>
-
-    <!-- CARD 9 — WHY NOW -->
-    <section class="card">
-      <div class="panel" style="background: linear-gradient(135deg, #134e4a, #115e59);">
-        <div class="pageno">9 / 10 →</div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
-          <circle cx="12" cy="12" r="9"/>
-          <path d="M12 7v5l3 2"/>
-        </svg>
-        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Why now</div>
-        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Four days from now, the doors open</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">&ldquo;<strong>Frida: The Making of an Icon</strong>&rdquo; opens at <strong>Tate Modern on 25 June 2026</strong> and runs through 3 January 2027. It&rsquo;s the museum&rsquo;s summer blockbuster — and one of the headline shows of the European 2026 art calendar, alongside Anish Kapoor at the Hayward and Pierre Huyghe&rsquo;s &ldquo;living&rdquo; ecosystem installation.</div>
-        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">The framing matters. Past blockbusters celebrated Kahlo. Tate&rsquo;s 2026 show is interrogating the celebration itself — asking who built the icon, who owns it, and what got left behind.</div>
-      </div>
-    </section>
-
-    <!-- CARD 10 — CLOSING -->
-    <section class="card">
-      <div class="panel" style="background: #ede4d3; color: #2d1810;">
-        <div class="pageno" style="opacity: 0.5;">10 / 10 ✓</div>
-        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">The line that stays</div>
-        <div style="font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; font-style: italic; border-left: 4px solid #7c2d12; padding-left: 18px; color: #2d1810;">&ldquo;I never painted dreams. I painted my own reality.&rdquo;</div>
-        <div style="font-size: 13px; opacity: 0.6; margin-bottom: 32px; padding-left: 22px;">&mdash; Frida Kahlo, rejecting the surrealist label André Breton tried to fix on her work</div>
-        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Concrete next step</div>
-        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">🎨 If you&rsquo;re in London between late June and early January, book a Tate Modern slot for the morning &mdash; weekend afternoons of summer blockbusters get unbearable. Before you go, read Wikipedia&rsquo;s entry on <em>The Two Fridas</em> (1939, painted the year she divorced Rivera): it&rsquo;s the painting the iconography all radiates from.</div>
-        <div style="margin-top:14px">
-          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
-          <a href="https://www.tate.org.uk/whats-on/tate-modern/frida-kahlo-the-making-of-an-icon" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Tate Modern · book the exhibition</b></a>
-          <a href="https://www.tate.org.uk/press/press-releases/frida-the-making-of-an-icon-25-june-2026--3-january-2027" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Tate press release (curators, 30+ works, scope)</b></a>
-          <a href="https://www.museofridakahlo.org.mx/?lang=en" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Museo Frida Kahlo · Casa Azul, Coyoacán</b></a>
-          <a href="https://en.wikipedia.org/wiki/Frida_Kahlo" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Wikipedia · Frida Kahlo (biography &amp; works)</b></a>
-        </div>
-        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px; color: #5c2d12;">Daily Swipe · 21 June 2026</div>
-      </div>
-    </section>
-
+    <div class="row">
+      <h2>Browse all</h2>
+      <button class="reset" onclick="resetSeen()">Reset progress</button>
+    </div>
+    <div class="list" id="list"></div>
+    <div class="err" id="err"></div>
   </div>
 
-  <div class="nav prev hidden" id="prev" aria-label="Previous">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  <div class="player" id="player">
+    <div class="bar">
+      <button onclick="closePlayer()">‹ Library</button>
+      <div class="label" id="plabel"></div>
+      <button class="again" onclick="drawNext()">↻ Another</button>
+    </div>
+    <iframe id="frame" title="Swipe"></iframe>
   </div>
-  <div class="nav next" id="next" aria-label="Next">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-  </div>
-</div>
 
 <script>
-(function () {
-  var track = document.getElementById('track');
-  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
-  var dotsWrap = document.getElementById('dots');
-  var prevBtn = document.getElementById('prev');
-  var nextBtn = document.getElementById('next');
-  var n = cards.length;
-  var current = 0;
+const REPO = "Hawkeen/daily-swipe";      // used only for optional auto-refresh
+const SEEN_KEY = "ds_seen_v1";
+let SWIPES = [];
 
-  // build progress dots
-  for (var i = 0; i < n; i++) {
-    (function (idx) {
-      var d = document.createElement('div');
-      d.className = 'dot' + (idx === 0 ? ' active' : '');
-      d.addEventListener('click', function () { goTo(idx); });
-      dotsWrap.appendChild(d);
-    })(i);
+const seen = () => { try { return JSON.parse(localStorage.getItem(SEEN_KEY)) || []; }
+                     catch(e){ return []; } };
+const setSeen = a => localStorage.setItem(SEEN_KEY, JSON.stringify(a));
+
+function deriveFromName(file){
+  const t = file.replace(/^Swipe\s*[–-]\s*/, "").replace(/\.html$/i, "")
+               .replace(/\s*[–-]\s*\d{4}-\d{2}-\d{2}\s*$/, "");
+  const d = (file.match(/(\d{4}-\d{2}-\d{2})/) || [])[1] || "";
+  return { file, title: t || file, date: d, kicker: "", emoji: "📄", description: "" };
+}
+
+async function load(){
+  // 1) committed manifest (always available, rich metadata)
+  try {
+    const r = await fetch("library.json", {cache:"no-store"});
+    const j = await r.json();
+    SWIPES = j.swipes || [];
+  } catch(e){
+    document.getElementById("err").textContent =
+      "Couldn't load library.json — is it in the same folder?";
   }
-  var dots = Array.prototype.slice.call(dotsWrap.children);
+  // 2) optional: pick up brand-new swipes not yet in the manifest
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/`,
+                          {headers:{Accept:"application/vnd.github+json"}});
+    if (r.ok){
+      const files = (await r.json())
+        .map(x => x.name)
+        .filter(n => /^Swipe\s*[–-].*\.html$/i.test(n));
+      const known = new Set(SWIPES.map(s => s.file));
+      files.forEach(n => { if(!known.has(n)) SWIPES.push(deriveFromName(n)); });
+    }
+  } catch(e){ /* offline / rate-limited — manifest is enough */ }
 
-  function setActive(i) {
-    i = Math.max(0, Math.min(n - 1, i));
-    if (i === current) return;
-    current = i;
-    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
-    prevBtn.classList.toggle('hidden', i === 0);
-    nextBtn.classList.toggle('hidden', i === n - 1);
-  }
-  function goTo(i) {
-    i = Math.max(0, Math.min(n - 1, i));
-    setActive(i); // commit target immediately so rapid taps don't rely on scroll events
-    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
-  }
+  SWIPES.sort((a,b) => (b.date||"").localeCompare(a.date||""));
+  render();
+}
 
-  // keep active dot in sync while the user swipes/drags by hand
-  track.addEventListener('scroll', function () {
-    setActive(Math.round(track.scrollLeft / track.clientWidth));
-  }, { passive: true });
+function render(){
+  document.getElementById("count").innerHTML =
+    `<b>${SWIPES.length}</b> swipe${SWIPES.length===1?"":"s"} in your library`;
+  const s = new Set(seen());
+  const remaining = SWIPES.filter(x => !s.has(x.file)).length;
+  document.getElementById("progress").textContent =
+    remaining ? `${remaining} unseen left in this round`
+              : "You've seen them all — next draw reshuffles the deck";
 
-  prevBtn.addEventListener('click', function () { goTo(current - 1); });
-  nextBtn.addEventListener('click', function () { goTo(current + 1); });
-
-  // keyboard arrows (desktop)
-  window.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
-    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  SWIPES.forEach(x => {
+    const el = document.createElement("button");
+    el.className = "item" + (s.has(x.file) ? " seen" : "");
+    el.onclick = () => open(x);
+    el.innerHTML =
+      `<div class="ic">${x.emoji||"📄"}</div>
+       <div class="body">
+         <div class="t">${esc(x.title)}${s.has(x.file)?'<span class="tick">✓</span>':''}</div>
+         <div class="meta">${esc(x.kicker||"Swipe")} · ${esc(x.date||"")}</div>
+         ${x.description?`<div class="d">${esc(x.description)}</div>`:""}
+       </div>`;
+    list.appendChild(el);
   });
+}
 
-  // vertical mouse-wheel advances cards, unless the current card needs to scroll
-  var wheelLock = false;
-  track.addEventListener('wheel', function (e) {
-    var card = cards[current];
-    var canScrollY = card.scrollHeight > card.clientHeight + 2;
-    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // native horizontal trackpad
-    if (Math.abs(e.deltaY) < 8) return;
-    e.preventDefault();
-    if (wheelLock) return;
-    wheelLock = true;
-    goTo(current + (e.deltaY > 0 ? 1 : -1));
-    setTimeout(function () { wheelLock = false; }, 450);
-  }, { passive: false });
+function drawNext(){
+  if (!SWIPES.length) return;
+  let s = seen();
+  let pool = SWIPES.filter(x => !s.includes(x.file));
+  if (!pool.length){ s = []; setSeen(s); pool = SWIPES.slice(); }   // reshuffle deck
+  const pick = pool[Math.floor(Math.random()*pool.length)];
+  open(pick);
+}
 
-  // click-and-drag to swipe (desktop mouse)
-  var down = false, startX = 0, startLeft = 0, moved = false;
-  track.addEventListener('mousedown', function (e) {
-    if (e.target.closest('a')) return;
-    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
-    track.style.scrollBehavior = 'auto';
-  });
-  window.addEventListener('mousemove', function (e) {
-    if (!down) return;
-    var dx = e.pageX - startX;
-    if (Math.abs(dx) > 4) moved = true;
-    track.scrollLeft = startLeft - dx;
-  });
-  window.addEventListener('mouseup', function () {
-    if (!down) return;
-    down = false; track.style.scrollBehavior = 'smooth';
-    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
-  });
+function open(x){
+  if (!seen().includes(x.file)){ const s = seen(); s.push(x.file); setSeen(s); }
+  document.getElementById("frame").src = "./" + encodeURIComponent(x.file);
+  document.getElementById("plabel").textContent = x.title;
+  document.getElementById("player").classList.add("on");
+  render();
+}
 
-  // keep the right card framed after orientation / resize
-  window.addEventListener('resize', function () {
-    track.scrollLeft = current * track.clientWidth;
-  });
+function closePlayer(){
+  document.getElementById("player").classList.remove("on");
+  document.getElementById("frame").src = "about:blank";
+}
 
-  setActive(0);
-})();
+function resetSeen(){ setSeen([]); render(); }
+
+function esc(s){ return (s||"").replace(/[&<>"]/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+load();
 </script>
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                              
