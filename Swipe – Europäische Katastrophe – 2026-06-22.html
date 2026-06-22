@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "schemaVersion": 1,
+  "description": "Daily swipe für Simon. Heute: Herfried Münkler — 'Der Dreißigjährige Krieg. Europäische Katastrophe, deutsches Trauma 1618–1648'. Ein 975-Seiten-Standardwerk – und Münklers These: kein späterer Konflikt erklärt die Kriege der Gegenwart besser."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Europäische Katastrophe — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <!-- CARD 1 — COVER -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3b0d0d, #7a1f1f);">
+        <div class="pageno">1 / 10 →</div>
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 18px; opacity: 0.95;">
+          <path d="M12 2v20M8 6l4-4 4 4M6 22h12"/><path d="M9 9h6l-1 5h-4z"/>
+        </svg>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Buch des Tages · 📖</div>
+        <div style="font-size: 34px; font-weight: 800; line-height: 1.08; margin-bottom: 16px;">Europäische Katastrophe</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.4; margin-bottom: 24px;">Herfried Münkler — <em>Der Dreißigjährige Krieg. Europäische Katastrophe, deutsches Trauma 1618–1648</em></div>
+        <div style="font-size: 15px; opacity: 0.85; margin-bottom: 12px;">975 Seiten · gilt als Standardwerk · Politikwissenschaftler an der HU Berlin</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 36px;">Ein Krieg von vor 400 Jahren – und ein Schlüssel zu den Kriegen von heute.</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Weiter →</div>
+      </div>
+    </section>
+
+    <!-- CARD 2 — RECALL QUIZ (prior swipe in English) -->
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">2 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · a recent swipe</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Born in Bohemia&rdquo; (4 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What surprising claim did the Odd Lots episode make about the U.S. dollar's history?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. The dollar was invented by the Federal Reserve in 1913</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. The dollar is older than the United States — its name and story begin in Europe</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. The dollar was always backed entirely by New World gold</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> — The dollar (from the Bohemian &ldquo;thaler&rdquo;) is older than the United States — and, the episode argued, never really belonged to it.
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD 3 — HOOK -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7a1f1f, #9f2d20);">
+        <div class="pageno">3 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M3 21l6-6M14 4l6 6M9 9l6 6"/><path d="M13 3l8 8-2 2-8-8z"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">Der Aufhänger</div>
+        <div style="font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">Welcher Krieg erklärt die Kriege der Gegenwart besser als jeder spätere Konflikt?</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Münklers Antwort liegt vier Jahrhunderte zurück. Sein Buch führt den Dreißigjährigen Krieg in all seinen Aspekten vor Augen – und behält dabei stets die Gegenwart im Blick.</div>
+      </div>
+    </section>
+
+    <!-- CARD 4 — CORE THESIS -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="10"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">Die Kernthese</div>
+        <div style="font-size: 28px; font-weight: 800; line-height: 1.25; margin-bottom: 28px;">Eine europäische Katastrophe, die zum deutschen Trauma wurde.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Münkler erzählt den Krieg von 1618 bis 1648 als detailreiche Gesamtdarstellung – und macht zugleich seinen Gegenwartsbezug stark: Besser als alle späteren Konflikte, so seine These, lässt gerade dieser Krieg die Kriege von heute verstehen. Die Verschränkung von Religion und Macht, von Söldnerheeren und verheerten Landschaften wirkt aus dem 17. Jahrhundert verstörend vertraut.</div>
+      </div>
+    </section>
+
+    <!-- CARD 5 — FINDING 1 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #9a3412);">
+        <div class="pageno">5 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M3 20h18M5 20V10l3-2 3 2 3-2 3 2v10"/><path d="M9 20v-4h2v4"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Befund 1 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Dreißig Jahre verheerte Landschaften</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Der Untertitel sagt das Programm: <strong>„Europäische Katastrophe, deutsches Trauma 1618–1648&ldquo;.</strong> Münkler erzählt von den durch <strong>Krieg und Krankheiten verheerten Landschaften Deutschlands</strong>.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Es ist die Geschichte einer Region, über die drei Jahrzehnte lang Heere zogen – und die der Krieg als kollektives Trauma im deutschen Gedächtnis hinterließ.</div>
+      </div>
+    </section>
+
+    <!-- CARD 6 — FINDING 2 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #713f12, #a16207);">
+        <div class="pageno">6 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M15 21v-1a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v1"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Befund 2 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Gustav Adolf, Wallenstein &amp; die Kurfürsten</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Münkler erzählt vom Schwedenkönig <strong>Gustav Adolf</strong> und dem Feldherrn <strong>Wallenstein</strong>, von <strong>Kardinälen und Kurfürsten</strong> und von den <strong>Landsknechten</strong>.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Es ist ein vielschichtiges System konkurrierender Akteure – Fürsten, Söldnerführer und Kirchenmänner –, deren Interessen sich kreuzen, verbünden und wieder zerfallen.</div>
+      </div>
+    </section>
+
+    <!-- CARD 7 — FINDING 3 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #57534e);">
+        <div class="pageno">7 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Befund 3 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Der Krieg als Spiegel der Gegenwart</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Münklers Pointe: Der Dreißigjährige Krieg kann <strong>besser als alle späteren Konflikte die heutigen Kriege verstehen lassen</strong>. Er behält in der ganzen Darstellung die Gegenwart im Blick.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Verschleppte, entgrenzte Gewalt, in die sich immer neue Mächte einmischen, ohne dass einer den Krieg noch beenden kann – dieses Muster, so die Lesart, kehrt in den Kriegen der Gegenwart wieder.</div>
+      </div>
+    </section>
+
+    <!-- CARD 8 — FINDING 4 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #44403c, #78716c);">
+        <div class="pageno">8 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Befund 4 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Ein Standardwerk auf 975 Seiten</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Münklers Gesamtdarstellung gilt als <strong>Standardwerk</strong>, weil sie anschaulich und auf aktuellem Stand Diplomatie- und Kriegsgeschichte erzählt.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Er zeichnet den Krieg mit einem Detailreichtum nach, <strong>den es in der deutschsprachigen Geschichtsschreibung seit mehr als hundert Jahren nicht mehr gegeben hat</strong> – auf rund 975 Seiten.</div>
+      </div>
+    </section>
+
+    <!-- CARD 9 — WHY NOW -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7a1f1f, #991b1b);">
+        <div class="pageno">9 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Warum das 2026 zählt</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Wenn sich Mächte in fremde Kriege verstricken</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Im Juni 2026 dominiert ein neuer Krieg zwischen den <strong>USA und Iran</strong> die Schlagzeilen – samt der Frage nach Friedensverhandlungen, wie etwa der Podcast <em>Lage der Nation</em> (LdN483, 17. Juni 2026) diskutiert.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Genau hier setzt Münklers Gegenwartsbezug an: ein Konflikt, in den sich äußere Mächte einmischen und der schwer zu beenden ist, folgt einem Muster, das der Dreißigjährige Krieg in Reinform zeigt.</div>
+      </div>
+    </section>
+
+    <!-- CARD 10 — (reserved spacer removed) -->
+    <!-- CARD 10 — CLOSING -->
+    <section class="card">
+      <div class="panel" style="background: #e7ddd2; color: #3b0d0d;">
+        <div class="pageno" style="opacity: 0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">Der Titel, der bleibt</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; font-style: italic; border-left: 4px solid #9f2d20; padding-left: 18px; color: #3b0d0d;">&bdquo;Europäische Katastrophe, deutsches Trauma 1618–1648&ldquo;</div>
+        <div style="font-size: 13px; opacity: 0.6; margin-bottom: 32px; padding-left: 22px;">— Untertitel von Herfried Münkler, <em>Der Dreißigjährige Krieg</em></div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Konkreter nächster Schritt</div>
+        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">📖 Das Buch ist ein Brocken – lies es nicht am Stück. Nimm dir zuerst die Kapitel zu Gustav Adolf und Wallenstein vor; an diesen beiden Figuren hängt der Wendepunkt des Krieges, und von dort erschließt sich der Rest.</div>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Nächste Schritte</p>
+          <a href="https://www.rowohlt.de/buch/herfried-muenkler-der-dreissigjaehrige-krieg-9783499630903" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Rowohlt · Buchseite</b></a>
+          <a href="https://www.perlentaucher.de/buch/herfried-muenkler/der-dreissigjaehrige-krieg.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Perlentaucher · Pressestimmen</b></a>
+          <a href="https://www.hsozkult.de/publicationreview/id/reb-26752" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>H-Soz-Kult · ausführliche Rezension</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px; color: #7a1f1f;">Daily Swipe · 22. Juni 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zurück">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
