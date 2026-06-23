@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "schemaVersion": 1,
+  "description": "Daily Swipe für Simon. Heute: Sicherheitshalber Folge 109 — 'Die Thukydides-Falle: Gibt es die wirklich? | FCAS' (Wiegold, Franke, Sauer & Masala, 16. Juni 2026). Führen Machtverschiebungen wirklich zwangsläufig zum Krieg?"
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Die Thukydides-Falle — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <!-- CARD 1 — COVER -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0f172a, #334155);">
+        <div class="pageno">1 / 10 →</div>
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 18px; opacity: 0.95;">
+          <path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/><path d="M5 9h14"/>
+        </svg>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Folge des Tages · 🎧</div>
+        <div style="font-size: 36px; font-weight: 800; line-height: 1.05; margin-bottom: 16px;">Die Thukydides-Falle</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.4; margin-bottom: 24px;"><em>Sicherheitshalber</em> · Folge 109 &mdash; &bdquo;Die Thukydides-Falle: Gibt es die wirklich? | FCAS&ldquo;</div>
+        <div style="font-size: 15px; opacity: 0.85; margin-bottom: 12px;">Mit Thomas Wiegold, Ulrike Franke, Frank Sauer &amp; Carlo Masala · 16. Juni 2026</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 36px;">Führen Machtverschiebungen wirklich zwangsläufig zum Krieg?</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Weiter →</div>
+      </div>
+    </section>
+
+    <!-- CARD 2 — RECALL QUIZ (prior swipe is English) -->
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">2 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · a recent swipe</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;The Permabear Returns&rdquo; (20 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What did veteran investor Jeremy Grantham call today&rsquo;s AI boom?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. A once-in-a-century productivity miracle with no real downside</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. &ldquo;A classic market bubble&rdquo; &mdash; real technology, but priced far beyond reason</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A government hoax with no real economic effect</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> — Grantham, who flagged 1989 Japan, 2000 dot-com and 2008 housing, sees the tech as genuinely transformative but the prices as a bubble.
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD 3 — HOOK -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #b45309);">
+        <div class="pageno">3 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M12 3v18M5 7h14M7 7l-3 7a4 4 0 0 0 6 0zM17 7l-3 7a4 4 0 0 0 6 0z"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">Der Aufhänger</div>
+        <div style="font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">16 Mal in 500 Jahren traf eine aufsteigende Macht auf eine etablierte. 12 Mal kam es zum Krieg.</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Diese Statistik machte Graham Allisons &bdquo;Thukydides-Falle&ldquo; berühmt &mdash; und zur Schablone für China und die USA. Doch die Runde von <em>Sicherheitshalber</em> fragt: Stimmt das überhaupt?</div>
+      </div>
+    </section>
+
+    <!-- CARD 4 — CORE THESIS -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="10"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">Der Grundgedanke</div>
+        <div style="font-size: 27px; font-weight: 800; line-height: 1.25; margin-bottom: 28px;">Eine berühmte These &mdash; auf den Prüfstand gestellt.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Die Runde diskutiert Graham Allisons These, wonach Machtverschiebungen zwischen aufsteigender und etablierter Macht zum Krieg führen. Ihre Leitfrage: Ist die Machtverschiebung wirklich die <em>Hauptursache</em> von Großmachtkriegen &mdash; oder spielen andere Analyseebenen und Faktoren die entscheidende Rolle?</div>
+      </div>
+    </section>
+
+    <!-- CARD 5 — FINDING 1 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #155e75, #0e7490);">
+        <div class="pageno">5 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M6 21V7l6-4 6 4v14M3 21h18M10 21v-5h4v5"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Erkenntnis 1 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Wer war Thukydides?</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Der antike Historiker des Peloponnesischen Krieges (5. Jh. v. Chr.) beschrieb, wie das aufsteigende Athen das dominierende Sparta herausforderte. Seine Diagnose: Es war der Aufstieg Athens und die Furcht, die er in Sparta auslöste, der den Krieg unausweichlich machte. Daher der Name.</div>
+      </div>
+    </section>
+
+    <!-- CARD 6 — FINDING 2 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #1d4ed8);">
+        <div class="pageno">6 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M3 17l6-6 4 4 8-8M15 7h6v6"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Erkenntnis 2 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Allisons Statistik</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Der Begriff wurde vom Harvard-Politikwissenschaftler Graham Allison popularisiert (ab ca. 2012). Sein viel zitierter Befund: In den vergangenen 500 Jahren gab es 16 solcher Konstellationen &mdash; in 12 davon brach Krieg aus. Daraus zog Allison Schlüsse für das Verhältnis von China und den USA.</div>
+      </div>
+    </section>
+
+    <!-- CARD 7 — FINDING 3 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #7e22ce);">
+        <div class="pageno">7 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7M12 17h.01"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Erkenntnis 3 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Aber stimmt die Falle?</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Genau hier setzt der Podcast an: Ist die Machtverschiebung wirklich die Hauptursache &mdash; oder nur eine von mehreren Bedingungen? Die Wissenschaft ist gespalten. Der Harvard-Kollege Joseph Nye etwa bestreitet, dass 12 von 16 Fällen im Krieg endeten, und wirft Allison vor, die Fälle falsch ausgewählt zu haben.</div>
+      </div>
+    </section>
+
+    <!-- CARD 8 — FINDING 4 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f2d1a, #7c2d12);">
+        <div class="pageno">8 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M2 12l9-2 11-3-3 5 3 5-11-3-9-2z"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Erkenntnis 4 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Und dann: die FCAS-Autopsie</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Im zweiten Teil seziert die Runde das deutsch-französisch-spanische Kampfflugzeug-Projekt FCAS: Wie tot ist es, welche Teile sind gescheitert, und wie soll es weitergehen? &bdquo;Deutschland sucht den Super-Jet&ldquo; &mdash; mit offenem Ausgang.</div>
+      </div>
+    </section>
+
+    <!-- CARD 9 — WHY NOW -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #9a3412);">
+        <div class="pageno">9 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Warum das 2026 zählt</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Aktuelle Sicherheitspolitik, in einer Folge</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Die Folge endet mit den &bdquo;Sicherheitshinweisen&ldquo;: eine neue Richtlinie des Verteidigungsministeriums zu autonomen Waffensystemen, ein Deal zwischen dem Iran und den USA und ein neues deutsches Rüstungsexport-Modell &mdash; allesamt offene Baustellen der Sicherheitspolitik im Juni 2026.</div>
+      </div>
+    </section>
+
+    <!-- CARD 10 — CLOSING -->
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #7f1d1d;">
+        <div class="pageno" style="opacity: 0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">Der Gedanke, der bleibt</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; font-style: italic; border-left: 4px solid #b45309; padding-left: 18px; color: #7f1d1d;">Nicht die Machtverschiebung allein, sondern die Furcht, die sie auslöst, gilt als Treiber von Großmachtkriegen &mdash; ob daraus ein Naturgesetz wird, bleibt umstritten.</div>
+        <div style="font-size: 13px; opacity: 0.6; margin-bottom: 32px; padding-left: 22px;">— Kernfrage von Sicherheitshalber, Folge 109</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Konkreter nächster Schritt</div>
+        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">🎧 Hör den ersten Block (ab 00:02:05) bewusst als Denkübung: Notiere, welche Faktoren neben der reinen Machtverschiebung über Krieg oder Frieden entscheiden &mdash; und prüfe sie an China und den USA.</div>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Nächste Schritte</p>
+          <a href="https://augengeradeaus.net/2026/06/sicherheitshalber-der-podcast-109-die-thukydides-falle-gibt-es-die-wirklich-fcas-deutschland-sucht-den-super-jet/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Shownotes &amp; Kapitelmarken (Augen geradeaus!)</b></a>
+          <a href="https://sicherheitspod.de/2026/06/16/folge-109-die-thukydides-falle-gibt-es-die-wirklich-fcas-deutschland-sucht-den-super-jet/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>sicherheitspod.de · Folge 109</b></a>
+          <a href="https://www.youtube.com/watch?v=XV3GrSmjzp0" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Ganze Folge auf YouTube</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px; color: #9a3412;">Daily Swipe · 23. Juni 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

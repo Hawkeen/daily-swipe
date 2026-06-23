@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "schemaVersion": 1,
+  "description": "Daily swipe for Simon. Today: 'Guggenheim Pop: 1960 to Now' at the Solomon R. Guggenheim Museum, New York (5 June 2026 – 10 January 2027). Curated by Lauren Hinkson — 29 artists, Warhol and Lichtenstein next to Cattelan's banana, Oldenburg's Soft Shuttlecock back on view after 25 years, and a Kusama Infinity Mirrored Room on loan."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Comedian Returns — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <!-- CARD 1 — COVER -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #be185d, #9d174d);">
+        <div class="pageno">1 / 10 →</div>
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 18px; opacity: 0.95;">
+          <circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="9"/>
+        </svg>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Creative topic · 🎨</div>
+        <div style="font-size: 34px; font-weight: 800; line-height: 1.05; margin-bottom: 16px;">The Comedian Returns</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.4; margin-bottom: 24px;"><em>Guggenheim Pop: 1960 to Now</em> · Solomon R. Guggenheim Museum, New York · <strong>5 June 2026 – 10 January 2027</strong></div>
+        <div style="font-size: 15px; opacity: 0.85; margin-bottom: 12px;">Curated by Lauren Hinkson, with Victoria Horrocks and Faith Hunter · 29 artists · across the rotunda &amp; the towers</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 36px;">Maurizio Cattelan's banana, Oldenburg's giant shuttlecock back after 25 years, and a Kusama Infinity Room.</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
+      </div>
+    </section>
+
+    <!-- CARD 2 — RECALL QUIZ -->
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">2 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · a recent swipe</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Born in Bohemia&rdquo; (4 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Brendan Greeley argued on Odd Lots that the US dollar is, in fact, what?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. A purely American invention dating from the Coinage Act of 1792.</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Older than the United States — and never really belonging to it.</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A post-1971 fiat construct with no real pre-history.</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> — Greeley's whole 500-year history of the dollar lands on a single line: it's older than the United States, and it never really belonged to it.
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD 3 — HOOK -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #c026d3, #a21caf);">
+        <div class="pageno">3 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M12 2c2 0 5 1 5 5s-3 5-5 7c-2-2-5-3-5-7s3-5 5-5z"/><path d="M12 14v8M9 22h6"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The hook</div>
+        <div style="font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">A duct-taped banana hung on the rotunda is what we now mean by Pop.</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Maurizio Cattelan's <em>Comedian</em> (2019) — the work that sold three times in 2019 and again at auction in 2024 — joins Warhol and Lichtenstein in the Guggenheim's new survey. <strong>Pop didn't end in 1972</strong>; it learned to swallow itself and become the joke.</div>
+      </div>
+    </section>
+
+    <!-- CARD 4 — CORE THESIS -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/><path d="M3 12h18M12 3a13 13 0 0 1 4 9 13 13 0 0 1-4 9 13 13 0 0 1-4-9 13 13 0 0 1 4-9z"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The core argument</div>
+        <div style="font-size: 26px; font-weight: 800; line-height: 1.25; margin-bottom: 28px;">Pop was never just a 1960s American story.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">The show's framing is explicit: the historic works on view trace how 1960s artists turned to <strong>&ldquo;advertising techniques, reproduction, and mass media,&rdquo;</strong> while contemporary works by 18 living artists — many recently acquired — engage with and offer critical perspectives on the visual forms and language of popular culture. The point is the through-line, not the museum trophy.</div>
+      </div>
+    </section>
+
+    <!-- CARD 5 — FINDING 1 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #be123c, #9f1239);">
+        <div class="pageno">5 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 1 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">The classic cast, the canonical works</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Tower 5 opens with the 1960s heart of the show: quintessential works by <strong>Chryssa, Richard Hamilton, Roy Lichtenstein and Andy Warhol</strong>. The selection reads like a definition of the movement at the moment the museum was first collecting it.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Other names in this section: John Chamberlain, Jim Dine, Marta Minujín, Claes Oldenburg with Coosje van Bruggen, and Lucas Samaras.</div>
+      </div>
+    </section>
+
+    <!-- CARD 6 — FINDING 2 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #ea580c, #c2410c);">
+        <div class="pageno">6 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M5 18l7-15 7 15M9 14h6"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 2 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">A giant shuttlecock returns</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">One of the show's draws is logistical: Claes Oldenburg &amp; Coosje van Bruggen's <em>Soft Shuttlecock</em> (1995) is <strong>back on view in New York for the first time in 25 years</strong>. It is a literal piece of Pop's monumental scale being lowered into the rotunda.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Pair it with Yayoi Kusama's <em>INFINITY MIRRORED ROOM – DANCING LIGHTS THAT FLEW UP TO THE UNIVERSE</em> (2019), a major loan: two ways of asking the rotunda to absorb a single, total object.</div>
+      </div>
+    </section>
+
+    <!-- CARD 7 — FINDING 3 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #6b21a8);">
+        <div class="pageno">7 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 3 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">The opening is staggered, on purpose</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">The Guggenheim opens the show in two waves: the Pop historic rooms and Kusama's <em>Infinity Mirrored Room</em> on <strong>5 June</strong>; the contemporary galleries — including Cattelan's <em>Comedian</em> (2019) — on <strong>26 June</strong>. The staging itself echoes the show's argument that &ldquo;1960&rdquo; and &ldquo;now&rdquo; are one continuous frame.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">It runs through <strong>10 January 2027</strong> — seven months across the rotunda and the tower galleries.</div>
+      </div>
+    </section>
+
+    <!-- CARD 8 — FINDING 4 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #134e4a, #115e59);">
+        <div class="pageno">8 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="5" cy="7" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="9" r="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="18" r="2"/>
+          <path d="M5 7L19 9M12 5L7 17M5 7L17 18M19 9L17 18M7 17L17 18"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 4 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">A new generation, brought in deliberately</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Recent acquisitions hang next to the canon: <strong>Mohamed Ahmed Ibrahim, Farah Al Qasimi, Alex Da Corte, Lauren Halsey, Lucia Hierro, Yee I-Lann, Tommy Kha, Baseera Khan, Shinro Ohtake, Wendy Red Star, Cara Romero, Liu Shiyuan and Sheida Soleimani</strong> — among others.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Alex Da Corte's <em>ROY G BIV</em> (2022) is shown as a video installation with recurring live performances — exactly the kind of work where Pop's lineage becomes hard to draw.</div>
+      </div>
+    </section>
+
+    <!-- CARD 9 — WHY THIS MATTERS IN 2026 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #9a3412);">
+        <div class="pageno">9 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Why now</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">The Pop comeback is a museum project</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Apollo and the <em>New York Sun</em> have framed the opening as <strong>Pop &ldquo;storming back&rdquo; onto the museum's signature spiraling staircases</strong>. The 2025–26 announcement cycle made clear that the institution sees Pop not as a closed period but as a living lineage it intends to keep buying into.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">In the same year Tate Modern is rerunning Frida Kahlo and the Hayward is rerunning Anish Kapoor, the Guggenheim is making Pop the umbrella that swallows both the icon-making and the institutional critique.</div>
+      </div>
+    </section>
+
+    <!-- CARD 10 — CLOSING -->
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #831843;">
+        <div class="pageno" style="opacity: 0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">The line that stays</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; font-style: italic; border-left: 4px solid #be185d; padding-left: 18px; color: #831843;">&ldquo;Advertising techniques, reproduction, and mass media — redefining the boundaries of what art could be in the early 1960s.&rdquo;</div>
+        <div style="font-size: 13px; opacity: 0.6; margin-bottom: 32px; padding-left: 22px;">— Guggenheim press text, <em>Guggenheim Pop: 1960 to Now</em></div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Concrete next step</div>
+        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">🎨 If you go: start in Tower 5 with the 1960s rooms, then walk the rotunda chronologically up to Cattelan, Da Corte and Halsey on the top ramps. Allow at least 90 minutes — the contemporary section is where the curatorial argument lives.</div>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://www.guggenheim.org/exhibition/guggenheim-pop" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Guggenheim · official exhibition page</b></a>
+          <a href="https://apollo-magazine.com/guggenheim-pop-1960-to-now-new-york-preview/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Apollo Magazine · preview &amp; critical context</b></a>
+          <a href="https://www.guggenheim.org/press-release/guggenheim-announces-2026-exhibition-schedule" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Guggenheim · 2026 exhibition schedule</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px; color: #831843;">Daily Swipe · 23 June 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

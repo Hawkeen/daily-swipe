@@ -1,7 +1,103 @@
 {
-  "updated": "2026-06-22",
-  "count": 19,
+  "updated": "2026-06-23",
+  "count": 31,
   "swipes": [
+    {
+      "file": "Swipe – Chip War – 2026-06-23.html",
+      "title": "Chip War",
+      "date": "2026-06-23",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Chris Miller — Chip War: semiconductors are the new oil, and the world's most critical supply runs through one contested island, Taiwan."
+    },
+    {
+      "file": "Swipe – Wer bin ich und wenn ja, wie viele – 2026-06-23.html",
+      "title": "Wer bin ich – und wenn ja, wie viele?",
+      "date": "2026-06-23",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Richard David Precht — eine philosophische Reise entlang Kants drei Fragen, die große Philosophie mit Hirnforschung verbindet."
+    },
+    {
+      "file": "Swipe – A Story-Telling Animal – 2026-06-23.html",
+      "title": "A Story-Telling Animal",
+      "date": "2026-06-23",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Philosophize This! on Alasdair MacIntyre — no one is self-made; you can only act once you know what story you're a part of."
+    },
+    {
+      "file": "Swipe – Die Thukydides-Falle – 2026-06-23.html",
+      "title": "Die Thukydides-Falle",
+      "date": "2026-06-23",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Sicherheitshalber Folge 109 — führen Machtverschiebungen wirklich zwangsläufig zum Krieg? Plus eine FCAS-Autopsie."
+    },
+    {
+      "file": "Swipe – Sublime Poetry – 2026-06-23.html",
+      "title": "Sublime Poetry",
+      "date": "2026-06-23",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Raphael: Sublime Poetry at the Met — the first comprehensive US Raphael show, 170+ masterpieces, closing 28 June 2026."
+    },
+    {
+      "file": "Swipe – The Coming Wave – 2026-06-23.html",
+      "title": "The Coming Wave",
+      "date": "2026-06-23",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Mustafa Suleyman with Michael Bhaskar — The Coming Wave: the DeepMind co-founder argues the AI-and-synthetic-biology wave may be uncontainable, the century's defining dilemma."
+    },
+    {
+      "file": "Swipe – Warcraft and Fartcraft – 2026-06-23.html",
+      "title": "Warcraft & Fartcraft",
+      "date": "2026-06-23",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "MacroVoices #535 — Michael Every (Rabobank) and Rory Johnston on Iran, inflation, China and the commodity outlook."
+    },
+    {
+      "file": "Swipe – A Second Life – 2026-06-22.html",
+      "title": "A Second Life",
+      "date": "2026-06-22",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Tracey Emin — A Second Life at Tate Modern: a 40-year retrospective, from the bad girl of Britart to one of its great painters of mortality."
+    },
+    {
+      "file": "Swipe – Brexit, Ten Years On – 2026-06-22.html",
+      "title": "Brexit, Ten Years On",
+      "date": "2026-06-22",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Ones and Tooze — a decade after the vote, the economic bill is still arriving, quietly, every year."
+    },
+    {
+      "file": "Swipe – The Code of Life – 2026-06-22.html",
+      "title": "The Code of Life",
+      "date": "2026-06-22",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Walter Isaacson — The Code Breaker: a defence system stolen from bacteria became a tool to rewrite our own species."
+    },
+    {
+      "file": "Swipe – The Game of Doubt – 2026-06-22.html",
+      "title": "The Game of Doubt",
+      "date": "2026-06-22",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Freakonomics Radio — an ancient dice game, backgammon, as a school for thinking under uncertainty."
+    },
+    {
+      "file": "Swipe – The Purpose Put Into the Machine – 2026-06-22.html",
+      "title": "The Purpose Put Into the Machine",
+      "date": "2026-06-22",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Brian Christian — The Alignment Problem: how exactly, and what exactly, are we trying to teach machines that learn?"
+    },
     {
       "file": "Swipe – The Wood Wide Web – 2026-06-22.html",
       "title": "The Wood Wide Web",

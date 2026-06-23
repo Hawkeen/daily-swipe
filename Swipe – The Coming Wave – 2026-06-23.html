@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "schemaVersion": 1,
+  "description": "Daily swipe for Simon. Today: Mustafa Suleyman with Michael Bhaskar — 'The Coming Wave: Technology, Power, and the Twenty-first Century's Greatest Dilemma' (Crown, 2023). The DeepMind co-founder argues the AI-plus-synbio wave is uncontainable by default — and that the cardinal sin of our elites is 'pessimism aversion.'"
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Coming Wave — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <!-- CARD 1 — COVER -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #082f49);">
+        <div class="pageno">1 / 11 →</div>
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 18px; opacity: 0.95;">
+          <path d="M2 16c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/>
+          <path d="M2 11c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/>
+          <path d="M2 21c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/>
+        </svg>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Book of the day · 📖</div>
+        <div style="font-size: 36px; font-weight: 800; line-height: 1.05; margin-bottom: 16px;">The Coming Wave</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.4; margin-bottom: 24px;">Mustafa Suleyman with Michael Bhaskar — <em>Technology, Power, and the Twenty-first Century's Greatest Dilemma</em> · Crown, 2023</div>
+        <div style="font-size: 15px; opacity: 0.85; margin-bottom: 12px;">352 pages · DeepMind co-founder, now CEO of Microsoft AI · No. 1 <em>Sunday Times</em> &amp; <em>New York Times</em> bestseller</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 36px;">Every wave of technology has eventually been contained. This one, he argues, will not contain itself.</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
+      </div>
+    </section>
+
+    <!-- CARD 2 — RECALL QUIZ -->
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">2 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · a recent swipe</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;The Wood Wide Web&rdquo; (22 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Merlin Sheldrake quotes a landmark paper to sum up what fungi do to our concept of the individual. Which line?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. &ldquo;Every forest is a brain.&rdquo;</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. &ldquo;Plants think with their roots.&rdquo;</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. &ldquo;There have never been individuals. We are all lichens.&rdquo;</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> — More than 90% of plants depend on fungi, lichens are themselves partnerships, and once you take that seriously the line between one individual and another dissolves.
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD 3 — HOOK -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #134e4a, #0f766e);">
+        <div class="pageno">3 / 11 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The hook</div>
+        <div style="font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">No technology has ever been successfully contained once it became cheap and useful enough.</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">From fire to the printing press to the internet, every wave got <strong>cheaper</strong>, <strong>spread further</strong>, and reshaped the world in ways its creators never intended. Suleyman calls this iron pattern the <strong>containment problem</strong> — and says the coming wave of AI and synthetic biology is the hardest test of it humanity has ever faced.</div>
+      </div>
+    </section>
+
+    <!-- CARD 4 — CORE THESIS -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
+        <div class="pageno">4 / 11 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The core argument</div>
+        <div style="font-size: 28px; font-weight: 800; line-height: 1.25; margin-bottom: 28px;">A narrow path between dystopia and catastrophe.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Suleyman's argument is that the 21st century has to navigate &ldquo;a narrow path&rdquo; between two cliffs: &ldquo;techno-authoritarian dystopia on the one hand&rdquo; and &ldquo;openness-induced catastrophe on the other.&rdquo; AI and synthetic biology are not just tools — they are <em>force multipliers</em> capable of reshaping the global order, and unlike nuclear, they are broader, faster, and far harder to isolate.</div>
+      </div>
+    </section>
+
+    <!-- CARD 5 — FINDING 1 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #1e40af);">
+        <div class="pageno">5 / 11 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 1 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">The cardinal sin: pessimism aversion</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Suleyman defines &ldquo;pessimism aversion&rdquo; as <strong>&ldquo;the tendency for people, particularly elites, to ignore, downplay, or reject narratives they see as overly negative.&rdquo;</strong> Polite professional life punishes alarm and rewards measured optimism.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">&ldquo;Properly addressing this wave,&rdquo; he writes, &ldquo;containing technology, and ensuring that it always serves humanity means overcoming pessimism aversion. It means facing head-on the reality of what's coming.&rdquo;</div>
+      </div>
+    </section>
+
+    <!-- CARD 6 — FINDING 2 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #6b21a8);">
+        <div class="pageno">6 / 11 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 2 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Two technologies, one wave</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">The book's central novelty is treating <strong>AI and synthetic biology together</strong>. They are converging general-purpose technologies: AI accelerates biological discovery; engineered biology gives AI a body, a substrate, and a weapon.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Combined with cheap robotics and clean energy, Suleyman writes, the wave could enable &ldquo;small, state-like entities&rdquo; — groups that can live off-grid, slim education and medicine down to cottage scale, and route around the existing nation-state.</div>
+      </div>
+    </section>
+
+    <!-- CARD 7 — FINDING 3 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #9a3412);">
+        <div class="pageno">7 / 11 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M12 2L2 22h20L12 2z"/><path d="M12 9v5M12 18h.01"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 3 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">The near-term risks aren't science fiction</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Suleyman is concrete about the worry list: <strong>biotech manipulation</strong>, <strong>surveillance autocracies</strong>, and <strong>autonomous warfare</strong>. Each is a present-tense capability, not a future hypothetical.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">The dilemma isn't AI sentience. It's that the same wave that could give us cheap drug discovery and free tutors can also let a small group engineer a pathogen, a propaganda machine, or a swarm of drones.</div>
+      </div>
+    </section>
+
+    <!-- CARD 8 — FINDING 4 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #064e3b, #047857);">
+        <div class="pageno">8 / 11 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 4 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Containment is a stack, not a switch</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Suleyman lays out a <strong>ten-step containment framework</strong> that climbs from technology to culture to international agreements. Each step does not work alone; the point is the stack.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Concretely: global treaties modelled on nuclear non-proliferation but tailored to AI and biotech; <strong>kill-switch protocols</strong> that can deactivate models that breach defined thresholds; and <strong>transparency laws</strong> for AI-generated content, including watermarking and source disclosure.</div>
+      </div>
+    </section>
+
+    <!-- CARD 9 — FINDING 5 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #713f12);">
+        <div class="pageno">9 / 11 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 5 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">It's the writer, not the prophet, that matters</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Suleyman is not a doomer; he co-founded DeepMind and Inflection, now runs Microsoft AI. The book's authority comes from <strong>inside the wave</strong> — and that's the unease at its centre.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">He is asking the people most responsible for shipping the technology — and the elites most allergic to bad news — to do the one thing nobody in that position does: name the worst plausible outcome out loud.</div>
+      </div>
+    </section>
+
+    <!-- CARD 10 — WHY THIS MATTERS IN 2026 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #991b1b);">
+        <div class="pageno">10 / 11 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Why now</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">The agentic turn made the book operational</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">In February 2026 The Ezra Klein Show ran an episode titled <em>&ldquo;How Quickly Will A.I. Agents Rip Through the Economy?&rdquo;</em> with Anthropic co-founder Jack Clark — naming the shift from the chatbot era to the <strong>agentic era</strong>, where AI completes tasks on its own and even collaborates with other AI.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Suleyman's argument lands harder when models stop merely answering questions and start <em>acting</em> — exactly the threshold his containment stack was designed for.</div>
+      </div>
+    </section>
+
+    <!-- CARD 11 — CLOSING -->
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #082f49;">
+        <div class="pageno" style="opacity: 0.5;">11 / 11 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">The line that stays</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; font-style: italic; border-left: 4px solid #0c4a6e; padding-left: 18px; color: #082f49;">&ldquo;Containing technology, and ensuring that it always serves humanity means overcoming pessimism aversion. It means facing head-on the reality of what's coming.&rdquo;</div>
+        <div style="font-size: 13px; opacity: 0.6; margin-bottom: 32px; padding-left: 22px;">— Mustafa Suleyman, <em>The Coming Wave</em></div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Concrete next step</div>
+        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">🌊 Read Part III on the containment stack first — that is where Suleyman stops describing the problem and tries to design a way through. If you only have an hour, skim the &ldquo;ten steps&rdquo; chapter.</div>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://the-coming-wave.com/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>The book's own site · the-coming-wave.com</b></a>
+          <a href="https://www.penguinrandomhouse.com/books/722674/the-coming-wave-by-mustafa-suleyman-with-michael-bhaskar/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Penguin Random House · publisher page</b></a>
+          <a href="https://www.goodreads.com/book/show/90590134-the-coming-wave" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Goodreads · reviews &amp; quotes</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px; color: #0c4a6e;">Daily Swipe · 23 June 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

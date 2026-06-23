@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "schemaVersion": 1,
+  "description": "Daily swipe für Simon. Heute: Lage der Nation 483 — 'Lügenfritze' (Philip Banse & Ulf Buermeyer, 17. Juni 2026). Ein Facebook-Nutzer wurde wegen der Bezeichnung von Bundeskanzler Merz als „Lügenfritz" zu 30 Tagessätzen verurteilt — nach § 188 StGB, der Politiker besonders schützt. Banse und Buermeyer fragen: Opfern wir gerade die Meinungsfreiheit, um Politiker zu schützen?"
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Lügenfritz — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <!-- CARD 1 — COVER -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #991b1b);">
+        <div class="pageno">1 / 10 →</div>
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 18px; opacity: 0.95;">
+          <path d="M3 6h18M3 12h18M3 18h18"/><circle cx="6" cy="6" r="1.5"/><circle cx="6" cy="12" r="1.5"/><circle cx="6" cy="18" r="1.5"/>
+        </svg>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Folge des Tages · 🎧</div>
+        <div style="font-size: 36px; font-weight: 800; line-height: 1.05; margin-bottom: 16px;">Lügenfritz</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.4; margin-bottom: 24px;">Lage der Nation 483 — <em>Philip Banse &amp; Ulf Buermeyer</em> · 17. Juni 2026 · ~1 h 39 min</div>
+        <div style="font-size: 15px; opacity: 0.85; margin-bottom: 12px;">Der Politik-Podcast aus Berlin · Themen u.&nbsp;a.: USA &amp; Iran wollen Frieden verhandeln, Bildung, Heizungsgesetz</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 36px;">Im Zentrum: ein Facebook-Kommentar, eine 30-Tagessätze-Strafe — und die Frage, ob § 188 StGB die Meinungsfreiheit untergräbt.</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Weiter wischen →</div>
+      </div>
+    </section>
+
+    <!-- CARD 2 — RECALL QUIZ (German prior) -->
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">2 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · ein früherer Swipe</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Europäische Katastrophe&ldquo; (22. Juni 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was ist Herfried Münklers zentrale These zum Dreißigjährigen Krieg in seinem 975-Seiten-Standardwerk?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Der Krieg war ein lokales deutsches Ereignis ohne europäische Tragweite.</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Kein späterer Konflikt erklärt die Kriege der Gegenwart besser als dieser.</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Der Westfälische Frieden hat alle späteren europäischen Konflikte beendet.</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> — Münklers Punkt: gerade der Dreißigjährige Krieg — mit Religionen, Konfessionen, externen Mächten und einer zerfallenden Ordnung — ist die genaueste historische Folie für die Kriege unserer Gegenwart.
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD 3 — HOOK -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #9a3412);">
+        <div class="pageno">3 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">Der Einstieg</div>
+        <div style="font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">Wer Merz „Lügenfritz" nennt, zahlt — 30 Tagessätze.</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Ein Facebook-Nutzer ist <strong>rechtskräftig zu einer Geldstrafe von 30 Tagessätzen verurteilt</strong> worden, weil er den Bundeskanzler so bezeichnet hat. Die Staatsanwaltschaft Heilbronn hat die Verurteilung mitgeteilt; das <strong>Amtsgericht Öhringen</strong> erließ den Strafbefehl.</div>
+      </div>
+    </section>
+
+    <!-- CARD 4 — CORE THESIS -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M3 12h18"/><path d="M12 3v18"/><circle cx="12" cy="12" r="9"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">Die Kernfrage</div>
+        <div style="font-size: 26px; font-weight: 800; line-height: 1.25; margin-bottom: 28px;">Opfern wir die Meinungsfreiheit, um Politiker zu schützen?</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Banse und Buermeyer rahmen die LdN-Folge mit dieser Frage. Die juristische Grundlage ist <strong>§ 188 StGB</strong>, der „Personen des politischen Lebens" besonders vor Beleidigungen schützt, wenn die Tat geeignet ist, deren öffentliches Wirken erheblich zu erschweren. Der Paragraph ist neu in seiner heutigen Form — und das Verfahren um „Lügenfritz" ist einer seiner ersten Härtetests gegen einen Bundeskanzler.</div>
+      </div>
+    </section>
+
+    <!-- CARD 5 — FINDING 1 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #831843, #9d174d);">
+        <div class="pageno">5 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 12h6"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Befund 1 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Wie der Fall ins Rollen kam</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Nach einem Besuch von Merz in Heilbronn im Oktober des Vorjahres hatte die Polizei auf Facebook auf ein Flugverbot hingewiesen. Unter dem Beitrag sammelten sich zahlreiche Kommentare: viele bezeichneten den Kanzler unter anderem als „Lackaffe", „Pinocchio" — und eben „Lügenfritz".</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Die Staatsanwaltschaft Heilbronn nahm die Beiträge auf. Die meisten Verfahren wurden später abgegeben oder eingestellt — gerade „Pinocchio" und „Lügen-Kasper" wurden mangels Tatverdachts eingestellt.</div>
+      </div>
+    </section>
+
+    <!-- CARD 6 — FINDING 2 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #713f12);">
+        <div class="pageno">6 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M12 2L3 7v6c0 5 4 9 9 10 5-1 9-5 9-10V7l-9-5z"/><path d="M9 12l2 2 4-4"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Befund 2 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Warum § 188 StGB hier griff</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">§ 188 StGB schützt Personen des politischen Lebens — vom Gemeinderat bis zum Kanzler — besonders, wenn die Beleidigung geeignet ist, ihr <strong>öffentliches Wirken erheblich zu erschweren</strong>. Genau diese Schwelle macht die Norm so umstritten: Wer entscheidet, wann ein Schimpfwort Politik „erschwert"?</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Differenziertheit ist möglich: Manche Verfahren wurden eingestellt, andere weitergegeben. Die Strafkonsequenz traf hier nur einen Teil der Kommentatoren.</div>
+      </div>
+    </section>
+
+    <!-- CARD 7 — FINDING 3 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #1e40af);">
+        <div class="pageno">7 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M3 6l9 6 9-6"/><rect x="3" y="6" width="18" height="12" rx="2"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Befund 3 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Die Gegenposition: Politiker dürfen keine Mimosen sein</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">In der Begleitdebatte (u.&nbsp;a. <em>Cicero</em>, <em>Tagesspiegel</em>, <em>Berliner Zeitung</em>) wird argumentiert: die einzige Waffe des Bürgers gegen die politische Macht eines Bundeskanzlers ist <strong>Machtkritik</strong> — und die darf heftig, deutlich und polemisch sein, gedeckt durch Demokratie- und Meinungsfreiheit.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Aus dieser Sicht ist der Strafbefehl nicht der Schutz des Amts, sondern ein Eingriff in jenes laute Rauschen, das Demokratie ausmacht.</div>
+      </div>
+    </section>
+
+    <!-- CARD 8 — FINDING 4 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #134e4a, #115e59);">
+        <div class="pageno">8 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Befund 4 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Im Hintergrund: Irankrieg und der Verhandlungstisch</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Die LdN-Folge erscheint am selben Tag, an dem <strong>USA und Iran eine 14-Punkte-Absichtserklärung zur Beendigung des Kriegs unterzeichnen</strong>. Trump und Peseschkian unterschreiben das vorläufige Abkommen; pakistanischer Premier Sharif vermittelt. Banse und Buermeyer ordnen die Friedensgespräche im selben Atemzug ein wie die innenpolitische Meinungsfreiheits-Debatte.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Außerdem Themen: Bildung, und die <strong>Heizungs­gesetz-Änderungen</strong> mit der neuen Kostenteilung zwischen Mietern und Vermietern.</div>
+      </div>
+    </section>
+
+    <!-- CARD 9 — WHY THIS MATTERS IN 2026 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #6b21a8);">
+        <div class="pageno">9 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Warum jetzt</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">§ 188 trifft auf den Bundeskanzler</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95; margin-bottom: 14px;">Mit dem rechtskräftigen Strafbefehl beginnt eine neue Phase: § 188 StGB wird erstmals breit gegen Beleidigungen eines amtierenden CDU-Bundeskanzlers angewandt. Die Folge: ein Stresstest für den Paragraphen — und für den Umgang der Justiz mit Online-Polemik.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Die Diskussion ist nicht abgeschlossen. Sie wird in den kommenden Wochen weitergehen — und LdN 483 ist die kompakteste Einführung in den Stand der Debatte.</div>
+      </div>
+    </section>
+
+    <!-- CARD 10 — CLOSING -->
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #7f1d1d;">
+        <div class="pageno" style="opacity: 0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">Der Satz, der bleibt</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; font-style: italic; border-left: 4px solid #991b1b; padding-left: 18px; color: #7f1d1d;">&bdquo;Opfern wir die Meinungsfreiheit, um Politiker zu schützen?&ldquo;</div>
+        <div style="font-size: 13px; opacity: 0.6; margin-bottom: 32px; padding-left: 22px;">— Titelfrage zu LdN 483, &bdquo;Lügenfritze&ldquo; (17. Juni 2026)</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Konkreter nächster Schritt</div>
+        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">🎧 Höre den Lügenfritz-Block zuerst — er ist der schärfste Teil der Folge. Danach lohnt sich der Block zum 14-Punkte-Abkommen USA-Iran und der zur Heizungs-Kostenteilung, in der Reihenfolge.</div>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Weitere Schritte</p>
+          <a href="https://lagedernation.org/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Lage der Nation · Show-Home &amp; Folge 483</b></a>
+          <a href="https://talk.lagedernation.org/t/ldn-483-luegenfritze/33575" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Hörer-Talkforum · LdN 483 „Lügenfritze"</b></a>
+          <a href="https://www.berliner-zeitung.de/article/beleidigung-von-friedrich-merz-gericht-verhaengt-geldstrafe-fuer-luegenfritz-10055029" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Berliner Zeitung · Geldstrafe für „Lügenfritz"</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px; color: #7f1d1d;">Daily Swipe · 23. Juni 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

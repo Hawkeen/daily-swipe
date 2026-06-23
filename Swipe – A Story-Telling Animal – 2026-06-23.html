@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "schemaVersion": 1,
+  "description": "Daily swipe for Simon. Today: Philosophize This! Ep. 246 — 'The Myth of the Self-Made Person · Alasdair MacIntyre' (Stephen West, 26 April 2026). MacIntyre's claim: no one is self-made — we can only act once we know what story we're a part of."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>A Story-Telling Animal — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <!-- CARD 1 — COVER -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #7c2d12);">
+        <div class="pageno">1 / 10 →</div>
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 18px; opacity: 0.95;">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 11h7"/>
+        </svg>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Episode of the day · 🎧</div>
+        <div style="font-size: 36px; font-weight: 800; line-height: 1.05; margin-bottom: 16px;">A Story-Telling Animal</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.4; margin-bottom: 24px;"><em>Philosophize This!</em> Ep. 246 &mdash; &ldquo;The Myth of the Self-Made Person · Alasdair MacIntyre&rdquo;</div>
+        <div style="font-size: 15px; opacity: 0.85; margin-bottom: 12px;">Host: Stephen West · published 26 April 2026 · part of a spring 2026 MacIntyre series</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 36px;">You can&rsquo;t answer &ldquo;What should I do?&rdquo; until you know what story you&rsquo;re part of.</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
+      </div>
+    </section>
+
+    <!-- CARD 2 — RECALL QUIZ -->
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">2 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · a recent swipe</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;The Wood Wide Web&rdquo; (22 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What is Merlin Sheldrake&rsquo;s central claim about fungi in <em>Entangled Life</em>?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Fungi are simply a kind of plant that photosynthesizes underground</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Fungi dissolve our categories &mdash; challenging ideas of individuality and intelligence; most plants depend on them</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Fungi are mostly harmful parasites best cleared from healthy forests</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> — Over 90% of plants rely on mycorrhizal fungi, whose shared underground networks throw our concepts of the individual into question.
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD 3 — HOOK -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #3730a3);">
+        <div class="pageno">3 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M12 3v18M5 8c2-2 5-2 7 0 2-2 5-2 7 0M5 14c2-2 5-2 7 0 2-2 5-2 7 0"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The hook</div>
+        <div style="font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">No one is &ldquo;self-made.&rdquo;</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">The episode unpacks Alasdair MacIntyre, the philosopher behind <em>After Virtue</em>, who argued that the modern image of the lone, self-authoring individual is a myth. We inherit our identities &mdash; and our morality &mdash; from the communities, traditions and stories we are born into.</div>
+      </div>
+    </section>
+
+    <!-- CARD 4 — CORE THESIS -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="10"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The core argument</div>
+        <div style="font-size: 27px; font-weight: 800; line-height: 1.25; margin-bottom: 28px;">Modern moral language is in ruins &mdash; and we can only rebuild it through stories and traditions.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">MacIntyre&rsquo;s <em>After Virtue</em> argues that we kept the vocabulary of ethics &mdash; &ldquo;good,&rdquo; &ldquo;duty,&rdquo; &ldquo;virtue&rdquo; &mdash; while losing the shared framework that gave it meaning. The repair is to see the self not as a free-floating chooser but as embedded in narratives, practices and traditions.</div>
+      </div>
+    </section>
+
+    <!-- CARD 5 — FINDING 1 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #134e4a, #0f766e);">
+        <div class="pageno">5 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M8 9h8M8 13h6"/><path d="M21 12a8 8 0 0 1-8 8H5l-2 2V12a8 8 0 0 1 16 0z" transform="translate(0 -4)"/><circle cx="12" cy="12" r="9"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 1 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Why moral arguments never end</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">MacIntyre&rsquo;s diagnosis is &ldquo;emotivism&rdquo;: in modern culture, moral claims have collapsed into expressions of personal preference &mdash; saying &ldquo;this is wrong&rdquo; means little more than &ldquo;I dislike this.&rdquo; With no shared standard, debates over justice or rights become interminable shouting matches.</div>
+      </div>
+    </section>
+
+    <!-- CARD 6 — FINDING 2 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #1d4ed8);">
+        <div class="pageno">6 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 2 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">&ldquo;Man is a story-telling animal&rdquo;</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">For MacIntyre, we make sense of our lives as narratives with a beginning, middle and direction. His famous formulation: I can only answer &ldquo;What am I to do?&rdquo; if I can first answer &ldquo;Of what story or stories do I find myself a part?&rdquo; Identity is narrative before it is choice.</div>
+      </div>
+    </section>
+
+    <!-- CARD 7 — FINDING 3 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f2d1a, #92400e);">
+        <div class="pageno">7 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 20l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 3 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">Virtues live inside practices</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Virtues, MacIntyre argues, are not invented by lone individuals; they are the qualities that let us pursue the goods internal to shared &ldquo;practices&rdquo; &mdash; and they are carried forward by living traditions. The self-made person is a myth precisely because character is something we inherit and sustain together.</div>
+      </div>
+    </section>
+
+    <!-- CARD 8 — FINDING 4 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #6d28d9);">
+        <div class="pageno">8 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Finding 4 / 4</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">One of the great dissenters of modern ethics</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Alasdair MacIntyre (1929&ndash;2025) spent a career arguing against the liberal, individualist mainstream of moral philosophy. <em>After Virtue</em> (1981) became one of the most influential ethics books of the century &mdash; a sustained case that we cannot understand morality apart from community and history.</div>
+      </div>
+    </section>
+
+    <!-- CARD 9 — WHY NOW -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #9a3412);">
+        <div class="pageno">9 / 10 →</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+        </svg>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;">Why this matters in 2026</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 18px;">A thinker revisited after his death</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">MacIntyre died in 2025. In spring 2026 Stephen West devoted a run of <em>Philosophize This!</em> episodes to him &mdash; Ep. 245 &ldquo;The Rival Moral Approaches of the Modern World&rdquo; (12 April) and Ep. 246 &ldquo;The Myth of the Self-Made Person&rdquo; (26 April) &mdash; making his case newly accessible to a mass audience just as debates over individualism rage on.</div>
+      </div>
+    </section>
+
+    <!-- CARD 10 — CLOSING -->
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #7c2d12;">
+        <div class="pageno" style="opacity: 0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">The line that stays</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; font-style: italic; border-left: 4px solid #b45309; padding-left: 18px; color: #7c2d12;">&ldquo;I can only answer the question &lsquo;What am I to do?&rsquo; if I can answer the prior question &lsquo;Of what story or stories do I find myself a part?&rsquo;&rdquo;</div>
+        <div style="font-size: 13px; opacity: 0.6; margin-bottom: 32px; padding-left: 22px;">— Alasdair MacIntyre, <em>After Virtue</em></div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Concrete next step</div>
+        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">📖 Listen to Ep. 245 and 246 back to back &mdash; the first sets up why modern moral debate stalls; the second offers MacIntyre&rsquo;s narrative-and-tradition way out.</div>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://www.philosophizethis.org/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Philosophize This! · episodes &amp; transcripts</b></a>
+          <a href="https://en.wikipedia.org/wiki/After_Virtue" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · After Virtue</b></a>
+          <a href="https://www.goodreads.com/book/show/332138.After_Virtue" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Goodreads · After Virtue (quotes &amp; reviews)</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px; color: #92400e;">Daily Swipe · 23 June 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
