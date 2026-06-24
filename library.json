@@ -1,7 +1,47 @@
 {
-  "updated": "2026-06-23",
-  "count": 31,
+  "updated": "2026-06-24",
+  "count": 36,
   "swipes": [
+    {
+      "file": "Swipe – The Great Wave – 2026-06-24.html",
+      "title": "The Great Wave",
+      "date": "2026-06-24",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Hokusai's 'Great Wave off Kanagawa' (c.1831): not a tsunami but a Buddhist image of impermanence, printed in a brand-new blue accidentally invented in Berlin."
+    },
+    {
+      "file": "Swipe – Der Drohnenkrieg – 2026-06-24.html",
+      "title": "Der Drohnenkrieg",
+      "date": "2026-06-24",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Der Rest ist Geschichte (Deutschlandfunk, 4. Juni 2026): Eine Drohne für ein paar hundert Dollar zerstört einen Panzer für Millionen – wie billige Drohnen die Kriegsführung neu ordnen."
+    },
+    {
+      "file": "Swipe – Running a Bank in the Age of AI – 2026-06-24.html",
+      "title": "Running a Bank in the Age of AI",
+      "date": "2026-06-24",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Odd Lots with Goldman's David Solomon (4 June 2026): AI can draft 95% of an IPO filing in minutes — yet he bets there's no white-collar wipeout coming."
+    },
+    {
+      "file": "Swipe – The Avoidable War – 2026-06-24.html",
+      "title": "The Avoidable War",
+      "date": "2026-06-24",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Kevin Rudd on US–China: war isn't driven by what each side wants, but by how badly each misreads the other — and 'managed strategic competition' as the way out."
+    },
+    {
+      "file": "Swipe – Material World – 2026-06-24.html",
+      "title": "Material World",
+      "date": "2026-06-24",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Ed Conway on the six raw materials — sand, salt, iron, copper, oil, lithium — that still rule a supposedly weightless digital age. We've never dug up more stuff."
+    },
     {
       "file": "Swipe – Chip War – 2026-06-23.html",
       "title": "Chip War",
