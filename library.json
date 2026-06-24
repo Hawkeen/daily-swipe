@@ -1,7 +1,47 @@
 {
   "updated": "2026-06-24",
-  "count": 36,
+  "count": 41,
   "swipes": [
+    {
+      "file": "Swipe – A City on a Scroll – 2026-06-24.html",
+      "title": "A City on a Scroll",
+      "date": "2026-06-24",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Zhang Zeduan's 'Along the River During the Qingming Festival' (12th c.): a five-metre handscroll that packs 814 people into one continuous panorama of the Song capital — a census of everyday life in ink."
+    },
+    {
+      "file": "Swipe – Die Macht der Geografie – 2026-06-24.html",
+      "title": "Die Macht der Geografie",
+      "date": "2026-06-24",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Das Politikteil (DIE ZEIT, 12. Juni 2026): Eine Meerenge von kaum 33 Kilometern – die Straße von Hormus – entscheidet über rund ein Fünftel des Welt-Öls. Wie Lage zu Macht wird."
+    },
+    {
+      "file": "Swipe – The Grids Hidden Chokepoint – 2026-06-24.html",
+      "title": "The Grid's Hidden Chokepoint",
+      "date": "2026-06-24",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "ChinaTalk (20 June 2026): even an infinite supply of transformers wouldn't fix the grid. The deeper bottleneck is power electronics — and it runs through gallium, which China controls ~99% of."
+    },
+    {
+      "file": "Swipe – Why Nations Fail – 2026-06-24.html",
+      "title": "Why Nations Fail",
+      "date": "2026-06-24",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Acemoglu & Robinson (2024 Nobel): two towns share a name and a fence — one rich, one poor. The difference isn't geography or culture; it's inclusive vs extractive institutions."
+    },
+    {
+      "file": "Swipe – Sapiens – 2026-06-24.html",
+      "title": "Sapiens",
+      "date": "2026-06-24",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Yuval Noah Harari: we run the planet not because we're strong or clever, but because we alone can believe in shared fictions — money, nations, gods — that let millions of strangers cooperate."
+    },
     {
       "file": "Swipe – The Great Wave – 2026-06-24.html",
       "title": "The Great Wave",
