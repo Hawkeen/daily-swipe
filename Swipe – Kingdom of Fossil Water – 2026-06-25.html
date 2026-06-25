@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Daily swipe for Simon. Today: In Our Time (BBC Radio 4, 11 June 2026) on the Garamantes — a Saharan civilisation that mined 'fossil water' through 1,000 miles of underground tunnels, built cities in the desert, and then drained the aquifer that kept it alive."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kingdom of Fossil Water — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <!-- CARD 1 — RECALL QUIZ -->
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · before we begin</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Power and Progress&rdquo; (21 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What do Acemoglu &amp; Johnson argue about technology?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. New technology automatically lifts everyone&rsquo;s prosperity</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Technological progress should be halted to protect jobs</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Technology has no preordained direction &mdash; who benefits depends on power and choices</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> &mdash; Over a thousand-year sweep, the Nobel-winning pair argue gains from technology flow to the many only when power and institutions push them there &mdash; not by default.
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD 2 — COVER -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #92400e, #7c2d12);">
+        <div class="pageno">2 / 10 →</div>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Garma%20(Garama)%20-%20Ruinen%20der%20antiken%20Stadt%20Garama.jpg?width=900" alt="Ruins of the Garamantian capital Garama (Germa), Libya" onerror="this.style.display='none';this.nextElementSibling.style.display='none';" style="display:block; width:100%; max-height:230px; object-fit:cover; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.4); margin-bottom:10px;" loading="lazy">
+        <div style="font-size:11px; opacity:0.6; margin:0 0 16px; line-height:1.35;">Image: Franzfoto, CC BY-SA, via Wikimedia Commons — ruins of Garama (Germa), Libya.</div>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Episode of the day · 🎧</div>
+        <div style="font-size: 34px; font-weight: 800; line-height: 1.08; margin-bottom: 14px;">Kingdom of Fossil Water</div>
+        <div style="font-size: 16px; opacity: 0.95; line-height: 1.4; margin-bottom: 18px;">In Our Time — &ldquo;The Garamantes&rdquo; · BBC Radio 4 · Misha Glenny · 11 June 2026</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 28px;">A desert empire that mined water older than farming itself.</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
+      </div>
+    </section>
+
+    <!-- CARD 3 — HOOK -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #b45309, #d97706);">
+        <div class="pageno">3 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The hook</div>
+        <div style="font-size: 29px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">In the driest place on Earth, a civilisation grew grapes, figs and wheat &mdash; for a thousand years.</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Greek and Roman writers dismissed the Garamantes as barbarians on the desert&rsquo;s edge. Archaeology has overturned that: towns, cities, irrigation and a Saharan trade network &mdash; right in the hyper-arid Fezzan of southern Libya.</div>
+      </div>
+    </section>
+
+    <!-- CARD 4 — CORE THESIS -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;">
+          <path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v6l9 4 9-4V7"/>
+        </svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The core idea</div>
+        <div style="font-size: 27px; font-weight: 800; line-height: 1.25; margin-bottom: 28px;">Not nomads &mdash; a sophisticated desert state, built on engineering that borrowed water from the deep past.</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">The Garamantes flourished from roughly 400 BC to 700 AD, peaking in the 2nd&ndash;3rd centuries AD &mdash; often clashing with Rome to the north. Their power rested on an audacious technology for pulling underground water to the surface across the open desert.</div>
+      </div>
+    </section>
+
+    <!-- CARD 5 — FINDING 1 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #155e75, #0e7490);">
+        <div class="pageno">5 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 1 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">A thousand miles of tunnels</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">They dug <em>foggaras</em> &mdash; gently sloping underground channels that tapped the aquifer and let gravity carry water to the fields. Surveys credit them with hundreds of miles of tunnel, served by an estimated 100,000 vertical maintenance shafts, roughly one every 30 feet.</div>
+      </div>
+    </section>
+
+    <!-- CARD 6 — FINDING 2 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #166534, #15803d);">
+        <div class="pageno">6 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 2 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Cities, not campsites</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Excavations at the capital, Garama (modern Germa), and across the Fezzan revealed eight major towns and around twenty other settlements &mdash; with forts, tombs and cemeteries. The water let them farm dates, olives, wheat, barley, sorghum and millet in the sand.</div>
+      </div>
+    </section>
+
+    <!-- CARD 7 — FINDING 3 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #9a3412);">
+        <div class="pageno">7 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 3 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Brokers of the Sahara</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">Their oases sat astride routes crossing the desert, making them key middlemen in trans-Saharan trade between sub-Saharan Africa and the Mediterranean world. Far from isolated, the Garamantes were enterprising merchants plugged into a continental exchange.</div>
+      </div>
+    </section>
+
+    <!-- CARD 8 — FINDING 4 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #1d4ed8);">
+        <div class="pageno">8 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 4 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">They were spending a one-time gift</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">The Sahara was once green, with lakes; the water in the aquifer was &ldquo;fossil water,&rdquo; laid down tens of thousands of years earlier and not being replenished. Over six centuries the Garamantes are estimated to have drawn billions of gallons from a reserve that could never refill.</div>
+      </div>
+    </section>
+
+    <!-- CARD 9 — FINDING 5 -->
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #5b21b6, #7c3aed);">
+        <div class="pageno">9 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 5 / 5</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">The well runs dry</div>
+        <div style="font-size: 16px; line-height: 1.55; opacity: 0.95;">As the water table dropped, the foggaras had to be cut ever deeper at ever greater cost in labour. The system that built the kingdom eventually strained, contracted and failed &mdash; and the civilisation faded by the late first millennium AD. A society undone by exhausting the very resource it was built on.</div>
+      </div>
+    </section>
+
+    <!-- CARD 10 — CLOSING -->
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #7c2d12;">
+        <div class="pageno" style="opacity: 0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">The takeaway</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.45; margin-bottom: 16px; font-style: italic; border-left: 4px solid #b45309; padding-left: 18px;">&ldquo;The new archaeological evidence is showing that the Garamantes were brilliant farmers, resourceful engineers, and enterprising merchants who produced a remarkable civilization.&rdquo;</div>
+        <div style="font-size: 13px; opacity: 0.6; margin-bottom: 32px; padding-left: 22px;">— David Mattingly, archaeologist (University of Leicester)</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Concrete next step</div>
+        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">🏜️ Listen on a walk, then hold the thought: a desert empire fell by draining unreplenishable water &mdash; the same &ldquo;fossil water&rdquo; many regions pump today.</div>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://podcasts.apple.com/mt/podcast/the-garamantes/id73330895?i=1000767831495" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>In Our Time · listen to the episode</b></a>
+          <a href="https://en.wikipedia.org/wiki/Garamantes" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · the Garamantes</b></a>
+          <a href="https://www.world-archaeology.com/features/garamantes-libya/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>World Archaeology · Garama, civilisation of the Sahara</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px;">Daily Swipe · 25 June 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

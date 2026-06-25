@@ -1,7 +1,87 @@
 {
-  "updated": "2026-06-24",
-  "count": 41,
+  "updated": "2026-06-25",
+  "count": 51,
   "swipes": [
+    {
+      "file": "Swipe – Seeing Like a State – 2026-06-25.html",
+      "title": "Seeing Like a State",
+      "date": "2026-06-25",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "James C. Scott — why grand, 'scientific' schemes to improve society (planned cities, rational forests) keep failing: the state's drive for legibility erases the local knowledge (mētis) that real societies run on."
+    },
+    {
+      "file": "Swipe – The Dictators Handbook – 2026-06-25.html",
+      "title": "The Dictator's Handbook",
+      "date": "2026-06-25",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Bueno de Mesquita & Smith — selectorate theory: every leader survives by paying off the small group of 'essentials' whose support is vital. Why bad behaviour is almost always good politics."
+    },
+    {
+      "file": "Swipe – Paul Kennedy on Great Powers – 2026-06-25.html",
+      "title": "Paul Kennedy on Great Powers",
+      "date": "2026-06-25",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "ChinaTalk (Jordan Schneider, 10 June 2026): the historian of rise-and-fall on why Britain befriended America but feared Germany around 1900 — and why China today is not the Kaiser's Reich."
+    },
+    {
+      "file": "Swipe – Die Reformen des Kleisthenes – 2026-06-25.html",
+      "title": "Die Reformen des Kleisthenes",
+      "date": "2026-06-25",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Eine Stunde History (Deutschlandfunk Nova): 508 v. Chr. ordnete Kleisthenes die Bürgerschaft Athens nach Wohnort statt Abstammung neu — zehn Phylen, der Rat der 500 und das Fundament der Demokratie."
+    },
+    {
+      "file": "Swipe – Melencolia I – 2026-06-25.html",
+      "title": "Melencolia I",
+      "date": "2026-06-25",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Albrecht Dürer (1514): a winged genius sits idle amid the tools of knowledge — a magic square, a baffling polyhedron, an hourglass. Art's most enigmatic meditation on creativity and its limits."
+    },
+    {
+      "file": "Swipe – How Asia Works – 2026-06-25.html",
+      "title": "How Asia Works",
+      "date": "2026-06-25",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Joe Studwell: why Japan, Korea, Taiwan and China got rich and their neighbours didn't — a three-step recipe of land reform, export discipline and financial repression, in that order."
+    },
+    {
+      "file": "Swipe – Postwar – 2026-06-25.html",
+      "title": "Postwar",
+      "date": "2026-06-25",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Tony Judt's history of Europe since 1945: the continent rebuilt itself by forgetting the war, then defined itself by remembering it — East and West told as one story."
+    },
+    {
+      "file": "Swipe – Kingdom of Fossil Water – 2026-06-25.html",
+      "title": "Kingdom of Fossil Water",
+      "date": "2026-06-25",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "In Our Time (BBC, 11 June 2026) on the Garamantes — a Saharan civilisation that mined ancient 'fossil water' through a thousand miles of tunnels, built desert cities, then drained the aquifer that fed it."
+    },
+    {
+      "file": "Swipe – Dancing in Shackles – 2026-06-25.html",
+      "title": "Dancing in Shackles",
+      "date": "2026-06-25",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Sinica with Yi-Ling Liu on 'The Wall Dancers': China's internet told through five lives — rapper, censor, app founder, feminist, sci-fi writer — and the end of techno-utopianism."
+    },
+    {
+      "file": "Swipe – The Garden of Earthly Delights – 2026-06-25.html",
+      "title": "The Garden of Earthly Delights",
+      "date": "2026-06-25",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Hieronymus Bosch (c. 1490–1500, Prado): a four-metre triptych running Eden → a teeming pleasure garden → a nightmarish Hell — and 500 years of unsettled argument over what it means."
+    },
     {
       "file": "Swipe – A City on a Scroll – 2026-06-24.html",
       "title": "A City on a Scroll",
