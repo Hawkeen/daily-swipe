@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "David Graeber — 'Debt: The First 5,000 Years' (2011). The textbook story of barter then money then credit is backwards: credit came first, and debt is the oldest form of trade."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Debt: The First 5,000 Years — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="linear-gradient(135deg, #312e81, #1e1b4b)">
+        <div class="pageno">1 / 9 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · before we begin</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Why Nations Fail&rdquo; (24 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">In <i>Why Nations Fail</i>, what do Acemoglu &amp; Robinson say explains why one town is rich and its neighbour poor?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Geography and natural resources</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Culture and religion</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Inclusive vs. extractive political and economic institutions</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> &mdash; The difference isn&rsquo;t geography or culture; it&rsquo;s whether institutions are inclusive or extractive.
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #14532d, #052e16)">
+        <div class="pageno">2 / 9 →</div>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Book of the day · 📖</div>
+        <div style="font-size: 38px; font-weight: 800; line-height: 1.05; margin-bottom: 14px;">Debt</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.35; margin-bottom: 16px;">The First 5,000 Years</div>
+        <div style="font-size: 15px; opacity: 0.9; margin-bottom: 6px;">David Graeber</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 28px;">Melville House · 2011 · ~540 pp · ~6 min read</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #166534, #14532d)">
+        <div class="pageno">3 / 9 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5M12 17h.01"/></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The Hook</div>
+        <div style="font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">What if money was never invented to fix barter &mdash; because the barter economy never really existed?</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Graeber takes aim at the story every economics textbook tells: that money arose to replace an awkward, complicated barter system. He argues there is not a shred of evidence for it.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #1c1917, #292524)">
+        <div class="pageno">4 / 9 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The Big Idea</div>
+        <div style="font-size: 25px; font-weight: 800; line-height: 1.25; margin-bottom: 24px;">Credit came first. Coins and barter came later.</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Graeber inverts the textbook sequence of barter &rarr; money &rarr; credit. Credit &mdash; the ledger of who owes what to whom &mdash; is the most primitive form of commerce. Debt is probably the oldest means of trade; cash and barter are later developments that surface mainly when trust breaks down.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #166534, #14532d)">
+        <div class="pageno">5 / 9 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 1 / 4 · The myth of barter</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">No shred of evidence</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">The commodity theory of money &mdash; money emerging from early barter &mdash; holds sway in neo-classical economics. Graeber points out it is an imaginary history: there is no historical or anthropological evidence that a barter economy ever existed and was then fixed by money.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #064e3b, #022c22)">
+        <div class="pageno">6 / 9 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 2 / 4 · What actually came first</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Ledgers of who owes whom</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Credit, Graeber argues, is the original form of commerce &mdash; supplemented by barter or immediate monetary exchange only when social conditions deteriorate enough to make credit arrangements impossible. Cash and barter are usually limited to low-trust dealings with strangers or those deemed not credit-worthy.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #1e3a8a, #172554)">
+        <div class="pageno">7 / 9 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 3 / 4 · Money before markets</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">&ldquo;Social currencies&rdquo;</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Money first appeared as social currency &mdash; used to rearrange relationships among people: marriage, funerals, blood money and other social functions &mdash; not to buy and sell things. Commercial money began as credit: tallies of loans in a shared unit of account, settled periodically.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #44403c, #18181b)">
+        <div class="pageno">8 / 9 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 4 / 4 · The primacy of debt</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Debt has usually been the rule</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Across history, debt has typically retained its primacy, with cash and barter the exceptions. Reframing money as a record of obligations rather than a thing turns &ldquo;the economy&rdquo; into a story about morality, trust and who owes what to whom.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="#ede4d3; color: #2d1810">
+        <div class="pageno" style="opacity:0.5;">9 / 9 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">The Takeaway</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.45; margin-bottom: 32px; border-left: 4px solid #166534; padding-left: 18px;">Before there were coins or markets, there were promises &mdash; debt is the oldest economic technology we have.</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Next time</div>
+        <div style="margin-top:6px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://en.wikipedia.org/wiki/Debt:_The_First_5,000_Years" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · Debt: The First 5,000 Years</b></a>
+          <a href="https://eprints.lse.ac.uk/53184/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Review · LSE Research Online</b></a>
+          <a href="https://www.goodreads.com/book/show/6617037-debt" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Goodreads · reviews &amp; ratings</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px;">Daily Swipe · 27 June 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

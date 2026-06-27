@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Kyle Harper — 'The Fate of Rome: Climate, Disease, and the End of an Empire' (2017). Rome's fall was shaped not only by emperors and barbarians but by pandemics, volcanoes and an unstable climate."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Fate of Rome — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="linear-gradient(135deg, #312e81, #1e1b4b)">
+        <div class="pageno">1 / 9 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · before we begin</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Chip War&rdquo; (23 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">In <i>Chip War</i>, what does Chris Miller argue semiconductors have become?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. A solved, commoditised technology with little strategic value</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. &ldquo;The new oil&rdquo; &mdash; a critical resource whose supply runs through one contested island, Taiwan</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Mainly a consumer-electronics story with little geopolitical weight</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; Miller: chips are the new oil, and the world&rsquo;s most critical supply runs through Taiwan.
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #7c2d12, #431407)">
+        <div class="pageno">2 / 9 →</div>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Book of the day · 📖</div>
+        <div style="font-size: 38px; font-weight: 800; line-height: 1.05; margin-bottom: 14px;">The Fate of Rome</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.35; margin-bottom: 16px;">Climate, Disease, and the End of an Empire</div>
+        <div style="font-size: 15px; opacity: 0.9; margin-bottom: 6px;">Kyle Harper</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 28px;">Princeton University Press · 2017 · ~440 pp · ~6 min read</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #9a3412, #7c2d12)">
+        <div class="pageno">3 / 9 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The Hook</div>
+        <div style="font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">What if Rome wasn&rsquo;t only conquered by barbarians &mdash; but by germs and a shifting climate?</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Harper argues Rome&rsquo;s fate was decided not just by emperors, soldiers and barbarians, but also by volcanic eruptions, solar cycles, climate instability and devastating viruses and bacteria.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #1c1917, #44403c)">
+        <div class="pageno">4 / 9 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The Big Idea</div>
+        <div style="font-size: 25px; font-weight: 800; line-height: 1.25; margin-bottom: 24px;">Nature was a protagonist in Roman history, not a backdrop.</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Against narratives that treat the environment as a static stage, Harper synthesises climate science and genomics to argue that Rome&rsquo;s ecological context was deeply influential in its sociopolitical history &mdash; shaping the empire&rsquo;s rise and helping to unmake it.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #7f1d1d, #450a0a)">
+        <div class="pageno">5 / 9 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 1 / 4 · The first pandemic</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">The Antonine Plague (after AD 160)</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">An outbreak that was probably smallpox struck the empire in the late second century. Harper counts it as serious but not the &ldquo;neutron bomb&rdquo; the later plague would be &mdash; claiming on the order of seven to eight million lives and proving less socioeconomically disruptive.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #292524, #1c1917)">
+        <div class="pageno">6 / 9 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 2 / 4 · The great mortality</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">The Justinianic Plague (541 CE)</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">The bubonic plague first appears in the records in 541 CE. Harper links its emergence to climate cooling, which he argues created the conditions that tied the bacterium to black rats and their fleas &mdash; and finally to humans.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #78350f, #451a03)">
+        <div class="pageno">7 / 9 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 3 / 4 · The unseen actors</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Volcanoes, the sun, and an unstable climate</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Harper&rsquo;s wider point is that the fate of Rome was decided not only by human actors but by volcanic eruptions, solar cycles and climate instability &mdash; forces traditional histories left out of the story entirely.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #3f3f46, #18181b)">
+        <div class="pageno">8 / 9 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 4 / 4 · The pushback</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Critics say the story is too neat</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Harper&rsquo;s thesis has drawn sharp response. Reviewers argue he overlooked genuine scholarly controversy &mdash; for instance presenting an oversimplified, catastrophic narrative of the Antonine plague &mdash; a reminder that &ldquo;collapse&rdquo; histories invite caution.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="#ede4d3; color: #2d1810">
+        <div class="pageno" style="opacity:0.5;">9 / 9 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">The Takeaway</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.45; margin-bottom: 32px; border-left: 4px solid #9a3412; padding-left: 18px;">Rome did not simply fall to men with swords: a changing climate and new diseases were among the forces that decided its fate.</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Next time</div>
+        <div style="margin-top:6px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://press.princeton.edu/books/hardcover/9780691166834/the-fate-of-rome" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Publisher · Princeton University Press</b></a>
+          <a href="https://eh.net/book_reviews/the-fate-of-rome-climate-disease-and-the-end-of-an-empire/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Review · EH.net</b></a>
+          <a href="https://www.goodreads.com/book/show/34427005-the-fate-of-rome" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Goodreads · reviews &amp; ratings</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px;">Daily Swipe · 27 June 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

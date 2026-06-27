@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Diego Velázquez, 'Las Meninas' (1656, Museo del Prado): a court portrait that became a painting about painting — layered gazes, a mirrored king and queen, and the viewer pulled into the frame."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Las Meninas — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="linear-gradient(135deg, #312e81, #1e1b4b)">
+        <div class="pageno">1 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · before we begin</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;The Wood Wide Web&rdquo; (22 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">In the <i>Entangled Life</i> swipe, what striking claim did Merlin Sheldrake make about individuality?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Fungi are simple organisms with little effect on the plants around them</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Once you take fungi seriously, the line between individuals dissolves &mdash; &ldquo;We are all lichens&rdquo;</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Plants and fungi never cooperate, they only compete</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; More than 90% of plants depend on fungi they cannot see; once you take fungi seriously, &ldquo;We are all lichens.&rdquo;
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #3b2f2f, #1c1410)">
+        <div class="pageno">2 / 10 →</div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Las_Meninas_%281656%29%2C_by_Velazquez.jpg/800px-Las_Meninas_%281656%29%2C_by_Velazquez.jpg" alt="Las Meninas" style="display:block; width:150px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.35); margin-bottom:16px;" loading="lazy">
+        <div style="font-size:11px; opacity:0.6; margin:-6px 0 14px; line-height:1.35;">Diego Velázquez, <i>Las Meninas</i> (1656). Public domain, via Wikimedia Commons.</div>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Creative topic · 🎨</div>
+        <div style="font-size: 38px; font-weight: 800; line-height: 1.05; margin-bottom: 14px;">Las Meninas</div>
+        <div style="font-size: 18px; opacity: 0.95; line-height: 1.35; margin-bottom: 16px;">&ldquo;The Maids of Honour&rdquo;</div>
+        <div style="font-size: 15px; opacity: 0.9; margin-bottom: 6px;">Diego Velázquez</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 28px;">Oil on canvas · 1656 · Museo del Prado, Madrid · ~5 min read</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #44403c, #292524)">
+        <div class="pageno">3 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The Hook</div>
+        <div style="font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">Who is the real subject &mdash; the little princess, the painter, or you, standing where the king and queen should be?</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Velázquez turned an ordinary court portrait into a meta-painting: a picture about the act of painting, and about the strange exchange of seeing and being seen.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #1c1917, #3f3f46)">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The Big Idea</div>
+        <div style="font-size: 25px; font-weight: 800; line-height: 1.25; margin-bottom: 24px;">A court portrait that quietly questions what a portrait is.</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Las Meninas (1656) shows a moment in the Spanish court &mdash; the Infanta Margarita Theresa, her maids of honour, court dwarfs, and Velázquez himself at a vast canvas. Its layered gazes, deep illusionistic space and ambiguous narrative blur the boundary between reality and representation.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #292524, #0c0a09)">
+        <div class="pageno">5 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 1 / 5 · The mirror</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">The king and queen are where you stand</div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Las_Meninas_mirror_detail.jpg/500px-Las_Meninas_mirror_detail.jpg" alt="The king and queen are where you stand" style="display:block; width:100%; max-height:240px; object-fit:cover; border-radius:12px; margin-bottom:6px;" loading="lazy">
+        <div style="font-size:11px; opacity:0.6; margin:0 0 14px; line-height:1.35;">Detail: the mirror in <i>Las Meninas</i>. Public domain, via Wikimedia Commons.</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">On the back wall, a flat mirror reflects King Philip IV and Queen Mariana &mdash; implying the royal couple stands outside the painted space, exactly where the viewer stands. The mirror projects their double into the scene and pulls us into the picture.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #3f3f46, #18181b)">
+        <div class="pageno">6 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 2 / 5 · A painting about painting</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">The true subject is the brush</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Velázquez paints himself mid-work before a huge canvas we see only from behind. By hiding what he is painting, he makes the act of painting itself the real subject &mdash; a portrait that turns to look at its own making.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #44403c, #292524)">
+        <div class="pageno">7 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 3 / 5 · Seeing and being seen</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Everyone is looking at us</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Several figures gaze directly out of the canvas. The picture becomes a meditation on seeing and being seen &mdash; its complex composition and illusionistic space challenging the conventions of traditional portraiture.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #1c1917, #44403c)">
+        <div class="pageno">8 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 4 / 5 · Two meanings</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">The king &mdash; and the dignity of art</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Art historians read the painting on two levels at once: one political, tied to the king and the court; the other a statement of the idea Velázquez had of art itself &mdash; a claim for the status and intellectual dignity of the painter.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="linear-gradient(135deg, #312e81, #1e1b4b)">
+        <div class="pageno">9 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 5 / 5 · The philosophers&rsquo; picture</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Representation looking at itself</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Las Meninas has fascinated thinkers far beyond art history &mdash; Michel Foucault devoted a famous analysis to it, reading the work as representation turning to examine itself, a touchstone for debates on perception, postmodernism and painting.</div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="panel" style="#ede4d3; color: #2d1810">
+        <div class="pageno" style="opacity:0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 24px; text-transform: uppercase;">The Takeaway</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.45; margin-bottom: 32px; border-left: 4px solid #7c2d12; padding-left: 18px;">Stand in front of Las Meninas and the painting quietly hands you a role: you are the one being looked at.</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 14px; text-transform: uppercase;">Next time</div>
+        <div style="margin-top:6px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://www.museodelprado.es/en/easy-to-read/las-meninas-diego-velazquez/c43f1c8d-e6c9-a8c2-44dc-0c9be2e10177" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Museo del Prado · the painting</b></a>
+          <a href="https://en.wikipedia.org/wiki/Las_Meninas" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · Las Meninas</b></a>
+          <a href="https://www.britannica.com/topic/Las-meninas" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Britannica · analysis</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 28px;">Daily Swipe · 27 June 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
