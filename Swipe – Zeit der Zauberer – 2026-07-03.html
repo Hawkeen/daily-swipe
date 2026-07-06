@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Wolfram Eilenbergers 'Zeit der Zauberer' (2018): das große Jahrzehnt der Philosophie 1919–1929, in dem Wittgenstein, Benjamin, Cassirer und Heidegger das Denken neu erfanden."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Zeit der Zauberer — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Rückblick · zum Aufwärmen</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Warum es die Welt nicht gibt&ldquo; (22. Juni 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was genau gibt es laut Markus Gabriels Neuem Realismus <em>nicht</em>?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Einzelne Dinge und Tatsachen</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Sinnfelder, in denen Dinge erscheinen</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Das All-Umfassende &ndash; &bdquo;die Welt&ldquo; als Ganzes</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: C</b> &mdash; es gibt unzählige Sinnfelder, in denen Dinge erscheinen; nur das All-Umfassende, die Welt, gibt es nicht. Aber alles andere schon.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3b0764, #1e1b4b);">
+        <div class="pageno">2 / 10 →</div>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 18px; opacity: 0.9;"><path d="M12 2l2 5 5 .5-4 3.5 1.5 5-4.5-3-4.5 3 1.5-5-4-3.5 5-.5z"/></svg>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Buch des Tages · 📖</div>
+        <div style="font-size: 36px; font-weight: 800; line-height: 1.05; margin-bottom: 14px;">Zeit der Zauberer</div>
+        <div style="font-size: 17px; opacity: 0.95; line-height: 1.35; margin-bottom: 16px;">Das große Jahrzehnt der Philosophie 1919&ndash;1929</div>
+        <div style="font-size: 15px; opacity: 0.9; margin-bottom: 6px;">Wolfram Eilenberger · Philosoph &amp; Publizist</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 28px;">Klett-Cotta, 2018 · ~5 Min. Lesezeit</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Weiter →</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">3 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;"><path d="M4 19.5V6a2 2 0 0 1 2-2h11a1 1 0 0 1 1 1v13"/><path d="M6 17h12"/></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">Der Aufhänger</div>
+        <div style="font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 24px;">Vier junge Männer, ein Jahrzehnt &mdash; und das Denken war danach ein anderes.</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Zwischen 1919 und 1929, im Trümmerfeld nach dem Ersten Weltkrieg, erfinden Ludwig Wittgenstein, Walter Benjamin, Ernst Cassirer und Martin Heidegger die Philosophie neu. Eilenberger erzählt es nicht als Ideengeschichte, sondern als Lebensroman &mdash; mit Liebschaften, Geldnöten und Zusammenbrüchen.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #2e1065);">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18M3 12h18"/></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">Die Kernidee</div>
+        <div style="font-size: 25px; font-weight: 800; line-height: 1.25; margin-bottom: 24px;">Vier Lebensentwürfe &mdash; vier Antworten auf die Frage: Was ist der Mensch?</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Eilenberger spannt die Biografien der vier Denker parallel auf und zeigt: In diesem Jahrzehnt wurde die deutsche Sprache, ein letztes Mal vor der Katastrophe des Zweiten Weltkriegs, zur Sprache des Geistes. Ihre Werke prägen bis heute, wie wir über Sprache, Zeit, Kunst und Existenz nachdenken.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #155e75, #082f49);">
+        <div class="pageno">5 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Erkenntnis 1 / 5 · Das Jahrzehnt</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Schöpfung aus den Trümmern</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Ausgerechnet die Jahre nach dem Ersten Weltkrieg, geprägt von Inflation, Umsturz und Unsicherheit, werden zu einer Epoche unvergleichlicher geistiger Kreativität. Der Zusammenbruch der alten Ordnung zwingt eine ganze Generation, das Fundament des Denkens neu zu legen.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
+        <div class="pageno">6 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Erkenntnis 2 / 5 · Wittgenstein</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Der Milliardärssohn als Dorfschullehrer</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Ludwig Wittgenstein, Erbe eines der größten Vermögen Europas, wird in Cambridge als Gott der Philosophie verehrt &mdash; und unterrichtet zur selben Zeit in völliger Armut als Volksschullehrer im oberösterreichischen Hinterland. Sein &bdquo;Tractatus&ldquo; erklärt die Grenzen dessen, was sich überhaupt sagen lässt.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">7 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Erkenntnis 3 / 5 · Heidegger</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Kometenhafter Aufstieg &mdash; und Hannah Arendt</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Martin Heidegger steigt in diesen Jahren zum gefeierten Denker auf; parallel dazu läuft seine Liebe zu seiner Studentin Hannah Arendt. Eilenberger verwebt das philosophische Werk mit der privaten Existenz, aus der es hervorgeht.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #78350f, #3b1d0a);">
+        <div class="pageno">8 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Erkenntnis 4 / 5 · Benjamin</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Capri macht ihn zum Revolutionär</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Walter Benjamin, zeitlebens ohne feste Professur und in prekären Verhältnissen, erlebt auf Capri eine leidenschaftliche Affäre mit einer lettischen Anarchistin &mdash; und wird darüber zum politischen, revolutionären Denker. Die Biografie kippt das Werk in eine neue Richtung.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f3f46, #18181b);">
+        <div class="pageno">9 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Erkenntnis 5 / 5 · Cassirer</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Der Bürgerliche und der aufkommende Hass</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Ernst Cassirer, der Philosoph der symbolischen Formen, erlebt im gutbürgerlichen Hamburg den erstarkenden Antisemitismus &mdash; Vorbote der Emigration, die ihm bald bevorsteht. In ihm verkörpert sich die zivilisierte Vernunft, die das Jahrzehnt am Ende nicht retten wird.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 20px; text-transform: uppercase;">Die Quintessenz</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.45; margin-bottom: 26px; border-left: 4px solid #7c2d12; padding-left: 18px; color: #431407;">&bdquo;&hellip; machten die deutsche Sprache, ein letztes Mal vor der Katastrophe des Zweiten Weltkriegs, zur Sprache des Geistes.&ldquo; &mdash; Klett-Cotta, über die vier Denker</div>
+        <div style="margin-top:6px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Nächste Schritte</p>
+          <a href="https://www.klett-cotta.de/produkt/wolfram-eilenberger-zeit-der-zauberer-9783608947632-t-4168" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Das Buch · Klett-Cotta</b></a>
+          <a href="https://www.perlentaucher.de/buch/wolfram-eilenberger/zeit-der-zauberer.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Perlentaucher · Rezensionsüberblick</b></a>
+          <a href="https://de.wikipedia.org/wiki/Wolfram_Eilenberger" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Wolfram Eilenberger · Wikipedia</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 26px;">Daily Swipe · 3. Juli 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zurück">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

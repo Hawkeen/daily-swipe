@@ -1,7 +1,47 @@
 {
   "updated": "2026-07-03",
-  "count": 83,
+  "count": 88,
   "swipes": [
+    {
+      "file": "Swipe – The Price of Time – 2026-07-03.html",
+      "title": "The Price of Time",
+      "date": "2026-07-03",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Edward Chancellor (2022): interest is the price of time — push rates to zero and finance turns absurd, breeding bubbles, zombie firms and inequality rather than growth."
+    },
+    {
+      "file": "Swipe – Müdigkeitsgesellschaft – 2026-07-03.html",
+      "title": "Müdigkeitsgesellschaft",
+      "date": "2026-07-03",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Byung-Chul Han (2010): Wir leben nicht mehr in Foucaults Disziplinar-, sondern in einer Leistungsgesellschaft — und beuten uns freiwillig selbst aus, bis zum Burnout."
+    },
+    {
+      "file": "Swipe – China's Growth Machine – 2026-07-03.html",
+      "title": "China's Growth Machine",
+      "date": "2026-07-03",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Ones and Tooze from 'Summer Davos' in Dalian (June 2026): Adam Tooze on Chinese 'overcapacity' as a global gift, the 15th Five-Year Plan, and a country running two economies at once."
+    },
+    {
+      "file": "Swipe – Rückzug aus Europa – 2026-07-03.html",
+      "title": "Rückzug aus Europa",
+      "date": "2026-07-03",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Streitkräfte und Strategien (NDR, Juni 2026): Die USA prüfen einen beschleunigten Truppenabzug aus Europa — und Europa muss die Lücke im NATO-Streitkräftemodell selbst füllen."
+    },
+    {
+      "file": "Swipe – Shadows on the Wall – 2026-07-03.html",
+      "title": "Shadows on the Wall",
+      "date": "2026-07-03",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Film · German Expressionist cinema (c.1919–1933): a defeated Weimar Germany painted its nightmares onto film — Caligari, Nosferatu, Metropolis — and invented horror, noir and sci-fi."
+    },
     {
       "file": "Swipe – Thinking Fast and Slow – 2026-07-03.html",
       "title": "Thinking, Fast and Slow",
