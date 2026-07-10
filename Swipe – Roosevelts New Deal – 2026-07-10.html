@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Der Rest ist Geschichte (2. Juli 2026): Franklin D. Roosevelt und der New Deal — wie ein an Polio erkrankter Präsident die Weltwirtschaftskrise bekämpfte, die USA umbaute und viermal gewählt wurde."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Roosevelts New Deal — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #713f12, #422006);">
+        <div class="pageno">1 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Die Sezession der Plebejer&ldquo; (3. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was taten die Plebejer 494 v. Chr.?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Sie zettelten einen bewaffneten Aufstand an, um die Könige zurückzuholen</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Sie verließen Rom geschlossen und erzwangen so politische Mitsprache</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Sie wanderten endgültig nach Griechenland aus</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> &mdash; mit dem Auszug (<em>secessio plebis</em>) legten die Plebejer Rom lahm und erkämpften sich politische Rechte.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+        <div class="pageno">2 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Rückzug aus Europa&ldquo; (3. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Worum ging es in dieser Folge von <em>Streitkräfte und Strategien</em>?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Um einen möglichen beschleunigten Abzug von US-Truppen aus Europa</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Um eine Verdopplung der US-Truppenpräsenz in Europa</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Um einen geschlossenen NATO-Austritt der Europäer</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: A</b> &mdash; die Folge diskutierte, dass die USA einen beschleunigten Truppenabzug prüfen &mdash; und was das für Europas Sicherheit hieße.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 10 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Die Verwandlung der Welt&ldquo; (27. Juni 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wie erzählt Jürgen Osterhammel das 19. Jahrhundert?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Streng eurozentrisch, als alleinigen Aufstieg Europas</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Global und verflochten &mdash; als weltweite Verwandlung, nicht nur europäische Geschichte</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Ausschließlich als Wirtschaftsgeschichte in Zahlen</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> &mdash; Osterhammel schreibt das 19. Jahrhundert als globale Verflechtungsgeschichte statt als europäisches Sonderkapitel.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+        <div class="pageno">4 / 10 →</div>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.9;"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/FDR%20in%201933.jpg?width=300" alt="Franklin D. Roosevelt, Porträt 1933" style="display:block; width:140px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.35); margin-bottom:10px;" loading="lazy" onerror="this.style.display='none'; var c=this.nextElementSibling; if(c) c.style.display='none';">
+        <div style="font-size:11px; opacity:0.6; margin:0 0 16px; line-height:1.35;">Foto: Elias Goldensky, 1933. Public domain, via Wikimedia Commons.</div>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Folge des Tages · 🎧</div>
+        <div style="font-size: 32px; font-weight: 800; line-height: 1.07; margin-bottom: 12px;">Roosevelts New Deal</div>
+        <div style="font-size: 17px; opacity: 0.95; line-height: 1.35; margin-bottom: 12px;">Der Rest ist Geschichte · Der Mann, der die Weltwirtschaftskrise, die Nationalsozialisten und die Kinderlähmung bekämpfte</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 24px;">Deutschlandfunk · 2. Juli 2026 · ~5 Min. Lesezeit</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Weiter →</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #292524, #0c0a09);">
+        <div class="pageno">5 / 10 →</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">Der Aufschlag</div>
+        <div style="font-size: 29px; font-weight: 800; line-height: 1.18; margin-bottom: 24px;">Ein Präsident im Rollstuhl gegen die größte Krise des Kapitalismus.</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Als Franklin D. Roosevelt 1933 sein Amt antrat, war rund ein Viertel der Erwerbsfähigen ohne Arbeit. Die Folge erzählt, wie er den Staat neu erfand &mdash; und als einziger US-Präsident viermal gewählt wurde, ehe er im Amt starb.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f3f46, #18181b);">
+        <div class="pageno">6 / 10 →</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 22px; text-transform: uppercase;">Der Kern</div>
+        <div style="font-size: 25px; font-weight: 800; line-height: 1.25; margin-bottom: 22px;">Der New Deal: den Staat als Krisenhelfer erfinden</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Zwischen 1933 und dem Kriegsbeginn 1939 sollte eine Flut von Reformen die seit 1929 wütende Weltwirtschaftskrise eindämmen: Roosevelt versuchte, mit Wirtschafts- und Sozialpolitik die Konjunktur anzukurbeln und Arbeitslosigkeit und Armut zu bekämpfen.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">7 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Befund 1 / 3 · Die Tiefe der Krise</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Ein Viertel ohne Arbeit, die Börse fast ausgelöscht</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Das Ausmaß war beispiellos: 1932 waren rund 25 Prozent der Erwerbsfähigen arbeitslos. Zwischen 1929 und Ende 1932 verloren die Aktien im Dow-Jones-Index fast 90 Prozent ihres Werts. Auf diesen Abgrund musste der New Deal antworten.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #44403c, #1c1917);">
+        <div class="pageno">8 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Befund 2 / 3 · Das Gesicht der Not</div>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lange-MigrantMother02.jpg?width=520" alt="Dorothea Langes &bdquo;Migrant Mother&ldquo;, 1936" style="display:block; width:100%; max-height:300px; object-fit:cover; border-radius:12px; margin-bottom:12px;" loading="lazy" onerror="this.style.display='none'; var c=this.nextElementSibling; if(c) c.style.display='none';">
+        <div style="font-size:11px; opacity:0.6; margin:-4px 0 14px; line-height:1.35;">Foto: Dorothea Lange, 1936 (&bdquo;Migrant Mother&ldquo;). Public domain (FSA), via Wikimedia Commons.</div>
+        <div style="font-size: 22px; font-weight: 800; line-height: 1.3; margin-bottom: 14px;">Reformen gegen Arbeitslosigkeit und Armut</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Bilder wie Dorothea Langes &bdquo;Migrant Mother&ldquo; wurden zum Sinnbild der Depression. Der New Deal antwortete mit zahllosen Reformen &mdash; Beschäftigungsprogrammen und sozialer Absicherung &mdash;, die das Verhältnis von Staat und Wirtschaft dauerhaft veränderten.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
+        <div class="pageno">9 / 10 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Befund 3 / 3 · Vier Amtszeiten</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Depression, Nazis, Polio &mdash; und ein Tod im Amt</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Roosevelt kämpfte gegen die Weltwirtschaftskrise, die Nationalsozialisten und seine eigene Kinderlähmung. Als bislang einziger US-Präsident wurde er viermal gewählt &mdash; und starb 1945 im Amt, ehe er die von ihm mitgeschaffene Nachkriegsordnung erleben konnte.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">10 / 10 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 20px; text-transform: uppercase;">Die Quintessenz</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.45; margin-bottom: 26px; border-left: 4px solid #292524; padding-left: 18px; color: #1c1917;">Kernbotschaft der Folge: Roosevelt beantwortete den Zusammenbruch nicht mit weniger, sondern mit mehr Staat &mdash; und formte in zwölf Jahren ein neues Amerika, dessen Nachkriegsordnung er selbst nicht mehr sah.</div>
+        <div style="margin-top:6px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Nächste Schritte</p>
+          <a href="https://podcasts.apple.com/de/podcast/der-rest-ist-geschichte/id1673952611" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Der Rest ist Geschichte · alle Folgen</b></a>
+          <a href="https://de.wikipedia.org/wiki/Franklin_D._Roosevelt" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · Franklin D. Roosevelt</b></a>
+          <a href="https://de.wikipedia.org/wiki/New_Deal" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Wikipedia · Der New Deal</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 26px;">Daily Swipe · 10. Juli 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zurück">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
