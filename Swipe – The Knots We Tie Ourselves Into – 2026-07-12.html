@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Making Sense #483 (1 July 2026): Sam Harris and Alain de Botton on the psychology of unhappiness, secular ritual, and emotional education."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Knots We Tie Ourselves Into — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;From Choke to Clutch&rdquo; (12 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">According to Sian Beilock, why do skilled people choke under pressure?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Worry hijacks working memory &mdash; the mental workspace the skill needs</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Their muscles physically fatigue under stress hormones</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. They were never really skilled in the first place</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: A</b> &mdash; Beilock&rsquo;s core finding: under pressure, worry occupies working memory and crowds out the very resources skilled performance depends on &mdash; which is why the fixes are counterintuitive.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">2 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Resonanz&ldquo; (27. Juni 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Woran misst sich Lebensqualit&auml;t nach Hartmut Rosa?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. An der Menge der verf&uuml;gbaren Ressourcen und Optionen</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. An der Qualit&auml;t unserer Weltbeziehung &mdash; ob sie in Resonanz tritt</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. An der Geschwindigkeit, mit der wir unsere Ziele erreichen</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> &mdash; Rosa: Nicht Ressourcen, sondern die Beziehung zur Welt entscheidet &mdash; wo Beschleunigung die Resonanz zerst&ouml;rt, verstummt die Welt.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #164e63, #082f49);">
+        <div class="pageno">3 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;A Story-Telling Animal&rdquo; (23 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What is Alasdair MacIntyre&rsquo;s claim about how we become capable of acting well?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. By maximising our individual freedom from all traditions</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. By calculating the consequences of every possible action</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. You can only act once you know what story you&rsquo;re part of &mdash; no one is self-made</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> &mdash; MacIntyre&rsquo;s point: we are story-telling animals; agency and virtue only make sense inside the narratives and communities we inherit.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #2e1065);">
+        <div class="pageno">4 / 11 →</div>
+        <img src="https://assets.samharris.org/episodes/images/0ba71ef7-bca1-415f-98cd-9521dcf38e1e/2b70ddaef51_thumb_x1" alt="Making Sense episode 483 artwork" style="display:block; width:140px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.3); margin-bottom:10px;">
+        <div style="font-size:11px; opacity:0.6; margin:0 0 14px; line-height:1.35;">Art: Making Sense / samharris.org</div>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Episode of the day · 🎧</div>
+        <div style="font-size: 30px; font-weight: 800; line-height: 1.1; margin-bottom: 12px;">The Knots We Tie Ourselves Into</div>
+        <div style="font-size: 17px; opacity: 0.95; line-height: 1.35; margin-bottom: 12px;">Sam Harris meets Alain de Botton on the psychology of unhappiness &mdash; and why the secular world struggles with ecstasy, ritual and consolation</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 24px;">Making Sense #483 · Sam Harris &amp; Alain de Botton · 1 July 2026</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Swipe →</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #292524, #0c0a09);">
+        <div class="pageno">5 / 11 →</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">The Hook</div>
+        <div style="font-size: 30px; font-weight: 800; line-height: 1.18; margin-bottom: 24px;">We school children for years in maths and cloud formations &mdash; and barely an hour in shame, rage or how to love.</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">De Botton&rsquo;s life project &mdash; The School of Life &mdash; starts from that imbalance. In this conversation, two very different secular thinkers circle the same question: where is a modern person supposed to learn how to be less unhappy?</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f3f46, #18181b);">
+        <div class="pageno">6 / 11 →</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 22px; text-transform: uppercase;">The Core Thesis</div>
+        <div style="font-size: 25px; font-weight: 800; line-height: 1.25; margin-bottom: 22px;">Emotional insight is neither unnecessary nor unteachable &mdash; treating it that way is the modern world&rsquo;s strangest blind spot.</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">De Botton &mdash; writer, psychotherapist and founder of The School of Life &mdash; argues that we are &ldquo;left to find our own path around our unfeasibly complicated minds&rdquo;, as if each generation should rediscover the laws of physics by themselves. Emotional education is his proposed remedy.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+        <div class="pageno">7 / 11 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 1 / 4 · The gap</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Ecstasy and ritual, awkwardly missing</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">A central thread of the conversation is the secular world&rsquo;s discomfort with ecstasy and ritual &mdash; the structured experiences of awe and consolation that religions once organised. Harris and de Botton also discuss psychedelics as a tool for self-discovery, and what remains of Freud&rsquo;s legacy in how we understand the unconscious knots of the title.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #831843, #500724);">
+        <div class="pageno">8 / 11 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 2 / 4 · Love as a skill</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Not a feeling you fall into</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">&ldquo;The emotionally intelligent person knows that love is a skill, not a feeling,&rdquo; de Botton writes, &ldquo;and will require trust, vulnerability, generosity, humour, sexual understanding and selective resignation.&rdquo; Unhappiness, in this view, is less a fate than a set of unexamined habits &mdash; knots that can, with work, be untied.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #78350f, #451a03);">
+        <div class="pageno">9 / 11 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 3 / 4 · Against meritocracy</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">When success becomes a verdict</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">The episode takes up de Botton&rsquo;s case against meritocracy &mdash; the idea that if the successful deserve their success, the unsuccessful must deserve their failure &mdash; alongside what Harris&rsquo;s show notes call &ldquo;the cancel culture purity trap&rdquo; and the psychological meaning of death. The common thread: systems that promise justice can quietly manufacture shame.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+        <div class="pageno">10 / 11 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Finding 4 / 4 · The mirror</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">AI as the ultimate mirror</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Among the more unexpected turns: de Botton&rsquo;s framing of AI as &ldquo;the ultimate mirror&rdquo; &mdash; a technology that reflects our psychology back at us. For a psychotherapist, the interesting question is not what the machine knows, but what our conversations with it reveal about the knots we tie ourselves into.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">11 / 11 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 20px; text-transform: uppercase;">The Takeaway</div>
+        <div style="font-size: 22px; font-weight: 700; line-height: 1.45; margin-bottom: 26px; border-left: 4px solid #292524; padding-left: 18px; color: #1c1917;">&ldquo;The emotionally intelligent person knows how to hope and be grateful, while remaining steadfast before the essentially tragic structure of existence.&rdquo; &mdash; Alain de Botton, The School of Life</div>
+        <div style="margin-top:6px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://www.samharris.org/podcasts/making-sense-episodes/483-the-knots-we-tie-ourselves-into" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Making Sense · the episode page</b></a>
+          <a href="https://youtu.be/1NOg56SFwBc" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>YouTube · watch the preview</b></a>
+          <a href="https://www.alaindebotton.com/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>alaindebotton.com · the author</b></a>
+          <a href="http://theschooloflife.com" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>The School of Life · emotional education</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 26px;">Daily Swipe · 12 July 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

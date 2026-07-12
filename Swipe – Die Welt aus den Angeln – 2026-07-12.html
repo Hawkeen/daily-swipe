@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Philipp Blom (2017): Die Kleine Eiszeit 1570–1700 als Katalysator der Moderne — und was der erste Klimawandel über den heutigen lehrt."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Die Welt aus den Angeln — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Das sowjetische Jahrhundert&ldquo; (12. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wie erz&auml;hlt Karl Schl&ouml;gel die Geschichte der Sowjetunion?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Als klassische Systemgeschichte der Parteif&uuml;hrung von Lenin bis Gorbatschow</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Als reine Milit&auml;rgeschichte des Kalten Krieges</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Als Arch&auml;ologie des Alltags &mdash; Kommunalka, Datscha und Eisenbahn als gelebte Wirklichkeit</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: C</b> &mdash; Schl&ouml;gel schreibt keine Systemgeschichte, sondern eine Arch&auml;ologie des sowjetischen Alltags &mdash; das untergegangene Imperium wird &uuml;ber seine Dinge und Orte begreifbar.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">2 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Der Mond und die Menschen&ldquo; (2. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Worauf trifft die uralte Mond-Sehnsucht der Menschen laut der Folge von &bdquo;Der Rest ist Geschichte&ldquo; heute?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Auf das endg&uuml;ltige Ende aller bemannten Raumfahrt</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Auf einen neuen Wettlauf zum Mond</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Auf ein internationales Verbot von Mondmissionen</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> &mdash; Die Folge verband die jahrtausendealte Sehnsucht nach dem Mond mit dem neuen Wettlauf der Raumfahrtnationen um seine Eroberung.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #164e63, #082f49);">
+        <div class="pageno">3 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Wer bin ich &ndash; und wenn ja, wie viele?&ldquo; (23. Juni 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Entlang wessen ber&uuml;hmter Fragen strukturiert Richard David Precht seine philosophische Reise?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Kants drei Fragen &mdash; verbunden mit moderner Hirnforschung</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Hegels Dialektik von These, Antithese und Synthese</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Nietzsches Lehre von der ewigen Wiederkunft</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: A</b> &mdash; Precht folgt Kants drei Fragen und verbindet gro&szlig;e Philosophie mit den Befunden der modernen Hirnforschung.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #082f49);">
+        <div class="pageno">4 / 12 →</div>
+        <img src="https://res.cloudinary.com/literaturverlage/image/upload/MAM/Image/ARTK_CT0_9783446254589_0001.jpg" alt="Cover: Die Welt aus den Angeln" style="display:block; width:140px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.3); margin-bottom:10px;">
+        <div style="font-size:11px; opacity:0.6; margin:0 0 14px; line-height:1.35;">Cover: Hanser Verlag</div>
+        <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 12px; text-transform: uppercase;">Buch des Tages · 📖</div>
+        <div style="font-size: 32px; font-weight: 800; line-height: 1.08; margin-bottom: 12px;">Die Welt aus den Angeln</div>
+        <div style="font-size: 17px; opacity: 0.95; line-height: 1.35; margin-bottom: 12px;">Eine Geschichte der Kleinen Eiszeit von 1570 bis 1700 &mdash; und wie ein Klimasturz die moderne Welt mit hervorbrachte</div>
+        <div style="font-size: 13px; opacity: 0.7; margin-bottom: 24px;">Philipp Blom · Hanser, 2017 · 304 Seiten · ~6 Min. Lesezeit</div>
+        <div style="font-size: 16px; font-weight: 600; padding: 14px 20px; background: rgba(255,255,255,0.18); border-radius: 100px; display: inline-block; align-self: flex-start;">Wischen →</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #292524, #0c0a09);">
+        <div class="pageno">5 / 12 →</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 24px; text-transform: uppercase;">Der Aufh&auml;nger</div>
+        <div style="font-size: 30px; font-weight: 800; line-height: 1.18; margin-bottom: 24px;">Europa hat schon einmal einen Klimawandel erlebt. Er hat die moderne Welt hervorgebracht &mdash; und ihre gef&auml;hrlichste Gewohnheit.</div>
+        <div style="font-size: 17.5px; line-height: 1.55; opacity: 0.92;">Lange kalte Winter, kurze k&uuml;hle Sommer: Im 17. Jahrhundert ver&auml;nderte sich das Klima in Europa dramatisch. Das Getreide wurde knapp, Wirtschaft und Gesellschaft torkelten in eine tiefe Krise. Was die Menschen daraus machten, pr&auml;gt uns bis heute.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f3f46, #18181b);">
+        <div class="pageno">6 / 12 →</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.8; margin-bottom: 22px; text-transform: uppercase;">Die Kernthese</div>
+        <div style="font-size: 25px; font-weight: 800; line-height: 1.25; margin-bottom: 22px;">Die Kleine Eiszeit war nicht die Ursache der Moderne &mdash; aber ihr Katalysator.</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Blom argumentiert, dass der Klimasturz bestimmte Entwicklungen beschleunigte: Aufkl&auml;rung, wissenschaftliche Methode, religi&ouml;se Toleranz, Kapitalismus und die Idee der Menschenrechte entstanden in dieser Zeit als Antworten auf ver&auml;nderte Lebensbedingungen. Die Menschen versuchten, sich mit Wissenschaft und Technik aus der Abh&auml;ngigkeit von der Natur zu befreien.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
+        <div class="pageno">7 / 12 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Erkenntnis 1 / 4 · Der Klimasturz</div>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pieter_Bruegel_the_Elder_-_Hunters_in_the_Snow_(Winter)_-_Google_Art_Project.jpg?width=900" alt="Pieter Bruegel der Ältere: Die Jäger im Schnee (1565)" style="display:block; width:100%; max-height:240px; object-fit:cover; border-radius:12px; margin-bottom:6px;" loading="lazy">
+        <div style="font-size:11px; opacity:0.6; margin:0 0 14px; line-height:1.35;">Pieter Bruegel d. &Auml;., Die J&auml;ger im Schnee (1565), Kunsthistorisches Museum Wien. Public domain, via Wikimedia Commons.</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Ein Jahrhundert im Frost</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Zwischen 1570 und 1700 wurde es in Europa merklich k&auml;lter. Ernten fielen aus, Getreide wurde knapp, Hunger und Teuerung folgten &mdash; eine Vorstellung davon, welche schweren Verwerfungen ein Klimawandel ausl&ouml;st. Die Winterlandschaften der Epoche, wie Bruegels ber&uuml;hmte &bdquo;J&auml;ger im Schnee&ldquo; von 1565, zeigen eine Welt, die sich an Eis und K&auml;lte gew&ouml;hnen musste.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+        <div class="pageno">8 / 12 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Erkenntnis 2 / 4 · Die Antwort</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Aus der Krise in die Aufkl&auml;rung</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Die Kleine Eiszeit erm&ouml;glichte den Abschied von einer tief religi&ouml;sen Welt hin zu einem zunehmend aufgekl&auml;rten, wissenschaftlich orientierten Denken. M&auml;rkte, Handel und neue Wirtschaftsformen setzten sich durch &mdash; in einer Art evolution&auml;rem Prozess der Gesellschaft &uuml;berlebten die Ideen und Wirtschaftsweisen, die unter den ver&auml;nderten Bedingungen bestehen konnten.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #831843, #500724);">
+        <div class="pageno">9 / 12 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Erkenntnis 3 / 4 · Der Bogen zur Gegenwart</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Die L&ouml;sung von damals ist das Problem von heute</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Der Untertitel verspricht &bdquo;einige &Uuml;berlegungen zum Klima der Gegenwart&ldquo; &mdash; und Blom liefert: Die in der Kleinen Eiszeit entwickelten Strategien, endloses Wachstum und Ausbeutung der Natur, sind f&uuml;r die heutige Klimakrise mitverantwortlich. Das Wirtschaftswachstum, so seine Warnung, wird die kommende Krise nicht mehr bew&auml;ltigen k&ouml;nnen.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+        <div class="pageno">10 / 12 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Erkenntnis 4 / 4 · Der Autor</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">Ein Panoramamaler der Ideengeschichte</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Philipp Blom, geboren 1970, studierte Philosophie, Geschichte und Judaistik in Wien und Oxford und lebt als Schriftsteller und Historiker in Wien. Er erhielt u.&thinsp;a. den NDR Kultur Sachbuchpreis und 2026 den Lessing-Preis f&uuml;r Kritik. Die Kritik lobte das Buch als &bdquo;Panorama einer ganzen Epoche&ldquo; &mdash; ein Geschichtsbuch, das zugleich ein Lehrst&uuml;ck &uuml;ber die Gegenwart ist.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #2e1065);">
+        <div class="pageno">11 / 12 →</div>
+        <div style="display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,0.15); border-radius: 100px; margin-bottom: 18px; text-transform: uppercase;">Das Echo</div>
+        <div style="font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 16px;">&bdquo;Wie einen F&auml;cher aufgefaltet&ldquo;</div>
+        <div style="font-size: 16.5px; line-height: 1.55; opacity: 0.95;">Die taz schrieb: &bdquo;Auf der Basis zahlreicher, teils bewegender Zeugnisse faltet der Autor das &sbquo;eherne&lsquo; Zeitalter Kapitel f&uuml;r Kapitel wie einen F&auml;cher auf, bis sich ein faszinierendes Gesamtbild zeigt.&ldquo; Und ORF.at urteilte: &bdquo;Es ist das Verdienst von Bloms Buch, die Klimaver&auml;nderung als Katalysator des sozialen Wandels herauszuarbeiten.&ldquo;</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">12 / 12 ✓</div>
+        <div style="font-size: 14px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 20px; text-transform: uppercase;">Das Fazit</div>
+        <div style="font-size: 21px; font-weight: 700; line-height: 1.45; margin-bottom: 26px; border-left: 4px solid #292524; padding-left: 18px; color: #1c1917;">&bdquo;Das Experiment ist mit Blick auf den gegenw&auml;rtigen Klimawandel hochaktuell. (&hellip;) Eine Fallstudie, die die Geburt der modernen Welt mit dem Klimawandel verbindet.&ldquo; &mdash; Christoph Arens, Welt Online</div>
+        <div style="margin-top:6px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">N&auml;chste Schritte</p>
+          <a href="https://www.hanser-literaturverlage.de/buch/philipp-blom-die-welt-aus-den-angeln-9783446254589-t-2281" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Hanser · das Buch und die Pressestimmen</b></a>
+          <a href="https://www.perlentaucher.de/buch/philipp-blom/die-welt-aus-den-angeln.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Perlentaucher · Rezensions&uuml;bersicht</b></a>
+          <a href="https://literaturkritik.de/blom-welt-aus-angeln-ein-wandel-geistigen-klimas-interview-mit-philipp-blom-ueber-kleine-eiszeit-klimawandel,23498.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>literaturkritik.de · Interview mit Philipp Blom</b></a>
+          <a href="https://www.philipp-blom.eu/bucher/die-welt-aus-den-angeln" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>philipp-blom.eu · der Autor</b></a>
+        </div>
+        <div style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: 26px;">Daily Swipe · 12. Juli 2026</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
