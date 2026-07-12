@@ -1,7 +1,79 @@
 {
-  "updated": "2026-07-10",
-  "count": 103,
+  "updated": "2026-07-12",
+  "count": 112,
   "swipes": [
+    {
+      "file": "Swipe – Imagined Communities – 2026-07-12.html",
+      "title": "Imagined Communities",
+      "date": "2026-07-12",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Benedict Anderson (1983): the nation as an imagined political community — built by print capitalism, mapped by census, map and museum, and loyal enough to die for."
+    },
+    {
+      "file": "Swipe – From Choke to Clutch – 2026-07-12.html",
+      "title": "From Choke to Clutch",
+      "date": "2026-07-12",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Freakonomics Radio (3 July 2026): cognitive scientist and Dartmouth president Sian Beilock on why skilled people choke under pressure — worry hijacks working memory — and the counterintuitive fixes."
+    },
+    {
+      "file": "Swipe – Schuldig und trotzdem Kandidatin – 2026-07-12.html",
+      "title": "Schuldig — und trotzdem Kandidatin?",
+      "date": "2026-07-12",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Das Politikteil (10. Juli 2026) mit Matthias Krupa: Das Berufungsgericht bestätigt Le Pens „systematische Veruntreuung von EU-Geldern“ — Fußfessel inklusive. Und trotzdem hält sie an der Kandidatur 2027 fest."
+    },
+    {
+      "file": "Swipe – Todesfuge – 2026-07-12.html",
+      "title": "Todesfuge",
+      "date": "2026-07-12",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Lyrik · Paul Celans „Todesfuge“ (1944/45): eine Fuge aus Worten über die Lager — „der Tod ist ein Meister aus Deutschland“ wurde zur Chiffre des Holocaust und 1988 im Bundestag verlesen."
+    },
+    {
+      "file": "Swipe – Empire of Cotton – 2026-07-12.html",
+      "title": "Empire of Cotton",
+      "date": "2026-07-12",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Sven Beckert (2014): the Industrial Revolution was built on 'war capitalism' — slavery, land expropriation and armed conquest — told through the global history of a single fibre."
+    },
+    {
+      "file": "Swipe – Das sowjetische Jahrhundert – 2026-07-12.html",
+      "title": "Das sowjetische Jahrhundert",
+      "date": "2026-07-12",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Karl Schlögel (2017): keine Systemgeschichte, sondern eine Archäologie des sowjetischen Alltags — Kommunalka, Datscha und Eisenbahn als gelebte Wirklichkeit eines untergegangenen Imperiums."
+    },
+    {
+      "file": "Swipe – A Radical Vision for Israelis and Palestinians – 2026-07-12.html",
+      "title": "A Radical Vision for Israelis and Palestinians",
+      "date": "2026-07-12",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "The Ezra Klein Show (7 July 2026): Rula Hardal & May Pundak on 'A Land for All' — two sovereign states sharing one open homeland, with free movement and a shared Jerusalem."
+    },
+    {
+      "file": "Swipe – Wie wir mit AfD-Waehlern reden – 2026-07-12.html",
+      "title": "Wie wir mit AfD-Wähler:innen reden müssen",
+      "date": "2026-07-12",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Lage der Nation LdN486 (8. Juli 2026) mit Psychologin Eva-Lotta Brakemeier: Der Treiber hinter der AfD-Wahl ist oft nicht Ideologie, sondern Abstiegsangst — und man sollte im Gespräch bleiben."
+    },
+    {
+      "file": "Swipe – The Waste Land – 2026-07-12.html",
+      "title": "The Waste Land",
+      "date": "2026-07-12",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Poetry · T.S. Eliot's 'The Waste Land' (1922): modernism's central poem — a fragmented, allusive collage that turned the spiritual desolation of post-war Europe into a new kind of verse."
+    },
     {
       "file": "Swipe – Determined – 2026-07-10.html",
       "title": "Determined",
