@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Streitkräfte und Strategien (NDR, 14. Juli 2026): Die Koalition der Willigen schmiedet in Paris ein Raketenabwehr-Bündnis für die Ukraine — und Thomas Schiller erklärt Europas strategisches Versagen in Afrika."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Wie Europa Putins Raketenterror stoppen will — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Schuldig &mdash; und trotzdem Kandidatin?&ldquo; (12. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was war der Kern des Pariser Berufungsurteils gegen Marine Le Pen?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Ein Freispruch in allen Anklagepunkten</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Ein lebenslanger Ausschluss von allen Wahlen</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Schuldspruch wegen systematischer Veruntreuung von EU-Geldern bestätigt &mdash; inklusive Fu&szlig;fessel, doch die Kandidatur 2027 bleibt m&ouml;glich</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: C</b> &mdash; Der Schuldspruch ist eindeutig, aber die eigentliche Entscheidung f&auml;llen die W&auml;hler im Wahlkampf 2027.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">2 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;R&uuml;ckzug aus Europa&ldquo; (3. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wie hat sich die Debatte um die US-Truppen in Europa verschoben?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Der Abzug ist keine Ger&uuml;chtefrage mehr, sondern Planung &mdash; es geht nur noch um das &bdquo;wie schnell&ldquo;, und Europa muss die L&uuml;cke f&uuml;llen</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Die USA stocken ihre Truppen in Europa massiv auf</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Ein Abzug wurde vom US-Kongress endg&uuml;ltig ausgeschlossen</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: A</b> &mdash; Die stille Grundannahme europ&auml;ischer Verteidigung seit 1945 &mdash; die US-Pr&auml;senz &mdash; ist zur offenen Frage geworden.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Das Ende von FCAS&ldquo; (27. Juni 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Woran ist Europas gr&ouml;&szlig;tes R&uuml;stungsprojekt FCAS gescheitert?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. An einer Haushaltssperre des Bundestags</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. An einem erbitterten Industriestreit zwischen Dassault und Airbus um Projektf&uuml;hrung und Arbeitsanteile &mdash; gestoppt von Deutschland und Frankreich selbst</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. An einem Veto Spaniens gegen das Jet-Design</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> &mdash; Nicht ein Gegner stoppte den Kampfjet der 6. Generation, sondern die Partner: Industriepolitik schlug Souver&auml;nit&auml;t.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+        <div class="pageno">4 / 11 →</div>
+        <img src="https://cdn.podcastcms.de/images/podcasts/600/2785537/streitkraefte-und-strategien.png" alt="Podcast-Art: Streitkräfte und Strategien (NDR Info)" style="display:block; width:140px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.3); margin-bottom:12px;">
+        <div style="font-size:11px; opacity:0.6; margin:0 0 14px; line-height:1.35;">Art: NDR Info / Streitkr&auml;fte und Strategien</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Folge des Tages · 🎧</div>
+        <h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">Wie Europa Putins Raketenterror stoppen will</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Ein neues Raketenabwehr-B&uuml;ndnis aus Paris, die Wiederentflammung des Iran-Konflikts &mdash; und Europas blinder Fleck Afrika</p>
+        <p style="font-size:15px; opacity:0.75;">Streitkr&auml;fte und Strategien · NDR Info · mit Thomas Schiller · 14. Juli 2026 · 51 Min.</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Weiter →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #1c1917);">
+        <div class="pageno">5 / 11 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Der Aufhänger</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">Die Ukraine kann Putins ballistische Raketen derzeit kaum abfangen. Jetzt reagiert Europa.</p>
+        <p style="font-size:17.5px; line-height:1.5;">In Frankreich hat sich die sogenannte Koalition der Willigen mit Pr&auml;sident Selenskyj getroffen &mdash; und ein weiteres B&uuml;ndnis geschmiedet, das die ukrainische und europ&auml;ische Raketenabwehr st&auml;rken soll. Astrid Corall erkl&auml;rt in der Folge, was genau sich hinter der neuen Koalition verbirgt.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0f172a, #172554);">
+        <div class="pageno">6 / 11 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Die Kernidee</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Europas Sicherheitsprobleme enden nicht an der ukrainischen Front &mdash; sie reichen von Paris bis in den Sahel.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Die Folge spannt den Bogen ungew&ouml;hnlich weit: von der Raketenabwehr &uuml;ber die wieder eskalierende Konfrontation zwischen den USA und dem Iran bis zum Schwerpunktgespr&auml;ch mit dem Afrika-Kenner Thomas Schiller &mdash; &uuml;ber Krisen und Kriege von Mali &uuml;ber den Sudan bis Dschibuti, wo zwei deutsche Marine-Schiffe auf einen m&ouml;glichen Einsatz im Persischen Golf warten.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+        <div class="pageno">7 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 1 / 4 · Paris</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Ein B&uuml;ndnis gegen ballistische Raketen</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Beim Pariser Treffen der Koalition der Willigen entstand ein neues B&uuml;ndnis zur St&auml;rkung der ukrainischen und europ&auml;ischen Raketenabwehr &mdash; eine direkte Antwort darauf, dass die Ukraine russische Angriffe mit ballistischen Raketen derzeit kaum abfangen kann.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Astrid Corall berichtet au&szlig;erdem &uuml;ber weitere Ergebnisse des Treffens und die aktuelle Lage an der Front.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #2e1065);">
+        <div class="pageno">8 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 2 / 4 · Asowsches Meer</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Angriffe auf die Krim-Versorgung</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Die Ukraine versucht mit gezielten Angriffen auf russische Schiffe im Asowschen Meer, die Versorgung des russischen Milit&auml;rs auf der Krim zu st&ouml;ren.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Die Strategie dahinter kennt man aus fr&uuml;heren Folgen: Nachschubwege treffen, statt nur die Front zu halten.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">9 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 3 / 4 · Iran</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Seeblockade &mdash; und eine &bdquo;Maut&ldquo; f&uuml;r Hormus</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Der Konflikt zwischen dem Iran und den USA ist wieder voll entflammt, mit gegenseitigen Angriffen. US-Pr&auml;sident Trump hat angek&uuml;ndigt, die Seeblockade gegen Schiffe, die iranische H&auml;fen ansteuern oder verlassen, wieder aufzunehmen.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Mehr noch: Er will f&uuml;r die Fahrt durch die Stra&szlig;e von Hormus Geld verlangen &mdash; was nicht nur im Iran auf deutliche Kritik st&ouml;&szlig;t.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #164e63, #082f49);">
+        <div class="pageno">10 / 11 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 4 / 4 · Afrika</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">&bdquo;Strategisches Versagen&ldquo; auf dem Nachbarkontinent</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Im Schwerpunkt spricht Kai K&uuml;stner mit dem Analysten Thomas Schiller, der lange in Mali gelebt hat. Sein Urteil: Was Afrika angeht, ist Europas Politik ein strategisches Versagen &mdash; punktuelles Engagement statt belastbarer Strategie.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Russland nutzt seit Jahren das Machtvakuum in der Sahel-Region, das durch den R&uuml;ckzug westlicher Truppen entstanden ist. Europa, so Schiller, m&uuml;sse jenseits der Ukraine eine belastbare globale Strategie entwickeln.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">11 / 11 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Zum Mitnehmen</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">&bdquo;Russland etwa nutzt seit Jahren das Machtvakuum in der Sahel-Region, das durch den R&uuml;ckzug westlicher Truppen entstanden ist.&ldquo;</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">&mdash; aus der Folgenbeschreibung, Streitkr&auml;fte und Strategien (NDR Info, 14. Juli 2026)</p>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next Steps</p>
+          <a href="https://www.podcast.de/episode/704663804/wie-europa-putins-raketenterror-stoppen-will-mit-thomas-schiller" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Folge anh&ouml;ren · podcast.de</b></a>
+          <a href="https://www.tagesschau.de/ausland/europa/ukraine-buendnisraketenabwehr-europa-100.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>tagesschau · Europ&auml;isches B&uuml;ndnis zur Raketenabwehr</b></a>
+          <a href="https://www.ndr.de/nachrichten/info/audio-3357556.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>NDR · Interview mit Thomas Schiller</b></a>
+          <a href="https://www.ndr.de/nachrichten/info/podcast2998.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Alle Folgen · Streitkr&auml;fte und Strategien</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 16. Juli 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
