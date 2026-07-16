@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Dance · Merce Cunningham (1919–2009): the choreographer who let coins, dice and the I Ching decide the next step — and rebuilt modern dance around chance."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Dancing by Chance — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;The Waste Land&rdquo; (12 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">How does T.S. Eliot&rsquo;s poem render the spiritually exhausted world after the First World War?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Through one heroic narrator telling a single continuous story</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. As a nature poem celebrating spring and renewal</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. As a collage of fragments — broken voices, languages and allusions, because a broken world can only be spoken in shards</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> &mdash; &ldquo;April is the cruellest month&rdquo;: the form itself enacts the theme &mdash; a civilisation in pieces, voiced through the fragments of its own past.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">2 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;The Memory of Society&rdquo; (10 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What made Sebastião Salgado&rsquo;s path into photography &mdash; and his idea of it &mdash; distinctive?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. He came from economics and treated the photograph as testimony &mdash; the memory a society keeps of its own condition</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. He started in fashion photography and moved into colour landscapes</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. He photographed only abstract compositions, avoiding people entirely</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: A</b> &mdash; The economist who became the camera&rsquo;s conscience: miners, migrants and workers in stark black and white &mdash; photography as witness and memory.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Café Müller&rdquo; (2 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">How did Pina Bausch create the material for her Tanztheater pieces?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. By tossing coins and letting chance decide the sequence of steps</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. By asking her dancers questions about memories and emotions, then shaping their answers into scenes</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. By strictly notating classical ballet vocabulary in advance</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; &ldquo;I&rsquo;m not interested in how people move but what moves them&rdquo; &mdash; she choreographed from psychology, not steps. (Chance was Cunningham&rsquo;s method &mdash; today&rsquo;s swipe.)
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+        <div class="pageno">4 / 12 →</div>
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:18px;"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1.2" fill="#fff"/><circle cx="16" cy="8" r="1.2" fill="#fff"/><circle cx="12" cy="12" r="1.2" fill="#fff"/><circle cx="8" cy="16" r="1.2" fill="#fff"/><circle cx="16" cy="16" r="1.2" fill="#fff"/></svg>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Creative topic · 🎨</div>
+        <h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">Dancing by Chance</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Dance · Merce Cunningham, the choreographer who handed his decisions to coins, dice and the I Ching &mdash; and changed modern dance for good</p>
+        <p style="font-size:15px; opacity:0.75;">USA · 1919&ndash;2009 · ~200 dances, 800+ Events · ~6 min read</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Swipe →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #1c1917);">
+        <div class="pageno">5 / 12 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The Hook</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">What if the choreographer&rsquo;s most important move is a coin toss?</p>
+        <p style="font-size:17.5px; line-height:1.5;">Cunningham shook dice, tossed coins and consulted the I Ching to decide which movement came next &mdash; often his dancers learned the order of a piece only on the night of the performance. It looked like an abdication of artistic responsibility. He saw it as the opposite: contact with forces larger than his own mind.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0f172a, #172554);">
+        <div class="pageno">6 / 12 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The Core Idea</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Chance operations: free the dance from your own likes and dislikes.</p>
+        <p style="font-size:17.5px; line-height:1.5;">The method came from his lifelong partner, composer John Cage, who used the I Ching&rsquo;s 64 hexagrams and repeated coin tosses to decide what sound came next. Cunningham took it into dance: instead of asking what he <i>thought</i> should follow a movement, he asked what chance suggested &mdash; and discovered works, he said, that could never have arisen from traditional collaboration.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+        <div class="pageno">7 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 5 · 1953</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Suite by Chance: charts and a coin</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;"><i>Suite by Chance</i> (1953) was his first work made entirely through chance procedures: charts listed elements of space, time and position, and a coin toss determined each one. Later, <i>Canfield</i> (1969) assigned each movement to a playing card drawn at random.</p>
+        <p style="font-size:17.5px; line-height:1.5;">1953 was also the year he formed the Merce Cunningham Dance Company at Black Mountain College &mdash; with dancers including Paul Taylor and Carolyn Brown, and musicians John Cage and David Tudor.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #2e1065);">
+        <div class="pageno">8 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 5 · The rupture</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Dance and music, deliberately divorced</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">With Cage, Cunningham famously asserted that dance and its music should not be intentionally coordinated &mdash; each was made independently and met only in performance.</p>
+        <p style="font-size:17.5px; line-height:1.5;">He also discarded narrative and traditional form: no story, no beginning, middle or end &mdash; &ldquo;non-representational&rdquo; choreography that simply emphasises movement, breaking with both ballet and his teacher Martha Graham, in whose company he had danced as a soloist from 1939.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">9 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 5 · The stage</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">No front, no centre, no soloist&rsquo;s spot</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">In Cunningham&rsquo;s works the &ldquo;front and centre&rdquo; spot traditionally coveted by soloists no longer exists. Dance can happen on any part of the stage, viewed from any angle; the audience must choose among many centres of activity.</p>
+        <p style="font-size:17.5px; line-height:1.5;">He saw randomness and arbitrariness as positive qualities &mdash; because they exist in real life.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #164e63, #082f49);">
+        <div class="pageno">10 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 5 · The machine</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">From the I Ching to the computer</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Chance made him fearless about technology. From 1991 he choreographed with the software LifeForms (later DanceForms); motion-capture experiments with digital artists Paul Kaiser and Shelley Eshkar produced <i>Hand-drawn Spaces</i> (SIGGRAPH, 1998) and the stage work <i>BIPED</i> (1999).</p>
+        <p style="font-size:17.5px; line-height:1.5;">His collaborators ran from Robert Rauschenberg (resident designer 1954&ndash;64) and Andy Warhol &mdash; whose Silver Clouds floated through <i>RainForest</i> (1968) &mdash; to Radiohead and Sigur R&oacute;s, who scored <i>Split Sides</i> (2003).</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f3f46, #18181b);">
+        <div class="pageno">11 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 5 · The legacy</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">A company planned its own ending</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Cunningham presented his last work, <i>Nearly Ninety</i>, at 90 in April 2009, and died that July. His Legacy Plan &mdash; the first of its kind in dance &mdash; sent the company on a final world tour and then closed it: the last performance was on 31 December 2011 at New York&rsquo;s Park Avenue Armory, with his works passing to the Merce Cunningham Trust.</p>
+        <p style="font-size:17.5px; line-height:1.5;">The conversation continues: the exhibition <i>Five Friends: John Cage, Merce Cunningham, Jasper Johns, Robert Rauschenberg, Cy Twombly</i> ran at Museum Brandhorst in Munich and closed at Museum Ludwig in Cologne in January 2026.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">12 / 12 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">The Takeaway</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">&ldquo;Instead of finding out what you think should follow &mdash; say a particular sound &mdash; what did the I Ching suggest? Well, I took this also for dance.&rdquo;</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">&mdash; Merce Cunningham, in <i>Merce Cunningham: A Lifetime of Dance</i> (2000)</p>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://www.walkerart.org/reader/chance-conversations-an-interview-with-merce/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Watch · &ldquo;Chance Conversations&rdquo; with Cunningham &amp; Cage (Walker, 1981)</b></a>
+          <a href="https://www.mercecunningham.org/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Merce Cunningham Trust · the works</b></a>
+          <a href="https://en.wikipedia.org/wiki/Merce_Cunningham" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Wikipedia · life, method &amp; works</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 15 July 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

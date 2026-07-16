@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Daniel Yergin (1990, Pulitzer 1992): the epic history of oil — from Churchill's navy to Desert Storm — and why 'mastery itself was the prize'."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Prize — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Say Nothing&rdquo; (12 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What does Patrick Radden Keefe use the 1972 disappearance of Jean McConville for?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. To prove the British Army was behind the &ldquo;disappearances&rdquo;</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. As a lens on the whole Troubles &mdash; how people radicalise, and how a society reckons with violence afterwards</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. As the opening of a biography of Gerry Adams&rsquo;s peace strategy</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; One murder as a lens on an entire conflict: radicalisation, its long shadow, and the politics of forgetting.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">2 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;The Platform State&rdquo; (10 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What mental model did Angela Huyue Zhang &amp; S. Alex Yang propose on Sinica for how China governs its economy?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. A Soviet-style central planner that owns and runs the firms</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. A night-watchman state that stays out of the market</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A platform company &mdash; it sets the standards and governs the ecosystem, while private firms compete inside it like apps</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> &mdash; The state as platform, not planner: market dynamism and state direction aren&rsquo;t opposites &mdash; they run on the same architecture.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Material World&rdquo; (24 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Which six raw materials does Ed Conway argue still rule our supposedly &ldquo;weightless&rdquo; world?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Sand, salt, iron, copper, oil and lithium</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Coal, steel, aluminium, gold, uranium and gas</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Water, timber, cotton, rubber, silver and tin</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: A</b> &mdash; Conway follows sand, salt, iron, copper, oil and lithium from mine to device &mdash; the six materials that quietly built the modern world.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #451a03);">
+        <div class="pageno">4 / 12 →</div>
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:18px;"><path d="M8 21h8"/><path d="M12 21V8"/><path d="M7 8h10l-2-5H9L7 8z"/><path d="M5 21l7-13 7 13"/></svg>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Book of the day · 📖</div>
+        <h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">The Prize</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">The Epic Quest for Oil, Money, and Power &mdash; the definitive history of the substance that made the modern world</p>
+        <p style="font-size:15px; opacity:0.75;">Daniel Yergin · Simon &amp; Schuster, 1990 · 912 pages · Pulitzer Prize 1992 · ~6 min read</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Swipe →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #1c1917);">
+        <div class="pageno">5 / 12 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The Hook</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">We are all, whether we notice or not, citizens of the age of &ldquo;Hydrocarbon Man&rdquo;.</p>
+        <p style="font-size:17.5px; line-height:1.5;">That is Yergin&rsquo;s name for our era &mdash; and his book is its biography. Published in December 1990, four months after Saddam Hussein invaded Kuwait and one month before the Gulf War began, <i>The Prize</i> arrived just as the world was violently reminded what it runs on. It became a bestseller, then a Pulitzer winner, and has been called the &ldquo;definitive&rdquo; history of oil &mdash; even a &ldquo;bible&rdquo;.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0f172a, #172554);">
+        <div class="pageno">6 / 12 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The Core Thesis</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Oil &mdash; and every struggle over its discovery, acquisition and distribution &mdash; created the modern world.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Yergin builds the case along three threads: the relationship of oil to the rise of modern capitalism; the intertwining of oil, politics and international power; and the relationship between oil and society in the age of &ldquo;Hydrocarbon Man&rdquo;. The canvas runs from the first well drilled in 1850s Pennsylvania, through two world wars, to Iraq&rsquo;s invasion of Kuwait and Operation Desert Storm.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+        <div class="pageno">7 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 4 · The title</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Churchill&rsquo;s gamble gave the book its name</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">As First Lord of the Admiralty before the First World War, Winston Churchill argued for converting British warships from Welsh coal &mdash; safe in Britain&rsquo;s own mines &mdash; to fuel oil, which had to be carried by sea from distant countries, in peace or war.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Committing the Navy irrevocably to oil, Churchill admitted, was to &ldquo;take arms against a sea of troubles&rdquo;. But if the risks could be surmounted: better ships, better crews, more intense forms of war power &mdash; &ldquo;mastery itself was the prize of the venture.&rdquo;</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #2e1065);">
+        <div class="pageno">8 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 4 · The cast</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Wildcatters and rogues, Churchill and Ibn Saud</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">This is history told through people: oil tycoons and wildcat drillers alongside statesmen &mdash; Winston Churchill and Ibn Saud, George Bush and Saddam Hussein.</p>
+        <p style="font-size:17.5px; line-height:1.5;">The through-line is that oil decided the twentieth century&rsquo;s conflicts, its economic systems and its balance of power &mdash; from the rise of Standard Oil to the OPEC era and the tanker wars.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">9 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 4 · The craft</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Ten years, 700 sources, 80 interviews</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">The book was ten years in the making. Its bibliography lists some 700 books, articles and dissertations, sixty government documents, four oil-company archives (Amoco, Chevron, Gulf, Royal Dutch Shell) &mdash; and 80 personal interviews with key figures such as James Schlesinger and Armand Hammer.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Library Journal&rsquo;s verdict: enough insight to satisfy the scholar, enough drama and colourful personality to capture everyone else &mdash; and &ldquo;though lengthy, the book never drags&rdquo;.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #164e63, #082f49);">
+        <div class="pageno">10 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 4 · The afterlife</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">A Pulitzer, a PBS epic &mdash; and a 2024 epilogue</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">In 1992 <i>The Prize</i> won the Pulitzer Prize for General Nonfiction; it has been translated into fourteen languages. In 1992&ndash;93 it became an eight-hour PBS documentary narrated by Donald Sutherland, seen by a reported 20 million Americans.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Yergin continued the story in the 2011 sequel <i>The Quest</i>. In 2024 an unabridged audiobook appeared with a new epilogue narrated by the author &mdash; reflecting on the book&rsquo;s relevance more than 30 years on.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #1e1b4b);">
+        <div class="pageno">11 / 12 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Why this matters in 2026</h3>
+        <p style="font-size:20px; line-height:1.4; font-weight:700; margin-bottom:14px;">This month&rsquo;s oil market is a chapter Yergin could have written.</p>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">After the US&ndash;Iran war disrupted the Strait of Hormuz, the IEA&rsquo;s July 2026 report shows global supply rebounding by a sharp 4.1 mb/d in June to 98.8 mb/d as Gulf flows resumed &mdash; yet output remains some 9.4 mb/d below pre-war levels.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Brent hit a four-year high above $126 in late April, plunged to ~$68&ndash;72 by early July &mdash; then jumped back towards $77&ndash;79 when the ceasefire was breached on 7&ndash;8 July. Meanwhile seven OPEC+ countries agreed to add another 188,000 b/d in August, the fifth straight monthly increase. Oil, politics and power: still one story.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">12 / 12 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">The Takeaway</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">&ldquo;Mastery itself was the prize of the venture.&rdquo;</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">&mdash; Winston Churchill on committing the Royal Navy to oil, as quoted by Daniel Yergin &mdash; the line that gave the book its title.</p>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://en.wikipedia.org/wiki/The_Prize:_The_Epic_Quest_for_Oil,_Money,_and_Power" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · the book &amp; its background</b></a>
+          <a href="https://www.goodreads.com/book/show/169354.The_Prize" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Goodreads · reviews &amp; editions</b></a>
+          <a href="https://www.pulitzer.org/winners/daniel-yergin" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Pulitzer Prizes · the 1992 citation</b></a>
+          <a href="https://www.iea.org/reports/oil-market-report-july-2026" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>IEA · Oil Market Report, July 2026</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 15 July 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

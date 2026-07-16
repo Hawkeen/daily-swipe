@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Philipp Ther (2014, Preis der Leipziger Buchmesse): Osteuropa nach 1989 als Labor des Neoliberalismus — Schocktherapie, Boomtowns, Kotransformation."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Die neue Ordnung auf dem alten Kontinent — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus „Das sowjetische Jahrhundert“ (12. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wie erzählt Karl Schlögel die Geschichte der Sowjetunion?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Als Chronologie der Parteitage von 1917 bis 1991</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Als Doppelbiographie von Lenin und Stalin</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Als Archäologie des Alltags — über Dinge, Orte, Gerüche und Rituale einer untergegangenen Welt</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: C</b> — Archäologie statt Chronologie: ein Panorama vom Kreml bis zur Kommunalka — vorn der Traum des Fünfjahresplans, hinten die Geographie der Lager.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">2 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus „Gekaufte Zeit“ (10. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wie hat der demokratische Kapitalismus laut Wolfgang Streeck seine fällige Krise seit den 1970ern vertagt?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Er hat mit immer neuen Schulden Zeit gekauft — erst Inflation, dann Staats-, dann Privatverschuldung</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Er hat die Krise durch Produktivitätswachstum dauerhaft gelöst</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Er ist zum Goldstandard zurückgekehrt und hat die Märkte gezähmt</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: A</b> — Streecks Sequenz: Inflation → Staatsschuld → Privatschuld. Der Konflikt zwischen Staatsvolk und Marktvolk wurde nie gelöst, nur vertagt.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus „Die Verwandlung der Welt“ (27. Juni 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was zeichnet Jürgen Osterhammels Geschichte des 19. Jahrhunderts aus?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Sie erzählt das Jahrhundert als deutsche Nationalgeschichte</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Sie erzählt global statt eurozentrisch — thematisch aufgebaut statt nach Ländern geordnet</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Sie konzentriert sich ausschließlich auf die Wirtschaftsgeschichte Europas</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> — Das 19. Jahrhundert verstehen heißt, es global zu lesen — als Geschichte der Verflechtung, nicht der Nationen allein.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+        <div class="pageno">4 / 12 →</div>
+        <img src="https://res.cloudinary.com/suhrkamp/images/c_limit,q_auto,f_auto,w_400/v1742208201/58204/die-neue-ordnung-auf-dem-alten-kontinent_9783518466636_cover.webp" alt="Buchcover: Die neue Ordnung auf dem alten Kontinent" style="display:block; width:140px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.3); margin-bottom:18px;">
+        <div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Cover: Suhrkamp Verlag</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Buch des Tages · 📖</div>
+        <h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">Die neue Ordnung auf dem alten Kontinent</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Eine Geschichte des neoliberalen Europa — was nach 1989 wirklich geschah</p>
+        <p style="font-size:15px; opacity:0.75;">Philipp Ther · Suhrkamp, 2014 · Preis der Leipziger Buchmesse 2015 · ~6 Min. Lesezeit</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Weiter →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #1e1b4b);">
+        <div class="pageno">5 / 12 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Der Aufschlag</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">„Als im November 1989 die Mauer fiel, begann ein Großexperiment kontinentalen Ausmaßes.“</p>
+        <p style="font-size:17.5px; line-height:1.5;">So beginnt der Verlagstext — und so liest Ther die Zeit nach dem Mauerfall: nicht als glückliches Ende der Geschichte, sondern als beispielloses Experiment. Die ehemaligen Staaten des „Ostblocks“ wurden binnen kurzer Zeit auf eine neoliberale Ordnung getrimmt und dem Regime der Privatisierung und Liberalisierung unterworfen.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0f172a, #172554);">
+        <div class="pageno">6 / 12 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Die Kernthese</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Osteuropa wurde zum Labor des Neoliberalismus — und das Experiment wirkte auf den Westen zurück.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Thers Kernthese: Das Scheitern gradueller Reformen im Ostblock und das Ende des Systemwettbewerbs mündeten in eine Hegemonie des Neoliberalismus. Erstmals analysiert er die Transformation in gesamteuropäischer Perspektive — und räumt dabei mit einigen Mythen rund um „1989“ auf.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+        <div class="pageno">7 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 1 / 4 · Die Therapie</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Schocktherapie — am radikalsten in der DDR</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Privatisierung und Liberalisierung kamen im Osten nicht schleichend, sondern als Schock. Nirgends verlief die Therapie schneller und radikaler als in Ostdeutschland, wo sich Wirtschaft und Gesellschaft am stärksten zum Westen öffneten.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Der Unterschied zu Polen oder Russland: Der Schock wurde vom westdeutschen Sozialstaat erheblich abgefedert — was die Härte des Umbruchs milderte, aber nicht aufhob.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">8 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 2 / 4 · Die Bilanz</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Gewinner und Verlierer</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Die Transformation brachte beides hervor: Russland glitt in ein wirtschaftliches Chaos ab, auf dem Präsident Putin sein autoritäres Regime begründete. Polen, Tschechien und Ungarn erholten sich und wurden EU-Mitglieder.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Und innerhalb der Länder öffnete sich eine zweite Schere: Während Warschau und andere Hauptstädte sich zu Boomtowns entwickelten, verarmten die ländlichen Regionen.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #164e63, #082f49);">
+        <div class="pageno">9 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 3 / 4 · Der Begriff</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Kotransformation: Der Osten veränderte den Westen</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Thers wegweisender Begriff: Transformation war keine Einbahnstraße der Anpassung des Ostens an den Westen. Das der Umgestaltung zugrunde liegende Wirtschaftsdenken wirkte auf den Westen zurück — die Reformlabore des Ostens wurden zu Vorreitern von Deregulierung und sozioökonomischer Spaltung.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Deutschland prägte diese „Kotransformation“ wegen der Vereinigung besonders stark.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #2e1065);">
+        <div class="pageno">10 / 12 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 4 / 4 · Die Wirkung</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Vom „elektrisierenden Buch“ zum Standardwerk</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Jens Bisky nannte es in der Süddeutschen Zeitung ein „elektrisierendes Buch“. 2015 erhielt Ther den Preis der Leipziger Buchmesse (Sachbuch/Essayistik) und die Auszeichnung „Das politische Buch des Jahres“ der Friedrich-Ebert-Stiftung.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Die Fachrezension (H-Soz-Kult) urteilt: Durch seine vergleichende Perspektive dürfte das Buch ein wichtiger Referenzpunkt der zeithistorischen Transformationsforschung bleiben.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #1e1b4b);">
+        <div class="pageno">11 / 12 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Warum jetzt</h3>
+        <p style="font-size:20px; line-height:1.4; font-weight:700; margin-bottom:14px;">Die Langzeitfolgen der Transformation stehen 2026 wieder auf dem Wahlzettel.</p>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Am 6. September 2026 wählt Sachsen-Anhalt einen neuen Landtag. In Umfragen vom Mai 2026 (Infratest dimap) liegt die AfD bei 41–42 Prozent — rund doppelt so hoch wie ihr Wahlergebnis von 2021 (20,8 %). Sachsen-Anhalt gilt damit als erstes Bundesland, in dem eine absolute AfD-Mehrheit realistisch erscheint; am 20. September folgt Mecklenburg-Vorpommern.</p>
+        <p style="font-size:17.5px; line-height:1.5;">In der Forschung wird der Zusammenhang weiter vermessen: Der Systembruch von 1990 prägt die neuen Länder politisch, sozial und ökonomisch bis heute — genau die Langzeitwirkung, die Ther 2014 beschrieben hat.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">12 / 12 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Die Quintessenz</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">„Diese Transformation brachte Gewinner und Verlierer hervor: Russland glitt in ein wirtschaftliches Chaos ab, auf dem Präsident Putin sein autoritäres Regime begründete, Länder wie Polen, Tschechien oder Ungarn erholten sich und sind heute Mitglieder der EU.“</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">— Suhrkamp-Verlagstext zu Philipp Ther, Die neue Ordnung auf dem alten Kontinent</p>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Nächste Schritte</p>
+          <a href="https://www.suhrkamp.de/buch/philipp-ther-die-neue-ordnung-auf-dem-alten-kontinent-t-9783518466636" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Suhrkamp · Buchseite</b></a>
+          <a href="https://www.bpb.de/shop/buecher/schriftenreihe/285127/die-neue-ordnung-auf-dem-alten-kontinent/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>bpb · Ausgabe der Bundeszentrale</b></a>
+          <a href="https://www.hsozkult.de/publicationreview/id/reb-21580" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>H-Soz-Kult · Fachrezension</b></a>
+          <a href="https://www.perlentaucher.de/buch/philipp-ther/die-neue-ordnung-auf-dem-alten-kontinent.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Perlentaucher · Pressestimmen</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 15. Juli 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
