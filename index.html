@@ -93,6 +93,18 @@
   iframe { flex: 1; width: 100%; border: 0; background: #0b0b0d; }
 
   .err { color: #ff8f8f; font-size: 14px; margin-top: 20px; }
+
+  /* ---------- toast ---------- */
+  .toast {
+    position: fixed; left: 50%; bottom: calc(32px + env(safe-area-inset-bottom));
+    transform: translateX(-50%) translateY(12px);
+    background: rgba(28,28,35,.96); color: #fff;
+    padding: 13px 20px; border-radius: 14px; font-size: 15px; font-weight: 600;
+    border: 1px solid rgba(255,255,255,.12); box-shadow: 0 8px 30px rgba(0,0,0,.5);
+    opacity: 0; pointer-events: none; z-index: 60;
+    transition: opacity .2s ease, transform .2s ease; white-space: nowrap;
+  }
+  .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -102,7 +114,7 @@
     <div class="sub count" id="count">Loading…</div>
 
     <button class="draw" id="drawBtn" onclick="drawNext()">
-      <span class="emoji">🎲</span> Draw a swipe
+      <span class="emoji">⏳</span> Draw a swipe
     </button>
     <div class="progress" id="progress"></div>
 
@@ -122,6 +134,8 @@
     </div>
     <iframe id="frame" title="Swipe"></iframe>
   </div>
+
+  <div class="toast" id="toast"></div>
 
 <script>
 const REPO = "Hawkeen/daily-swipe";      // used only for optional auto-refresh
@@ -173,7 +187,7 @@ function render(){
   const remaining = SWIPES.filter(x => !s.has(x.file)).length;
   document.getElementById("progress").textContent =
     remaining ? `${remaining} unseen left in this round`
-              : "You've seen them all — next draw reshuffles the deck";
+              : "Alle Swipes gelesen";
 
   const list = document.getElementById("list");
   list.innerHTML = "";
@@ -194,11 +208,22 @@ function render(){
 
 function drawNext(){
   if (!SWIPES.length) return;
-  let s = seen();
-  let pool = SWIPES.filter(x => !s.includes(x.file));
-  if (!pool.length){ s = []; setSeen(s); pool = SWIPES.slice(); }   // reshuffle deck
-  const pick = pool[Math.floor(Math.random()*pool.length)];
+  const s = seen();
+  const pool = SWIPES.filter(x => !s.includes(x.file));
+  if (!pool.length){ toast("Alle Swipes gelesen"); return; }   // no reshuffle
+  // always draw the OLDEST unseen swipe (undated ones go last)
+  const pick = pool.reduce((oldest, x) =>
+    (x.date || "9999-99-99") < (oldest.date || "9999-99-99") ? x : oldest);
   open(pick);
+}
+
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("on"), 2200);
 }
 
 function open(x){
