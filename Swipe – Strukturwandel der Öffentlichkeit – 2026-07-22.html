@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Jürgen Habermas, 'Strukturwandel der Öffentlichkeit' (1962): Wie in Kaffeehäusern und Salons die bürgerliche Öffentlichkeit entstand — und wie kommerzielle Massenmedien, PR und Werbung sie in eine manipulierte Pseudo-Öffentlichkeit zurückverwandeln ('Refeudalisierung')."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Strukturwandel der Öffentlichkeit — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Wolfszeit&ldquo; (18. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was ist Harald Jähners Zugang zur Nachkriegszeit 1945&ndash;1955?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Eine klassische politische Ereignisgeschichte der vier Besatzungszonen</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Eine Mentalitätsgeschichte des Alltags &mdash; wie aus &bdquo;Volksgenossen&ldquo; wieder Bürger wurden; keine saubere &bdquo;Stunde Null&ldquo;</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Eine Wirtschaftsgeschichte, die das &bdquo;Wunder&ldquo; allein der Währungsreform zuschreibt</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> &mdash; Nicht die Großereignisse erklären das Jahrzehnt, sondern der Alltag &mdash; Trümmer, Schwarzmarkt, Heimkehrer &mdash; und das große Beschweigen.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">2 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Gekaufte Zeit&ldquo; (10. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was ist Wolfgang Streecks Kernthese über den demokratischen Kapitalismus?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Demokratie und Kapitalismus haben ihren Konflikt seit den 1970ern endgültig gelöst</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Der Kapitalismus ist wie vorhergesagt am &bdquo;Spätkapitalismus&ldquo; zusammengebrochen</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Der demokratische Kapitalismus kauft seit den 1970ern Zeit &mdash; seine fällige Krise wird immer nur vertagt, und die Rechnung wächst</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: C</b> &mdash; Vier Jahrzehnte aufgeschobener Krisen: Der Konflikt zwischen Demokratie und Markt wird nicht gelöst, sondern mit immer neuen Mitteln verschoben.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Warum es die Welt nicht gibt&ldquo; (22. Juni 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was meint Markus Gabriel mit dem Titel seines Buches?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Nichts existiert wirklich &mdash; alles ist bloße Konstruktion und Illusion</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Nur physikalische Objekte existieren, alles Übrige nicht</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Alles Mögliche existiert &mdash; nur nicht &bdquo;die Welt&ldquo; als das eine, alles umfassende Ganze</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: C</b> &mdash; Gabriels Neuer Realismus: Einzeldinge existieren in &bdquo;Sinnfeldern&ldquo; &mdash; das Allumfassende, &bdquo;die Welt&ldquo;, gerade nicht.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #292524);">
+        <div class="pageno">4 / 14 →</div>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Interior%20of%20a%20London%20Coffee-house%2C%2017th%20century.JPG?width=800" onerror="this.style.display='none'" alt="Innenansicht eines Londoner Kaffeehauses, 17. Jahrhundert" style="display:block; width:100%; max-height:230px; object-fit:cover; border-radius:12px; margin-bottom:6px;" loading="lazy">
+        <div style="font-size:11px; opacity:0.6; margin:0 0 14px; line-height:1.35;">Bild: &bdquo;Interior of a London Coffee-house&ldquo;, um 1690&ndash;1700. Gemeinfrei, via Wikimedia Commons.</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Buch des Tages · 📖</div>
+        <h1 style="font-size:34px; line-height:1.1; margin:0 0 10px;">Strukturwandel der Öffentlichkeit</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Untersuchungen zu einer Kategorie der bürgerlichen Gesellschaft &mdash; wie die Öffentlichkeit entstand, und wie sie wieder zerfällt</p>
+        <p style="font-size:15px; opacity:0.75;">Jürgen Habermas · Suhrkamp · 1962 (Habilitationsschrift) · ~6 Min. Lesezeit</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Weiter →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #1c1917);">
+        <div class="pageno">5 / 14 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Der Aufhänger</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">Die Demokratie wurde in Kaffeehäusern geboren &mdash; und droht in den Massenmedien wieder zu verschwinden.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Habermas&rsquo; Habilitationsschrift von 1962 fragt, woher jener Raum kommt, in dem Bürger frei über die öffentliche Gewalt diskutieren &mdash; und was mit ihm geschieht, wenn Kommerz und Massenmedien ihn übernehmen. Das Werk gehört bis heute zu den einflussreichsten der Soziologie, Philosophie und Medienwissenschaft.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0f172a, #172554);">
+        <div class="pageno">6 / 14 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Die Kernthese</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Öffentlichkeit ist keine Selbstverständlichkeit &mdash; sie hat eine Geburt, eine Blüte und einen Verfall.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Habermas liefert eine real- und ideengeschichtliche Analyse der bürgerlichen Öffentlichkeit: von ihrer Entstehung im frühen 18. Jahrhundert über die Blüte im 19. bis zum Niedergang im 20. Jahrhundert. Aus diesem Verfall leitet er später eine normative Theorie der deliberativen Demokratie ab.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #713f12, #422006);">
+        <div class="pageno">7 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 1 / 6 · Vom Hof zum Publikum</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Vor der Öffentlichkeit: die Repräsentation</h3>
+        <p style="font-size:17.5px; line-height:1.5;">In der feudalen Welt gab es keine Öffentlichkeit im modernen Sinn, sondern &bdquo;repräsentative&ldquo; Machtdarstellung: Der Herrscher stellte seine Würde <em>vor</em> dem Volk zur Schau. Erst seit dem frühen 18. Jahrhundert bildet sich ein intellektueller Raum, geschaffen von einem lesenden und diskutierenden Publikum.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+        <div class="pageno">8 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 2 / 6 · Der Ort</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Kaffeehaus, Salon, &bdquo;Räsonnement&ldquo;</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">In Salons und Kaffeehäusern treten Privatleute erstmals zu einem &bdquo;räsonierenden&ldquo; Publikum zusammen, um über Politik, Gesellschaft und Kultur zu streiten. Ihr Medium ist das &bdquo;öffentliche Räsonnement&ldquo; &mdash; die Berufung auf die Vernunft im Sinne der Aufklärung.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Die Öffentlichkeit ist bei Habermas die &bdquo;Sphäre der zum Publikum versammelten Privatleute&ldquo;, die sich kritisch mit der öffentlichen Gewalt auseinandersetzt.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">9 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 3 / 6 · Die Grenzen</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Eine Öffentlichkeit mit Türstehern</h3>
+        <p style="font-size:17.5px; line-height:1.5;">So emanzipatorisch die Idee war &mdash; die bürgerliche Öffentlichkeit war nicht offen für alle. Frauen und Arbeiter:innen hatten in den Kaffeehäusern keinen Platz. Das &bdquo;allgemeine&ldquo; Publikum war von Anfang an ein besitzendes, männliches, gebildetes &mdash; ein blinder Fleck, den Habermas selbst benennt und den seine Kritiker verschärften.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f3f46, #18181b);">
+        <div class="pageno">10 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 4 / 6 · Der Umschlag</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">&bdquo;Refeudalisierung&ldquo;</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Mit der Massenpresse und ihren kommerziellen Bedingungen kehrt sich der Prozess um: Kommunikation wird wieder eingeschränkt und dem Einfluss einzelner Großinvestoren unterworfen. Habermas nennt das die &bdquo;Refeudalisierung der Öffentlichkeit&ldquo; &mdash; die höfische Zurschaustellung kehrt zurück, nur in neuem Gewand.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #581c87, #2e1065);">
+        <div class="pageno">11 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 5 / 6 · Die Pseudo-Öffentlichkeit</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Vom Räsonnement zum Konsum</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">Werbung und Public Relations inszenieren Öffentlichkeit: Verbände und Private präsentieren ihre Partikularinteressen als das Gemeinwohl. Die monarchische Repräsentation kehrt als PR zurück.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Aus dem kritischen &bdquo;Kulturräsonnement&ldquo; wird passiver &bdquo;Kulturkonsum&ldquo; &mdash; und übrig bleibt eine manipulierte Pseudo-Öffentlichkeit, in der Sonderinteressen den Ton angeben.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #164e63, #082f49);">
+        <div class="pageno">12 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 6 / 6 · Warum das zählt</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Ein Maßstab, keine Nostalgie</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Habermas verklärt das alte Kaffeehaus nicht. Der Wert der Idee liegt im <em>Maßstab</em>: Eine funktionierende Demokratie braucht einen Raum, in dem konkurrierende öffentliche Meinungen durch Argument entstehen &mdash; nicht durch Kauf, Inszenierung oder Lärm. Daran lässt sich jedes Mediensystem messen.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a5f, #0c1f33);">
+        <div class="pageno">13 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Warum das 2026 zählt</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Habermas&rsquo; zweiter Strukturwandel</h3>
+        <p style="font-size:17.5px; line-height:1.5; margin-bottom:12px;">2022 legte der über 90-jährige Habermas nach: &bdquo;Ein neuer Strukturwandel der Öffentlichkeit und die deliberative Politik&ldquo;.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Seine These: Die sozialen Medien, einst als basisdemokratische Infrastruktur begrüßt, fragmentieren den Meinungsbildungsprozess und entfalten ein &bdquo;destruktives Potenzial&ldquo; &mdash; eine Gefahr für die deliberative Demokratie. Der Streit darüber prägt die Debatte über Plattformen, Desinformation und Öffentlichkeit bis heute.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">14 / 14 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Zum Mitnehmen</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">Öffentlichkeit ist die &bdquo;Sphäre der zum Publikum versammelten Privatleute&ldquo;.</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">&mdash; Jürgen Habermas, <em>Strukturwandel der Öffentlichkeit</em></p>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Nächste Schritte</p>
+          <a href="https://de.wikipedia.org/wiki/Strukturwandel_der_%C3%96ffentlichkeit" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · Strukturwandel der Öffentlichkeit</b></a>
+          <a href="https://www.suhrkamp.de/buch/juergen-habermas-strukturwandel-der-oeffentlichkeit-t-9783518284919" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Das Buch · Suhrkamp Verlag</b></a>
+          <a href="https://www.suhrkamp.de/buch/juergen-habermas-ein-neuer-strukturwandel-der-oeffentlichkeit-und-die-deliberative-politik-t-9783518587904" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Der Nachfolgeband (2022) · Suhrkamp</b></a>
+          <a href="https://www.fes.de/asd/buch-essenz/juergen-habermas-2022-ein-neuer-strukturwandel-der-oeffentlichkeit-und-die-deliberative-politik" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Buch-Essenz zum neuen Strukturwandel · FES</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 22. Juli 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
