@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Photography · Sebastião Salgado (1944–2025): the Brazilian master of black-and-white documentary photography — Workers, Migrations, Genesis — honoured by posthumous retrospectives across 2026."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Salt of the Earth — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #0c2a4d, #071a33);">
+        <div class="pageno">1 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Kind of Blue&rdquo; (23 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What made Miles Davis&rsquo;s <em>Kind of Blue</em> revolutionary?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. It sped bebop&rsquo;s chord changes up even further</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. It improvised on scales (modes), not chords — &ldquo;a new language of music&rdquo;</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. It was the first jazz album recorded with electric instruments</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; Davis based the album on modality &mdash; a few scales instead of rushing chord changes &mdash; opening a new musical language.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #4c0519, #1c0a10);">
+        <div class="pageno">2 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;In the Mood for Love&rdquo; (18 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What defines Wong Kar-wai&rsquo;s <em>In the Mood for Love</em>?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. A fast-paced action thriller</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. A documentary about 1960s Hong Kong</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A love story told through restraint — shot over 15 months without a screenplay, later ranked 5th greatest film ever (Sight &amp; Sound 2022)</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> &mdash; Its power is in what is withheld: longing conveyed through glances, corridors and repetition rather than plot.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #1c1917, #0c0a09);">
+        <div class="pageno">3 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Determined&rdquo; (10 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What is Robert Sapolsky&rsquo;s hard case in <em>Determined</em>?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Free will is humanity&rsquo;s defining gift</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Free will is an illusion — every choice is the sum of biology and environment we never chose</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Only our genes determine everything; environment is irrelevant</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; Sapolsky argues every action flows from prior causes &mdash; genes <em>and</em> environment &mdash; that we never selected.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #0c0a09);">
+        <div class="pageno">4 / 14 →</div>
+        <div style="width:64px; height:64px; border-radius:16px; background:rgba(255,255,255,0.10); display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Creative topic · 🎨 · Photography</div>
+        <h1 style="font-size:34px; line-height:1.12; margin:0 0 10px;">The Salt of the Earth</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Sebastião Salgado photographed labour, migration and the planet itself &mdash; all in luminous black and white</p>
+        <p style="font-size:15px; opacity:0.75;">Sebastião Salgado · Brazilian documentary photographer · 1944&ndash;2025 · ~5 min read</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Swipe →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #292524, #0c0a09);">
+        <div class="pageno">5 / 14 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The hook</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">One photographer, 130 countries, 55 years &mdash; and not a single frame in colour.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Salgado made dramatic, unflinching black-and-white images of hardship, conflict and natural beauty, captured across 130 countries over 55 years. He gave up colour completely &mdash; and never looked back.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #44403c, #1c1917);">
+        <div class="pageno">6 / 14 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The core idea</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">A photograph can make us <em>see</em> &mdash; and seeing can change us.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Salgado&rsquo;s philosophy centred on using photography as a tool for social change: he believed images could raise awareness of global issues and human dignity. &ldquo;Photography,&rdquo; he said, &ldquo;is the language that gives people the opportunity to see what you saw.&rdquo;</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f3f46, #18181b);">
+        <div class="pageno">7 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 5 · Workers</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The dignity of labour</h3>
+        <p style="font-size:17.5px; line-height:1.5;">His project <em>Workers</em> documented manual labour across the globe &mdash; miners, fishermen, shipbreakers &mdash; monumental images that insisted on the dignity and scale of human toil in an age that was hiding it away.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #57534e, #292524);">
+        <div class="pageno">8 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 5 · Migrations</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">A planet on the move</h3>
+        <p style="font-size:17.5px; line-height:1.5;">In <em>Migrations</em>, Salgado turned to mass human movement and displacement &mdash; refugees and the uprooted &mdash; giving faces and scale to one of the defining crises of our time.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #0c0a09);">
+        <div class="pageno">9 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 5 · Genesis</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Letting nature speak</h3>
+        <p style="font-size:17.5px; line-height:1.5;">His late epic <em>Genesis</em> showcased pristine landscapes and indigenous communities &mdash; the parts of the planet still untouched. &ldquo;In GENESIS,&rdquo; he wrote, &ldquo;my camera allowed nature to speak to me. And it was my privilege to listen.&rdquo;</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #292524, #0c0a09);">
+        <div class="pageno">10 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 5 · Black &amp; white</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Why no colour</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Salgado always preferred the chiaroscuro palette of black and white. &ldquo;The only heritage we have is our planet,&rdquo; he said, &ldquo;and I have decided to go to the most pristine places&hellip; and photograph them in the most honest way I know&hellip; and of course it is in black and white, because it is the only thing I know how to do.&rdquo;</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f3f46, #18181b);">
+        <div class="pageno">11 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 5 · The belief</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">&ldquo;We are animals, born from the land&rdquo;</h3>
+        <p style="font-size:17.5px; line-height:1.5;">For Salgado, our link to the earth was spiritual, not sentimental. &ldquo;We are animals, born from the land with the other species,&rdquo; he said. &ldquo;What made us survive all these hundreds of thousands of years is our spirituality; the link to our land.&rdquo;</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1c1917, #0c0a09);">
+        <div class="pageno">12 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Why this matters in 2026</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The year of the retrospectives</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Salgado died in Paris on 23 May 2025, aged 81. A year on, the tributes are everywhere: Paris&rsquo;s Hôtel de Ville staged a free retrospective from 21 February to 6 June 2026, and from 24 October 2026 the Museo Civico in Bassano del Grappa shows 160 of his photographs (through April 2027). His eye is having a very public afterlife.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ece7de; color: #1c1917;">
+        <div class="pageno" style="opacity:0.5;">13 / 14 →</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">The takeaway</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">&ldquo;In GENESIS, my camera allowed nature to speak to me. And it was my privilege to listen.&rdquo;</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">&mdash; Sebastião Salgado</p>
+        <p style="font-size:16px; line-height:1.5;">Labour, exile, wilderness &mdash; Salgado spent a lifetime asking us to look harder at what we usually look past, and trusting that black and white could tell the truth in colour&rsquo;s place.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #e2ddd3; color: #1c1917;">
+        <div class="pageno" style="opacity:0.5;">14 / 14 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Go deeper</h3>
+        <div style="margin-top:4px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://en.wikipedia.org/wiki/Sebasti%C3%A3o_Salgado" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · Sebastião Salgado</b></a>
+          <a href="https://www.sortiraparis.com/en/what-to-visit-in-paris/exhibit-museum/articles/340905-the-free-sebastiao-salgado-photo-exhibition-has-been-extended-at-paris-city-hall" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Paris · Hôtel de Ville retrospective (2026)</b></a>
+          <a href="https://www.domusweb.it/en/news/gallery/2026/06/17/sebastiao-salgado-exhibition-italy-bassano.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Domus · Bassano del Grappa show (Oct 2026)</b></a>
+          <a href="https://feeds.bbci.co.uk/news/articles/cx2exym29pdo" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>BBC · Salgado&rsquo;s life &amp; work</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 23 July 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
