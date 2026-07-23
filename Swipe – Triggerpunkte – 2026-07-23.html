@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Steffen Mau, Thomas Lux und Linus Westheuser: 'Triggerpunkte' (2023) — die vielbeschworene Polarisierung ist ein Mythos. In den großen Fragen herrscht Konsens; Streit entzündet sich erst an konkreten Reizpunkten wie Gendersternchen und Lastenrädern."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Triggerpunkte — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #1e3a8a, #0f172a);">
+        <div class="pageno">1 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Strukturwandel der Öffentlichkeit&ldquo; (22. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was meint Habermas mit der &bdquo;Refeudalisierung&ldquo; der Öffentlichkeit?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Der Staat verbietet Zeitungen und schließt die Kaffeehäuser</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Kommerzielle Massenmedien, PR und Werbung verwandeln die räsonierende Öffentlichkeit zurück in eine manipulierte Pseudo-Öffentlichkeit, in der Macht nur noch inszeniert wird</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Das Bürgertum kehrt zur Monarchie zurück</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> &mdash; Habermas zeigt, wie aus der kritisch räsonierenden bürgerlichen Öffentlichkeit unter dem Druck von Massenmedien, PR und Werbung wieder eine bloß repräsentative, &bdquo;refeudalisierte&ldquo; Schau-Öffentlichkeit wird.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">2 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Imagined Communities&rdquo; (12 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What does Benedict Anderson mean by calling a nation an &ldquo;imagined community&rdquo;?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Nations are fake and bound to disappear soon</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Its members will never meet, yet feel a deep horizontal kinship &mdash; built by print capitalism and mapped by census, map and museum</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A nation exists only inside novels and poems</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; The nation is imagined because most members never meet, yet feel a bond deep enough to die for &mdash; a bond forged by print capitalism, census, map and museum.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Why Nations Fail&rdquo; (24 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">According to Acemoglu &amp; Robinson, what best explains why some nations are rich and others poor?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Geography and climate</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. National culture and religion</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Inclusive vs extractive institutions</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> &mdash; Two towns can share a name and a fence yet differ wildly &mdash; because inclusive institutions spread opportunity while extractive ones concentrate it.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4a044e, #1a1035);">
+        <div class="pageno">4 / 13 →</div>
+        <svg width="112" height="112" viewBox="0 0 120 120" fill="none" stroke="#e9a8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.92;">
+          <path d="M30 40 h60 v34 h-24 l-10 12 v-12 h-16 z"/>
+          <path d="M46 84 h44 v22 h-14 l-8 9 v-9 h-22 z" opacity="0.7"/>
+          <line x1="42" y1="55" x2="78" y2="55"/><line x1="42" y1="63" x2="66" y2="63"/>
+        </svg>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Buch des Tages · 📖</div>
+        <h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">Triggerpunkte</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Konsens und Konflikt in der Gegenwartsgesellschaft &mdash; warum Gendersternchen und Lastenräder so viele Menschen triggern</p>
+        <p style="font-size:15px; opacity:0.75;">Steffen Mau, Thomas Lux &amp; Linus Westheuser · Suhrkamp, 2023 · ~6 Min. Lesezeit</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Weiter →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #422006, #1c1917);">
+        <div class="pageno">5 / 13 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Der Aufhänger</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">Deutschland ist gar nicht so gespalten, wie alle behaupten &mdash; bis jemand einen Triggerpunkt berührt.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Der vielbeschworene Befund von der immer tieferen Spaltung der Gesellschaft, so die Kernbotschaft dieser empirischen Studie, ist ein Mythos.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0f172a, #172554);">
+        <div class="pageno">6 / 13 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Die Kernthese</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Breiter Konsens in der Sache &mdash; explosive Konflikte an einzelnen Reizpunkten.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Auf Grundlage einer eigens erhobenen repräsentativen Befragung von 2.530 Menschen und sechs moderierter Gruppendiskussionen zeigen die Autoren: In vielen großen Fragen gibt es quer durch das sozialstrukturelle Spektrum erhebliche Übereinstimmung. Erst wenn bestimmte &bdquo;Triggerpunkte&ldquo; berührt werden, eskaliert die Debatte plötzlich.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3730a3, #1e1b4b);">
+        <div class="pageno">7 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 1 / 5 · Vier Arenen</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Die vier Ungleichheitsarenen</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Die Soziologen kartieren die Einstellungen in vier &bdquo;Arenen&ldquo; der Ungleichheit: Armut und Reichtum, Migration, Diversität und Gender sowie Klimaschutz. In jeder gibt es Streit &mdash; aber stets vor dem Hintergrund einer großen Grundübereinstimmung.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+        <div class="pageno">8 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 2 / 5 · Der Konsens</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Überraschend viel Einigkeit</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Der überraschende Befund: In allen vier Arenen finden sich zahlreiche Konflikte, doch immer vor dem Hintergrund einer großen Übereinstimmung in den wesentlichen Fragen. Dass der Klimawandel eine Herausforderung ist, wird breit anerkannt; Zuwanderung wird im Durchschnitt eher begrüßt.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">9 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 3 / 5 · Die Reizpunkte</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Wo der Konsens kippt</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Der Konsens hält &mdash; bis ein Triggerpunkt berührt wird: Gleichheit ja, aber bitte keine &bdquo;Gendersprache&ldquo;. Nicht die großen Werte trennen die Gesellschaft, sondern konkrete Symbole und Zumutungen. Der Untertitel bringt es auf den Punkt: warum Gendersternchen und Lastenräder so viele Menschen triggern.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e293b, #0b1120);">
+        <div class="pageno">10 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 4 / 5 · Was Polarisierung wäre</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Wann eine Gesellschaft wirklich zerfällt</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Nach dem an der Cleavage-Theorie orientierten Ansatz der Autoren entsteht politische Polarisierung erst, wenn wachsende Meinungsunterschiede sich mit sozialstruktureller Segmentierung verbinden &mdash; wenn schwebende ideologische Positionen zu verfestigten &bdquo;sozialstrukturellen Großgruppen&ldquo; gerinnen, die das Potenzial haben, die Gesellschaft zu spalten. Genau das ist bislang nicht der Fall.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f3f46, #18181b);">
+        <div class="pageno">11 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 5 / 5 · Das Fundament</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Eine Studie, kein Meinungsstück</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Das Gewicht des Buches liegt in der Empirie: über 500 Seiten Sozialforschung, getragen von einer telefonischen Befragung von 2.530 Personen und sechs moderierten Gruppendiskussionen. Trotz dieses wissenschaftlichen Anspruchs stand &bdquo;Triggerpunkte&ldquo; monatelang auf der Bestsellerliste &mdash; und erreichte Platz 1 der Spiegel-Bestsellerliste.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #164e63, #082f49);">
+        <div class="pageno">12 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Warum das 2026 zählt</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Die Zusammenhalts-Debatte läuft weiter</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Drei Jahre nach Erscheinen bleibt &bdquo;Triggerpunkte&ldquo; ein Fixpunkt der Debatte über gesellschaftlichen Zusammenhalt &mdash; das Buch hält sich weiter auf den Sachbuch-Bestsellerlisten, und noch in Heft 1/2026 der <em>Politischen Vierteljahresschrift</em> wird die Studie ausführlich besprochen. Wer 2026 über Spaltung, AfD und Streitkultur redet, kommt an Maus Reizpunkt-These nicht vorbei.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">13 / 13 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Der Kern in einem Satz</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">&bdquo;Warum Gendersternchen und Lastenfahrräder so viele Menschen triggern.&ldquo;</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">&mdash; Untertitel von <em>Triggerpunkte</em> (Mau, Lux, Westheuser, Suhrkamp 2023)</p>
+        <div style="margin-top:14px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Nächste Schritte</p>
+          <a href="https://www.suhrkamp.de/person/steffen-mau-p-8677" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Suhrkamp · Steffen Mau &amp; das Buch</b></a>
+          <a href="https://www.scripts-berlin.eu/publications/Publications/Mau_Triggerpunkte/index.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>SCRIPTS Berlin · Projektseite</b></a>
+          <a href="https://link.springer.com/article/10.1007/s11615-024-00561-y" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Rezension · Politische Vierteljahresschrift</b></a>
+          <a href="https://www.youtube.com/watch?v=Iyc_dpXXcIE" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Gespräch · Mau &amp; Eszter Kováts (Video)</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 23. Juli 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zurück">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
