@@ -1,7 +1,47 @@
 {
-  "updated": "2026-07-22",
-  "count": 137,
+  "updated": "2026-07-23",
+  "count": 142,
   "swipes": [
+    {
+      "file": "Swipe – The Man Who Solved the Market – 2026-07-23.html",
+      "title": "The Man Who Solved the Market",
+      "date": "2026-07-23",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Gregory Zuckerman (2019): how Jim Simons — a Chern–Simons geometer and Cold-War codebreaker who never read an earnings report — built Renaissance Technologies and the Medallion Fund (≈66% a year) into the greatest money-making machine in history."
+    },
+    {
+      "file": "Swipe – Triggerpunkte – 2026-07-23.html",
+      "title": "Triggerpunkte",
+      "date": "2026-07-23",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Steffen Mau, Thomas Lux & Linus Westheuser (2023): Die vielbeschworene Polarisierung ist ein Mythos — in vier Ungleichheitsarenen herrscht breiter Konsens; Streit entzündet sich erst an konkreten Reizpunkten wie Gendersternchen und Lastenrädern."
+    },
+    {
+      "file": "Swipe – Agile Governance – 2026-07-23.html",
+      "title": "Agile Governance",
+      "date": "2026-07-23",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Sinica Podcast (Kaiser Kuo, 1 July 2026): Tsinghua's Xue Lan on how China regulates AI it can't fully predict — the 'pacing problem', 'agile governance', and whether Beijing's adaptive model can travel to democracies. Recorded at Summer Davos, Dalian."
+    },
+    {
+      "file": "Swipe – Julius Caesar und der Rubikon – 2026-07-23.html",
+      "title": "Julius Caesar und der Rubikon",
+      "date": "2026-07-23",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Eine Stunde History (Deutschlandfunk Nova, 17. Juli 2026): Gaius Julius Caesar — vom Gallischen Krieg über Alesia und den Rubikon ('Alea iacta est') bis zur Ermordung an den Iden des März 44 v. Chr."
+    },
+    {
+      "file": "Swipe – Kind of Blue – 2026-07-23.html",
+      "title": "Kind of Blue",
+      "date": "2026-07-23",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Music · Miles Davis (1959): the best-selling jazz record of all time, built on modal improvisation instead of chord changes — 'a new language of music' whose influence runs from the Doors to Steve Reich; freshly remastered in 2026."
+    },
     {
       "file": "Swipe – The Emperor of All Maladies – 2026-07-22.html",
       "title": "The Emperor of All Maladies",
