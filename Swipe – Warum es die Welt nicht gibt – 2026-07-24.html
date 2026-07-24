@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Markus Gabriel, 'Warum es die Welt nicht gibt' (2013): das Manifest des Neuen Realismus. Alles existiert in Sinnfeldern — nur das eine, alles umfassende Ganze, die Welt, existiert nicht. 'Die Welt existiert nicht. Aber sonst existiert alles.'"
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Warum es die Welt nicht gibt — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Wiederholung · 1 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Strukturwandel der Öffentlichkeit&ldquo; (22. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wo entstand laut Habermas die bürgerliche Öffentlichkeit?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Am absolutistischen Fürstenhof</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. In Kaffeehäusern, Salons und Zeitungen — wo Privatleute öffentlich räsonieren</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Erst mit dem Fernsehen der 1950er Jahre</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> &mdash; im 18. Jahrhundert entsteht ein Raum kritischer Vernunft; später zerfällt er, so Habermas, durch Kommerz und Massenmedien.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">2 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Wiederholung · 2 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Geschichte eines Deutschen&ldquo; (16. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was schildert Sebastian Haffner in seinen Erinnerungen?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Wie der Nationalsozialismus bis 1933 das Privatleben eines jungen Deutschen eroberte</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Sein Fronterlebnis im Ersten Weltkrieg</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Das westdeutsche Wirtschaftswunder der 1950er</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: A</b> &mdash; 1939 geschrieben, erst 2000 erschienen: die Machtergreifung von innen, im Alltag eines Einzelnen erzählt.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Wiederholung · 3 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Der lange Weg nach Westen&ldquo; (9. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was ist Heinrich August Winklers These über die deutsche Geschichte 1806–1990?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Deutschland war immer schon Teil des politischen Westens</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Ein deutscher Sonderweg — aber nach Osten</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Ein Sonderweg — die verspätete, schließlich doppelte Verwestlichung</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: C</b> &mdash; erst 1990 kam Deutschland, so Winkler, endgültig im Westen an.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #115e59, #042f2e);">
+        <div class="pageno">4 / 14 →</div>
+        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.95;"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.7 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.7-4-9s1.4-6.5 4-9z"/><line x1="4" y1="4" x2="20" y2="20" stroke-width="1.6"/></svg>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Buch des Tages · 📖</div>
+        <h1 style="font-size:34px; line-height:1.1; margin:0 0 10px;">Warum es die Welt nicht gibt</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Das populäre Manifest des &bdquo;Neuen Realismus&ldquo; &mdash; eine neue Ontologie in sieben Kapiteln</p>
+        <p style="font-size:15px; opacity:0.75;">Markus Gabriel · Ullstein · 2013 · ~6 Min. Lesezeit</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Weiter →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #065f46, #022c22);">
+        <div class="pageno">5 / 14 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Der Aufhänger</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">Es gibt Deutschland, es gibt Zahlen, es gibt sogar Einhörner. Nur eines gibt es nicht: die Welt.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Gabriel meint das nicht als Provokation um ihrer selbst willen. &bdquo;Welt&ldquo; ist für ihn der Name für das Ganze, den Bereich aller Bereiche &mdash; und genau dieses eine Ganze, behauptet er, kann es aus logischen Gründen nicht geben.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0f766e, #134e4a);">
+        <div class="pageno">6 / 14 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Die Grundthese</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Existieren heißt: in einem Sinnfeld erscheinen.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Der Kern des Neuen Realismus ist der Begriff des &bdquo;Sinnfeldes&ldquo;: der Ort, an dem etwas erscheint. Etwas existiert genau dann, wenn es in einem Sinnfeld auftaucht. Es gibt unendlich viele solcher Felder &mdash; die Physik, ein Roman, ein Traum, die Mathematik &mdash; aber kein Feld, das sie alle umfasst.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #a16207, #451a03);">
+        <div class="pageno">7 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 1 / 6 · Zwei Gegner</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Weder Metaphysik noch Konstruktivismus</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Gabriel positioniert sich zwischen zwei Fronten: der Metaphysik, für die es nur die eine, wahre Welt &bdquo;an sich&ldquo; gibt, und dem Konstruktivismus, für den alles nur unsere Konstruktion ist. Beide, sagt er, verfehlen die Sache &mdash; der Neue Realismus nimmt die Dinge <em>und</em> unsere Gedanken darüber gleichermaßen ernst.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4d7c0f, #1a2e05);">
+        <div class="pageno">8 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 2 / 6 · Das Argument</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Warum das Ganze nicht existiert</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Damit die Welt existierte, müsste sie in einem Sinnfeld erscheinen. Aber die Welt soll ja das Feld aller Felder sein &mdash; es gäbe kein umfassenderes Feld, in dem sie auftauchen könnte. Sie unterschiede sich von nichts und wäre nur mit sich selbst identisch. Also: Die Welt existiert nicht.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #9333ea, #3b0764);">
+        <div class="pageno">9 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 3 / 6 · Die Pointe</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Dafür existiert fast alles andere</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Der überraschende Preis dieser These ist eine ungeheure Großzügigkeit: Wenn die Welt nicht existiert, existiert sonst beinahe alles. Auch rosa Einhörner &mdash; Gabriel sagt provokant, sogar Einhörner auf der Rückseite des Mondes gebe es, nämlich in bestimmten Sinnfeldern wie dem der Vorstellung oder der Fiktion.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1d4ed8, #0c1a3f);">
+        <div class="pageno">10 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 4 / 6 · Gegen den Naturalismus</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Nicht nur Atome sind wirklich</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Aus der Pluralität der Sinnfelder folgt ein Angriff auf den Naturalismus &mdash; die Ansicht, nur das physikalisch Messbare sei real. Für Gabriel sind der Staat Deutschland, die Zahl 7 und ein Gedicht ebenso wirklich wie Elektronen. Sie erscheinen bloß in anderen Feldern des Sinns.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #374151, #111827);">
+        <div class="pageno">11 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 5 / 6 · Die Debatte</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Bestseller &mdash; und Streitfall</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Das Buch wurde ein Verkaufserfolg und machte Philosophie massentauglich. Kritiker halten dagegen, das Argument sei zum Teil ein Wortspiel mit dem Begriff &bdquo;Welt&ldquo; und verschiebe nur, was man unter dem &bdquo;Ganzen&ldquo; verstehen will. Der Neue Realismus bleibt einflussreich und umstritten zugleich.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #155e75, #083344);">
+        <div class="pageno">12 / 14 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 6 / 6 · Warum es zählt</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Eine Ontologie ohne Über-Perspektive</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Wenn es kein alles umfassendes Feld gibt, gibt es auch keinen Standpunkt, von dem aus man &bdquo;alles&ldquo; überblickte &mdash; weder den der Physik noch den eines Gottes. Übrig bleibt eine pluralistische, offene Wirklichkeit: viele wahre Beschreibungen, keine einzige, die alle anderen schluckt.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">13 / 14 →</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Die Quintessenz</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">&bdquo;Die Welt existiert nicht. Aber sonst existiert alles.&ldquo;</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">&mdash; Markus Gabriel, <em>Warum es die Welt nicht gibt</em></p>
+        <p style="font-size:16px; line-height:1.5;">Ein Satz wie ein Vexierbild: Er nimmt uns das eine große Ganze und gibt uns dafür die unüberschaubare Fülle der einzelnen Wirklichkeiten zurück &mdash; jede echt, jede in ihrem eigenen Sinnfeld.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #e7ddc8; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">14 / 14 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Weiterlesen</h3>
+        <div style="margin-top:4px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Nächste Schritte</p>
+          <a href="https://www.perlentaucher.de/buch/markus-gabriel/warum-es-die-welt-nicht-gibt.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Perlentaucher · Buchseite &amp; Pressestimmen</b></a>
+          <a href="https://taz.de/Philosophie-des-Neuen-Realismus/!5298540/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>taz · &bdquo;Die weiten Felder des Sinns&ldquo;</b></a>
+          <a href="https://de.wikipedia.org/wiki/Markus_Gabriel_(Philosoph)" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Wikipedia · Markus Gabriel</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 24. Juli 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zurück">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
