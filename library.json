@@ -1,30 +1,34 @@
 {
   "updated": "2026-07-24",
-  "count": 152,
+  "count": 145,
   "swipes": [
-    {
-      "file": "Swipe – Nexus – 2026-07-24.html",
-      "title": "Nexus",
-      "date": "2026-07-24",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Yuval Noah Harari (2024): a history of information networks from the Stone Age to AI — information's job is to connect, not to reveal truth, and we're now handing the network to a non-human intelligence."
-    },
-    {
-      "file": "Swipe – Warum es die Welt nicht gibt – 2026-07-24.html",
-      "title": "Warum es die Welt nicht gibt",
-      "date": "2026-07-24",
-      "kicker": "Buch des Tages · 📖",
-      "emoji": "📖",
-      "description": "Markus Gabriel (2013): das Manifest des Neuen Realismus — alles existiert in unendlich vielen Sinnfeldern, nur das eine, alles umfassende Ganze, die Welt, existiert nicht."
-    },
     {
       "file": "Swipe – The Iran War's Energy Shock – 2026-07-24.html",
       "title": "The Iran War's Energy Shock",
       "date": "2026-07-24",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "Ones and Tooze (Foreign Policy, Ep. 244, 29 May 2026): Adam Tooze on the deals that could end the 2026 Iran war — and the 33-km Strait of Hormuz that carries a fifth of the world's oil."
+      "description": "Ones and Tooze (Foreign Policy, Ep. 244, 29 May 2026): Adam Tooze on the deals that could end the 2026 Iran war — and the 33-km Strait of Hormuz that carries a fifth of the world's oil.",
+      "subject": {
+        "work": "ones-and-tooze-244-iran-energy",
+        "creator": "adam-tooze",
+        "topic": "iran-war-oil-shock",
+        "source": "ones-and-tooze"
+      }
+    },
+    {
+      "file": "Swipe – Nexus – 2026-07-24.html",
+      "title": "Nexus",
+      "date": "2026-07-24",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Yuval Noah Harari (2024): a history of information networks from the Stone Age to AI — information's job is to connect, not to reveal truth, and we're now handing the network to a non-human intelligence.",
+      "subject": {
+        "work": "nexus",
+        "creator": "yuval-noah-harari",
+        "topic": "information-networks-and-ai",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Die Duineser Elegien – 2026-07-24.html",
@@ -32,7 +36,13 @@
       "date": "2026-07-24",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Lyrik · Rilkes 'Duineser Elegien' (1912–1922): zehn Elegien zwischen Klage und Rühmen. Am Schloss Duino im Sturm gehört, erst nach zehn Jahren in Muzot vollendet."
+      "description": "Lyrik · Rilkes 'Duineser Elegien' (1912–1922): zehn Elegien zwischen Klage und Rühmen. Am Schloss Duino im Sturm gehört, erst nach zehn Jahren in Muzot vollendet.",
+      "subject": {
+        "work": "duineser-elegien",
+        "creator": "rainer-maria-rilke",
+        "topic": "german-modernist-poetry",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Ana Mendieta – 2026-07-24.html",
@@ -40,15 +50,13 @@
       "date": "2026-07-24",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Exhibition · Ana Mendieta at Tate Modern (15 Jul 2026 – 17 Jan 2027): the UK's biggest survey in over a decade of the artist who pressed her body into the earth — 120+ 'earth-body' works."
-    },
-    {
-      "file": "Swipe – The Fate of Rome – 2026-07-23.html",
-      "title": "The Fate of Rome",
-      "date": "2026-07-23",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Kyle Harper (2017): the first history to put climate and disease at the centre of Rome's fall — volcanoes, solar cycles and three great pandemics (Antonine, Cyprian, Justinian) as the empire's unseen adversaries. 'Nature is not passive.'"
+      "description": "Exhibition · Ana Mendieta at Tate Modern (15 Jul 2026 – 17 Jan 2027): the UK's biggest survey in over a decade of the artist who pressed her body into the earth — 120+ 'earth-body' works.",
+      "subject": {
+        "work": "mendieta-tate-survey",
+        "creator": "ana-mendieta",
+        "topic": "earth-body-performance-art",
+        "source": "tate-modern"
+      }
     },
     {
       "file": "Swipe – Zeit der Zauberer – 2026-07-23.html",
@@ -56,39 +64,13 @@
       "date": "2026-07-23",
       "kicker": "Buch des Tages · 📖",
       "emoji": "📖",
-      "description": "Wolfram Eilenberger (2018): das große Jahrzehnt der Philosophie 1919–1929 in den Leben von Cassirer, Benjamin, Heidegger und Wittgenstein — gerahmt von der Davoser Disputation 1929 (Cassirer gegen Heidegger)."
-    },
-    {
-      "file": "Swipe – Hyperscaler Debt Is Now a Rates Story – 2026-07-23.html",
-      "title": "Hyperscaler Debt Is Now a Rates Story",
-      "date": "2026-07-23",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Odd Lots (Bloomberg, July 2026): the AI buildout is increasingly funded by bonds, not cash flow — Big Five capex hit ~$602B, AI debt doubled to ~$350B, and Amazon's $25B bond was the softest launch since 2025. Now it's a rates story."
-    },
-    {
-      "file": "Swipe – Das Völkerrecht in der Krise – 2026-07-23.html",
-      "title": "Das Völkerrecht in der Krise",
-      "date": "2026-07-23",
-      "kicker": "Folge des Tages · 🎧",
-      "emoji": "🎧",
-      "description": "Das Politikteil (DIE ZEIT, 18. Juli 2026): IKRK-Präsidentin Mirjana Spoljaric warnt, die Achtung des humanitären Völkerrechts sei 'in der Krise' — und wirbt mit sechs Staaten für eine globale Initiative, die Regeln des Krieges neu zu beleben."
-    },
-    {
-      "file": "Swipe – The Salt of the Earth – 2026-07-23.html",
-      "title": "The Salt of the Earth",
-      "date": "2026-07-23",
-      "kicker": "Creative topic · 🎨",
-      "emoji": "🎨",
-      "description": "Photography · Sebastião Salgado (1944–2025): the Brazilian master of black-and-white documentary photography — Workers, Migrations, Genesis — honoured by posthumous retrospectives across 2026 in Paris and Bassano."
-    },
-    {
-      "file": "Swipe – The Man Who Solved the Market – 2026-07-23.html",
-      "title": "The Man Who Solved the Market",
-      "date": "2026-07-23",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Gregory Zuckerman (2019): how Jim Simons — a Chern–Simons geometer and Cold-War codebreaker who never read an earnings report — built Renaissance Technologies and the Medallion Fund (≈66% a year) into the greatest money-making machine in history."
+      "description": "Wolfram Eilenberger (2018): das große Jahrzehnt der Philosophie 1919–1929 in den Leben von Cassirer, Benjamin, Heidegger und Wittgenstein — gerahmt von der Davoser Disputation 1929 (Cassirer gegen Heidegger).",
+      "subject": {
+        "work": "zeit-der-zauberer",
+        "creator": "wolfram-eilenberger",
+        "topic": "philosophy-1919-1929",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Triggerpunkte – 2026-07-23.html",
@@ -96,23 +78,55 @@
       "date": "2026-07-23",
       "kicker": "Buch des Tages · 📖",
       "emoji": "📖",
-      "description": "Steffen Mau, Thomas Lux & Linus Westheuser (2023): Die vielbeschworene Polarisierung ist ein Mythos — in vier Ungleichheitsarenen herrscht breiter Konsens; Streit entzündet sich erst an konkreten Reizpunkten wie Gendersternchen und Lastenrädern."
+      "description": "Steffen Mau, Thomas Lux & Linus Westheuser (2023): Die vielbeschworene Polarisierung ist ein Mythos — in vier Ungleichheitsarenen herrscht breiter Konsens; Streit entzündet sich erst an konkreten Reizpunkten wie Gendersternchen und Lastenrädern.",
+      "subject": {
+        "work": "triggerpunkte",
+        "creator": "steffen-mau",
+        "topic": "german-polarisation-debate",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Agile Governance – 2026-07-23.html",
-      "title": "Agile Governance",
+      "file": "Swipe – The Salt of the Earth – 2026-07-23.html",
+      "title": "The Salt of the Earth",
       "date": "2026-07-23",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Sinica Podcast (Kaiser Kuo, 1 July 2026): Tsinghua's Xue Lan on how China regulates AI it can't fully predict — the 'pacing problem', 'agile governance', and whether Beijing's adaptive model can travel to democracies. Recorded at Summer Davos, Dalian."
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Photography · Sebastião Salgado (1944–2025): the Brazilian master of black-and-white documentary photography — Workers, Migrations, Genesis — honoured by posthumous retrospectives across 2026 in Paris and Bassano.",
+      "subject": {
+        "work": "salgado-oeuvre",
+        "creator": "sebastiao-salgado",
+        "topic": "social-documentary-photography",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Julius Caesar und der Rubikon – 2026-07-23.html",
-      "title": "Julius Caesar und der Rubikon",
+      "file": "Swipe – The Man Who Solved the Market – 2026-07-23.html",
+      "title": "The Man Who Solved the Market",
       "date": "2026-07-23",
-      "kicker": "Folge des Tages · 🎧",
-      "emoji": "🎧",
-      "description": "Eine Stunde History (Deutschlandfunk Nova, 17. Juli 2026): Gaius Julius Caesar — vom Gallischen Krieg über Alesia und den Rubikon ('Alea iacta est') bis zur Ermordung an den Iden des März 44 v. Chr."
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Gregory Zuckerman (2019): how Jim Simons — a Chern–Simons geometer and Cold-War codebreaker who never read an earnings report — built Renaissance Technologies and the Medallion Fund (≈66% a year) into the greatest money-making machine in history.",
+      "subject": {
+        "work": "the-man-who-solved-the-market",
+        "creator": "gregory-zuckerman",
+        "topic": "jim-simons-quant-investing",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Fate of Rome – 2026-07-23.html",
+      "title": "The Fate of Rome",
+      "date": "2026-07-23",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Kyle Harper (2017): the first history to put climate and disease at the centre of Rome's fall — volcanoes, solar cycles and three great pandemics (Antonine, Cyprian, Justinian) as the empire's unseen adversaries. 'Nature is not passive.'",
+      "subject": {
+        "work": "the-fate-of-rome",
+        "creator": "kyle-harper",
+        "topic": "rome-collapse-climate-disease",
+        "source": "princeton-up"
+      }
     },
     {
       "file": "Swipe – Kind of Blue – 2026-07-23.html",
@@ -120,39 +134,55 @@
       "date": "2026-07-23",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Music · Miles Davis (1959): the best-selling jazz record of all time, built on modal improvisation instead of chord changes — 'a new language of music' whose influence runs from the Doors to Steve Reich; freshly remastered in 2026."
+      "description": "Music · Miles Davis (1959): the best-selling jazz record of all time, built on modal improvisation instead of chord changes — 'a new language of music' whose influence runs from the Doors to Steve Reich; freshly remastered in 2026.",
+      "subject": {
+        "work": "kind-of-blue",
+        "creator": "miles-davis",
+        "topic": "modal-jazz",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – The Emperor of All Maladies – 2026-07-22.html",
-      "title": "The Emperor of All Maladies",
-      "date": "2026-07-22",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Siddhartha Mukherjee (2010, Pulitzer): the 5,000-year 'biography' of cancer — from Imhotep and Atossa through Halsted's radical surgery and Farber's first chemotherapy to Nixon's War on Cancer and the targeted-therapy age."
-    },
-    {
-      "file": "Swipe – Strukturwandel der Öffentlichkeit – 2026-07-22.html",
-      "title": "Strukturwandel der Öffentlichkeit",
-      "date": "2026-07-22",
-      "kicker": "Buch des Tages · 📖",
-      "emoji": "📖",
-      "description": "Jürgen Habermas (1962): Wie in Kaffeehäusern und Salons die bürgerliche Öffentlichkeit entstand — und wie kommerzielle Massenmedien, PR und Werbung sie in eine manipulierte Pseudo-Öffentlichkeit zurückverwandeln ('Refeudalisierung')."
-    },
-    {
-      "file": "Swipe – New York Hits Pause on AI – 2026-07-22.html",
-      "title": "New York Hits Pause on AI",
-      "date": "2026-07-22",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Odd Lots (Bloomberg, 17 July 2026): Gov. Kathy Hochul on her one-year moratorium on new hyperscale data centers — the first statewide pause in the US, as the AI build-out collides with soaring electricity bills."
-    },
-    {
-      "file": "Swipe – Kuba und die USA – 2026-07-22.html",
-      "title": "Kuba und die USA",
-      "date": "2026-07-22",
+      "file": "Swipe – Julius Caesar und der Rubikon – 2026-07-23.html",
+      "title": "Julius Caesar und der Rubikon",
+      "date": "2026-07-23",
       "kicker": "Folge des Tages · 🎧",
       "emoji": "🎧",
-      "description": "Der Rest ist Geschichte (Deutschlandfunk, 16. Juli 2026): Wie aus der Revolution von 1959 das längste Embargo der Welt wurde — von der Schweinebucht über die Kubakrise bis zu Obamas Tauwetter und der neuen Sanktionswelle 2026."
+      "description": "Eine Stunde History (Deutschlandfunk Nova, 17. Juli 2026): Gaius Julius Caesar — vom Gallischen Krieg über Alesia und den Rubikon ('Alea iacta est') bis zur Ermordung an den Iden des März 44 v. Chr.",
+      "subject": {
+        "work": "esh-caesar-rubikon",
+        "creator": null,
+        "topic": "julius-caesar-rubicon",
+        "source": "eine-stunde-history"
+      }
+    },
+    {
+      "file": "Swipe – Hyperscaler Debt Is Now a Rates Story – 2026-07-23.html",
+      "title": "Hyperscaler Debt Is Now a Rates Story",
+      "date": "2026-07-23",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Odd Lots (Bloomberg, July 2026): the AI buildout is increasingly funded by bonds, not cash flow — Big Five capex hit ~$602B, AI debt doubled to ~$350B, and Amazon's $25B bond was the softest launch since 2025. Now it's a rates story.",
+      "subject": {
+        "work": "oddlots-hyperscaler-debt",
+        "creator": null,
+        "topic": "ai-datacenter-debt-financing",
+        "source": "odd-lots"
+      }
+    },
+    {
+      "file": "Swipe – Agile Governance – 2026-07-23.html",
+      "title": "Agile Governance",
+      "date": "2026-07-23",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Sinica Podcast (Kaiser Kuo, 1 July 2026): Tsinghua's Xue Lan on how China regulates AI it can't fully predict — the 'pacing problem', 'agile governance', and whether Beijing's adaptive model can travel to democracies. Recorded at Summer Davos, Dalian.",
+      "subject": {
+        "work": "sinica-xue-lan-ai-governance",
+        "creator": "xue-lan",
+        "topic": "china-ai-regulation",
+        "source": "sinica"
+      }
     },
     {
       "file": "Swipe – Waiting for Godot – 2026-07-22.html",
@@ -160,31 +190,69 @@
       "date": "2026-07-22",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Theatre · Samuel Beckett (1953): two tramps wait by a bare tree for someone who never comes — 'a play in which nothing happens, twice', the cornerstone of absurdist theatre, now revived on Broadway."
+      "description": "Theatre · Samuel Beckett (1953): two tramps wait by a bare tree for someone who never comes — 'a play in which nothing happens, twice', the cornerstone of absurdist theatre, now revived on Broadway.",
+      "subject": {
+        "work": "waiting-for-godot",
+        "creator": "samuel-beckett",
+        "topic": "theatre-of-the-absurd",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Private Truths Public Lies – 2026-07-18.html",
-      "title": "Private Truths, Public Lies",
-      "date": "2026-07-18",
+      "file": "Swipe – The Emperor of All Maladies – 2026-07-22.html",
+      "title": "The Emperor of All Maladies",
+      "date": "2026-07-22",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Timur Kuran (1995): preference falsification — we misrepresent what we want under social pressure, hated regimes look stable until a minor event triggers the bandwagon, and that's why 1989 surprised everyone."
+      "description": "Siddhartha Mukherjee (2010, Pulitzer): the 5,000-year 'biography' of cancer — from Imhotep and Atossa through Halsted's radical surgery and Farber's first chemotherapy to Nixon's War on Cancer and the targeted-therapy age.",
+      "subject": {
+        "work": "the-emperor-of-all-maladies",
+        "creator": "siddhartha-mukherjee",
+        "topic": "history-of-cancer",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Wolfszeit – 2026-07-18.html",
-      "title": "Wolfszeit",
-      "date": "2026-07-18",
+      "file": "Swipe – Strukturwandel der Öffentlichkeit – 2026-07-22.html",
+      "title": "Strukturwandel der Öffentlichkeit",
+      "date": "2026-07-22",
       "kicker": "Buch des Tages · 📖",
       "emoji": "📖",
-      "description": "Harald Jähner (2019, Preis der Leipziger Buchmesse): Deutschland 1945–1955 als Mentalitätsgeschichte — wie aus Volksgenossen über Trümmer, Schwarzmarkt und Beschweigen allmählich wieder Bürger wurden."
+      "description": "Jürgen Habermas (1962): Wie in Kaffeehäusern und Salons die bürgerliche Öffentlichkeit entstand — und wie kommerzielle Massenmedien, PR und Werbung sie in eine manipulierte Pseudo-Öffentlichkeit zurückverwandeln ('Refeudalisierung').",
+      "subject": {
+        "work": "strukturwandel-der-oeffentlichkeit",
+        "creator": "juergen-habermas",
+        "topic": "bourgeois-public-sphere",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Machado de Assis – 2026-07-18.html",
-      "title": "Machado de Assis",
-      "date": "2026-07-18",
+      "file": "Swipe – New York Hits Pause on AI – 2026-07-22.html",
+      "title": "New York Hits Pause on AI",
+      "date": "2026-07-22",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "In Our Time (BBC, 11 June 2026): the grandson of freed slaves who became Brazil's greatest writer — his slave-owning readers loved his books, and only later realised he was satirising them. The show's first Brazilian topic."
+      "description": "Odd Lots (Bloomberg, 17 July 2026): Gov. Kathy Hochul on her one-year moratorium on new hyperscale data centers — the first statewide pause in the US, as the AI build-out collides with soaring electricity bills.",
+      "subject": {
+        "work": "oddlots-hochul-datacenters",
+        "creator": "kathy-hochul",
+        "topic": "datacenter-moratorium-new-york",
+        "source": "odd-lots"
+      }
+    },
+    {
+      "file": "Swipe – Kuba und die USA – 2026-07-22.html",
+      "title": "Kuba und die USA",
+      "date": "2026-07-22",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Der Rest ist Geschichte (Deutschlandfunk, 16. Juli 2026): Wie aus der Revolution von 1959 das längste Embargo der Welt wurde — von der Schweinebucht über die Kubakrise bis zu Obamas Tauwetter und der neuen Sanktionswelle 2026.",
+      "subject": {
+        "work": "drig-kuba-usa",
+        "creator": null,
+        "topic": "cuba-us-embargo",
+        "source": "der-rest-ist-geschichte"
+      }
     },
     {
       "file": "Swipe – Wir kennen die Realität des Krieges – 2026-07-18.html",
@@ -192,7 +260,55 @@
       "date": "2026-07-18",
       "kicker": "Folge des Tages · 🎧",
       "emoji": "🎧",
-      "description": "Das Politikteil (18. Juli 2026): IKRK-Präsidentin Mirjana Spoljaric über Foltergefängnisse, den Geiselaustausch in Gaza und geheime Verhandlungen mit Diktatoren — in einer Welt mit über 130 bewaffneten Konflikten."
+      "description": "Das Politikteil (18. Juli 2026): IKRK-Präsidentin Mirjana Spoljaric über Foltergefängnisse, den Geiselaustausch in Gaza und geheime Verhandlungen mit Diktatoren — in einer Welt mit über 130 bewaffneten Konflikten.",
+      "subject": {
+        "work": "politikteil-spoljaric-2026-07-18",
+        "creator": "mirjana-spoljaric",
+        "topic": "international-humanitarian-law",
+        "source": "das-politikteil"
+      }
+    },
+    {
+      "file": "Swipe – Wolfszeit – 2026-07-18.html",
+      "title": "Wolfszeit",
+      "date": "2026-07-18",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Harald Jähner (2019, Preis der Leipziger Buchmesse): Deutschland 1945–1955 als Mentalitätsgeschichte — wie aus Volksgenossen über Trümmer, Schwarzmarkt und Beschweigen allmählich wieder Bürger wurden.",
+      "subject": {
+        "work": "wolfszeit",
+        "creator": "harald-jaehner",
+        "topic": "germany-1945-1955-mentality",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Private Truths Public Lies – 2026-07-18.html",
+      "title": "Private Truths, Public Lies",
+      "date": "2026-07-18",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Timur Kuran (1995): preference falsification — we misrepresent what we want under social pressure, hated regimes look stable until a minor event triggers the bandwagon, and that's why 1989 surprised everyone.",
+      "subject": {
+        "work": "private-truths-public-lies",
+        "creator": "timur-kuran",
+        "topic": "preference-falsification",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Machado de Assis – 2026-07-18.html",
+      "title": "Machado de Assis",
+      "date": "2026-07-18",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "In Our Time (BBC, 11 June 2026): the grandson of freed slaves who became Brazil's greatest writer — his slave-owning readers loved his books, and only later realised he was satirising them. The show's first Brazilian topic.",
+      "subject": {
+        "work": "iot-machado-de-assis",
+        "creator": "machado-de-assis",
+        "topic": "brazilian-literature",
+        "source": "in-our-time"
+      }
     },
     {
       "file": "Swipe – In the Mood for Love – 2026-07-18.html",
@@ -200,23 +316,13 @@
       "date": "2026-07-18",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Film · Wong Kar-wai (2000): shot for 15 months without a screenplay in 1962 Hong Kong, a love story told through restraint — ranked 5th greatest film of all time in the 2022 Sight and Sound poll."
-    },
-    {
-      "file": "Swipe – The Great Leveler – 2026-07-16.html",
-      "title": "The Great Leveler",
-      "date": "2026-07-16",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Walter Scheidel (2017): across all of history, only violent shocks — the 'Four Horsemen' of war, revolution, collapse and plague — have seriously reduced inequality. 'Inequality never dies peacefully.'"
-    },
-    {
-      "file": "Swipe – Geschichte eines Deutschen – 2026-07-16.html",
-      "title": "Geschichte eines Deutschen",
-      "date": "2026-07-16",
-      "kicker": "Buch des Tages · 📖",
-      "emoji": "📖",
-      "description": "Sebastian Haffner (geschrieben 1939, erschienen 2000): Die Erinnerungen 1914–1933 — die Nazifizierung Deutschlands von innen, erzählt als 'Duell' zwischen übermächtigem Staat und Privatmann."
+      "description": "Film · Wong Kar-wai (2000): shot for 15 months without a screenplay in 1962 Hong Kong, a love story told through restraint — ranked 5th greatest film of all time in the 2022 Sight and Sound poll.",
+      "subject": {
+        "work": "in-the-mood-for-love",
+        "creator": "wong-kar-wai",
+        "topic": "hong-kong-arthouse-cinema",
+        "source": null
+      }
     },
     {
       "file": "Swipe – You Must Change Your Life – 2026-07-16.html",
@@ -224,7 +330,13 @@
       "date": "2026-07-16",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "Philosophize This! #249 (14 July 2026): Stephen West on Peter Sloterdijk — humans as practicing animals, anthropotechnics, religion reread as training, and Rilke's absolute imperative."
+      "description": "Philosophize This! #249 (14 July 2026): Stephen West on Peter Sloterdijk — humans as practicing animals, anthropotechnics, religion reread as training, and Rilke's absolute imperative.",
+      "subject": {
+        "work": "pt-249-sloterdijk",
+        "creator": "peter-sloterdijk",
+        "topic": "anthropotechnics-practice",
+        "source": "philosophize-this"
+      }
     },
     {
       "file": "Swipe – Wie Europa Putins Raketenterror stoppen will – 2026-07-16.html",
@@ -232,7 +344,27 @@
       "date": "2026-07-16",
       "kicker": "Folge des Tages · 🎧",
       "emoji": "🎧",
-      "description": "Streitkräfte und Strategien (NDR, 14. Juli 2026): Die Koalition der Willigen schmiedet in Paris ein Raketenabwehr-Bündnis — plus Iran-Eskalation und Thomas Schiller über Europas strategisches Versagen in Afrika."
+      "description": "Streitkräfte und Strategien (NDR, 14. Juli 2026): Die Koalition der Willigen schmiedet in Paris ein Raketenabwehr-Bündnis — plus Iran-Eskalation und Thomas Schiller über Europas strategisches Versagen in Afrika.",
+      "subject": {
+        "work": "sus-raketenabwehr-paris",
+        "creator": null,
+        "topic": "european-missile-defence",
+        "source": "streitkraefte-und-strategien"
+      }
+    },
+    {
+      "file": "Swipe – The Great Leveler – 2026-07-16.html",
+      "title": "The Great Leveler",
+      "date": "2026-07-16",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Walter Scheidel (2017): across all of history, only violent shocks — the 'Four Horsemen' of war, revolution, collapse and plague — have seriously reduced inequality. 'Inequality never dies peacefully.'",
+      "subject": {
+        "work": "the-great-leveler",
+        "creator": "walter-scheidel",
+        "topic": "inequality-and-violent-shocks",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Lina Bo Bardi – 2026-07-16.html",
@@ -240,7 +372,27 @@
       "date": "2026-07-16",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Architecture · Lina Bo Bardi (1914–1992): the Italian-Brazilian who floated MASP above São Paulo on a 74-metre span, hung its paintings on glass easels, and turned a barrel factory into SESC Pompéia."
+      "description": "Architecture · Lina Bo Bardi (1914–1992): the Italian-Brazilian who floated MASP above São Paulo on a 74-metre span, hung its paintings on glass easels, and turned a barrel factory into SESC Pompéia.",
+      "subject": {
+        "work": "bo-bardi-oeuvre",
+        "creator": "lina-bo-bardi",
+        "topic": "brazilian-modernist-architecture",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Geschichte eines Deutschen – 2026-07-16.html",
+      "title": "Geschichte eines Deutschen",
+      "date": "2026-07-16",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Sebastian Haffner (geschrieben 1939, erschienen 2000): Die Erinnerungen 1914–1933 — die Nazifizierung Deutschlands von innen, erzählt als 'Duell' zwischen übermächtigem Staat und Privatmann.",
+      "subject": {
+        "work": "geschichte-eines-deutschen",
+        "creator": "sebastian-haffner",
+        "topic": "nazification-1914-1933",
+        "source": null
+      }
     },
     {
       "file": "Swipe – The Prize – 2026-07-15.html",
@@ -248,23 +400,13 @@
       "date": "2026-07-15",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Daniel Yergin (1990, Pulitzer 1992): oil created the modern world — from Churchill's navy to Desert Storm, and why 'mastery itself was the prize'."
-    },
-    {
-      "file": "Swipe – Die neue Ordnung auf dem alten Kontinent – 2026-07-15.html",
-      "title": "Die neue Ordnung auf dem alten Kontinent",
-      "date": "2026-07-15",
-      "kicker": "Buch des Tages · 📖",
-      "emoji": "📖",
-      "description": "Philipp Ther (2014, Preis der Leipziger Buchmesse): Osteuropa nach 1989 als Labor des Neoliberalismus — Schocktherapie, Boomtowns und die 'Kotransformation' des Westens."
-    },
-    {
-      "file": "Swipe – How China Remembers – 2026-07-15.html",
-      "title": "How China Remembers",
-      "date": "2026-07-15",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "MERICS China Podcast (13 July 2026): historian Rana Mitter on how China's memory of invasion and humiliation shapes its 'New Chinese Nationalism' — and its choices today."
+      "description": "Daniel Yergin (1990, Pulitzer 1992): oil created the modern world — from Churchill's navy to Desert Storm, and why 'mastery itself was the prize'.",
+      "subject": {
+        "work": "the-prize",
+        "creator": "daniel-yergin",
+        "topic": "oil-history-and-geopolitics",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Krankheit als Lehrmeisterin – 2026-07-15.html",
@@ -272,7 +414,41 @@
       "date": "2026-07-15",
       "kicker": "Folge des Tages · 🎧",
       "emoji": "🎧",
-      "description": "WDR 5 Das philosophische Radio (13. Juli 2026): Philosoph Helmut Heit über Nietzsche — für den Gesundheit hieß, Krankheiten produktiv zu nutzen."
+      "description": "WDR 5 Das philosophische Radio (13. Juli 2026): Philosoph Helmut Heit über Nietzsche — für den Gesundheit hieß, Krankheiten produktiv zu nutzen.",
+      "subject": {
+        "work": "philrad-nietzsche-krankheit",
+        "creator": "friedrich-nietzsche",
+        "topic": "nietzsche-illness-and-health",
+        "source": "wdr5-philosophisches-radio"
+      }
+    },
+    {
+      "file": "Swipe – How China Remembers – 2026-07-15.html",
+      "title": "How China Remembers",
+      "date": "2026-07-15",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "MERICS China Podcast (13 July 2026): historian Rana Mitter on how China's memory of invasion and humiliation shapes its 'New Chinese Nationalism' — and its choices today.",
+      "subject": {
+        "work": "merics-rana-mitter",
+        "creator": "rana-mitter",
+        "topic": "chinese-historical-memory",
+        "source": "merics"
+      }
+    },
+    {
+      "file": "Swipe – Die neue Ordnung auf dem alten Kontinent – 2026-07-15.html",
+      "title": "Die neue Ordnung auf dem alten Kontinent",
+      "date": "2026-07-15",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Philipp Ther (2014, Preis der Leipziger Buchmesse): Osteuropa nach 1989 als Labor des Neoliberalismus — Schocktherapie, Boomtowns und die 'Kotransformation' des Westens.",
+      "subject": {
+        "work": "die-neue-ordnung-auf-dem-alten-kontinent",
+        "creator": "philipp-ther",
+        "topic": "eastern-europe-after-1989",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Dancing by Chance – 2026-07-15.html",
@@ -280,39 +456,13 @@
       "date": "2026-07-15",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Dance · Merce Cunningham (1919–2009): the choreographer who let coins, dice and the I Ching decide the next step — and rebuilt modern dance around chance."
-    },
-    {
-      "file": "Swipe – Say Nothing – 2026-07-12.html",
-      "title": "Say Nothing",
-      "date": "2026-07-12",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Patrick Radden Keefe (2018): the 1972 disappearance of Jean McConville as a lens on the whole of the Troubles — radicalisation, the Boston College tapes, and what a society owes the disappeared."
-    },
-    {
-      "file": "Swipe – Die Welt aus den Angeln – 2026-07-12.html",
-      "title": "Die Welt aus den Angeln",
-      "date": "2026-07-12",
-      "kicker": "Buch des Tages · 📖",
-      "emoji": "📖",
-      "description": "Philipp Blom (2017): Die Kleine Eiszeit 1570–1700 als Katalysator der Moderne — Aufklärung, Wissenschaft und Kapitalismus als Antworten auf einen Klimasturz, und was das über die heutige Klimakrise lehrt."
-    },
-    {
-      "file": "Swipe – Avoiding War in the South China Sea – 2026-07-12.html",
-      "title": "Avoiding War in the South China Sea",
-      "date": "2026-07-12",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Pekingology (CSIS, 9 July 2026): Greg Poling on China's strategy, successes and failures in the South China Sea — ten years to the day after the tribunal voided the nine-dash line."
-    },
-    {
-      "file": "Swipe – The Knots We Tie Ourselves Into – 2026-07-12.html",
-      "title": "The Knots We Tie Ourselves Into",
-      "date": "2026-07-12",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Making Sense #483 (1 July 2026): Sam Harris and Alain de Botton on the psychology of unhappiness, the secular world's discomfort with ritual, love as a skill, and the case against meritocracy."
+      "description": "Dance · Merce Cunningham (1919–2009): the choreographer who let coins, dice and the I Ching decide the next step — and rebuilt modern dance around chance.",
+      "subject": {
+        "work": "cunningham-oeuvre",
+        "creator": "merce-cunningham",
+        "topic": "chance-choreography",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Yayoi Kusama – 2026-07-12.html",
@@ -320,63 +470,13 @@
       "date": "2026-07-12",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Exhibition · Yayoi Kusama at Museum Ludwig, Cologne (until 2 Aug 2026): 300+ works from seven decades — polka dots, happenings and Infinity Mirror Rooms as 'self-obliteration'."
-    },
-    {
-      "file": "Swipe – Imagined Communities – 2026-07-12.html",
-      "title": "Imagined Communities",
-      "date": "2026-07-12",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Benedict Anderson (1983): the nation as an imagined political community — built by print capitalism, mapped by census, map and museum, and loyal enough to die for."
-    },
-    {
-      "file": "Swipe – From Choke to Clutch – 2026-07-12.html",
-      "title": "From Choke to Clutch",
-      "date": "2026-07-12",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Freakonomics Radio (3 July 2026): cognitive scientist and Dartmouth president Sian Beilock on why skilled people choke under pressure — worry hijacks working memory — and the counterintuitive fixes."
-    },
-    {
-      "file": "Swipe – Schuldig und trotzdem Kandidatin – 2026-07-12.html",
-      "title": "Schuldig — und trotzdem Kandidatin?",
-      "date": "2026-07-12",
-      "kicker": "Folge des Tages · 🎧",
-      "emoji": "🎧",
-      "description": "Das Politikteil (10. Juli 2026) mit Matthias Krupa: Das Berufungsgericht bestätigt Le Pens „systematische Veruntreuung von EU-Geldern“ — Fußfessel inklusive. Und trotzdem hält sie an der Kandidatur 2027 fest."
-    },
-    {
-      "file": "Swipe – Todesfuge – 2026-07-12.html",
-      "title": "Todesfuge",
-      "date": "2026-07-12",
-      "kicker": "Creative topic · 🎨",
-      "emoji": "🎨",
-      "description": "Lyrik · Paul Celans „Todesfuge“ (1944/45): eine Fuge aus Worten über die Lager — „der Tod ist ein Meister aus Deutschland“ wurde zur Chiffre des Holocaust und 1988 im Bundestag verlesen."
-    },
-    {
-      "file": "Swipe – Empire of Cotton – 2026-07-12.html",
-      "title": "Empire of Cotton",
-      "date": "2026-07-12",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Sven Beckert (2014): the Industrial Revolution was built on 'war capitalism' — slavery, land expropriation and armed conquest — told through the global history of a single fibre."
-    },
-    {
-      "file": "Swipe – Das sowjetische Jahrhundert – 2026-07-12.html",
-      "title": "Das sowjetische Jahrhundert",
-      "date": "2026-07-12",
-      "kicker": "Buch des Tages · 📖",
-      "emoji": "📖",
-      "description": "Karl Schlögel (2017): keine Systemgeschichte, sondern eine Archäologie des sowjetischen Alltags — Kommunalka, Datscha und Eisenbahn als gelebte Wirklichkeit eines untergegangenen Imperiums."
-    },
-    {
-      "file": "Swipe – A Radical Vision for Israelis and Palestinians – 2026-07-12.html",
-      "title": "A Radical Vision for Israelis and Palestinians",
-      "date": "2026-07-12",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "The Ezra Klein Show (7 July 2026): Rula Hardal & May Pundak on 'A Land for All' — two sovereign states sharing one open homeland, with free movement and a shared Jerusalem."
+      "description": "Exhibition · Yayoi Kusama at Museum Ludwig, Cologne (until 2 Aug 2026): 300+ works from seven decades — polka dots, happenings and Infinity Mirror Rooms as 'self-obliteration'.",
+      "subject": {
+        "work": "kusama-museum-ludwig",
+        "creator": "yayoi-kusama",
+        "topic": "kusama-retrospective",
+        "source": "museum-ludwig"
+      }
     },
     {
       "file": "Swipe – Wie wir mit AfD-Waehlern reden – 2026-07-12.html",
@@ -384,7 +484,27 @@
       "date": "2026-07-12",
       "kicker": "Folge des Tages · 🎧",
       "emoji": "🎧",
-      "description": "Lage der Nation LdN486 (8. Juli 2026) mit Psychologin Eva-Lotta Brakemeier: Der Treiber hinter der AfD-Wahl ist oft nicht Ideologie, sondern Abstiegsangst — und man sollte im Gespräch bleiben."
+      "description": "Lage der Nation LdN486 (8. Juli 2026) mit Psychologin Eva-Lotta Brakemeier: Der Treiber hinter der AfD-Wahl ist oft nicht Ideologie, sondern Abstiegsangst — und man sollte im Gespräch bleiben.",
+      "subject": {
+        "work": "ldn486",
+        "creator": "eva-lotta-brakemeier",
+        "topic": "afd-voter-psychology",
+        "source": "lage-der-nation"
+      }
+    },
+    {
+      "file": "Swipe – Todesfuge – 2026-07-12.html",
+      "title": "Todesfuge",
+      "date": "2026-07-12",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Lyrik · Paul Celans „Todesfuge“ (1944/45): eine Fuge aus Worten über die Lager — „der Tod ist ein Meister aus Deutschland“ wurde zur Chiffre des Holocaust und 1988 im Bundestag verlesen.",
+      "subject": {
+        "work": "todesfuge",
+        "creator": "paul-celan",
+        "topic": "holocaust-poetry",
+        "source": null
+      }
     },
     {
       "file": "Swipe – The Waste Land – 2026-07-12.html",
@@ -392,23 +512,153 @@
       "date": "2026-07-12",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Poetry · T.S. Eliot's 'The Waste Land' (1922): modernism's central poem — a fragmented, allusive collage that turned the spiritual desolation of post-war Europe into a new kind of verse."
+      "description": "Poetry · T.S. Eliot's 'The Waste Land' (1922): modernism's central poem — a fragmented, allusive collage that turned the spiritual desolation of post-war Europe into a new kind of verse.",
+      "subject": {
+        "work": "the-waste-land",
+        "creator": "ts-eliot",
+        "topic": "modernist-poetry-1922",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Determined – 2026-07-10.html",
-      "title": "Determined",
-      "date": "2026-07-10",
+      "file": "Swipe – The Knots We Tie Ourselves Into – 2026-07-12.html",
+      "title": "The Knots We Tie Ourselves Into",
+      "date": "2026-07-12",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Making Sense #483 (1 July 2026): Sam Harris and Alain de Botton on the psychology of unhappiness, the secular world's discomfort with ritual, love as a skill, and the case against meritocracy.",
+      "subject": {
+        "work": "making-sense-483",
+        "creator": "alain-de-botton",
+        "topic": "psychology-of-unhappiness",
+        "source": "making-sense"
+      }
+    },
+    {
+      "file": "Swipe – Schuldig und trotzdem Kandidatin – 2026-07-12.html",
+      "title": "Schuldig — und trotzdem Kandidatin?",
+      "date": "2026-07-12",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Das Politikteil (10. Juli 2026) mit Matthias Krupa: Das Berufungsgericht bestätigt Le Pens „systematische Veruntreuung von EU-Geldern“ — Fußfessel inklusive. Und trotzdem hält sie an der Kandidatur 2027 fest.",
+      "subject": {
+        "work": "politikteil-le-pen",
+        "creator": "marine-le-pen",
+        "topic": "le-pen-conviction-france",
+        "source": "das-politikteil"
+      }
+    },
+    {
+      "file": "Swipe – Say Nothing – 2026-07-12.html",
+      "title": "Say Nothing",
+      "date": "2026-07-12",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Robert Sapolsky (2023): the neurobiologist's hard case that free will is an illusion — every choice is the sum of biology and environment we never chose."
+      "description": "Patrick Radden Keefe (2018): the 1972 disappearance of Jean McConville as a lens on the whole of the Troubles — radicalisation, the Boston College tapes, and what a society owes the disappeared.",
+      "subject": {
+        "work": "say-nothing",
+        "creator": "patrick-radden-keefe",
+        "topic": "northern-ireland-troubles",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Gekaufte Zeit – 2026-07-10.html",
-      "title": "Gekaufte Zeit",
-      "date": "2026-07-10",
+      "file": "Swipe – Imagined Communities – 2026-07-12.html",
+      "title": "Imagined Communities",
+      "date": "2026-07-12",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Benedict Anderson (1983): the nation as an imagined political community — built by print capitalism, mapped by census, map and museum, and loyal enough to die for.",
+      "subject": {
+        "work": "imagined-communities",
+        "creator": "benedict-anderson",
+        "topic": "nationalism-print-capitalism",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – From Choke to Clutch – 2026-07-12.html",
+      "title": "From Choke to Clutch",
+      "date": "2026-07-12",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Freakonomics Radio (3 July 2026): cognitive scientist and Dartmouth president Sian Beilock on why skilled people choke under pressure — worry hijacks working memory — and the counterintuitive fixes.",
+      "subject": {
+        "work": "freakonomics-beilock",
+        "creator": "sian-beilock",
+        "topic": "choking-under-pressure",
+        "source": "freakonomics"
+      }
+    },
+    {
+      "file": "Swipe – Empire of Cotton – 2026-07-12.html",
+      "title": "Empire of Cotton",
+      "date": "2026-07-12",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Sven Beckert (2014): the Industrial Revolution was built on 'war capitalism' — slavery, land expropriation and armed conquest — told through the global history of a single fibre.",
+      "subject": {
+        "work": "empire-of-cotton",
+        "creator": "sven-beckert",
+        "topic": "cotton-and-war-capitalism",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Die Welt aus den Angeln – 2026-07-12.html",
+      "title": "Die Welt aus den Angeln",
+      "date": "2026-07-12",
       "kicker": "Buch des Tages · 📖",
       "emoji": "📖",
-      "description": "Wolfgang Streeck (2013): Demokratie und Kapitalismus im Dauerstreit — seit den 1970ern wird die fällige Krise mit 'gekaufter Zeit' (Inflation, Schulden) nur vertagt; Staatsvolk gegen Marktvolk."
+      "description": "Philipp Blom (2017): Die Kleine Eiszeit 1570–1700 als Katalysator der Moderne — Aufklärung, Wissenschaft und Kapitalismus als Antworten auf einen Klimasturz, und was das über die heutige Klimakrise lehrt.",
+      "subject": {
+        "work": "die-welt-aus-den-angeln",
+        "creator": "philipp-blom",
+        "topic": "little-ice-age",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Das sowjetische Jahrhundert – 2026-07-12.html",
+      "title": "Das sowjetische Jahrhundert",
+      "date": "2026-07-12",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Karl Schlögel (2017): keine Systemgeschichte, sondern eine Archäologie des sowjetischen Alltags — Kommunalka, Datscha und Eisenbahn als gelebte Wirklichkeit eines untergegangenen Imperiums.",
+      "subject": {
+        "work": "das-sowjetische-jahrhundert",
+        "creator": "karl-schloegel",
+        "topic": "soviet-everyday-life",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Avoiding War in the South China Sea – 2026-07-12.html",
+      "title": "Avoiding War in the South China Sea",
+      "date": "2026-07-12",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Pekingology (CSIS, 9 July 2026): Greg Poling on China's strategy, successes and failures in the South China Sea — ten years to the day after the tribunal voided the nine-dash line.",
+      "subject": {
+        "work": "pekingology-poling-scs",
+        "creator": "greg-poling",
+        "topic": "south-china-sea-strategy",
+        "source": "pekingology"
+      }
+    },
+    {
+      "file": "Swipe – A Radical Vision for Israelis and Palestinians – 2026-07-12.html",
+      "title": "A Radical Vision for Israelis and Palestinians",
+      "date": "2026-07-12",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "The Ezra Klein Show (7 July 2026): Rula Hardal & May Pundak on 'A Land for All' — two sovereign states sharing one open homeland, with free movement and a shared Jerusalem.",
+      "subject": {
+        "work": "ezra-klein-land-for-all",
+        "creator": "rula-hardal",
+        "topic": "israel-palestine-confederation",
+        "source": "ezra-klein-show"
+      }
     },
     {
       "file": "Swipe – The Platform State – 2026-07-10.html",
@@ -416,15 +666,13 @@
       "date": "2026-07-10",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "Sinica Podcast (8 July 2026): Angela Huyue Zhang & Alex Yang recast China's state not as a central planner but as a platform company — setting standards and governing an ecosystem of competing private firms."
-    },
-    {
-      "file": "Swipe – Roosevelts New Deal – 2026-07-10.html",
-      "title": "Roosevelts New Deal",
-      "date": "2026-07-10",
-      "kicker": "Folge des Tages · 🎧",
-      "emoji": "🎧",
-      "description": "Der Rest ist Geschichte (2. Juli 2026): Franklin D. Roosevelt und der New Deal — wie ein an Polio erkrankter Präsident die Weltwirtschaftskrise mit mehr Staat bekämpfte und als Einziger viermal gewählt wurde."
+      "description": "Sinica Podcast (8 July 2026): Angela Huyue Zhang & Alex Yang recast China's state not as a central planner but as a platform company — setting standards and governing an ecosystem of competing private firms.",
+      "subject": {
+        "work": "sinica-platform-state",
+        "creator": "angela-huyue-zhang",
+        "topic": "china-platform-economy-state",
+        "source": "sinica"
+      }
     },
     {
       "file": "Swipe – The Father of Modern Drama – 2026-07-10.html",
@@ -432,31 +680,41 @@
       "date": "2026-07-10",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Theatre · Henrik Ibsen and 'A Doll's House' (1879): the play that traded melodrama for real life, put a woman's inner world at the centre, and ended on a slammed door — the birth of modern drama."
+      "description": "Theatre · Henrik Ibsen and 'A Doll's House' (1879): the play that traded melodrama for real life, put a woman's inner world at the centre, and ended on a slammed door — the birth of modern drama.",
+      "subject": {
+        "work": "a-dolls-house",
+        "creator": "henrik-ibsen",
+        "topic": "modern-realist-drama",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – An Immense World – 2026-07-10.html",
-      "title": "An Immense World",
+      "file": "Swipe – Roosevelts New Deal – 2026-07-10.html",
+      "title": "Roosevelts New Deal",
       "date": "2026-07-10",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Ed Yong (2022): every animal lives inside its own sensory bubble — its Umwelt — and what we call reality is only the sliver our own senses can reach."
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Der Rest ist Geschichte (2. Juli 2026): Franklin D. Roosevelt und der New Deal — wie ein an Polio erkrankter Präsident die Weltwirtschaftskrise mit mehr Staat bekämpfte und als Einziger viermal gewählt wurde.",
+      "subject": {
+        "work": "drig-new-deal",
+        "creator": "franklin-d-roosevelt",
+        "topic": "the-new-deal",
+        "source": "der-rest-ist-geschichte"
+      }
     },
     {
-      "file": "Swipe – Die Neuerfindung der Diktatur – 2026-07-10.html",
-      "title": "Die Neuerfindung der Diktatur",
+      "file": "Swipe – Gekaufte Zeit – 2026-07-10.html",
+      "title": "Gekaufte Zeit",
       "date": "2026-07-10",
       "kicker": "Buch des Tages · 📖",
       "emoji": "📖",
-      "description": "Kai Strittmatter (2018): Wie China mit Big Data und KI den perfektesten Überwachungsstaat der Geschichte baut — und damit auch den Westen herausfordert."
-    },
-    {
-      "file": "Swipe – Betting Against the Crowd – 2026-07-10.html",
-      "title": "Betting Against the Crowd",
-      "date": "2026-07-10",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Odd Lots (6 July 2026): the rare 'sharps' who actually make money on Kalshi and Polymarket — by exploiting the systematic biases of everyone else in the crowd."
+      "description": "Wolfgang Streeck (2013): Demokratie und Kapitalismus im Dauerstreit — seit den 1970ern wird die fällige Krise mit 'gekaufter Zeit' (Inflation, Schulden) nur vertagt; Staatsvolk gegen Marktvolk.",
+      "subject": {
+        "work": "gekaufte-zeit",
+        "creator": "wolfgang-streeck",
+        "topic": "democracy-versus-capitalism",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Die Sezession der Plebejer – 2026-07-10.html",
@@ -464,23 +722,69 @@
       "date": "2026-07-10",
       "kicker": "Folge des Tages · 🎧",
       "emoji": "🎧",
-      "description": "Eine Stunde History (3. Juli 2026): 494 v. Chr. verließen die Plebejer Rom und legten die Stadt lahm — der erste 'Streik' der Geschichte erzwang das Amt der Volkstribune."
+      "description": "Eine Stunde History (3. Juli 2026): 494 v. Chr. verließen die Plebejer Rom und legten die Stadt lahm — der erste 'Streik' der Geschichte erzwang das Amt der Volkstribune.",
+      "subject": {
+        "work": "esh-sezession-plebejer",
+        "creator": null,
+        "topic": "roman-plebeian-secession",
+        "source": "eine-stunde-history"
+      }
     },
     {
-      "file": "Swipe – The Memory of Society – 2026-07-10.html",
-      "title": "The Memory of Society",
+      "file": "Swipe – Die Neuerfindung der Diktatur – 2026-07-10.html",
+      "title": "Die Neuerfindung der Diktatur",
       "date": "2026-07-10",
-      "kicker": "Creative topic · 🎨",
-      "emoji": "🎨",
-      "description": "Photography · Sebastião Salgado (1944–2025): the trained economist who became social documentary photography's conscience — Workers, Migrations, Genesis."
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Kai Strittmatter (2018): Wie China mit Big Data und KI den perfektesten Überwachungsstaat der Geschichte baut — und damit auch den Westen herausfordert.",
+      "subject": {
+        "work": "die-neuerfindung-der-diktatur",
+        "creator": "kai-strittmatter",
+        "topic": "china-surveillance-state",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Age of Ambition – 2026-07-09.html",
-      "title": "Age of Ambition",
-      "date": "2026-07-09",
+      "file": "Swipe – Determined – 2026-07-10.html",
+      "title": "Determined",
+      "date": "2026-07-10",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Evan Osnos (2014): the new China as a collision of two forces — individual aspiration and Party authoritarianism — told through strivers, a blind dissident, and seekers of faith."
+      "description": "Robert Sapolsky (2023): the neurobiologist's hard case that free will is an illusion — every choice is the sum of biology and environment we never chose.",
+      "subject": {
+        "work": "determined",
+        "creator": "robert-sapolsky",
+        "topic": "free-will-and-determinism",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Betting Against the Crowd – 2026-07-10.html",
+      "title": "Betting Against the Crowd",
+      "date": "2026-07-10",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Odd Lots (6 July 2026): the rare 'sharps' who actually make money on Kalshi and Polymarket — by exploiting the systematic biases of everyone else in the crowd.",
+      "subject": {
+        "work": "oddlots-prediction-market-sharps",
+        "creator": null,
+        "topic": "prediction-markets",
+        "source": "odd-lots"
+      }
+    },
+    {
+      "file": "Swipe – An Immense World – 2026-07-10.html",
+      "title": "An Immense World",
+      "date": "2026-07-10",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Ed Yong (2022): every animal lives inside its own sensory bubble — its Umwelt — and what we call reality is only the sliver our own senses can reach.",
+      "subject": {
+        "work": "an-immense-world",
+        "creator": "ed-yong",
+        "topic": "animal-senses-umwelt",
+        "source": null
+      }
     },
     {
       "file": "Swipe – The Rare Earth Weapon – 2026-07-09.html",
@@ -488,23 +792,13 @@
       "date": "2026-07-09",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "ChinaTalk (June 2026) with Farrell Gregory & Joris Teer: China refines ~90% of the world's rare earths — how Beijing turned that chokehold into economic coercion, and why subsidies alone can't answer it."
-    },
-    {
-      "file": "Swipe – Forced Rejoicing – 2026-07-09.html",
-      "title": "Forced Rejoicing",
-      "date": "2026-07-09",
-      "kicker": "Creative topic · 🎨",
-      "emoji": "🎨",
-      "description": "Music · Shostakovich's Fifth Symphony (1937): written to survive Stalin, it hands the censor a triumph and the audience its grief — and the finale's 'rejoicing' may be forced."
-    },
-    {
-      "file": "Swipe – Der lange Weg nach Westen – 2026-07-09.html",
-      "title": "Der lange Weg nach Westen",
-      "date": "2026-07-09",
-      "kicker": "Buch des Tages · 📖",
-      "emoji": "📖",
-      "description": "Heinrich August Winkler (2000): deutsche Geschichte 1806–1990 als Sonderweg — eine doppelte Verspätung von Nationalstaat und Demokratie, die erst 1945 und 1990 endete."
+      "description": "ChinaTalk (June 2026) with Farrell Gregory & Joris Teer: China refines ~90% of the world's rare earths — how Beijing turned that chokehold into economic coercion, and why subsidies alone can't answer it.",
+      "subject": {
+        "work": "chinatalk-rare-earths",
+        "creator": null,
+        "topic": "rare-earth-export-controls",
+        "source": "chinatalk"
+      }
     },
     {
       "file": "Swipe – Lincoln und die Union – 2026-07-09.html",
@@ -512,47 +806,55 @@
       "date": "2026-07-09",
       "kicker": "Folge des Tages · 🎧",
       "emoji": "🎧",
-      "description": "Der Rest ist Geschichte (25. Juni 2026): Lincolns oberstes Ziel war nicht die Abschaffung der Sklaverei, sondern der Erhalt der Union — für den er mit dem Leben bezahlte."
+      "description": "Der Rest ist Geschichte (25. Juni 2026): Lincolns oberstes Ziel war nicht die Abschaffung der Sklaverei, sondern der Erhalt der Union — für den er mit dem Leben bezahlte.",
+      "subject": {
+        "work": "drig-lincoln",
+        "creator": "abraham-lincoln",
+        "topic": "us-civil-war-and-union",
+        "source": "der-rest-ist-geschichte"
+      }
     },
     {
-      "file": "Swipe – The Price of Time – 2026-07-03.html",
-      "title": "The Price of Time",
-      "date": "2026-07-03",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Edward Chancellor (2022): interest is the price of time — push rates to zero and finance turns absurd, breeding bubbles, zombie firms and inequality rather than growth."
-    },
-    {
-      "file": "Swipe – Müdigkeitsgesellschaft – 2026-07-03.html",
-      "title": "Müdigkeitsgesellschaft",
-      "date": "2026-07-03",
-      "kicker": "Buch des Tages · 📖",
-      "emoji": "📖",
-      "description": "Byung-Chul Han (2010): Wir leben nicht mehr in Foucaults Disziplinar-, sondern in einer Leistungsgesellschaft — und beuten uns freiwillig selbst aus, bis zum Burnout."
-    },
-    {
-      "file": "Swipe – China's Growth Machine – 2026-07-03.html",
-      "title": "China's Growth Machine",
-      "date": "2026-07-03",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Ones and Tooze from 'Summer Davos' in Dalian (June 2026): Adam Tooze on Chinese 'overcapacity' as a global gift, the 15th Five-Year Plan, and a country running two economies at once."
-    },
-    {
-      "file": "Swipe – Rückzug aus Europa – 2026-07-03.html",
-      "title": "Rückzug aus Europa",
-      "date": "2026-07-03",
-      "kicker": "Folge des Tages · 🎧",
-      "emoji": "🎧",
-      "description": "Streitkräfte und Strategien (NDR, Juni 2026): Die USA prüfen einen beschleunigten Truppenabzug aus Europa — und Europa muss die Lücke im NATO-Streitkräftemodell selbst füllen."
-    },
-    {
-      "file": "Swipe – Shadows on the Wall – 2026-07-03.html",
-      "title": "Shadows on the Wall",
-      "date": "2026-07-03",
+      "file": "Swipe – Forced Rejoicing – 2026-07-09.html",
+      "title": "Forced Rejoicing",
+      "date": "2026-07-09",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Film · German Expressionist cinema (c.1919–1933): a defeated Weimar Germany painted its nightmares onto film — Caligari, Nosferatu, Metropolis — and invented horror, noir and sci-fi."
+      "description": "Music · Shostakovich's Fifth Symphony (1937): written to survive Stalin, it hands the censor a triumph and the audience its grief — and the finale's 'rejoicing' may be forced.",
+      "subject": {
+        "work": "shostakovich-symphony-5",
+        "creator": "dmitri-shostakovich",
+        "topic": "music-under-stalin",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Der lange Weg nach Westen – 2026-07-09.html",
+      "title": "Der lange Weg nach Westen",
+      "date": "2026-07-09",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Heinrich August Winkler (2000): deutsche Geschichte 1806–1990 als Sonderweg — eine doppelte Verspätung von Nationalstaat und Demokratie, die erst 1945 und 1990 endete.",
+      "subject": {
+        "work": "der-lange-weg-nach-westen",
+        "creator": "heinrich-august-winkler",
+        "topic": "german-sonderweg",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Age of Ambition – 2026-07-09.html",
+      "title": "Age of Ambition",
+      "date": "2026-07-09",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Evan Osnos (2014): the new China as a collision of two forces — individual aspiration and Party authoritarianism — told through strivers, a blind dissident, and seekers of faith.",
+      "subject": {
+        "work": "age-of-ambition",
+        "creator": "evan-osnos",
+        "topic": "china-individual-aspiration",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Thinking Fast and Slow – 2026-07-03.html",
@@ -560,15 +862,27 @@
       "date": "2026-07-03",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Daniel Kahneman (2011, Nobel laureate): the mind runs on two systems — fast, intuitive System 1 and slow, effortful System 2 — and we place far too much confidence in our own judgement."
+      "description": "Daniel Kahneman (2011, Nobel laureate): the mind runs on two systems — fast, intuitive System 1 and slow, effortful System 2 — and we place far too much confidence in our own judgement.",
+      "subject": {
+        "work": "thinking-fast-and-slow",
+        "creator": "daniel-kahneman",
+        "topic": "dual-process-cognition",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – 1913 Der Sommer des Jahrhunderts – 2026-07-03.html",
-      "title": "1913. Der Sommer des Jahrhunderts",
+      "file": "Swipe – The Price of Time – 2026-07-03.html",
+      "title": "The Price of Time",
       "date": "2026-07-03",
-      "kicker": "Buch des Tages · 📖",
+      "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Florian Illies (2012): eine kulturelle Chronik des Jahres vor der Katastrophe, Monat für Monat — als Kafka, Freud, Strawinsky und die kommenden Diktatoren gleichzeitig auf der Bühne standen."
+      "description": "Edward Chancellor (2022): interest is the price of time — push rates to zero and finance turns absurd, breeding bubbles, zombie firms and inequality rather than growth.",
+      "subject": {
+        "work": "the-price-of-time",
+        "creator": "edward-chancellor",
+        "topic": "interest-rate-history",
+        "source": null
+      }
     },
     {
       "file": "Swipe – The Origins of Political Order – 2026-07-03.html",
@@ -576,15 +890,13 @@
       "date": "2026-07-03",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Francis Fukuyama (2011): a working political order needs three things at once — a strong state, the rule of law and accountable government. China built the first modern state; the miracle is balancing all three."
-    },
-    {
-      "file": "Swipe – Der Mafia-Staat – 2026-07-03.html",
-      "title": "Der „Mafia-Staat“",
-      "date": "2026-07-03",
-      "kicker": "Folge des Tages · 🎧",
-      "emoji": "🎧",
-      "description": "Lage der Nation LdN485 (1. Juli 2026) mit Gesine Dornblüth: Russland jenseits der Klischees — warum die Demokratie scheiterte, Gewalt zum Mittel der Politik wurde und ein Kriegsende auch Putins Ende wäre."
+      "description": "Francis Fukuyama (2011): a working political order needs three things at once — a strong state, the rule of law and accountable government. China built the first modern state; the miracle is balancing all three.",
+      "subject": {
+        "work": "the-origins-of-political-order",
+        "creator": "francis-fukuyama",
+        "topic": "state-law-accountability",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Smiljan Radic – 2026-07-03.html",
@@ -592,15 +904,97 @@
       "date": "2026-07-03",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Architecture · Smiljan Radić, the Chilean who won the 2026 Pritzker Prize: buildings that look temporary, unstable or unfinished — resting on raw boulders — yet offer structured, quietly joyful shelter."
+      "description": "Architecture · Smiljan Radić, the Chilean who won the 2026 Pritzker Prize: buildings that look temporary, unstable or unfinished — resting on raw boulders — yet offer structured, quietly joyful shelter.",
+      "subject": {
+        "work": "radic-oeuvre",
+        "creator": "smiljan-radic",
+        "topic": "chilean-architecture-pritzker",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – The Making of the Atomic Bomb – 2026-07-02.html",
-      "title": "The Making of the Atomic Bomb",
-      "date": "2026-07-02",
-      "kicker": "Book of the day · 📖",
+      "file": "Swipe – Shadows on the Wall – 2026-07-03.html",
+      "title": "Shadows on the Wall",
+      "date": "2026-07-03",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Film · German Expressionist cinema (c.1919–1933): a defeated Weimar Germany painted its nightmares onto film — Caligari, Nosferatu, Metropolis — and invented horror, noir and sci-fi.",
+      "subject": {
+        "work": "german-expressionist-cinema",
+        "creator": null,
+        "topic": "weimar-expressionist-film",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Rückzug aus Europa – 2026-07-03.html",
+      "title": "Rückzug aus Europa",
+      "date": "2026-07-03",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Streitkräfte und Strategien (NDR, Juni 2026): Die USA prüfen einen beschleunigten Truppenabzug aus Europa — und Europa muss die Lücke im NATO-Streitkräftemodell selbst füllen.",
+      "subject": {
+        "work": "sus-us-truppenabzug",
+        "creator": null,
+        "topic": "us-troop-withdrawal-europe",
+        "source": "streitkraefte-und-strategien"
+      }
+    },
+    {
+      "file": "Swipe – Müdigkeitsgesellschaft – 2026-07-03.html",
+      "title": "Müdigkeitsgesellschaft",
+      "date": "2026-07-03",
+      "kicker": "Buch des Tages · 📖",
       "emoji": "📖",
-      "description": "Richard Rhodes (1986, Pulitzer): part biography of the scientists, part biography of the atom itself — from Szilárd's chain-reaction insight at a London stoplight to Trinity and the moral reckoning."
+      "description": "Byung-Chul Han (2010): Wir leben nicht mehr in Foucaults Disziplinar-, sondern in einer Leistungsgesellschaft — und beuten uns freiwillig selbst aus, bis zum Burnout.",
+      "subject": {
+        "work": "muedigkeitsgesellschaft",
+        "creator": "byung-chul-han",
+        "topic": "burnout-achievement-society",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Der Mafia-Staat – 2026-07-03.html",
+      "title": "Der „Mafia-Staat“",
+      "date": "2026-07-03",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Lage der Nation LdN485 (1. Juli 2026) mit Gesine Dornblüth: Russland jenseits der Klischees — warum die Demokratie scheiterte, Gewalt zum Mittel der Politik wurde und ein Kriegsende auch Putins Ende wäre.",
+      "subject": {
+        "work": "ldn485",
+        "creator": "gesine-dornblueth",
+        "topic": "russian-political-system",
+        "source": "lage-der-nation"
+      }
+    },
+    {
+      "file": "Swipe – China's Growth Machine – 2026-07-03.html",
+      "title": "China's Growth Machine",
+      "date": "2026-07-03",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Ones and Tooze from 'Summer Davos' in Dalian (June 2026): Adam Tooze on Chinese 'overcapacity' as a global gift, the 15th Five-Year Plan, and a country running two economies at once.",
+      "subject": {
+        "work": "ones-and-tooze-dalian",
+        "creator": "adam-tooze",
+        "topic": "chinese-overcapacity",
+        "source": "ones-and-tooze"
+      }
+    },
+    {
+      "file": "Swipe – 1913 Der Sommer des Jahrhunderts – 2026-07-03.html",
+      "title": "1913. Der Sommer des Jahrhunderts",
+      "date": "2026-07-03",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Florian Illies (2012): eine kulturelle Chronik des Jahres vor der Katastrophe, Monat für Monat — als Kafka, Freud, Strawinsky und die kommenden Diktatoren gleichzeitig auf der Bühne standen.",
+      "subject": {
+        "work": "1913-der-sommer-des-jahrhunderts",
+        "creator": "florian-illies",
+        "topic": "1913-cultural-chronicle",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Welt in Aufruhr – 2026-07-02.html",
@@ -608,7 +1002,27 @@
       "date": "2026-07-02",
       "kicker": "Buch des Tages · 📖",
       "emoji": "📖",
-      "description": "Herfried Münkler (2023): Die liberale Weltordnung ist an ihre Grenzen gekommen; wahrscheinlichstes Zukunftsmodell ist eine Pentarchie aus USA, China, Russland, Indien und EU."
+      "description": "Herfried Münkler (2023): Die liberale Weltordnung ist an ihre Grenzen gekommen; wahrscheinlichstes Zukunftsmodell ist eine Pentarchie aus USA, China, Russland, Indien und EU.",
+      "subject": {
+        "work": "welt-in-aufruhr",
+        "creator": "herfried-muenkler",
+        "topic": "post-liberal-world-order",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Making of the Atomic Bomb – 2026-07-02.html",
+      "title": "The Making of the Atomic Bomb",
+      "date": "2026-07-02",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Richard Rhodes (1986, Pulitzer): part biography of the scientists, part biography of the atom itself — from Szilárd's chain-reaction insight at a London stoplight to Trinity and the moral reckoning.",
+      "subject": {
+        "work": "the-making-of-the-atomic-bomb",
+        "creator": "richard-rhodes",
+        "topic": "manhattan-project",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Spains China Gambit – 2026-07-02.html",
@@ -616,7 +1030,13 @@
       "date": "2026-07-02",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "Sinica Podcast (22 April 2026) with Mario Esteban Rodríguez: is Pedro Sánchez's turn to Beijing a shrewd bid for European strategic autonomy — or an increasingly one-sided pilgrimage?"
+      "description": "Sinica Podcast (22 April 2026) with Mario Esteban Rodríguez: is Pedro Sánchez's turn to Beijing a shrewd bid for European strategic autonomy — or an increasingly one-sided pilgrimage?",
+      "subject": {
+        "work": "sinica-spain-china",
+        "creator": "mario-esteban-rodriguez",
+        "topic": "spain-china-relations",
+        "source": "sinica"
+      }
     },
     {
       "file": "Swipe – Der Mond und die Menschen – 2026-07-02.html",
@@ -624,7 +1044,13 @@
       "date": "2026-07-02",
       "kicker": "Folge des Tages · 🎧",
       "emoji": "🎧",
-      "description": "Der Rest ist Geschichte (Deutschlandfunk, 21. Mai 2026): Die uralte Mond-Sehnsucht trifft auf einen neuen Wettlauf — USA (Landung 2028) und China (2030) verfolgen fast identische Pläne."
+      "description": "Der Rest ist Geschichte (Deutschlandfunk, 21. Mai 2026): Die uralte Mond-Sehnsucht trifft auf einen neuen Wettlauf — USA (Landung 2028) und China (2030) verfolgen fast identische Pläne.",
+      "subject": {
+        "work": "drig-mond",
+        "creator": null,
+        "topic": "moon-race",
+        "source": "der-rest-ist-geschichte"
+      }
     },
     {
       "file": "Swipe – Café Müller – 2026-07-02.html",
@@ -632,23 +1058,13 @@
       "date": "2026-07-02",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Dance · Pina Bausch's 'Café Müller' (1978): dancers stumble through a deserted café with eyes closed — Tanztheater that dissolves the line between dance and drama, choreographed from memory."
-    },
-    {
-      "file": "Swipe – The Box – 2026-06-28.html",
-      "title": "The Box",
-      "date": "2026-06-28",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Marc Levinson: globalisation was built not by trade treaties but by a plain steel shipping container, which slashed transport costs and let factories move anywhere — making Asia the world's workshop."
-    },
-    {
-      "file": "Swipe – Die Gesellschaft der Singularitäten – 2026-06-28.html",
-      "title": "Die Gesellschaft der Singularitäten",
-      "date": "2026-06-28",
-      "kicker": "Buch des Tages · 📖",
-      "emoji": "📖",
-      "description": "Andreas Reckwitz: Die Spätmoderne folgt einer sozialen Logik des Besonderen — das Einzigartige wird prämiert, das Allgemeine entwertet. Kehrseite der Singularisierung: eine neue Klassengesellschaft."
+      "description": "Dance · Pina Bausch's 'Café Müller' (1978): dancers stumble through a deserted café with eyes closed — Tanztheater that dissolves the line between dance and drama, choreographed from memory.",
+      "subject": {
+        "work": "cafe-mueller",
+        "creator": "pina-bausch",
+        "topic": "tanztheater",
+        "source": null
+      }
     },
     {
       "file": "Swipe – The Risks America Poses to the World – 2026-06-28.html",
@@ -656,7 +1072,27 @@
       "date": "2026-06-28",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "The Ezra Klein Show (2 June 2026): Ian Bremmer on the Iran war and the Trump–Xi summit, and why US foreign policy has entered 'a period of absolute incoherence' — with America now a source of global risk."
+      "description": "The Ezra Klein Show (2 June 2026): Ian Bremmer on the Iran war and the Trump–Xi summit, and why US foreign policy has entered 'a period of absolute incoherence' — with America now a source of global risk.",
+      "subject": {
+        "work": "ezra-klein-bremmer",
+        "creator": "ian-bremmer",
+        "topic": "us-foreign-policy-incoherence",
+        "source": "ezra-klein-show"
+      }
+    },
+    {
+      "file": "Swipe – The Box – 2026-06-28.html",
+      "title": "The Box",
+      "date": "2026-06-28",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Marc Levinson: globalisation was built not by trade treaties but by a plain steel shipping container, which slashed transport costs and let factories move anywhere — making Asia the world's workshop.",
+      "subject": {
+        "work": "the-box",
+        "creator": "marc-levinson",
+        "topic": "shipping-container-globalisation",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Kritik der ökonomischen Vernunft – 2026-06-28.html",
@@ -664,7 +1100,13 @@
       "date": "2026-06-28",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "WDR 5 Das philosophische Radio (8. Juni 2026): Der Philosoph Carsten Lotz darüber, wie das Nutzenkalkül des Homo oeconomicus alle Lebensbereiche durchdringt — und warum es zurückgedrängt gehört."
+      "description": "WDR 5 Das philosophische Radio (8. Juni 2026): Der Philosoph Carsten Lotz darüber, wie das Nutzenkalkül des Homo oeconomicus alle Lebensbereiche durchdringt — und warum es zurückgedrängt gehört.",
+      "subject": {
+        "work": "philrad-oekonomische-vernunft",
+        "creator": "carsten-lotz",
+        "topic": "homo-oeconomicus-critique",
+        "source": "wdr5-philosophisches-radio"
+      }
     },
     {
       "file": "Swipe – Du Fu – 2026-06-28.html",
@@ -672,143 +1114,27 @@
       "date": "2026-06-28",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Poetry · Du Fu (712–770), the Tang 'poet-sage' ranked with Li Bai as China's greatest poet: from 'Spring View' to his ruined Chengdu cottage, he turned an empire's collapse into the most human verse."
+      "description": "Poetry · Du Fu (712–770), the Tang 'poet-sage' ranked with Li Bai as China's greatest poet: from 'Spring View' to his ruined Chengdu cottage, he turned an empire's collapse into the most human verse.",
+      "subject": {
+        "work": "du-fu-oeuvre",
+        "creator": "du-fu",
+        "topic": "tang-dynasty-poetry",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – How the World Really Works – 2026-06-27.html",
-      "title": "How the World Really Works",
-      "date": "2026-06-27",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Vaclav Smil: modern civilisation rests on four material pillars — ammonia, steel, concrete, plastics — and on the fossil fuels we can't yet replace. We don't eat sunlight; we partly eat oil."
-    },
-    {
-      "file": "Swipe – Resonanz – 2026-06-27.html",
-      "title": "Resonanz",
-      "date": "2026-06-27",
+      "file": "Swipe – Die Gesellschaft der Singularitäten – 2026-06-28.html",
+      "title": "Die Gesellschaft der Singularitäten",
+      "date": "2026-06-28",
       "kicker": "Buch des Tages · 📖",
       "emoji": "📖",
-      "description": "Hartmut Rosa: Lebensqualität misst sich nicht an Ressourcen, sondern an unserer Weltbeziehung. Wenn Beschleunigung das Problem ist, dann ist Resonanz vielleicht die Lösung."
-    },
-    {
-      "file": "Swipe – Joseph Roth – 2026-06-27.html",
-      "title": "Joseph Roth",
-      "date": "2026-06-27",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "In Our Time (BBC, 4 June 2026): the stateless novelist of 'The Radetzky March' who mourned the Habsburg empire and foresaw the new nationalism that burned his books."
-    },
-    {
-      "file": "Swipe – A 60-Day Window – 2026-06-27.html",
-      "title": "A 60-Day Window",
-      "date": "2026-06-27",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Iran: The Latest (The Telegraph, late June 2026): inside the fragile US–Iran ceasefire framework, the fight over the Strait of Hormuz and the 60-day nuclear clock."
-    },
-    {
-      "file": "Swipe – Episches Theater – 2026-06-27.html",
-      "title": "Episches Theater",
-      "date": "2026-06-27",
-      "kicker": "Kreatives Thema · 🎨",
-      "emoji": "🎨",
-      "description": "Theater · Bertolt Brecht und der Verfremdungseffekt: ein 'Theater des wissenschaftlichen Zeitalters', das kritisches Mitdenken statt Einfühlung will — und trotzdem amüsiert."
-    },
-    {
-      "file": "Swipe – The Fate of Rome – 2026-06-27.html",
-      "title": "The Fate of Rome",
-      "date": "2026-06-27",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Kyle Harper: Rome's fate was decided not only by emperors and barbarians but by pandemics (Antonine, Justinianic), volcanoes, solar cycles and an unstable climate — nature as a protagonist, not a backdrop."
-    },
-    {
-      "file": "Swipe – Debt The First 5000 Years – 2026-06-27.html",
-      "title": "Debt: The First 5,000 Years",
-      "date": "2026-06-27",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "David Graeber: the textbook story of barter → money → credit is backwards. Credit came first, money began as 'social currency', and debt is the oldest economic technology we have."
-    },
-    {
-      "file": "Swipe – Las Meninas – 2026-06-27.html",
-      "title": "Las Meninas",
-      "date": "2026-06-27",
-      "kicker": "Creative topic · 🎨",
-      "emoji": "🎨",
-      "description": "Diego Velázquez (1656, Museo del Prado): a court portrait that became a painting about painting — layered gazes, a mirror placing the king and queen where you stand, and the viewer pulled into the frame."
-    },
-    {
-      "file": "Swipe – Paul Kennedy on Great Powers – 2026-06-27.html",
-      "title": "Paul Kennedy on Great Powers",
-      "date": "2026-06-27",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "ChinaTalk (10 June 2026): historian Paul Kennedy on imperial overstretch, 'sensible retrenchment', and why in a tripolar US–China–India world, 'shipbuilding is real'."
-    },
-    {
-      "file": "Swipe – Das Ende von FCAS – 2026-06-27.html",
-      "title": "Das Ende von FCAS",
-      "date": "2026-06-27",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Streitkräfte und Strategien (NDR, 5. Juni 2026): Europas größtes Rüstungsprojekt FCAS ist am Streit zwischen Dassault und Airbus über Führung, Arbeitsanteile und geistiges Eigentum zerbrochen."
-    },
-    {
-      "file": "Swipe – 1491 – 2026-06-27.html",
-      "title": "1491",
-      "date": "2026-06-27",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Charles C. Mann: the Americas of 1491 were more populous, settled earlier and shaped by human hands far more than the 'empty wilderness' story allows — from Holmberg's Mistake to the engineered black earth of the Amazon."
-    },
-    {
-      "file": "Swipe – The Alignment Problem – 2026-06-27.html",
-      "title": "The Alignment Problem",
-      "date": "2026-06-27",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Brian Christian: making AI capture what we actually mean — from a biased courtroom algorithm (COMPAS) to existential risk — is two sides of one coin, and computing's most urgent question."
-    },
-    {
-      "file": "Swipe – The Ambassadors – 2026-06-27.html",
-      "title": "The Ambassadors",
-      "date": "2026-06-27",
-      "kicker": "Creative topic · 🎨",
-      "emoji": "🎨",
-      "description": "Hans Holbein the Younger (1533, National Gallery): two French envoys, a shelf of human knowledge — and an anamorphic skull that only resolves when you view the picture from the side."
-    },
-    {
-      "file": "Swipe – How Chinese AI Is Different – 2026-06-27.html",
-      "title": "How Chinese AI Is Different",
-      "date": "2026-06-27",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Odd Lots (15 June 2026): Grace Shao on how China's AI sector adapted to chip controls — cheap frontier models since DeepSeek, conditional Nvidia H200 access, and giants like Baidu going full-stack."
-    },
-    {
-      "file": "Swipe – Die Höhle von Chauvet – 2026-06-27.html",
-      "title": "Die Höhle von Chauvet",
-      "date": "2026-06-27",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Eine Stunde History (Deutschlandfunk Nova): Auftakt der neuen 100-teiligen Chronik — die rund 36.000 Jahre alten Höhlenmalereien von Chauvet, 1994 im Ardèche-Tal entdeckt."
-    },
-    {
-      "file": "Swipe – Die Verwandlung der Welt – 2026-06-27.html",
-      "title": "Die Verwandlung der Welt",
-      "date": "2026-06-27",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Jürgen Osterhammel erzählt das 19. Jahrhundert global statt eurozentrisch: wie Westeuropa zum Modell wurde, die Macht sich ungleich verschob — Sklaverei, Imperien, Industrialisierung in einer vernetzten Welt."
-    },
-    {
-      "file": "Swipe – The BS Détente – 2026-06-27.html",
-      "title": "WarTalk: The BS Détente",
-      "date": "2026-06-27",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "ChinaTalk (25 June 2026): Ely Ratner on why a hollow détente with Beijing leaves US allies hedging, whether Taiwan is the better dollar-for-dollar defence buy, and the Iran-war shadow over American resolve."
+      "description": "Andreas Reckwitz: Die Spätmoderne folgt einer sozialen Logik des Besonderen — das Einzigartige wird prämiert, das Allgemeine entwertet. Kehrseite der Singularisierung: eine neue Klassengesellschaft.",
+      "subject": {
+        "work": "die-gesellschaft-der-singularitaeten",
+        "creator": "andreas-reckwitz",
+        "topic": "singularisation-late-modernity",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Washington vs Pontiac – 2026-06-27.html",
@@ -816,7 +1142,181 @@
       "date": "2026-06-27",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "ZEIT Geschichte (30. Mai 2026): Wie die USA auch aus dem Kampf um Land entstanden — vom 16-jährigen Landvermesser Washington bis zur Allianz des Ottawa-Anführers Pontiac. Land, das nie leer war."
+      "description": "ZEIT Geschichte (30. Mai 2026): Wie die USA auch aus dem Kampf um Land entstanden — vom 16-jährigen Landvermesser Washington bis zur Allianz des Ottawa-Anführers Pontiac. Land, das nie leer war.",
+      "subject": {
+        "work": "zeitgeschichte-pontiac",
+        "creator": null,
+        "topic": "us-frontier-land-conflict",
+        "source": "zeit-geschichte"
+      }
+    },
+    {
+      "file": "Swipe – The BS Détente – 2026-06-27.html",
+      "title": "WarTalk: The BS Détente",
+      "date": "2026-06-27",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "ChinaTalk (25 June 2026): Ely Ratner on why a hollow détente with Beijing leaves US allies hedging, whether Taiwan is the better dollar-for-dollar defence buy, and the Iran-war shadow over American resolve.",
+      "subject": {
+        "work": "chinatalk-ely-ratner",
+        "creator": "ely-ratner",
+        "topic": "us-china-detente-and-taiwan",
+        "source": "chinatalk"
+      }
+    },
+    {
+      "file": "Swipe – The Ambassadors – 2026-06-27.html",
+      "title": "The Ambassadors",
+      "date": "2026-06-27",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Hans Holbein the Younger (1533, National Gallery): two French envoys, a shelf of human knowledge — and an anamorphic skull that only resolves when you view the picture from the side.",
+      "subject": {
+        "work": "the-ambassadors",
+        "creator": "hans-holbein-the-younger",
+        "topic": "renaissance-anamorphosis",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Alignment Problem – 2026-06-27.html",
+      "title": "The Alignment Problem",
+      "date": "2026-06-27",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Brian Christian: making AI capture what we actually mean — from a biased courtroom algorithm (COMPAS) to existential risk — is two sides of one coin, and computing's most urgent question.",
+      "subject": {
+        "work": "the-alignment-problem",
+        "creator": "brian-christian",
+        "topic": "ai-alignment",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Resonanz – 2026-06-27.html",
+      "title": "Resonanz",
+      "date": "2026-06-27",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Hartmut Rosa: Lebensqualität misst sich nicht an Ressourcen, sondern an unserer Weltbeziehung. Wenn Beschleunigung das Problem ist, dann ist Resonanz vielleicht die Lösung.",
+      "subject": {
+        "work": "resonanz",
+        "creator": "hartmut-rosa",
+        "topic": "resonance-and-acceleration",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Paul Kennedy on Great Powers – 2026-06-27.html",
+      "title": "Paul Kennedy on Great Powers",
+      "date": "2026-06-27",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "ChinaTalk (10 June 2026): historian Paul Kennedy on imperial overstretch, 'sensible retrenchment', and why in a tripolar US–China–India world, 'shipbuilding is real'.",
+      "subject": {
+        "work": "chinatalk-paul-kennedy",
+        "creator": "paul-kennedy",
+        "topic": "imperial-overstretch",
+        "source": "chinatalk"
+      }
+    },
+    {
+      "file": "Swipe – Las Meninas – 2026-06-27.html",
+      "title": "Las Meninas",
+      "date": "2026-06-27",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Diego Velázquez (1656, Museo del Prado): a court portrait that became a painting about painting — layered gazes, a mirror placing the king and queen where you stand, and the viewer pulled into the frame.",
+      "subject": {
+        "work": "las-meninas",
+        "creator": "diego-velazquez",
+        "topic": "baroque-painting-self-reference",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Joseph Roth – 2026-06-27.html",
+      "title": "Joseph Roth",
+      "date": "2026-06-27",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "In Our Time (BBC, 4 June 2026): the stateless novelist of 'The Radetzky March' who mourned the Habsburg empire and foresaw the new nationalism that burned his books.",
+      "subject": {
+        "work": "iot-joseph-roth",
+        "creator": "joseph-roth",
+        "topic": "habsburg-literature-exile",
+        "source": "in-our-time"
+      }
+    },
+    {
+      "file": "Swipe – How the World Really Works – 2026-06-27.html",
+      "title": "How the World Really Works",
+      "date": "2026-06-27",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Vaclav Smil: modern civilisation rests on four material pillars — ammonia, steel, concrete, plastics — and on the fossil fuels we can't yet replace. We don't eat sunlight; we partly eat oil.",
+      "subject": {
+        "work": "how-the-world-really-works",
+        "creator": "vaclav-smil",
+        "topic": "material-foundations-of-civilisation",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – How Chinese AI Is Different – 2026-06-27.html",
+      "title": "How Chinese AI Is Different",
+      "date": "2026-06-27",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Odd Lots (15 June 2026): Grace Shao on how China's AI sector adapted to chip controls — cheap frontier models since DeepSeek, conditional Nvidia H200 access, and giants like Baidu going full-stack.",
+      "subject": {
+        "work": "oddlots-grace-shao",
+        "creator": "grace-shao",
+        "topic": "china-ai-under-chip-controls",
+        "source": "odd-lots"
+      }
+    },
+    {
+      "file": "Swipe – Episches Theater – 2026-06-27.html",
+      "title": "Episches Theater",
+      "date": "2026-06-27",
+      "kicker": "Kreatives Thema · 🎨",
+      "emoji": "🎨",
+      "description": "Theater · Bertolt Brecht und der Verfremdungseffekt: ein 'Theater des wissenschaftlichen Zeitalters', das kritisches Mitdenken statt Einfühlung will — und trotzdem amüsiert.",
+      "subject": {
+        "work": "brecht-episches-theater",
+        "creator": "bertolt-brecht",
+        "topic": "epic-theatre-verfremdung",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Die Verwandlung der Welt – 2026-06-27.html",
+      "title": "Die Verwandlung der Welt",
+      "date": "2026-06-27",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Jürgen Osterhammel erzählt das 19. Jahrhundert global statt eurozentrisch: wie Westeuropa zum Modell wurde, die Macht sich ungleich verschob — Sklaverei, Imperien, Industrialisierung in einer vernetzten Welt.",
+      "subject": {
+        "work": "die-verwandlung-der-welt",
+        "creator": "juergen-osterhammel",
+        "topic": "global-19th-century",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Die Höhle von Chauvet – 2026-06-27.html",
+      "title": "Die Höhle von Chauvet",
+      "date": "2026-06-27",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Eine Stunde History (Deutschlandfunk Nova): Auftakt der neuen 100-teiligen Chronik — die rund 36.000 Jahre alten Höhlenmalereien von Chauvet, 1994 im Ardèche-Tal entdeckt.",
+      "subject": {
+        "work": "esh-chauvet",
+        "creator": null,
+        "topic": "chauvet-cave-painting",
+        "source": "eine-stunde-history"
+      }
     },
     {
       "file": "Swipe – Der Wanderer über dem Nebelmeer – 2026-06-27.html",
@@ -824,71 +1324,55 @@
       "date": "2026-06-27",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Caspar David Friedrich (um 1818, Hamburger Kunsthalle): die berühmteste Rückenfigur der Kunst. Wir sehen nie sein Gesicht, nur das Nebelmeer — Sinnbild des romantischen Erhabenen."
+      "description": "Caspar David Friedrich (um 1818, Hamburger Kunsthalle): die berühmteste Rückenfigur der Kunst. Wir sehen nie sein Gesicht, nur das Nebelmeer — Sinnbild des romantischen Erhabenen.",
+      "subject": {
+        "work": "wanderer-ueber-dem-nebelmeer",
+        "creator": "caspar-david-friedrich",
+        "topic": "german-romantic-sublime",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Seeing Like a State – 2026-06-25.html",
-      "title": "Seeing Like a State",
-      "date": "2026-06-25",
+      "file": "Swipe – Debt The First 5000 Years – 2026-06-27.html",
+      "title": "Debt: The First 5,000 Years",
+      "date": "2026-06-27",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "James C. Scott — why grand, 'scientific' schemes to improve society (planned cities, rational forests) keep failing: the state's drive for legibility erases the local knowledge (mētis) that real societies run on."
+      "description": "David Graeber: the textbook story of barter → money → credit is backwards. Credit came first, money began as 'social currency', and debt is the oldest economic technology we have.",
+      "subject": {
+        "work": "debt-the-first-5000-years",
+        "creator": "david-graeber",
+        "topic": "history-of-debt-and-money",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – The Dictators Handbook – 2026-06-25.html",
-      "title": "The Dictator's Handbook",
-      "date": "2026-06-25",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Bueno de Mesquita & Smith — selectorate theory: every leader survives by paying off the small group of 'essentials' whose support is vital. Why bad behaviour is almost always good politics."
-    },
-    {
-      "file": "Swipe – Die Reformen des Kleisthenes – 2026-06-25.html",
-      "title": "Die Reformen des Kleisthenes",
-      "date": "2026-06-25",
+      "file": "Swipe – Das Ende von FCAS – 2026-06-27.html",
+      "title": "Das Ende von FCAS",
+      "date": "2026-06-27",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "Eine Stunde History (Deutschlandfunk Nova): 508 v. Chr. ordnete Kleisthenes die Bürgerschaft Athens nach Wohnort statt Abstammung neu — zehn Phylen, der Rat der 500 und das Fundament der Demokratie."
+      "description": "Streitkräfte und Strategien (NDR, 5. Juni 2026): Europas größtes Rüstungsprojekt FCAS ist am Streit zwischen Dassault und Airbus über Führung, Arbeitsanteile und geistiges Eigentum zerbrochen.",
+      "subject": {
+        "work": "sus-fcas",
+        "creator": null,
+        "topic": "fcas-programme-collapse",
+        "source": "streitkraefte-und-strategien"
+      }
     },
     {
-      "file": "Swipe – Melencolia I – 2026-06-25.html",
-      "title": "Melencolia I",
-      "date": "2026-06-25",
-      "kicker": "Creative topic · 🎨",
-      "emoji": "🎨",
-      "description": "Albrecht Dürer (1514): a winged genius sits idle amid the tools of knowledge — a magic square, a baffling polyhedron, an hourglass. Art's most enigmatic meditation on creativity and its limits."
-    },
-    {
-      "file": "Swipe – How Asia Works – 2026-06-25.html",
-      "title": "How Asia Works",
-      "date": "2026-06-25",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Joe Studwell: why Japan, Korea, Taiwan and China got rich and their neighbours didn't — a three-step recipe of land reform, export discipline and financial repression, in that order."
-    },
-    {
-      "file": "Swipe – Postwar – 2026-06-25.html",
-      "title": "Postwar",
-      "date": "2026-06-25",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Tony Judt's history of Europe since 1945: the continent rebuilt itself by forgetting the war, then defined itself by remembering it — East and West told as one story."
-    },
-    {
-      "file": "Swipe – Kingdom of Fossil Water – 2026-06-25.html",
-      "title": "Kingdom of Fossil Water",
-      "date": "2026-06-25",
+      "file": "Swipe – A 60-Day Window – 2026-06-27.html",
+      "title": "A 60-Day Window",
+      "date": "2026-06-27",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "In Our Time (BBC, 11 June 2026) on the Garamantes — a Saharan civilisation that mined ancient 'fossil water' through a thousand miles of tunnels, built desert cities, then drained the aquifer that fed it."
-    },
-    {
-      "file": "Swipe – Dancing in Shackles – 2026-06-25.html",
-      "title": "Dancing in Shackles",
-      "date": "2026-06-25",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Sinica with Yi-Ling Liu on 'The Wall Dancers': China's internet told through five lives — rapper, censor, app founder, feminist, sci-fi writer — and the end of techno-utopianism."
+      "description": "Iran: The Latest (The Telegraph, late June 2026): inside the fragile US–Iran ceasefire framework, the fight over the Strait of Hormuz and the 60-day nuclear clock.",
+      "subject": {
+        "work": "iran-the-latest-ceasefire",
+        "creator": null,
+        "topic": "us-iran-ceasefire-talks",
+        "source": "iran-the-latest"
+      }
     },
     {
       "file": "Swipe – The Garden of Earthly Delights – 2026-06-25.html",
@@ -896,31 +1380,125 @@
       "date": "2026-06-25",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Hieronymus Bosch (c. 1490–1500, Prado): a four-metre triptych running Eden → a teeming pleasure garden → a nightmarish Hell — and 500 years of unsettled argument over what it means."
+      "description": "Hieronymus Bosch (c. 1490–1500, Prado): a four-metre triptych running Eden → a teeming pleasure garden → a nightmarish Hell — and 500 years of unsettled argument over what it means.",
+      "subject": {
+        "work": "the-garden-of-earthly-delights",
+        "creator": "hieronymus-bosch",
+        "topic": "bosch-triptych",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – A City on a Scroll – 2026-06-24.html",
-      "title": "A City on a Scroll",
-      "date": "2026-06-24",
+      "file": "Swipe – The Dictators Handbook – 2026-06-25.html",
+      "title": "The Dictator's Handbook",
+      "date": "2026-06-25",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Bueno de Mesquita & Smith — selectorate theory: every leader survives by paying off the small group of 'essentials' whose support is vital. Why bad behaviour is almost always good politics.",
+      "subject": {
+        "work": "the-dictators-handbook",
+        "creator": "bruce-bueno-de-mesquita",
+        "topic": "selectorate-theory",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Seeing Like a State – 2026-06-25.html",
+      "title": "Seeing Like a State",
+      "date": "2026-06-25",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "James C. Scott — why grand, 'scientific' schemes to improve society (planned cities, rational forests) keep failing: the state's drive for legibility erases the local knowledge (mētis) that real societies run on.",
+      "subject": {
+        "work": "seeing-like-a-state",
+        "creator": "james-c-scott",
+        "topic": "high-modernism-legibility",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Postwar – 2026-06-25.html",
+      "title": "Postwar",
+      "date": "2026-06-25",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Tony Judt's history of Europe since 1945: the continent rebuilt itself by forgetting the war, then defined itself by remembering it — East and West told as one story.",
+      "subject": {
+        "work": "postwar",
+        "creator": "tony-judt",
+        "topic": "europe-since-1945",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Melencolia I – 2026-06-25.html",
+      "title": "Melencolia I",
+      "date": "2026-06-25",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Zhang Zeduan's 'Along the River During the Qingming Festival' (12th c.): a five-metre handscroll that packs 814 people into one continuous panorama of the Song capital — a census of everyday life in ink."
+      "description": "Albrecht Dürer (1514): a winged genius sits idle amid the tools of knowledge — a magic square, a baffling polyhedron, an hourglass. Art's most enigmatic meditation on creativity and its limits.",
+      "subject": {
+        "work": "melencolia-i",
+        "creator": "albrecht-duerer",
+        "topic": "melancholy-and-creativity",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Die Macht der Geografie – 2026-06-24.html",
-      "title": "Die Macht der Geografie",
-      "date": "2026-06-24",
+      "file": "Swipe – Kingdom of Fossil Water – 2026-06-25.html",
+      "title": "Kingdom of Fossil Water",
+      "date": "2026-06-25",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "Das Politikteil (DIE ZEIT, 12. Juni 2026): Eine Meerenge von kaum 33 Kilometern – die Straße von Hormus – entscheidet über rund ein Fünftel des Welt-Öls. Wie Lage zu Macht wird."
+      "description": "In Our Time (BBC, 11 June 2026) on the Garamantes — a Saharan civilisation that mined ancient 'fossil water' through a thousand miles of tunnels, built desert cities, then drained the aquifer that fed it.",
+      "subject": {
+        "work": "iot-garamantes",
+        "creator": null,
+        "topic": "garamantes-sahara-civilisation",
+        "source": "in-our-time"
+      }
     },
     {
-      "file": "Swipe – The Grids Hidden Chokepoint – 2026-06-24.html",
-      "title": "The Grid's Hidden Chokepoint",
-      "date": "2026-06-24",
+      "file": "Swipe – How Asia Works – 2026-06-25.html",
+      "title": "How Asia Works",
+      "date": "2026-06-25",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Joe Studwell: why Japan, Korea, Taiwan and China got rich and their neighbours didn't — a three-step recipe of land reform, export discipline and financial repression, in that order.",
+      "subject": {
+        "work": "how-asia-works",
+        "creator": "joe-studwell",
+        "topic": "east-asian-development-model",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Die Reformen des Kleisthenes – 2026-06-25.html",
+      "title": "Die Reformen des Kleisthenes",
+      "date": "2026-06-25",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "ChinaTalk (20 June 2026): even an infinite supply of transformers wouldn't fix the grid. The deeper bottleneck is power electronics — and it runs through gallium, which China controls ~99% of."
+      "description": "Eine Stunde History (Deutschlandfunk Nova): 508 v. Chr. ordnete Kleisthenes die Bürgerschaft Athens nach Wohnort statt Abstammung neu — zehn Phylen, der Rat der 500 und das Fundament der Demokratie.",
+      "subject": {
+        "work": "esh-kleisthenes",
+        "creator": null,
+        "topic": "athenian-democratic-reforms",
+        "source": "eine-stunde-history"
+      }
+    },
+    {
+      "file": "Swipe – Dancing in Shackles – 2026-06-25.html",
+      "title": "Dancing in Shackles",
+      "date": "2026-06-25",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Sinica with Yi-Ling Liu on 'The Wall Dancers': China's internet told through five lives — rapper, censor, app founder, feminist, sci-fi writer — and the end of techno-utopianism.",
+      "subject": {
+        "work": "sinica-wall-dancers",
+        "creator": "yi-ling-liu",
+        "topic": "chinese-internet-lives",
+        "source": "sinica"
+      }
     },
     {
       "file": "Swipe – Why Nations Fail – 2026-06-24.html",
@@ -928,15 +1506,27 @@
       "date": "2026-06-24",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Acemoglu & Robinson (2024 Nobel): two towns share a name and a fence — one rich, one poor. The difference isn't geography or culture; it's inclusive vs extractive institutions."
+      "description": "Acemoglu & Robinson (2024 Nobel): two towns share a name and a fence — one rich, one poor. The difference isn't geography or culture; it's inclusive vs extractive institutions.",
+      "subject": {
+        "work": "why-nations-fail",
+        "creator": "daron-acemoglu",
+        "topic": "inclusive-extractive-institutions",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Sapiens – 2026-06-24.html",
-      "title": "Sapiens",
+      "file": "Swipe – The Grids Hidden Chokepoint – 2026-06-24.html",
+      "title": "The Grid's Hidden Chokepoint",
       "date": "2026-06-24",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Yuval Noah Harari: we run the planet not because we're strong or clever, but because we alone can believe in shared fictions — money, nations, gods — that let millions of strangers cooperate."
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "ChinaTalk (20 June 2026): even an infinite supply of transformers wouldn't fix the grid. The deeper bottleneck is power electronics — and it runs through gallium, which China controls ~99% of.",
+      "subject": {
+        "work": "chinatalk-grid-gallium",
+        "creator": null,
+        "topic": "power-electronics-and-gallium",
+        "source": "chinatalk"
+      }
     },
     {
       "file": "Swipe – The Great Wave – 2026-06-24.html",
@@ -944,23 +1534,13 @@
       "date": "2026-06-24",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Hokusai's 'Great Wave off Kanagawa' (c.1831): not a tsunami but a Buddhist image of impermanence, printed in a brand-new blue accidentally invented in Berlin."
-    },
-    {
-      "file": "Swipe – Der Drohnenkrieg – 2026-06-24.html",
-      "title": "Der Drohnenkrieg",
-      "date": "2026-06-24",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Der Rest ist Geschichte (Deutschlandfunk, 4. Juni 2026): Eine Drohne für ein paar hundert Dollar zerstört einen Panzer für Millionen – wie billige Drohnen die Kriegsführung neu ordnen."
-    },
-    {
-      "file": "Swipe – Running a Bank in the Age of AI – 2026-06-24.html",
-      "title": "Running a Bank in the Age of AI",
-      "date": "2026-06-24",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Odd Lots with Goldman's David Solomon (4 June 2026): AI can draft 95% of an IPO filing in minutes — yet he bets there's no white-collar wipeout coming."
+      "description": "Hokusai's 'Great Wave off Kanagawa' (c.1831): not a tsunami but a Buddhist image of impermanence, printed in a brand-new blue accidentally invented in Berlin.",
+      "subject": {
+        "work": "the-great-wave-off-kanagawa",
+        "creator": "katsushika-hokusai",
+        "topic": "ukiyo-e-printmaking",
+        "source": null
+      }
     },
     {
       "file": "Swipe – The Avoidable War – 2026-06-24.html",
@@ -968,7 +1548,41 @@
       "date": "2026-06-24",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Kevin Rudd on US–China: war isn't driven by what each side wants, but by how badly each misreads the other — and 'managed strategic competition' as the way out."
+      "description": "Kevin Rudd on US–China: war isn't driven by what each side wants, but by how badly each misreads the other — and 'managed strategic competition' as the way out.",
+      "subject": {
+        "work": "the-avoidable-war",
+        "creator": "kevin-rudd",
+        "topic": "us-china-managed-competition",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Sapiens – 2026-06-24.html",
+      "title": "Sapiens",
+      "date": "2026-06-24",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Yuval Noah Harari: we run the planet not because we're strong or clever, but because we alone can believe in shared fictions — money, nations, gods — that let millions of strangers cooperate.",
+      "subject": {
+        "work": "sapiens",
+        "creator": "yuval-noah-harari",
+        "topic": "shared-fictions-cognitive-revolution",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Running a Bank in the Age of AI – 2026-06-24.html",
+      "title": "Running a Bank in the Age of AI",
+      "date": "2026-06-24",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Odd Lots with Goldman's David Solomon (4 June 2026): AI can draft 95% of an IPO filing in minutes — yet he bets there's no white-collar wipeout coming.",
+      "subject": {
+        "work": "oddlots-david-solomon",
+        "creator": "david-solomon",
+        "topic": "ai-in-investment-banking",
+        "source": "odd-lots"
+      }
     },
     {
       "file": "Swipe – Material World – 2026-06-24.html",
@@ -976,15 +1590,55 @@
       "date": "2026-06-24",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Ed Conway on the six raw materials — sand, salt, iron, copper, oil, lithium — that still rule a supposedly weightless digital age. We've never dug up more stuff."
+      "description": "Ed Conway on the six raw materials — sand, salt, iron, copper, oil, lithium — that still rule a supposedly weightless digital age. We've never dug up more stuff.",
+      "subject": {
+        "work": "material-world",
+        "creator": "ed-conway",
+        "topic": "six-raw-materials",
+        "source": null
+      }
     },
     {
-      "file": "Swipe – Chip War – 2026-06-23.html",
-      "title": "Chip War",
-      "date": "2026-06-23",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Chris Miller — Chip War: semiconductors are the new oil, and the world's most critical supply runs through one contested island, Taiwan."
+      "file": "Swipe – Die Macht der Geografie – 2026-06-24.html",
+      "title": "Die Macht der Geografie",
+      "date": "2026-06-24",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Das Politikteil (DIE ZEIT, 12. Juni 2026): Eine Meerenge von kaum 33 Kilometern – die Straße von Hormus – entscheidet über rund ein Fünftel des Welt-Öls. Wie Lage zu Macht wird.",
+      "subject": {
+        "work": "politikteil-hormus",
+        "creator": null,
+        "topic": "strait-of-hormuz-chokepoint",
+        "source": "das-politikteil"
+      }
+    },
+    {
+      "file": "Swipe – Der Drohnenkrieg – 2026-06-24.html",
+      "title": "Der Drohnenkrieg",
+      "date": "2026-06-24",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Der Rest ist Geschichte (Deutschlandfunk, 4. Juni 2026): Eine Drohne für ein paar hundert Dollar zerstört einen Panzer für Millionen – wie billige Drohnen die Kriegsführung neu ordnen.",
+      "subject": {
+        "work": "drig-drohnenkrieg",
+        "creator": null,
+        "topic": "drone-warfare",
+        "source": "der-rest-ist-geschichte"
+      }
+    },
+    {
+      "file": "Swipe – A City on a Scroll – 2026-06-24.html",
+      "title": "A City on a Scroll",
+      "date": "2026-06-24",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Zhang Zeduan's 'Along the River During the Qingming Festival' (12th c.): a five-metre handscroll that packs 814 people into one continuous panorama of the Song capital — a census of everyday life in ink.",
+      "subject": {
+        "work": "along-the-river-during-qingming",
+        "creator": "zhang-zeduan",
+        "topic": "song-dynasty-handscroll",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Wer bin ich und wenn ja, wie viele – 2026-06-23.html",
@@ -992,39 +1646,13 @@
       "date": "2026-06-23",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Richard David Precht — eine philosophische Reise entlang Kants drei Fragen, die große Philosophie mit Hirnforschung verbindet."
-    },
-    {
-      "file": "Swipe – A Story-Telling Animal – 2026-06-23.html",
-      "title": "A Story-Telling Animal",
-      "date": "2026-06-23",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Philosophize This! on Alasdair MacIntyre — no one is self-made; you can only act once you know what story you're a part of."
-    },
-    {
-      "file": "Swipe – Die Thukydides-Falle – 2026-06-23.html",
-      "title": "Die Thukydides-Falle",
-      "date": "2026-06-23",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Sicherheitshalber Folge 109 — führen Machtverschiebungen wirklich zwangsläufig zum Krieg? Plus eine FCAS-Autopsie."
-    },
-    {
-      "file": "Swipe – Sublime Poetry – 2026-06-23.html",
-      "title": "Sublime Poetry",
-      "date": "2026-06-23",
-      "kicker": "Creative topic · 🎨",
-      "emoji": "🎨",
-      "description": "Raphael: Sublime Poetry at the Met — the first comprehensive US Raphael show, 170+ masterpieces, closing 28 June 2026."
-    },
-    {
-      "file": "Swipe – The Coming Wave – 2026-06-23.html",
-      "title": "The Coming Wave",
-      "date": "2026-06-23",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Mustafa Suleyman with Michael Bhaskar — The Coming Wave: the DeepMind co-founder argues the AI-and-synthetic-biology wave may be uncontainable, the century's defining dilemma."
+      "description": "Richard David Precht — eine philosophische Reise entlang Kants drei Fragen, die große Philosophie mit Hirnforschung verbindet.",
+      "subject": {
+        "work": "wer-bin-ich-und-wenn-ja-wie-viele",
+        "creator": "richard-david-precht",
+        "topic": "philosophy-of-self-and-brain",
+        "source": null
+      }
     },
     {
       "file": "Swipe – Warcraft and Fartcraft – 2026-06-23.html",
@@ -1032,71 +1660,111 @@
       "date": "2026-06-23",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "MacroVoices #535 — Michael Every (Rabobank) and Rory Johnston on Iran, inflation, China and the commodity outlook."
+      "description": "MacroVoices #535 — Michael Every (Rabobank) and Rory Johnston on Iran, inflation, China and the commodity outlook.",
+      "subject": {
+        "work": "macrovoices-535",
+        "creator": "michael-every",
+        "topic": "commodities-and-iran-outlook",
+        "source": "macrovoices"
+      }
     },
     {
-      "file": "Swipe – A Second Life – 2026-06-22.html",
-      "title": "A Second Life",
-      "date": "2026-06-22",
+      "file": "Swipe – The Coming Wave – 2026-06-23.html",
+      "title": "The Coming Wave",
+      "date": "2026-06-23",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Mustafa Suleyman with Michael Bhaskar — The Coming Wave: the DeepMind co-founder argues the AI-and-synthetic-biology wave may be uncontainable, the century's defining dilemma.",
+      "subject": {
+        "work": "the-coming-wave",
+        "creator": "mustafa-suleyman",
+        "topic": "ai-and-biotech-containment",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Comedian Returns – 2026-06-23.html",
+      "title": "The Comedian Returns",
+      "date": "2026-06-23",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Tracey Emin — A Second Life at Tate Modern: a 40-year retrospective, from the bad girl of Britart to one of its great painters of mortality."
+      "description": "Exhibition · 'Guggenheim Pop: 1960 to Now' (New York, 5 Jun 2026 – 10 Jan 2027): 29 artists, Warhol and Lichtenstein beside Cattelan's banana, and Oldenburg's Soft Shuttlecock back after 25 years.",
+      "subject": {
+        "work": "guggenheim-pop-1960-to-now",
+        "creator": null,
+        "topic": "pop-art-survey",
+        "source": "guggenheim"
+      }
     },
     {
-      "file": "Swipe – Brexit, Ten Years On – 2026-06-22.html",
-      "title": "Brexit, Ten Years On",
-      "date": "2026-06-22",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Ones and Tooze — a decade after the vote, the economic bill is still arriving, quietly, every year."
-    },
-    {
-      "file": "Swipe – The Code of Life – 2026-06-22.html",
-      "title": "The Code of Life",
-      "date": "2026-06-22",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Walter Isaacson — The Code Breaker: a defence system stolen from bacteria became a tool to rewrite our own species."
-    },
-    {
-      "file": "Swipe – The Game of Doubt – 2026-06-22.html",
-      "title": "The Game of Doubt",
-      "date": "2026-06-22",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Freakonomics Radio — an ancient dice game, backgammon, as a school for thinking under uncertainty."
-    },
-    {
-      "file": "Swipe – The Purpose Put Into the Machine – 2026-06-22.html",
-      "title": "The Purpose Put Into the Machine",
-      "date": "2026-06-22",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Brian Christian — The Alignment Problem: how exactly, and what exactly, are we trying to teach machines that learn?"
-    },
-    {
-      "file": "Swipe – The Wood Wide Web – 2026-06-22.html",
-      "title": "The Wood Wide Web",
-      "date": "2026-06-22",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Daily swipe for Simon. Today: Merlin Sheldrake — 'Entangled Life: How Fungi Make Our Worlds, Change Our Minds & Shape Our Futures' (2020). More than 90% of plants depend on fungi they cannot see — and once you take fungi seriously, the line between one individual and another starts to dissolve: 'We are all lichens.'"
-    },
-    {
-      "file": "Swipe – All Under Heaven – 2026-06-22.html",
-      "title": "All Under Heaven",
-      "date": "2026-06-22",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: Sinica — 'To Rule All Under Heaven: Andrew Seth Meyer on the Warring States' (Kaiser Kuo, 21 May 2026). The 260 years between Confucius and the First Emperor wrote the operating system Chinese political life still runs on — and why reaching for Han Feizi to decode Xi is mostly lazy essentialism."
-    },
-    {
-      "file": "Swipe – I Am Not a Designer – 2026-06-22.html",
-      "title": "I Am Not a Designer",
-      "date": "2026-06-22",
+      "file": "Swipe – Sublime Poetry – 2026-06-23.html",
+      "title": "Sublime Poetry",
+      "date": "2026-06-23",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Daily swipe for Simon. Today: Isamu Noguchi (1904–1988), ahead of the High Museum's design retrospective 'I am not a designer' (Atlanta 2026 → Peabody Essex Museum). Brâncuși's assistant, Martha Graham's set designer, maker of the Akari lamp — a six-decade career that refused every label."
+      "description": "Raphael: Sublime Poetry at the Met — the first comprehensive US Raphael show, 170+ masterpieces, closing 28 June 2026.",
+      "subject": {
+        "work": "raphael-met-exhibition",
+        "creator": "raphael",
+        "topic": "raphael-retrospective",
+        "source": "the-met"
+      }
+    },
+    {
+      "file": "Swipe – Lügenfritz – 2026-06-23.html",
+      "title": "Lügenfritz",
+      "date": "2026-06-23",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Lage der Nation LdN483 (17. Juni 2026): Ein Facebook-Nutzer wurde für die Bezeichnung von Kanzler Merz als „Lügenfritze“ verurteilt — wie weit reicht die Meinungsfreiheit gegenüber Politikern?",
+      "subject": {
+        "work": "ldn483",
+        "creator": null,
+        "topic": "free-speech-and-insult-law-germany",
+        "source": "lage-der-nation"
+      }
+    },
+    {
+      "file": "Swipe – Die Thukydides-Falle – 2026-06-23.html",
+      "title": "Die Thukydides-Falle",
+      "date": "2026-06-23",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Sicherheitshalber Folge 109 — führen Machtverschiebungen wirklich zwangsläufig zum Krieg? Plus eine FCAS-Autopsie.",
+      "subject": {
+        "work": "sicherheitshalber-109",
+        "creator": null,
+        "topic": "thucydides-trap",
+        "source": "sicherheitshalber"
+      }
+    },
+    {
+      "file": "Swipe – Chip War – 2026-06-23.html",
+      "title": "Chip War",
+      "date": "2026-06-23",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Chris Miller — Chip War: semiconductors are the new oil, and the world's most critical supply runs through one contested island, Taiwan.",
+      "subject": {
+        "work": "chip-war",
+        "creator": "chris-miller",
+        "topic": "semiconductor-geopolitics",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – A Story-Telling Animal – 2026-06-23.html",
+      "title": "A Story-Telling Animal",
+      "date": "2026-06-23",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Philosophize This! on Alasdair MacIntyre — no one is self-made; you can only act once you know what story you're a part of.",
+      "subject": {
+        "work": "macintyre-after-virtue",
+        "creator": "alasdair-macintyre",
+        "topic": "after-virtue-narrative-ethics",
+        "source": "philosophize-this"
+      }
     },
     {
       "file": "Swipe – Warum es die Welt nicht gibt – 2026-06-22.html",
@@ -1104,7 +1772,69 @@
       "date": "2026-06-22",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Daily swipe für Simon. Heute: Markus Gabriel — 'Warum es die Welt nicht gibt' (2013). Der Neue Realismus in einem Satz: Es gibt unzählige Sinnfelder, in denen Dinge erscheinen — nur das All-Umfassende, die Welt, gibt es nicht. Aber alles andere schon."
+      "description": "Daily swipe für Simon. Heute: Markus Gabriel — 'Warum es die Welt nicht gibt' (2013). Der Neue Realismus in einem Satz: Es gibt unzählige Sinnfelder, in denen Dinge erscheinen — nur das All-Umfassende, die Welt, gibt es nicht. Aber alles andere schon.",
+      "subject": {
+        "work": "warum-es-die-welt-nicht-gibt",
+        "creator": "markus-gabriel",
+        "topic": "neuer-realismus-sinnfelder",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Wood Wide Web – 2026-06-22.html",
+      "title": "The Wood Wide Web",
+      "date": "2026-06-22",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Daily swipe for Simon. Today: Merlin Sheldrake — 'Entangled Life: How Fungi Make Our Worlds, Change Our Minds & Shape Our Futures' (2020). More than 90% of plants depend on fungi they cannot see — and once you take fungi seriously, the line between one individual and another starts to dissolve: 'We are all lichens.'",
+      "subject": {
+        "work": "entangled-life",
+        "creator": "merlin-sheldrake",
+        "topic": "fungal-networks",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Game of Doubt – 2026-06-22.html",
+      "title": "The Game of Doubt",
+      "date": "2026-06-22",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Freakonomics Radio — an ancient dice game, backgammon, as a school for thinking under uncertainty.",
+      "subject": {
+        "work": "freakonomics-backgammon",
+        "creator": null,
+        "topic": "backgammon-and-uncertainty",
+        "source": "freakonomics"
+      }
+    },
+    {
+      "file": "Swipe – The Code of Life – 2026-06-22.html",
+      "title": "The Code of Life",
+      "date": "2026-06-22",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Walter Isaacson — The Code Breaker: a defence system stolen from bacteria became a tool to rewrite our own species.",
+      "subject": {
+        "work": "the-code-breaker",
+        "creator": "walter-isaacson",
+        "topic": "crispr-gene-editing",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – I Am Not a Designer – 2026-06-22.html",
+      "title": "I Am Not a Designer",
+      "date": "2026-06-22",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Daily swipe for Simon. Today: Isamu Noguchi (1904–1988), ahead of the High Museum's design retrospective 'I am not a designer' (Atlanta 2026 → Peabody Essex Museum). Brâncuși's assistant, Martha Graham's set designer, maker of the Akari lamp — a six-decade career that refused every label.",
+      "subject": {
+        "work": "noguchi-high-museum",
+        "creator": "isamu-noguchi",
+        "topic": "noguchi-design-retrospective",
+        "source": "high-museum"
+      }
     },
     {
       "file": "Swipe – Europäische Katastrophe – 2026-06-22.html",
@@ -1112,7 +1842,55 @@
       "date": "2026-06-22",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Daily swipe für Simon. Heute: Herfried Münkler — 'Der Dreißigjährige Krieg. Europäische Katastrophe, deutsches Trauma 1618–1648'. Ein 975-Seiten-Standardwerk — und Münklers These: kein späterer Konflikt erklärt die Kriege der Gegenwart besser als dieser."
+      "description": "Daily swipe für Simon. Heute: Herfried Münkler — 'Der Dreißigjährige Krieg. Europäische Katastrophe, deutsches Trauma 1618–1648'. Ein 975-Seiten-Standardwerk — und Münklers These: kein späterer Konflikt erklärt die Kriege der Gegenwart besser als dieser.",
+      "subject": {
+        "work": "der-dreissigjaehrige-krieg",
+        "creator": "herfried-muenkler",
+        "topic": "thirty-years-war",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Brexit, Ten Years On – 2026-06-22.html",
+      "title": "Brexit, Ten Years On",
+      "date": "2026-06-22",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Ones and Tooze — a decade after the vote, the economic bill is still arriving, quietly, every year.",
+      "subject": {
+        "work": "ones-and-tooze-brexit",
+        "creator": null,
+        "topic": "brexit-economic-cost",
+        "source": "ones-and-tooze"
+      }
+    },
+    {
+      "file": "Swipe – All Under Heaven – 2026-06-22.html",
+      "title": "All Under Heaven",
+      "date": "2026-06-22",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Daily swipe for Simon. Today: Sinica — 'To Rule All Under Heaven: Andrew Seth Meyer on the Warring States' (Kaiser Kuo, 21 May 2026). The 260 years between Confucius and the First Emperor wrote the operating system Chinese political life still runs on — and why reaching for Han Feizi to decode Xi is mostly lazy essentialism.",
+      "subject": {
+        "work": "sinica-warring-states",
+        "creator": "andrew-seth-meyer",
+        "topic": "warring-states-political-thought",
+        "source": "sinica"
+      }
+    },
+    {
+      "file": "Swipe – A Second Life – 2026-06-22.html",
+      "title": "A Second Life",
+      "date": "2026-06-22",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Tracey Emin — A Second Life at Tate Modern: a 40-year retrospective, from the bad girl of Britart to one of its great painters of mortality.",
+      "subject": {
+        "work": "emin-tate-retrospective",
+        "creator": "tracey-emin",
+        "topic": "emin-retrospective",
+        "source": "tate-modern"
+      }
     },
     {
       "file": "Swipe – The Survivors – 2026-06-21.html",
@@ -1120,47 +1898,13 @@
       "date": "2026-06-21",
       "kicker": "Book of the day · 📖",
       "emoji": "📖",
-      "description": "Daily swipe for Simon. Today: Charles C. Mann — '1491: New Revelations of the Americas Before Columbus' (Knopf, 2005; National Academies Communication Award 2006). The Americas of 1491 may have held more people than Europe — and what Europeans called wilderness was a depopulated garden."
-    },
-    {
-      "file": "Swipe – Great Gun Barrels – 2026-06-21.html",
-      "title": "Great Gun Barrels",
-      "date": "2026-06-21",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: ChinaTalk — 'Paul Kennedy on Great Powers' (Jordan Schneider, 10 June 2026). The historian of imperial overstretch on Anglo-German antagonism, why Britain made friends with one rising power and enemies with the other, and the uncomfortable echoes for the US–China rivalry of 2026."
-    },
-    {
-      "file": "Swipe – Into the Void – 2026-06-21.html",
-      "title": "Into the Void",
-      "date": "2026-06-21",
-      "kicker": "Creative topic · 🎨",
-      "emoji": "🎨",
-      "description": "Daily swipe for Simon. Today: Anish Kapoor at the Hayward Gallery, London (16 June – 18 October 2026). Curated by Ralph Rugoff for his final show as director, the artist's first major UK survey at the Hayward in nearly 30 years — Vantablack voids, mirror sculptures, and a six-metre inflatable that swallows the room."
-    },
-    {
-      "file": "Swipe – Power and Progress – 2026-06-21.html",
-      "title": "Power and Progress",
-      "date": "2026-06-21",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Daily swipe for Simon. Today: Daron Acemoglu & Simon Johnson — 'Power and Progress: Our Thousand-Year Struggle Over Technology and Prosperity' (Public Affairs, 2023). The book that won the 2024 Nobel team a global hearing: technology has no preordained direction, and shared prosperity is a political choice."
-    },
-    {
-      "file": "Swipe – How Progress Ends – 2026-06-21.html",
-      "title": "How Progress Ends",
-      "date": "2026-06-21",
-      "kicker": "Episode of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: Mark Leonard's World in 30 Minutes — 'How progress ends' with Carl Benedikt Frey (ECFR, June 2026). Computing, the internet, AI — and productivity is still stagnating. The Oxford economist on why stagnation, not innovation, is the historical default."
-    },
-    {
-      "file": "Swipe – Carving the Essence – 2026-06-21.html",
-      "title": "Carving the Essence",
-      "date": "2026-06-21",
-      "kicker": "Creative topic · 🎨",
-      "emoji": "🎨",
-      "description": "Daily swipe for Simon. Today: Constantin Brâncuși at the Neue Nationalgalerie, Berlin (20 March – 9 August 2026, in cooperation with Centre Pompidou). The first comprehensive German Brâncuși show in over 50 years — 150+ works, plus a partial reconstruction of the Paris studio. The man who taught modern sculpture to subtract."
+      "description": "Daily swipe for Simon. Today: Charles C. Mann — '1491: New Revelations of the Americas Before Columbus' (Knopf, 2005; National Academies Communication Award 2006). The Americas of 1491 may have held more people than Europe — and what Europeans called wilderness was a depopulated garden.",
+      "subject": {
+        "work": "1491",
+        "creator": "charles-c-mann",
+        "topic": "pre-columbian-americas",
+        "source": null
+      }
     },
     {
       "file": "Swipe – The Making of an Icon – 2026-06-21.html",
@@ -1168,7 +1912,69 @@
       "date": "2026-06-21",
       "kicker": "Creative topic · 🎨",
       "emoji": "🎨",
-      "description": "Daily swipe for Simon. Today: Frida Kahlo, ahead of Tate Modern's 'Frida: The Making of an Icon' (25 June 2026 – 3 January 2027). How a chronically ill painter from a blue house in Coyoacán became the most reproduced female artist on Earth — and what she lost in the translation."
+      "description": "Daily swipe for Simon. Today: Frida Kahlo, ahead of Tate Modern's 'Frida: The Making of an Icon' (25 June 2026 – 3 January 2027). How a chronically ill painter from a blue house in Coyoacán became the most reproduced female artist on Earth — and what she lost in the translation.",
+      "subject": {
+        "work": "kahlo-tate-icon",
+        "creator": "frida-kahlo",
+        "topic": "kahlo-and-iconography",
+        "source": "tate-modern"
+      }
+    },
+    {
+      "file": "Swipe – Power and Progress – 2026-06-21.html",
+      "title": "Power and Progress",
+      "date": "2026-06-21",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Daily swipe for Simon. Today: Daron Acemoglu & Simon Johnson — 'Power and Progress: Our Thousand-Year Struggle Over Technology and Prosperity' (Public Affairs, 2023). The book that won the 2024 Nobel team a global hearing: technology has no preordained direction, and shared prosperity is a political choice.",
+      "subject": {
+        "work": "power-and-progress",
+        "creator": "daron-acemoglu",
+        "topic": "technology-and-shared-prosperity",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Into the Void – 2026-06-21.html",
+      "title": "Into the Void",
+      "date": "2026-06-21",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Daily swipe for Simon. Today: Anish Kapoor at the Hayward Gallery, London (16 June – 18 October 2026). Curated by Ralph Rugoff for his final show as director, the artist's first major UK survey at the Hayward in nearly 30 years — Vantablack voids, mirror sculptures, and a six-metre inflatable that swallows the room.",
+      "subject": {
+        "work": "kapoor-hayward-survey",
+        "creator": "anish-kapoor",
+        "topic": "kapoor-sculpture",
+        "source": "hayward-gallery"
+      }
+    },
+    {
+      "file": "Swipe – How Progress Ends – 2026-06-21.html",
+      "title": "How Progress Ends",
+      "date": "2026-06-21",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Daily swipe for Simon. Today: Mark Leonard's World in 30 Minutes — 'How progress ends' with Carl Benedikt Frey (ECFR, June 2026). Computing, the internet, AI — and productivity is still stagnating. The Oxford economist on why stagnation, not innovation, is the historical default.",
+      "subject": {
+        "work": "ecfr-carl-frey",
+        "creator": "carl-benedikt-frey",
+        "topic": "productivity-stagnation",
+        "source": "mark-leonards-world-in-30-minutes"
+      }
+    },
+    {
+      "file": "Swipe – Carving the Essence – 2026-06-21.html",
+      "title": "Carving the Essence",
+      "date": "2026-06-21",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Daily swipe for Simon. Today: Constantin Brâncuși at the Neue Nationalgalerie, Berlin (20 March – 9 August 2026, in cooperation with Centre Pompidou). The first comprehensive German Brâncuși show in over 50 years — 150+ works, plus a partial reconstruction of the Paris studio. The man who taught modern sculpture to subtract.",
+      "subject": {
+        "work": "brancusi-neue-nationalgalerie",
+        "creator": "constantin-brancusi",
+        "topic": "brancusi-sculpture",
+        "source": "neue-nationalgalerie"
+      }
     },
     {
       "file": "Swipe – The Permabear Returns – 2026-06-20.html",
@@ -1176,23 +1982,13 @@
       "date": "2026-06-20",
       "kicker": "Episode of the day · 🎧",
       "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: Odd Lots — 'Jeremy Grantham on How to Tell If a Bubble Is About to Burst' (Bloomberg, 18 June 2026). The 87-year-old who called 1989 Japan, 2000 dot-com, and 2008 housing says he sees the pattern again — and this time it has a name: AI."
-    },
-    {
-      "file": "Swipe – Natures Last Laugh – 2026-06-09.html",
-      "title": "Nature's Last Laugh",
-      "date": "2026-06-09",
-      "kicker": "Book of the day · 📖",
-      "emoji": "📖",
-      "description": "Daily swipe for Simon. Today: Kyle Harper — 'The Fate of Rome: Climate, Disease, and the End of an Empire' (Princeton, 2017). Rome wasn't brought down by Germans. It was brought down by germs — and by a sky that turned cold."
-    },
-    {
-      "file": "Swipe – Waiting for Benedict – 2026-06-08.html",
-      "title": "Waiting for Benedict",
-      "date": "2026-06-08",
-      "kicker": "Podcast of the day · 🎧",
-      "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: Philosophize This! Ep. 244 — Stephen West on Alasdair MacIntyre's After Virtue (11 Feb 2026). Why modern moral arguments feel unwinnable: emotivism, the failure of the Enlightenment project, and waiting for another St. Benedict."
+      "description": "Daily swipe for Simon. Today: Odd Lots — 'Jeremy Grantham on How to Tell If a Bubble Is About to Burst' (Bloomberg, 18 June 2026). The 87-year-old who called 1989 Japan, 2000 dot-com, and 2008 housing says he sees the pattern again — and this time it has a name: AI.",
+      "subject": {
+        "work": "oddlots-jeremy-grantham",
+        "creator": "jeremy-grantham",
+        "topic": "asset-bubbles",
+        "source": "odd-lots"
+      }
     },
     {
       "file": "Swipe – The Dinner-Plate Chip – 2026-06-08.html",
@@ -1200,7 +1996,13 @@
       "date": "2026-06-08",
       "kicker": "Podcast of the day · 🎧",
       "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: Odd Lots with Andrew Feldman — 'Why Cerebras CEO Andrew Feldman Built The World's Largest Computer Chip' (21 May 2026). A dinner-plate-sized chip, a $20B OpenAI contract, and a $56B IPO bet against Nvidia's GPU orthodoxy."
+      "description": "Daily swipe for Simon. Today: Odd Lots with Andrew Feldman — 'Why Cerebras CEO Andrew Feldman Built The World's Largest Computer Chip' (21 May 2026). A dinner-plate-sized chip, a $20B OpenAI contract, and a $56B IPO bet against Nvidia's GPU orthodoxy.",
+      "subject": {
+        "work": "oddlots-andrew-feldman",
+        "creator": "andrew-feldman",
+        "topic": "cerebras-wafer-scale-chip",
+        "source": "odd-lots"
+      }
     },
     {
       "file": "Swipe – The Lost Virtue – 2026-06-04.html",
@@ -1208,7 +2010,13 @@
       "date": "2026-06-04",
       "kicker": "Podcast of the day · 🎧",
       "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: The Ezra Klein Show with Helena Rosenblatt — 'The Book That Changed How I Think About Liberalism' (5 May 2026). Liberalism began as a virtue, not a political philosophy. The history was lost. That's why the defence feels so arid."
+      "description": "Daily swipe for Simon. Today: The Ezra Klein Show with Helena Rosenblatt — 'The Book That Changed How I Think About Liberalism' (5 May 2026). Liberalism began as a virtue, not a political philosophy. The history was lost. That's why the defence feels so arid.",
+      "subject": {
+        "work": "ezra-klein-rosenblatt",
+        "creator": "helena-rosenblatt",
+        "topic": "history-of-liberalism",
+        "source": "ezra-klein-show"
+      }
     },
     {
       "file": "Swipe – Born in Bohemia – 2026-06-04.html",
@@ -1216,7 +2024,13 @@
       "date": "2026-06-04",
       "kicker": "Podcast of the day · 🎧",
       "emoji": "🎧",
-      "description": "Daily swipe for Simon. Today: Odd Lots — Brendan Greeley on the 500-year history of the dollar. The dollar is older than the United States — and never really belonged to it."
+      "description": "Daily swipe for Simon. Today: Odd Lots — Brendan Greeley on the 500-year history of the dollar. The dollar is older than the United States — and never really belonged to it.",
+      "subject": {
+        "work": "oddlots-brendan-greeley-dollar",
+        "creator": "brendan-greeley",
+        "topic": "history-of-the-dollar",
+        "source": "odd-lots"
+      }
     }
   ]
 }
