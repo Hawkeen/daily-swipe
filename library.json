@@ -1,7 +1,77 @@
 {
-  "updated": "2026-07-24",
-  "count": 145,
+  "updated": "2026-07-27",
+  "count": 150,
   "swipes": [
+    {
+      "file": "Swipe – The Great Transformation – 2026-07-27.html",
+      "title": "The Great Transformation",
+      "date": "2026-07-27",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Karl Polanyi (1944): the self-regulating market was a planned utopia that turned land, labour and money into 'fictitious commodities' — and society's backlash against that 'satanic mill' shaped the twentieth century, fascism included.",
+      "subject": {
+        "work": "the-great-transformation",
+        "creator": "karl-polanyi",
+        "topic": "market-society-double-movement",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Vom Kriege – 2026-07-27.html",
+      "title": "Vom Kriege",
+      "date": "2026-07-27",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Carl von Clausewitz (postum 1832): der Krieg ist die Fortsetzung der Politik mit anderen Mitteln — geprägt von Friktion, dem Nebel des Krieges und der wunderlichen Dreifaltigkeit aus Volk, Heer und Regierung.",
+      "subject": {
+        "work": "vom-kriege",
+        "creator": "carl-von-clausewitz",
+        "topic": "theory-of-war",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Very Good and Very Bad News on Climate – 2026-07-27.html",
+      "title": "The Very Good and Very Bad News on Climate",
+      "date": "2026-07-27",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "The Ezra Klein Show (10 July 2026), Bill McKibben: climate is accelerating and its politics is in disarray — yet solar and wind now beat fossil on raw cost and China installs a gigawatt of solar every eight hours.",
+      "subject": {
+        "work": "ezra-klein-mckibben-climate",
+        "creator": "bill-mckibben",
+        "topic": "clean-energy-abundance",
+        "source": "the-ezra-klein-show"
+      }
+    },
+    {
+      "file": "Swipe – Death at Mayerling – 2026-07-27.html",
+      "title": "Death at Mayerling",
+      "date": "2026-07-27",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "The Rest Is History (Ep. 690, 22 July 2026): the 1889 Mayerling incident — Crown Prince Rudolf and 17-year-old Mary Vetsera dead in a suicide pact, the Habsburg cover-up, and the dynastic gap that led toward Sarajevo.",
+      "subject": {
+        "work": "trih-690-mayerling",
+        "creator": null,
+        "topic": "mayerling-habsburg-scandal",
+        "source": "the-rest-is-history"
+      }
+    },
+    {
+      "file": "Swipe – The Riot of Spring – 2026-07-27.html",
+      "title": "The Riot of Spring",
+      "date": "2026-07-27",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Dance · The Rite of Spring (1913): Nijinsky's turned-in, stamping choreography and Stravinsky's score for the Ballets Russes sparked a riot in Paris — and remade twentieth-century dance.",
+      "subject": {
+        "work": "the-rite-of-spring",
+        "creator": "vaslav-nijinsky",
+        "topic": "modernist-ballet-choreography",
+        "source": "ballets-russes"
+      }
+    },
     {
       "file": "Swipe – The Iran War's Energy Shock – 2026-07-24.html",
       "title": "The Iran War's Energy Shock",
