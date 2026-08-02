@@ -1,7 +1,77 @@
 {
-  "updated": "2026-07-27",
-  "count": 150,
+  "updated": "2026-08-01",
+  "count": 155,
   "swipes": [
+    {
+      "file": "Swipe – The Origins of Totalitarianism – 2026-08-01.html",
+      "title": "The Origins of Totalitarianism",
+      "date": "2026-08-01",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Hannah Arendt (1951): totalitarianism was a wholly new kind of regime — fusing ideology and terror for total domination, rooted in statelessness, superfluousness and organised loneliness.",
+      "subject": {
+        "work": "the-origins-of-totalitarianism",
+        "creator": "hannah-arendt",
+        "topic": "origins-of-totalitarianism",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Selfish Gene – 2026-08-01.html",
+      "title": "The Selfish Gene",
+      "date": "2026-08-01",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Richard Dawkins (1976): the gene, not the organism or species, is the true unit of selection — we are 'survival machines' built by replicators. A 50th-anniversary edition lands in 2026.",
+      "subject": {
+        "work": "the-selfish-gene",
+        "creator": "richard-dawkins",
+        "topic": "gene-centred-evolution",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Robots Are Here – 2026-08-01.html",
+      "title": "The Robots Are Here",
+      "date": "2026-08-01",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "ChinaTalk (4 July 2026): SemiAnalysis's Niko Ciminelli and Reyk Knuhtsen on why humanoid robots are the real general-purpose technology — and how vertical integration puts Unitree in pole position.",
+      "subject": {
+        "work": "chinatalk-robots-unitree",
+        "creator": "niko-ciminelli",
+        "topic": "chinese-humanoid-robotics",
+        "source": "chinatalk"
+      }
+    },
+    {
+      "file": "Swipe – No More Fables – 2026-08-01.html",
+      "title": "No More Fables",
+      "date": "2026-08-01",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Film · Italian Neorealism (mid-1940s): amid the rubble of war, Rossellini, De Sica and Visconti took cameras into the street — real locations, non-professional actors, everyday lives — and remade cinema.",
+      "subject": {
+        "work": "italian-neorealism",
+        "creator": null,
+        "topic": "italian-neorealist-cinema",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Stone Into Light – 2026-08-01.html",
+      "title": "Stone Into Light",
+      "date": "2026-08-01",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Architecture · The birth of Gothic: at Saint-Denis around 1140, Abbot Suger fused the pointed arch, rib vault and flying buttress to dissolve the wall and flood the church with light.",
+      "subject": {
+        "work": "gothic-architecture-saint-denis",
+        "creator": "abbot-suger",
+        "topic": "gothic-cathedral-architecture",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – The Great Transformation – 2026-07-27.html",
       "title": "The Great Transformation",

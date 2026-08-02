@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Architecture · The birth of Gothic: at Saint-Denis around 1140, Abbot Suger fused the pointed arch, rib vault and flying buttress to dissolve the wall and flood the church with light — turning stone into a theology of light."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Stone Into Light — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Death at Mayerling&rdquo; (27 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">On <em>The Rest Is History</em>, what was the 1889 Mayerling incident?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. A battle that ended the Habsburg Empire</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. The death of Crown Prince Rudolf and Mary Vetsera in a suicide pact, then a Habsburg cover-up</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A royal wedding that secured the succession</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; Crown Prince Rudolf and 17-year-old Mary Vetsera dead in a suicide pact, a Habsburg cover-up, and a dynastic gap that led toward Sarajevo.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">2 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Geschichte eines Deutschen&ldquo; (16. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wie erzählt Sebastian Haffner die Nazifizierung Deutschlands 1914&ndash;1933?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Als nüchterne Militärgeschichte des Ersten Weltkriegs</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Als Heldenepos des organisierten Widerstands</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Von innen &mdash; als &bdquo;Duell&ldquo; zwischen übermächtigem Staat und Privatmann</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: C</b> &mdash; Haffner (geschrieben 1939, erschienen 2000) erzählt die Nazifizierung von innen als &bdquo;Duell&ldquo; zwischen übermächtigem Staat und Privatmann.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Der lange Weg nach Westen&ldquo; (9. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was ist Heinrich August Winklers zentrale These zur deutschen Geschichte?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Ein Sonderweg &mdash; eine doppelte Verspätung von Nationalstaat und Demokratie, die erst 1945 und 1990 endete</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Deutschland folgte demselben Weg wie Frankreich und England</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Die deutsche Demokratie war bereits 1848 vollendet</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: A</b> &mdash; Winkler (2000) liest die deutsche Geschichte 1806&ndash;1990 als Sonderweg: eine doppelte Verspätung von Nationalstaat und Demokratie, die erst 1945 und 1990 endete.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
+        <div class="pageno">4 / 15 →</div>
+        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.95;"><path d="M12 2c2.5 2.5 4 5 4 8v11H8V10c0-3 1.5-5.5 4-8z"/><path d="M12 21V13M9 13a3 3 0 0 1 6 0"/><path d="M4 21h16"/><path d="M6 21v-7l2-2M18 21v-7l-2-2"/></svg>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Creative topic · 🎨</div>
+        <h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">Stone Into Light</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">How Gothic architecture was born at Saint-Denis &mdash; and turned the wall into a window</p>
+        <p style="font-size:15px; opacity:0.75;">Architecture · Abbot Suger &amp; the birth of Gothic · c.1137&ndash;1148 · ~5 min read</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Swipe →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e40af, #1e293b);">
+        <div class="pageno">5 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The hook</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">How do you make a stone wall disappear &mdash; and replace it with light?</p>
+        <p style="font-size:17.5px; line-height:1.5;">Around 1140, on the edge of Paris, an ambitious abbot set out to rebuild his church as a physical manifestation of the divine. The engineering he assembled to do it launched the style we now call Gothic.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3730a3, #1e1b4b);">
+        <div class="pageno">6 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The core idea</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Gothic is not a decorative style bolted onto a church &mdash; it is a structural system whose whole purpose is to let in light.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Bring together the pointed arch, the rib vault and the flying buttress, and the load no longer needs the wall. Freed from carrying the roof, the wall can dissolve into glass &mdash; and the interior floods with coloured light.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #082f49);">
+        <div class="pageno">7 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 6 · The birthplace</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Saint-Denis, c.1137&ndash;1148</h3>
+        <p style="font-size:17.5px; line-height:1.5;">The first Gothic building was the Basilica of Saint-Denis near Paris, renovated under Abbot Suger. Between roughly 1137 and 1148 he embarked on a project to transform the church into a physical manifestation of the divine &mdash; and created what became the archetype of the Gothic cathedral.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #334155, #0f172a);">
+        <div class="pageno">8 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 6 · The frame</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Pointed arch + rib vault</h3>
+        <p style="font-size:17.5px; line-height:1.5;">The pointed arch and the ribbed vault carry the roof&rsquo;s load down onto slender columns rather than continuous walls. Together they concentrate the weight at points, so the surfaces in between no longer have to hold anything up.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #155e75, #164e63);">
+        <div class="pageno">9 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 6 · The brace</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The flying buttress</h3>
+        <p style="font-size:17.5px; line-height:1.5;">The outward thrust from those vaults is caught by flying buttresses &mdash; arms of stone that carry the force outside the building to freestanding piers. With the sideways push handled beyond the wall, the wall itself is released from its structural job.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1d4ed8, #1e3a8a);">
+        <div class="pageno">10 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 6 · The payoff</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The wall becomes glass</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Because the pointed arch and rib vault carry the load to columns and buttresses, the wall between is freed to become glass. What was new at Saint-Denis was using these elements together with one purpose: to dissolve the wall and flood the interior with light through stained-glass windows.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #6d28d9, #4c1d95);">
+        <div class="pageno">11 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 6 · The meaning</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">A theology of light</h3>
+        <p style="font-size:17.5px; line-height:1.5;">For Suger this was not just engineering. Drawing on the Neoplatonic writings attributed to Pseudo-Dionysius &mdash; whom the abbey identified with its own Saint Denis &mdash; he held that every created light is a step toward the divine light of God. The luminous church was meant to lift the soul.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a5f, #0b1120);">
+        <div class="pageno">12 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 6 · The spread</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">From one abbey to an age</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Saint-Denis became a template. The same logic &mdash; taller, lighter buildings filled with natural light &mdash; produced the great cathedrals that followed, their walls opened into soaring windows and rose windows of coloured glass across medieval Europe.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0f766e, #134e4a);">
+        <div class="pageno">13 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.16); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Why this matters in 2026</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Notre-Dame, reborn</h3>
+        <p style="font-size:17.5px; line-height:1.5;">On 7 December 2024, Notre-Dame de Paris reopened, five years after the 2019 fire toppled its spire and destroyed the roof. Some 2,000 workers and specialist artisans rebuilt it &mdash; under architect Philippe Villeneuve, on the principle of restoring it identically, spire included &mdash; letting the light back into one of the greatest heirs of Suger&rsquo;s idea.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">14 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">The takeaway</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">&ldquo;The dull mind rises to truth through that which is material, and, in seeing this light, is resurrected from its former submersion.&rdquo;</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">&mdash; Abbot Suger, inscription at Saint-Denis</p>
+        <p style="font-size:16px; line-height:1.5;">Suger&rsquo;s wager was that stone, glass and light could carry the mind upward. The Gothic cathedral is that idea made structural: engineering pressed into the service of wonder.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #e7ddc8; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">15 / 15 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Go deeper</h3>
+        <div style="margin-top:4px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://www.worldhistory.org/article/1649/gothic-cathedrals-architecture--divine-light/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>World History Encyclopedia · Gothic cathedrals &amp; divine light</b></a>
+          <a href="https://www.thecollector.com/gothic-architecture-saint-denis-basilica/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>The Collector · Saint-Denis, cradle of Gothic</b></a>
+          <a href="https://www.britannica.com/art/Western-architecture/Early-Gothic" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Britannica · Early Gothic architecture</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 1 August 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

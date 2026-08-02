@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Hannah Arendt, 'The Origins of Totalitarianism' (1951): totalitarianism was a wholly new kind of regime that fused ideology and terror to achieve total domination — rooted in statelessness, superfluousness and organised loneliness."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Origins of Totalitarianism — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;The Great Transformation&rdquo; (27 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What was Karl Polanyi&rsquo;s central claim about the &ldquo;self-regulating market&rdquo;?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. It arose spontaneously from human nature and needed no state</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. It was a planned utopia that turned land, labour and money into &ldquo;fictitious commodities&rdquo; and provoked a backlash</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. It ended inequality and prevented fascism</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; the market was planned into existence, and society&rsquo;s protective &ldquo;double movement&rdquo; against that &ldquo;satanic mill&rdquo; shaped the twentieth century, fascism included.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">2 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;How China Remembers&rdquo; (15 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">On the MERICS podcast, what did historian Rana Mitter argue shapes China&rsquo;s choices today?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. China has largely forgotten its twentieth-century past</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Only economic growth, not memory, drives its politics</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Its memory of invasion and humiliation feeds a &ldquo;New Chinese Nationalism&rdquo;</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> &mdash; Mitter argued China&rsquo;s memory of invasion and humiliation shapes a &ldquo;New Chinese Nationalism&rdquo; and its decisions today.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Chip War&rdquo; (23 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What is Chris Miller&rsquo;s central metaphor for semiconductors?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Chips are the new oil &mdash; and the most critical supply runs through Taiwan</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Chips are a commodity with a safely diversified global supply</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Software, not fabrication, is the real chokepoint</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: A</b> &mdash; semiconductors are the new oil, and the world&rsquo;s most critical supply runs through one contested island, Taiwan.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1f2937, #0f172a);">
+        <div class="pageno">4 / 15 →</div>
+        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.95;"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Book of the day · 📖</div>
+        <h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">The Origins of Totalitarianism</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">How a wholly new kind of regime is built &mdash; from antisemitism and empire to total domination</p>
+        <p style="font-size:15px; opacity:0.75;">Hannah Arendt · 1951 · ~6 min read</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Swipe →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #374151, #1f2937);">
+        <div class="pageno">5 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The hook</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">Nazi Germany and Stalin&rsquo;s Russia were not just very bad tyrannies. They were something the world had never seen before.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Writing in the shadow of the death camps, Arendt set out to explain a regime whose goal was not merely power, but the total domination of human beings &mdash; and to trace the century of history that made it possible.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #2e1065);">
+        <div class="pageno">6 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The core idea</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Totalitarianism is a novel form of government that seeks total domination through ideology and terror &mdash; destroying human spontaneity and plurality.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Arendt&rsquo;s monumental study analyses the historical and social conditions that made Nazi Germany and Stalinist Russia possible, tracing a path from nineteenth-century antisemitism and European imperialism to the modern totalitarian movement.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">7 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 7 · A new species of regime</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Not tyranny &mdash; total domination</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Older tyrannies wanted obedience and left private life mostly alone. Totalitarianism aims at something more radical: control of humans through organised domination in every sphere of life, isolating people from one another and destroying the spontaneity and plurality that make politics human.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #9a3412, #7c2d12);">
+        <div class="pageno">8 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 7 · The three-part origin</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Antisemitism, then imperialism, then the movement</h3>
+        <p style="font-size:17.5px; line-height:1.5;">The book&rsquo;s structure is an argument. Arendt traces development from nineteenth-century antisemitism, through European imperialism and the pan-movements, to the emergence of the modern totalitarian movement &mdash; each stage loosening the ties of nation, class and law that had held people in place.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #b45309, #78350f);">
+        <div class="pageno">9 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 7 · Rightlessness</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The &ldquo;right to have rights&rdquo;</h3>
+        <p style="font-size:17.5px; line-height:1.5;">When people lost their state &mdash; usually persecuted minorities forced to flee &mdash; they became rightless: no community would guarantee their &ldquo;inalienable&rdquo; human rights. Arendt&rsquo;s famous formulation is that the deepest right is the <em>right to have rights</em> &mdash; membership in a political community that can protect you at all.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #831843, #500724);">
+        <div class="pageno">10 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 7 · Ideology</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Pseudo-laws of History and Nature</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Totalitarian ideologies claim to have decoded an inexorable law &mdash; the class struggle of History, the race war of Nature &mdash; that promises followers protection from insecurity. Once you accept the law, everything else can be deduced from it, and the movement becomes the instrument that executes History or Nature&rsquo;s verdict.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #3f0d0d);">
+        <div class="pageno">11 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 7 · Terror</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Terror as an end in itself</h3>
+        <p style="font-size:17.5px; line-height:1.5;">For Arendt, totalitarian terror is not a means to a further goal but the essence of the regime. It is applied indiscriminately &mdash; hitting enemies and obedient followers without distinction &mdash; because its job is to enforce the alleged laws of History or Nature, not to punish the guilty.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e293b, #0b1120);">
+        <div class="pageno">12 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 7 · The precondition</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Loneliness &mdash; the ground terror grows in</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Arendt calls loneliness &ldquo;the common ground for terror.&rdquo; What was once a borderline experience becomes a mass condition: isolated, cut off from others and from a shared world, people lose their footing in reality &mdash; and become the raw material of totalitarian movements.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #334155, #111827);">
+        <div class="pageno">13 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 7 / 7 · The ideal subject</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">When true and false stop mattering</h3>
+        <p style="font-size:17.5px; line-height:1.5;">The regime&rsquo;s perfect subject is not the fanatic but the disoriented person for whom facts have lost their grip. The endgame of imperialism and racism, Arendt argued, was to make whole categories of people <em>superfluous</em> &mdash; and, with them, the very distinction between reality and lies.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">14 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">The takeaway</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">&ldquo;The ideal subject of totalitarian rule is not the convinced Nazi or the convinced Communist, but people for whom the distinction between fact and fiction&hellip; and the distinction between true and false&hellip; no longer exist.&rdquo;</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">&mdash; Hannah Arendt, <em>The Origins of Totalitarianism</em></p>
+        <p style="font-size:16px; line-height:1.5;">Arendt&rsquo;s warning is less about jackboots than about the erosion of a shared reality &mdash; the moment a people stops being able to tell truth from fiction is the moment total domination becomes thinkable.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #e7ddc8; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">15 / 15 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Go deeper</h3>
+        <div style="margin-top:4px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://en.wikipedia.org/wiki/The_Origins_of_Totalitarianism" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · overview &amp; structure</b></a>
+          <a href="https://aeon.co/essays/for-hannah-arendt-totalitarianism-is-rooted-in-loneliness" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Aeon · totalitarianism &amp; loneliness</b></a>
+          <a href="https://www.themarginalian.org/2016/12/20/hannah-arendt-origins-of-totalitarianism-loneliness-isolation/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>The Marginalian · loneliness as the ground for terror</b></a>
+          <a href="https://www.ebsco.com/research-starters/literature-and-writing/origins-totalitarianism-hannah-arendt" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>EBSCO · research starter</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 1 August 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Richard Dawkins, 'The Selfish Gene' (1976): the gene, not the organism or species, is the true unit of selection — we are 'survival machines' built by replicators. Fifty years on, a new anniversary edition arrives in 2026."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Selfish Gene — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Nexus&rdquo; (24 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What is Yuval Noah Harari&rsquo;s core claim about information networks?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. More information reliably brings us closer to the truth</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Information&rsquo;s job is to connect, not to reveal truth &mdash; and we&rsquo;re now handing the network to a non-human intelligence</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. AI is merely a passive tool with no effect on the network</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; from the Stone Age to AI, information&rsquo;s job is to connect rather than reveal truth &mdash; and we&rsquo;re now handing the network to a non-human intelligence.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">2 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;An Immense World&rdquo; (10 July 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What does Ed Yong mean by an animal&rsquo;s <em>Umwelt</em>?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. The single objective reality all animals share equally</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. A ranking of species by intelligence</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. The sensory bubble each animal lives in &mdash; reality is only the sliver its senses can reach</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> &mdash; every animal lives inside its own sensory bubble, its <em>Umwelt</em>, and what we call reality is only the sliver our senses can reach.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;The Wood Wide Web&rdquo; (22 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What does Merlin Sheldrake&rsquo;s <em>Entangled Life</em> argue once you take fungi seriously?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. The line between one individual and another starts to dissolve &mdash; &ldquo;we are all lichens&rdquo;</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Fungi are irrelevant to plant life</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Only animals, not fungi, form networks</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: A</b> &mdash; more than 90% of plants depend on fungi they cannot see, and taking fungi seriously dissolves the line between one individual and another: &ldquo;We are all lichens.&rdquo;
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #065f46, #022c22);">
+        <div class="pageno">4 / 15 →</div>
+        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.95;"><path d="M7 3c0 4 10 6 10 10M17 3c0 4-10 6-10 10M7 21c0-4 10-6 10-10M17 21c0-4-10-6-10-10"/><path d="M8 6h8M8 18h8"/></svg>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Book of the day · 📖</div>
+        <h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">The Selfish Gene</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Evolution seen from the gene&rsquo;s point of view &mdash; and why that changes everything</p>
+        <p style="font-size:15px; opacity:0.75;">Richard Dawkins · Oxford University Press · 1976 · ~6 min read</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Swipe →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #047857, #064e3b);">
+        <div class="pageno">5 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The hook</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">What if you are not the point of evolution &mdash; but a vehicle your genes built to copy themselves?</p>
+        <p style="font-size:17.5px; line-height:1.5;">In 1976 Dawkins reframed evolution from the organism&rsquo;s perspective to the gene&rsquo;s, arguing that bodies are mere vehicles for replicators competing across the generations. It galvanised biology and fascinated a broad general readership.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0e7490, #083344);">
+        <div class="pageno">6 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The core idea</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">The gene &mdash; not the organism, not the species &mdash; is the primary unit of natural selection.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Dawkins&rsquo;s stated goal was to &ldquo;examine the biology of selfishness and altruism&rdquo; by combining theories of inclusive fitness, such as kin selection, with the gene-centred view of selection &mdash; and to criticise the popular idea that traits evolve &ldquo;for the good of the species.&rdquo;</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #166534, #052e16);">
+        <div class="pageno">7 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 6 · The replicator</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Genes that build good bodies spread</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Natural selection, in this view, is competition between genes to get copied. A gene that builds a body which survives and reproduces gets passed on; one that doesn&rsquo;t, disappears. Over deep time, the genes we see are simply the ones that were good at making more of themselves.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #15803d, #14532d);">
+        <div class="pageno">8 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 6 · The famous image</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">We are &ldquo;survival machines&rdquo;</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Organisms, Dawkins argues, are vehicles &mdash; survival machines built by genes to ensure their own replication. It is the book&rsquo;s most quoted idea and its most disorienting: the living world reorganised around the interests of the molecules doing the copying.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0f766e, #134e4a);">
+        <div class="pageno">9 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 6 · The twist on selfishness</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Selfish genes, altruistic animals</h3>
+        <p style="font-size:17.5px; line-height:1.5;">A &ldquo;selfish&rdquo; gene does not make a selfish person. Because relatives share genes, a gene can spread by making its vehicle help kin &mdash; kin selection. Apparent altruism between relatives is exactly what a gene bent on copying itself would produce.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4d7c0f, #365314);">
+        <div class="pageno">10 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 6 · Cooperation, explained</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Reciprocity and the human mind</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Kin selection and reciprocal altruism, Dawkins suggests, may have acted on human genes to produce many of our basic psychological tendencies. Cooperation need not be a mystery or a miracle &mdash; it can be the long-run payoff of genes playing a repeated game.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c3aed, #4c1d95);">
+        <div class="pageno">11 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 6 · A new replicator</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The birth of the &ldquo;meme&rdquo;</h3>
+        <p style="font-size:17.5px; line-height:1.5;">In the book&rsquo;s final chapter Dawkins coined the <em>meme</em>: a unit of cultural evolution analogous to the gene. Tunes, ideas, catchphrases and fashions, he proposed, spread from brain to brain and compete to be copied &mdash; a second replicator riding on top of biology.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #115e59, #042f2e);">
+        <div class="pageno">12 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 6 · What it overturned</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Goodbye to &ldquo;for the good of the species&rdquo;</h3>
+        <p style="font-size:17.5px; line-height:1.5;">The gene&rsquo;s-eye view offered a rigorous alternative to group-selection accounts &mdash; the loose idea that animals act for the benefit of their species. Fifty years on, the proper unit of selection is still debated, but Dawkins&rsquo;s reframing set the terms of the argument.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
+        <div class="pageno">13 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.16); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Why this matters in 2026</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Fifty years of a provocative view</h3>
+        <p style="font-size:17.5px; line-height:1.5;">2026 marks the book&rsquo;s 50th anniversary. Oxford University Press has released a 50th Anniversary Edition (544 pp) with a new epilogue in which Dawkins reflects on his signature work. Half a century on, translated into more than 30 languages, <em>The Selfish Gene</em> still sparks fascination and debate among scientists and enthusiasts alike.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">14 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">The takeaway</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:10px;">&ldquo;We are survival machines &ndash; robot vehicles blindly programmed to preserve the selfish molecules known as genes. This is a truth which still fills me with astonishment.&rdquo;</p>
+        <p style="font-size:15px; opacity:0.75; margin-bottom:16px;">&mdash; Richard Dawkins, <em>The Selfish Gene</em></p>
+        <p style="font-size:16px; line-height:1.5;">The unsettling gift of the book is a change of vantage point: look at life from the gene&rsquo;s side, and selfishness and altruism, family love and cooperation, all fall into a single, strange, coherent picture.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #e7ddc8; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">15 / 15 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Go deeper</h3>
+        <div style="margin-top:4px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://global.oup.com/academic/product/the-selfish-gene-9780198985389" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Oxford University Press · 50th Anniversary Edition</b></a>
+          <a href="https://en.wikipedia.org/wiki/The_Selfish_Gene" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · overview &amp; the meme</b></a>
+          <a href="https://www.goodreads.com/book/show/61535.The_Selfish_Gene" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Goodreads · reviews &amp; quotes</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 1 August 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
