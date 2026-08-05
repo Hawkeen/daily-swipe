@@ -1,7 +1,147 @@
 {
-  "updated": "2026-08-01",
-  "count": 155,
+  "updated": "2026-08-03",
+  "count": 165,
   "swipes": [
+    {
+      "file": "Swipe – The Mongol World Order – 2026-08-03.html",
+      "title": "The Mongol World Order",
+      "date": "2026-08-03",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Jack Weatherford (2004): the nomad remembered as a barbarian abolished torture, guaranteed religious freedom, smashed aristocratic privilege and stitched Eurasia into one zone of trade, law and exchange — a rough first draft of the modern world.",
+      "subject": {
+        "work": "genghis-khan-weatherford",
+        "creator": "jack-weatherford",
+        "topic": "mongol-empire-modernity",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Master and His Emissary – 2026-08-03.html",
+      "title": "The Master and His Emissary",
+      "date": "2026-08-03",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Iain McGilchrist (2009): the brain's two hemispheres embody two incompatible ways of attending to the world — and the West has let the narrow, abstracting 'emissary' (left) usurp the broad, living 'master' (right).",
+      "subject": {
+        "work": "the-master-and-his-emissary",
+        "creator": "iain-mcgilchrist",
+        "topic": "divided-brain-and-culture",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Bankers Who Broke the World – 2026-08-03.html",
+      "title": "The Bankers Who Broke the World",
+      "date": "2026-08-03",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Liaquat Ahamed (2009, Pulitzer): the Great Depression was no act of nature but the work of four central bankers who clung to the gold standard — a straitjacket that turned recession into catastrophe and set the stage for WWII.",
+      "subject": {
+        "work": "lords-of-finance",
+        "creator": "liaquat-ahamed",
+        "topic": "central-bankers-great-depression",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Element That Built Our World – 2026-08-03.html",
+      "title": "The Element That Built Our World",
+      "date": "2026-08-03",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "In Our Time (BBC Radio 4, 26 Jul 2026): Misha Glenny and guests on silicon — forged in dying stars, purified into the foundation of modern electronics, and quietly shaping life, the oceans and the climate.",
+      "subject": {
+        "work": "iot-silicon",
+        "creator": null,
+        "topic": "silicon-element-science",
+        "source": "in-our-time"
+      }
+    },
+    {
+      "file": "Swipe – I Contain Multitudes – 2026-08-03.html",
+      "title": "I Contain Multitudes",
+      "date": "2026-08-03",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Poetry · Walt Whitman's 'Leaves of Grass' (1855): the self-published book of twelve untitled poems, printed with no author's name, that invented American free verse and sang a democratic, all-embracing self.",
+      "subject": {
+        "work": "leaves-of-grass",
+        "creator": "walt-whitman",
+        "topic": "american-free-verse-poetry",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Free Raw Material – 2026-08-03.html",
+      "title": "Free Raw Material",
+      "date": "2026-08-03",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Shoshana Zuboff (2019): tech firms claim human experience as 'free raw material', refine it into behavioural predictions, and sell them in 'behavioural futures markets' — a new 'instrumentarian' power.",
+      "subject": {
+        "work": "the-age-of-surveillance-capitalism",
+        "creator": "shoshana-zuboff",
+        "topic": "surveillance-capitalism",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Sky-High Data Center – 2026-08-03.html",
+      "title": "The Sky-High Data Center",
+      "date": "2026-08-03",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Freakonomics Radio #682 (24 July 2026): Steve Levitt on Google's Project Suncatcher — solar-powered satellites carrying TPUs as a data centre in orbit, a moonshot answer to AI's energy crunch.",
+      "subject": {
+        "work": "freakonomics-682-ai-space",
+        "creator": "blaise-aguera-y-arcas",
+        "topic": "space-based-ai-datacenters",
+        "source": "freakonomics"
+      }
+    },
+    {
+      "file": "Swipe – The Art of the Unsaid – 2026-08-03.html",
+      "title": "The Art of the Unsaid",
+      "date": "2026-08-03",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Theatre · Anton Chekhov and 'The Seagull' (1896/1898): the playwright who replaced melodrama with subtext and 'indirect action' — booed off in St Petersburg, then reborn as a triumph at the Moscow Art Theatre.",
+      "subject": {
+        "work": "the-seagull",
+        "creator": "anton-chekhov",
+        "topic": "chekhovian-drama-subtext",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Party Is Like God – 2026-08-03.html",
+      "title": "The Party Is Like God",
+      "date": "2026-08-03",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Richard McGregor (2010): the Chinese Communist Party rules from behind the state — a Leninist machine, secret as the Vatican, that controls appointments, courts, media, military and business.",
+      "subject": {
+        "work": "the-party-mcgregor",
+        "creator": "richard-mcgregor",
+        "topic": "chinese-communist-party-power",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Krieg gegen die Raffinerien – 2026-08-03.html",
+      "title": "Krieg gegen die Raffinerien",
+      "date": "2026-08-03",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Streitkräfte und Strategien (NDR, 31. Juli 2026): Wie die Ukraine mit Langstreckendrohnen russische Ölraffinerien und Treibstofflager angreift — Tiefenschläge bis Sibirien, die Russlands Kriegswirtschaft treffen sollen.",
+      "subject": {
+        "work": "sus-ukraine-raffinerien",
+        "creator": null,
+        "topic": "ukraine-tiefenschlaege-raffinerien",
+        "source": "streitkraefte-und-strategien"
+      }
+    },
     {
       "file": "Swipe – The Origins of Totalitarianism – 2026-08-01.html",
       "title": "The Origins of Totalitarianism",
