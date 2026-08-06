@@ -1,7 +1,77 @@
 {
-  "updated": "2026-08-03",
-  "count": 165,
+  "updated": "2026-08-05",
+  "count": 170,
   "swipes": [
+    {
+      "file": "Swipe – A World of Surprising Resemblances – 2026-08-05.html",
+      "title": "A World of Surprising Resemblances",
+      "date": "2026-08-05",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Kenneth Pomeranz (2000): as late as 1750 the richest parts of China and Europe looked strikingly alike and hit the same ecological ceiling — only coal and New World 'ghost acres' let Britain race ahead.",
+      "subject": {
+        "work": "the-great-divergence-pomeranz",
+        "creator": "kenneth-pomeranz",
+        "topic": "great-divergence-china-europe",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – When Paradigms Break – 2026-08-05.html",
+      "title": "When Paradigms Break",
+      "date": "2026-08-05",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Thomas Kuhn (1962): science doesn't accumulate smoothly — long spells of 'normal science' are punctuated by anomalies, crisis and revolutionary paradigm shifts. The book that gave us the phrase.",
+      "subject": {
+        "work": "structure-of-scientific-revolutions",
+        "creator": "thomas-kuhn",
+        "topic": "paradigm-shifts-science",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Der Zwang zum Selbstzwang – 2026-08-05.html",
+      "title": "Der Zwang zum Selbstzwang",
+      "date": "2026-08-05",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Norbert Elias (1939): Wie über Jahrhunderte aus Fremdzwang Selbstzwang wurde — Affektkontrolle, höfische Gesellschaft und staatliches Gewaltmonopol als zwei Seiten eines Zivilisationsprozesses.",
+      "subject": {
+        "work": "ueber-den-prozess-der-zivilisation",
+        "creator": "norbert-elias",
+        "topic": "civilizing-process-self-restraint",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Drills, Data and Diplomacy – 2026-08-05.html",
+      "title": "Drills, Data and Diplomacy",
+      "date": "2026-08-05",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "MERICS China Podcast (17 July 2026): three signals from China's month — Joint Sea 2026 naval drills with Russia, its weakest growth since 2022, and a wary EU-China relationship.",
+      "subject": {
+        "work": "merics-china-in-26-jul-2026",
+        "creator": null,
+        "topic": "china-russia-military-eu-relations",
+        "source": "merics"
+      }
+    },
+    {
+      "file": "Swipe – The Horse That Flew – 2026-08-05.html",
+      "title": "The Horse That Flew",
+      "date": "2026-08-05",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Photography · Eadweard Muybridge and 'The Horse in Motion' (1878): to settle a bet, trip-wired cameras froze a galloping horse — proving all four hooves fly, and setting cinema in motion.",
+      "subject": {
+        "work": "muybridge-horse-in-motion",
+        "creator": "eadweard-muybridge",
+        "topic": "chronophotography-motion-studies",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – The Mongol World Order – 2026-08-03.html",
       "title": "The Mongol World Order",
