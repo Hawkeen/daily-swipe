@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Buch · Max Webers 'Die protestantische Ethik und der Geist des Kapitalismus' (1904/05): Warum entstand der rationale Kapitalismus ausgerechnet im asketischen Protestantismus — und wie wurde aus religiöser Berufung ein 'stahlhartes Gehäuse'?"
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Das stahlharte Gehäuse — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #57534e, #292524);">
+        <div class="pageno">1 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Rückblick · 1 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Der Zwang zum Selbstzwang&ldquo; (5. Aug. 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was beschreibt Norbert Elias&rsquo; &bdquo;Prozess der Zivilisation&ldquo;?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Zivilisation entsteht schlagartig durch neue Gesetze</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Über Jahrhunderte wurde aus äußerem Fremdzwang verinnerlichter Selbstzwang &mdash; Affektkontrolle und staatliches Gewaltmonopol</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Die Menschen waren immer schon gleich diszipliniert</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: B</b> &mdash; Elias (1939) zeigt, wie höfische Gesellschaft und staatliches Gewaltmonopol Affektkontrolle einübten: aus Fremdzwang wurde Selbstzwang.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #3b0764, #1e1b4b);">
+        <div class="pageno">2 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Rückblick · 2 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Zeit der Zauberer&ldquo; (23. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Worum geht es in Eilenbergers &bdquo;Zeit der Zauberer&ldquo;?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Um das große Jahrzehnt der Philosophie 1919&ndash;1929 &mdash; Cassirer, Benjamin, Heidegger und Wittgenstein</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Um die Physik des frühen 20. Jahrhunderts</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Um mittelalterliche Magie und Alchemie</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: A</b> &mdash; Eilenberger erzählt das Jahrzehnt 1919&ndash;1929 durch vier Leben, gerahmt von der Davoser Disputation 1929 (Cassirer gegen Heidegger).
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">3 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Rückblick · 3 von 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Strukturwandel der Öffentlichkeit&ldquo; (22. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was beschreibt Habermas mit dem &bdquo;Strukturwandel der Öffentlichkeit&ldquo;?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Die Öffentlichkeit war schon immer manipuliert und leer</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Öffentlichkeit spielt für die Demokratie keine Rolle</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Wie in Kaffeehäusern die bürgerliche Öffentlichkeit entstand &mdash; und wie Massenmedien und PR sie zur manipulierten Pseudo-Öffentlichkeit zurückverwandeln</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: C</b> &mdash; Habermas (1962): aus der räsonierenden bürgerlichen Öffentlichkeit wird durch Kommerz und PR eine &bdquo;Refeudalisierung&ldquo; &mdash; eine inszenierte Pseudo-Öffentlichkeit.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #292524, #0c0a09);">
+        <div class="pageno">4 / 15 →</div>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Max%20Weber,%201918.jpg" alt="Max Weber, 1918" style="display:block; width:130px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.4); margin-bottom:14px;" loading="lazy" onerror="this.style.display='none'">
+        <div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Max Weber, 1918. Gemeinfrei, via Wikimedia Commons.</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Buch des Tages · 📖</div>
+        <h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">Das stahlharte Gehäuse</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Wie aus der Angst um das Seelenheil der Geist des Kapitalismus wurde</p>
+        <p style="font-size:15px; opacity:0.75;">Max Weber · <em>Die protestantische Ethik und der Geist des Kapitalismus</em> · 1904/05 (erweitert 1920) · ~6 Min. Lesezeit</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Weiter →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #44403c, #1c1917);">
+        <div class="pageno">5 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Der Aufhänger</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">Warum entstand der moderne Kapitalismus ausgerechnet im asketischen Protestantismus &mdash; und nicht dort, wo man das Geld liebte?</p>
+        <p style="font-size:17.5px; line-height:1.5;">Webers Antwort dreht die naive Erwartung um: Nicht Gier, sondern religiös motivierte, methodische Berufsarbeit lieferte dem Kapitalismus seine ideelle Grundlage. Ein Gründungswerk der Religions- und Wirtschaftssoziologie.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #1e1b4b);">
+        <div class="pageno">6 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">Die Kernthese</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Eine spezifische protestantische Ethik war eine der entscheidenden Wurzeln der abendländischen Form des Wirtschaftens.</p>
+        <p style="font-size:17.5px; line-height:1.5;">Weber fragt nach der Besonderheit der abendländischen Moderne und findet eine &bdquo;Wahlverwandtschaft&ldquo; zwischen der Ethik des asketischen Protestantismus und der modernen, auf freiem Unternehmertum beruhenden kapitalistischen Berufsethik.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3730a3, #1e1b4b);">
+        <div class="pageno">7 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 1 / 7 · Die Frage</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Nicht &bdquo;woher die Gier&ldquo;</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Gierige Menschen gab es zu allen Zeiten und überall. Webers eigentliche Frage ist eine andere: Warum entstand gerade im Abendland der <em>rationale</em>, methodisch-betriebene Kapitalismus? Er sucht die geistige Wurzel, nicht den Trieb.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4338ca, #1e1b4b);">
+        <div class="pageno">8 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 2 / 7 · Prädestination</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Erwählt oder verworfen?</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Das zentrale Dogma des Calvinismus ist die Gnadenwahl: Himmel oder Hölle sind vorbestimmt. Die Erwählten unterscheiden sich äußerlich nicht von den Verworfenen &mdash; und niemand kann direkt zu seinem Auserwähltsein beitragen. Das erzeugt einen enormen inneren Druck.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #5b21b6, #2e1065);">
+        <div class="pageno">9 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 3 / 7 · Das Zeichen</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Erfolg als Gnadenzeichen</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Aus dieser Ungewissheit wird ein Motor: Rastlose, systematische Berufsarbeit und wirtschaftlicher Erfolg gelten als <em>Zeichen</em> (nicht als Mittel) der Erwählung. Fleiß und Sparsamkeit werden religiös aufgeladen &mdash; ein Leistungsgedanke, der auch das kapitalistische Unternehmertum prägt.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #6d28d9, #2e1065);">
+        <div class="pageno">10 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 4 / 7 · Der Vergleich</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Calvin gegen Rom</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Vor allem der Calvinismus sei wirtschaftsfreundlicher als der Katholizismus, so Weber: Er hält die Gläubigen zu Fleiß und Sparsamkeit an und deutet beruflichen Erfolg als Ausdruck göttlicher Gnade &mdash; genau jener Leistungsgedanke, der dem Unternehmertum eigen ist.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c3aed, #3b0764);">
+        <div class="pageno">11 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 5 / 7 · Die Askese</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Askese verlässt das Kloster</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Der entscheidende Schritt: Die Askese wird aus den Mönchszellen in das Berufsleben übertragen und beginnt die innerweltliche Sittlichkeit zu beherrschen. Genuss ist verpönt, Reinvestition geboten &mdash; die Haltung, aus der Kapital wächst.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4338ca, #1e1b4b);">
+        <div class="pageno">12 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 6 / 7 · Die Methode</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Idealtypus, nicht Monokausalität</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Weber arbeitet mit dem &bdquo;Idealtypus&ldquo; &mdash; einer zugespitzten Modellbildung historischer Erscheinungen. Er behauptet keine einfache Ursache-Wirkung, sondern eine <em>Wahlverwandtschaft</em>. Ein Punkt, der bis heute gern missverstanden wird.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #292524, #0c0a09);">
+        <div class="pageno">13 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 7 / 7 · Das Gehäuse</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Vom dünnen Mantel zum Stahl</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Am Ende verdorren die religiösen Wurzeln &mdash; der Zwang zur Berufsarbeit aber bleibt. Aus einem &bdquo;dünnen Mantel&ldquo; ließ das Verhängnis ein &bdquo;stahlhartes Gehäuse&ldquo; werden, in dem wir bis heute leben: Arbeit als Selbstzweck, ohne ihren einstigen Sinn.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">14 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Der Kerngedanke</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:14px;">&bdquo;Fachmenschen ohne Geist, Genußmenschen ohne Herz: dies Nichts bildet sich ein, eine nie vorher erreichte Stufe des Menschentums erstiegen zu haben.&ldquo;</p>
+        <p style="font-size:16px; line-height:1.5;">&mdash; Max Webers berühmte Schlusswarnung: Was als religiöse Berufung begann, endet als sinnentleerte Betriebsamkeit im stahlharten Gehäuse.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #e7ddc8; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">15 / 15 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Tiefer eintauchen</h3>
+        <div style="margin-top:4px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Nächste Schritte</p>
+          <a href="https://de.wikipedia.org/wiki/Die_protestantische_Ethik_und_der_Geist_des_Kapitalismus" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · Die protestantische Ethik</b></a>
+          <a href="http://www.zeno.org/Soziologie/M/Weber,+Max/Schriften+zur+Religionssoziologie/Die+protestantische+Ethik+und+der+Geist+des+Kapitalismus" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Zeno.org · Volltext</b></a>
+          <a href="https://soztheo.de/soziologie/schluesselwerke-der-soziologie/max-weber-die-protestantische-ethik-und-der-geist-des-kapitalismus-1905/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>SozTheo · Einführung &amp; Kritik</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 11. August 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zurück">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
