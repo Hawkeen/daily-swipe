@@ -1,7 +1,77 @@
 {
   "updated": "2026-08-11",
-  "count": 180,
+  "count": 185,
   "swipes": [
+    {
+      "file": "Swipe – Where Chaos Begins – 2026-08-11.html",
+      "title": "Where Chaos Begins",
+      "date": "2026-08-11",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "James Gleick's 'Chaos' (1987): a rounding error breaks the weather, a butterfly reshapes the forecast, a fractal repeats at every scale — how scientists found deep order hiding inside disorder.",
+      "subject": {
+        "work": "chaos-gleick",
+        "creator": "james-gleick",
+        "topic": "chaos-theory",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Die dunkle Seite der Vernunft – 2026-08-11.html",
+      "title": "Die dunkle Seite der Vernunft",
+      "date": "2026-08-11",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Horkheimer & Adorno, „Dialektik der Aufklärung“ (1947): Warum die Vernunft, die uns befreien sollte, in Herrschaft umschlägt — Entzauberung, Odysseus, Kulturindustrie. Das Gründungsbuch der Kritischen Theorie.",
+      "subject": {
+        "work": "dialektik-der-aufklaerung",
+        "creator": "adorno-horkheimer",
+        "topic": "dialectic-of-enlightenment",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – After Galwan – 2026-08-11.html",
+      "title": "After Galwan",
+      "date": "2026-08-11",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "The China-Global South Podcast (10 Aug 2026) with Yale's Sushant Singh: after the Galwan freeze, China and India edge toward a wary, tactical thaw across trade, BRICS and the US–China rivalry.",
+      "subject": {
+        "work": "cgsp-china-india-singh",
+        "creator": "sushant-singh",
+        "topic": "china-india-relations",
+        "source": "china-global-south"
+      }
+    },
+    {
+      "file": "Swipe – Der erste Deutsche – 2026-08-11.html",
+      "title": "Der erste Deutsche",
+      "date": "2026-08-11",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "ZEIT Geschichte (25. Apr 2026): Wie aus Arminius, der 9 n. Chr. drei römische Legionen schlug, über Luther, Kleist und das Kaiserreich „der erste Deutsche“ und ein Nationalmythos wurde.",
+      "subject": {
+        "work": "zeitgeschichte-hermann-cherusker",
+        "creator": null,
+        "topic": "arminius-hermann-myth",
+        "source": "zeit-geschichte"
+      }
+    },
+    {
+      "file": "Swipe – The Sound of Water – 2026-08-11.html",
+      "title": "The Sound of Water",
+      "date": "2026-08-11",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Poetry · Matsuo Bashō (1644–1694) turned haiku into a spiritual art: an old pond, a frog, a splash — plus the aesthetics of sabi and karumi, and a walking journey to Japan's deep north.",
+      "subject": {
+        "work": "basho-haiku",
+        "creator": "matsuo-basho",
+        "topic": "japanese-haiku",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – The Cataclysm Is Us – 2026-08-11.html",
       "title": "The Cataclysm Is Us",
