@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Dance · Martha Graham built modern dance from the breath: 'contraction and release', the grief-solo 'Lamentation', and 'Appalachian Spring'. In 2026 her company — America's oldest — turns 100."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Movement Never Lies — Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #334155, #0f172a);">
+        <div class="pageno">1 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;The Origins of Totalitarianism&rdquo; (1 Aug 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What makes totalitarianism, for Arendt, a wholly new kind of regime?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. It is just an old-fashioned tyranny with a new name</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. It fuses ideology and terror for total domination, rooted in statelessness, superfluousness and organised loneliness</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. It rules purely by open, honest persuasion</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: B</b> &mdash; Arendt (1951): a new regime fusing ideology and terror for total domination, growing from statelessness, human superfluousness and organised loneliness.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #4c1d95, #2e1065);">
+        <div class="pageno">2 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Die Duineser Elegien&ldquo; (24. Juli 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was kennzeichnet Rilkes &bdquo;Duineser Elegien&ldquo;?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Zehn Elegien zwischen Klage und Rühmen &mdash; am Schloss Duino im Sturm gehört, erst zehn Jahre später in Muzot vollendet</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Ein heiteres Reisetagebuch in Prosa</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Politische Kampfgedichte gegen den Krieg</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Antwort: A</b> &mdash; Rilkes zehn Elegien (1912&ndash;1922) schwanken zwischen Klage und Rühmen; am Schloss Duino im Sturm begonnen, erst nach zehn Jahren in Muzot vollendet.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #14532d, #052e16);">
+        <div class="pageno">3 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+        <h3 style="font-size:23px; margin-bottom:8px;">From &ldquo;Seeing Like a State&rdquo; (25 June 2026)</h3>
+        <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Why, per James C. Scott, do grand &lsquo;scientific&rsquo; schemes to improve society keep failing?</p>
+        <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. They aren&rsquo;t ambitious or centralised enough</button>
+        <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. They rely too much on local tradition</button>
+        <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. The state&rsquo;s drive for legibility erases the local knowledge (mētis) that real societies run on</button>
+        <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+          ✅ <b>Answer: C</b> &mdash; Scott: high-modernist schemes flatten society to make it &lsquo;legible&rsquo;, destroying the practical local knowledge &mdash; mētis &mdash; on which it actually depends.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4a044e, #1a0320);">
+        <div class="pageno">4 / 15 →</div>
+        <svg width="72" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:18px; opacity:0.95;"><circle cx="12" cy="4" r="2"/><path d="M12 6v7M12 9l-6-2M12 9l6-2M12 13l-4 7M12 13l4 7"/></svg>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Creative topic · 🎨 Dance</div>
+        <h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">Movement Never Lies</h1>
+        <p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">How Martha Graham built modern dance out of a single, honest thing: the breath</p>
+        <p style="font-size:15px; opacity:0.75;">Martha Graham · modern dance &amp; the Graham technique · company founded 1926 · ~6 min read</p>
+        <p style="font-size:14px; opacity:0.6; margin-top:16px;">Swipe →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #701a75, #2a0a2e);">
+        <div class="pageno">5 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The hook</h3>
+        <p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">What if a body could show you an emotion more truthfully than any word?</p>
+        <p style="font-size:17.5px; line-height:1.5;">Martha Graham thought it could. &lsquo;Movement never lies,&rsquo; she said &mdash; and she spent a lifetime inventing a language of dance to prove it, one built not on ballet&rsquo;s prettiness but on the raw mechanics of feeling.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #86198f, #4a044e);">
+        <div class="pageno">6 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:12px;">The core idea</h3>
+        <p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Our emotions ride on the breath &mdash; so Graham made breathing itself the engine of dance.</p>
+        <p style="font-size:17.5px; line-height:1.5;">She built a whole technique around &lsquo;contraction and release&rsquo;, which she called a dramatisation of breathing. Where ballet reaches up and out for grace, Graham&rsquo;s dancers move from an impulse in the centre of the torso &mdash; the same place a sob or a laugh comes from.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #9d174d, #4c0519);">
+        <div class="pageno">7 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 6 · 1926</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">A new American art form</h3>
+        <p style="font-size:17.5px; line-height:1.5;">In New York in April 1926, Graham stepped onstage with three supporting dancers &mdash; and a company was born. It became the oldest dance company in the United States, and its oldest integrated one: the seedbed of American modern dance.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #86198f, #3b0764);">
+        <div class="pageno">8 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 6 · The technique</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Contraction and release</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Graham developed her technique by studying people: she realised emotion rides on the breath, and from that built her famous contraction (the body folding inward on an exhale) and release. It gave modern dance a vocabulary as rigorous as ballet&rsquo;s &mdash; but rooted in the gut, not the pointed toe.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #6b21a8, #2e1065);">
+        <div class="pageno">9 / 15 →</div>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Janet%20Eilber%20Performing%20Martha%20Graham%E2%80%99s%20%E2%80%9CLamentation%E2%80%9D%20in%20the%20East%20Room%20of%20the%20White%20House%20-%20NARA%20-%2030805967.jpg" alt="A dancer performing Martha Graham's Lamentation, stretching a tube of jersey into angular shapes" style="display:block; width:100%; max-height:260px; object-fit:cover; border-radius:12px; margin-bottom:12px;" loading="lazy" onerror="this.style.display='none'">
+        <div style="font-size:11px; opacity:0.6; margin:-6px 0 14px; line-height:1.35;">Image: Janet Eilber performing Graham&rsquo;s <em>Lamentation</em>, White House (U.S. National Archives). Public domain, via Wikimedia Commons.</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 6 · Lamentation</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Grief inside a tube of jersey</h3>
+        <p style="font-size:17.5px; line-height:1.5;">In her 1930 solo <em>Lamentation</em>, the dancer sits on a bench, almost entirely encased in a stretch of purple jersey, and sways and flexes so the fabric strains into angular shapes &mdash; a moving sculpture of grief, set to music by Zoltán Kodály. It was unlike anything audiences had seen.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #9d174d, #4c0519);">
+        <div class="pageno">10 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 6 · The body can&rsquo;t lie</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Dance turned inward</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Graham dragged dance away from decorative spectacle and toward psychological and emotional truth. Because movement is driven by breath and impulse, she held, it cannot fake feeling &mdash; the dancing body reveals an inner state the way the face reveals a laugh or a sob.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #86198f, #3b0764);">
+        <div class="pageno">11 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 6 · Appalachian Spring</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Graham meets Copland and Noguchi</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Her 1944 masterwork <em>Appalachian Spring</em> paired her choreography with a score by Aaron Copland and a spare, iconic stage set by the sculptor Isamu Noguchi &mdash; a total collaboration of dance, music and design that became one of the defining American artworks of the century.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #6b21a8, #2e1065);">
+        <div class="pageno">12 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 6 · The living archive</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">A technique passed hand to hand</h3>
+        <p style="font-size:17.5px; line-height:1.5;">Graham died in 1991, but her company endures &mdash; now led by artistic director Janet Eilber, who dances and teaches the same contraction-and-release Graham drew from studying how people breathe. The vocabulary survives because each generation performs it into the next.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #2a0a2e, #0c0a09);">
+        <div class="pageno">13 / 15 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Why this matters in 2026</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">One hundred years of Graham</h3>
+        <p style="font-size:17.5px; line-height:1.5;">2026 is the centennial: GRAHAM100, marking the company&rsquo;s founding on 18 April 1926, with a gala weekend (17&ndash;19 April) and a season at New York City Center. Programmes pair the classics &mdash; <em>Lamentation</em> and <em>Appalachian Spring</em> &mdash; with new work, a century on.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">14 / 15 →</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">The takeaway</h3>
+        <p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:14px;">&ldquo;There is a vitality, a life force, an energy, a quickening that is translated through you into action.&rdquo;</p>
+        <p style="font-size:16px; line-height:1.5;">&mdash; Martha Graham. She built a technique so that this force could be made visible &mdash; and a century on, dancers still move from the breath to show us what words can&rsquo;t.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #e7ddc8; color: #2d1810;">
+        <div class="pageno" style="opacity:0.5;">15 / 15 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:14px;">Go deeper</h3>
+        <div style="margin-top:4px">
+          <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+          <a href="https://en.wikipedia.org/wiki/Martha_Graham" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · Martha Graham</b></a>
+          <a href="https://marthagraham.org/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Martha Graham Dance Company</b></a>
+          <a href="https://www.npr.org/2026/03/19/nx-s1-5683079/martha-graham-dance-company-100-years-centennial" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>NPR · &lsquo;Movement never lies&rsquo;: Graham at 100</b></a>
+        </div>
+        <p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe · 9 August 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

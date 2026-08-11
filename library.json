@@ -1,7 +1,77 @@
 {
-  "updated": "2026-08-05",
-  "count": 170,
+  "updated": "2026-08-09",
+  "count": 175,
   "swipes": [
+    {
+      "file": "Swipe – An Eternal Golden Braid – 2026-08-09.html",
+      "title": "An Eternal Golden Braid",
+      "date": "2026-08-09",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Douglas Hofstadter's 'Gödel, Escher, Bach' (1979): a logician, an artist and a composer share one trick — the self-referential 'strange loop' — and a mind, he argues, is exactly such a loop twisting back on itself.",
+      "subject": {
+        "work": "godel-escher-bach",
+        "creator": "douglas-hofstadter",
+        "topic": "strange-loops-self-reference",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – A Distant Mirror – 2026-08-09.html",
+      "title": "A Distant Mirror",
+      "date": "2026-08-09",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Barbara Tuchman (1978): plague, endless war, schism and revolt made the 14th century a 'violent, tormented' age — and, she argues, a distant mirror of our own turbulent times.",
+      "subject": {
+        "work": "a-distant-mirror",
+        "creator": "barbara-tuchman",
+        "topic": "fourteenth-century-crisis",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Fish in the Tin – 2026-08-09.html",
+      "title": "The Fish in the Tin",
+      "date": "2026-08-09",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Odd Lots (7 Aug 2026) with Fishwife's Becca Millstein: how a humble sardine travels from ocean to can — and how tinned fish became a premium, climate- and geopolitics-exposed business.",
+      "subject": {
+        "work": "oddlots-tinned-fish-millstein",
+        "creator": "becca-millstein",
+        "topic": "tinned-fish-supply-chain",
+        "source": "odd-lots"
+      }
+    },
+    {
+      "file": "Swipe – Music as a Gradual Process – 2026-08-09.html",
+      "title": "Music as a Gradual Process",
+      "date": "2026-08-09",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Music · Steve Reich and minimalism: a 1965 tape accident became 'phasing', and an aesthetic of audible, gradual process — from 'It's Gonna Rain' to 'Music for 18 Musicians'. In 2026 Reich turns 90.",
+      "subject": {
+        "work": "reich-music-for-18-musicians",
+        "creator": "steve-reich",
+        "topic": "minimalism-phase-music",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Movement Never Lies – 2026-08-09.html",
+      "title": "Movement Never Lies",
+      "date": "2026-08-09",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Dance · Martha Graham built modern dance from the breath: 'contraction and release', the grief-solo 'Lamentation' and 'Appalachian Spring'. In 2026 her company — America's oldest — turns 100.",
+      "subject": {
+        "work": "graham-modern-dance",
+        "creator": "martha-graham",
+        "topic": "modern-dance-technique",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – A World of Surprising Resemblances – 2026-08-05.html",
       "title": "A World of Surprising Resemblances",
