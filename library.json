@@ -1,7 +1,77 @@
 {
-  "updated": "2026-08-09",
-  "count": 175,
+  "updated": "2026-08-11",
+  "count": 180,
   "swipes": [
+    {
+      "file": "Swipe – The Cataclysm Is Us – 2026-08-11.html",
+      "title": "The Cataclysm Is Us",
+      "date": "2026-08-11",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Elizabeth Kolbert (2014, Pulitzer): five times, natural catastrophe has nearly erased life on Earth. The sixth mass extinction is unfolding now — and 'this time around the cataclysm is us'.",
+      "subject": {
+        "work": "the-sixth-extinction",
+        "creator": "elizabeth-kolbert",
+        "topic": "sixth-mass-extinction",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Das stahlharte Gehäuse – 2026-08-11.html",
+      "title": "Das stahlharte Gehäuse",
+      "date": "2026-08-11",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Max Weber (1904/05): Nicht Gier, sondern die Angst ums Seelenheil — wie die asketische Ethik des Calvinismus dem Kapitalismus seinen Geist gab und am Ende zum 'stahlharten Gehäuse' erstarrte.",
+      "subject": {
+        "work": "die-protestantische-ethik",
+        "creator": "max-weber",
+        "topic": "protestant-ethic-capitalism",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – China's Two Economies – 2026-08-11.html",
+      "title": "China's Two Economies",
+      "date": "2026-08-11",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Pekingology (CSIS, 6 Aug 2026) with Alicia García-Herrero: China runs a dual economy — a world-beating tech machine bolted to a stalling home market — because Xi prizes tech leadership over prosperity.",
+      "subject": {
+        "work": "pekingology-dual-economy",
+        "creator": "alicia-garcia-herrero",
+        "topic": "china-dual-economy-tech-priority",
+        "source": "pekingology"
+      }
+    },
+    {
+      "file": "Swipe – Der Sohn des Sterns – 2026-08-11.html",
+      "title": "Der Sohn des Sterns",
+      "date": "2026-08-11",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Eine Stunde History (DLF Nova, 7. Aug 2026): der Bar-Kochba-Aufstand (132–136 n. Chr.) — der letzte große jüdische Aufstand gegen Rom, von Aelia Capitolina bis zur Katastrophe von Betar und 'Syria Palaestina'.",
+      "subject": {
+        "work": "esh-bar-kochba",
+        "creator": null,
+        "topic": "bar-kochba-revolt",
+        "source": "eine-stunde-history"
+      }
+    },
+    {
+      "file": "Swipe – The Grayscale Gaze – 2026-08-11.html",
+      "title": "The Grayscale Gaze",
+      "date": "2026-08-11",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Visual art · Amy Sherald paints Black Americans with grayscale skin so you meet the person before the label. Her 'American Sublime' retrospective is on now at the High Museum — after a censorship row pulled it from the Smithsonian.",
+      "subject": {
+        "work": "sherald-american-sublime",
+        "creator": "amy-sherald",
+        "topic": "contemporary-american-portraiture",
+        "source": "high-museum"
+      }
+    },
     {
       "file": "Swipe – An Eternal Golden Braid – 2026-08-09.html",
       "title": "An Eternal Golden Braid",
