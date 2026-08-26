@@ -1,7 +1,77 @@
 {
-  "updated": "2026-08-11",
-  "count": 185,
+  "updated": "2026-08-26",
+  "count": 190,
   "swipes": [
+    {
+      "file": "Swipe – The Home-Run Business – 2026-08-26.html",
+      "title": "The Home-Run Business",
+      "date": "2026-08-26",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Sebastian Mallaby's 'The Power Law' (2022): a tiny handful of venture bets pay for every failure — the skew that drives Silicon Valley, and 2026's record AI-funding boom.",
+      "subject": {
+        "work": "the-power-law",
+        "creator": "sebastian-mallaby",
+        "topic": "venture-capital-power-law",
+        "source": "penguin-press"
+      }
+    },
+    {
+      "file": "Swipe – Power, Not Elections – 2026-08-26.html",
+      "title": "Power, Not Elections",
+      "date": "2026-08-26",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Robert Caro's 'The Power Broker' (1974, Pulitzer): how Robert Moses, never elected, seized power through unelected authorities and reshaped New York — the classic study of unaccountable power.",
+      "subject": {
+        "work": "the-power-broker",
+        "creator": "robert-caro",
+        "topic": "robert-moses-urban-power",
+        "source": "knopf"
+      }
+    },
+    {
+      "file": "Swipe – The Immortality Project – 2026-08-26.html",
+      "title": "The Immortality Project",
+      "date": "2026-08-26",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Ernest Becker's 'The Denial of Death' (1973, Pulitzer): civilisation as a defence against mortality — 'hero systems' and 'immortality projects', and why rival heroisms turn deadly.",
+      "subject": {
+        "work": "the-denial-of-death",
+        "creator": "ernest-becker",
+        "topic": "mortality-immortality-projects",
+        "source": "free-press"
+      }
+    },
+    {
+      "file": "Swipe – Africa's Industrial Behemoth – 2026-08-26.html",
+      "title": "Africa's Industrial Behemoth",
+      "date": "2026-08-26",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Odd Lots (24 Aug 2026) with Joe Studwell on the Dangote refinery: how Africa's richest man built what the Nigerian state couldn't — and whether it can break the continent's industrial trap.",
+      "subject": {
+        "work": "odd-lots-dangote-nigeria",
+        "creator": "joe-studwell",
+        "topic": "nigeria-industrialisation-dangote",
+        "source": "odd-lots"
+      }
+    },
+    {
+      "file": "Swipe – When Vengeance Became Justice – 2026-08-26.html",
+      "title": "When Vengeance Became Justice",
+      "date": "2026-08-26",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Theatre · Aeschylus's Oresteia (458 BCE): the only complete surviving Greek tragic trilogy stages the move from blood-vengeance to the first jury court — on at London's Bridge Theatre in 2026.",
+      "subject": {
+        "work": "aeschylus-oresteia",
+        "creator": "aeschylus",
+        "topic": "greek-tragedy-justice-revenge",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – Where Chaos Begins – 2026-08-11.html",
       "title": "Where Chaos Begins",

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Book \u00b7 Robert Caro's 'The Power Broker' (1974): how Robert Moses, never elected to anything, seized power through unelected authorities and reshaped New York \u2014 the classic study of how power really works."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Power, Not Elections &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #334155, #0f172a);">
+        <div class="pageno">1 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 1 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;A Distant Mirror&rdquo; (9 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Why does Barbara Tuchman call the 14th century a &lsquo;distant mirror&rsquo;?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Because nothing in it resembles our own age</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Because its plague, endless war, schism and revolt echo the calamities of the modern age</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Because it was a rare golden age of peace and order</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: B</b> &mdash; Tuchman: the &lsquo;violent, tormented&rsquo; 14th century is a distant mirror of our own troubled times.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">2 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 2 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;The Great Transformation&rdquo; (27 Jul 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What is Karl Polanyi&rsquo;s central claim?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. The self-regulating market arose naturally and needs no state</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. The &lsquo;self-regulating market&rsquo; was a planned utopia that turned land, labour and money into &lsquo;fictitious commodities&rsquo; &mdash; and society fought back</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Markets always and everywhere increase social harmony</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: B</b> &mdash; Polanyi: the market society was engineered, not natural &mdash; and it provoked society to protect itself.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">3 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 3 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;Seeing Like a State&rdquo; (25 Jun 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Why does James C. Scott say grand &lsquo;scientific&rsquo; schemes (planned cities, rational forests) keep failing?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. They are never given enough funding</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. The state&rsquo;s drive to make society &lsquo;legible&rsquo; erases the local, practical knowledge that makes things actually work</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Citizens are simply too lazy to follow the plans</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: B</b> &mdash; Scott: high-modernist legibility flattens the messy local know-how (m&#275;tis) that real life depends on.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1f2937, #0b1220);">
+        <div class="pageno">4 / 13 →</div>
+        <img src="https://covers.openlibrary.org/b/isbn/9780394720241-L.jpg" alt="Cover of The Power Broker by Robert Caro" style="display:block; width:140px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.3); margin-bottom:16px;" loading="lazy" onerror="this.style.display='none'"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Cover: Alfred A. Knopf / Vintage (identifying use).</div><div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Book of the day &middot; &#128214;</div><h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">Power, Not Elections</h1><p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">How did one man, never elected to anything, reshape New York for more than forty years?</p><p style="font-size:15px; opacity:0.75;">Robert A. Caro &middot; <em>The Power Broker</em> &middot; 1974 (Pulitzer 1975) &middot; ~6 min read</p><p style="font-size:14px; opacity:0.6; margin-top:16px;">Swipe →</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #334155, #0f172a);">
+        <div class="pageno">5 / 13 →</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The hook</h3><p style="font-size:30px; line-height:1.25; font-weight:700; margin-bottom:16px;">Who really runs a city &mdash; the people it elects, or the man who controls the money?</p><p style="font-size:17.5px; line-height:1.5;">Robert Moses was never elected to a single office. Yet for four decades he built the bridges, highways, parks and housing of New York, bending the lives of millions to his will. Caro&rsquo;s 1,300-page biography asks how, and at what cost.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #475569, #1e293b);">
+        <div class="pageno">6 / 13 →</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The core idea</h3><p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Power &mdash; not ideals &mdash; builds cities. Denied power at the ballot box, Moses seized it another way.</p><p style="font-size:17.5px; line-height:1.5;">Caro&rsquo;s three great themes are Moses&rsquo;s hunger for power, his genius for gaining it without ever being elected, and the complete reversal of how New Yorkers judged him over time. It is a study of how unaccountable power actually works.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1f2937, #0b1220);">
+        <div class="pageno">7 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 5 &middot; The pivot</div><h3 style="font-size:23px; margin-bottom:10px;">Idealism, then the meat-axe</h3><p style="font-size:17.5px; line-height:1.5;"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Robert_Moses_with_Battery_Bridge_model.jpg" alt="Robert Moses with a model of the proposed Battery Bridge, 1939" style="display:block; width:100%; max-height:240px; object-fit:cover; border-radius:12px; margin-bottom:12px;" loading="lazy" onerror="this.style.display='none'"><div style="font-size:11px; opacity:0.6; margin:-6px 0 12px; line-height:1.35;">Image: C.&nbsp;M. Stieglitz, New York World-Telegram &amp; Sun / Library of Congress. No known copyright restrictions, via Wikimedia Commons.</div>The young Moses was a reformer full of dreams &mdash; and was crushed by those who held real power. He drew the lesson that ideals are worthless without power, and spent the rest of his life amassing it.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #334155, #0f172a);">
+        <div class="pageno">8 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 5 &middot; The machine</div><h3 style="font-size:23px; margin-bottom:10px;">Power without a single vote</h3><p style="font-size:17.5px; line-height:1.5;">Moses ruled through unelected public authorities &mdash; above all the Triborough Bridge Authority. Its endless stream of toll revenue, plus his grip on contractors and labour unions, gave him leverage no mayor or governor could match.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3f3f46, #18181b);">
+        <div class="pageno">9 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 5 &middot; The doctrine</div><h3 style="font-size:23px; margin-bottom:10px;">&lsquo;Power was what dreams needed&rsquo;</h3><p style="font-size:17.5px; line-height:1.5;">For Moses, science, knowledge and brilliance were mere tools; they didn&rsquo;t build highways or civil-service systems &mdash; <em>power</em> did. His whole career was the pursuit of the &lsquo;executive support&rsquo; that turns a plan into concrete.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #475569, #1e293b);">
+        <div class="pageno">10 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 5 &middot; The cost</div><h3 style="font-size:23px; margin-bottom:10px;">Highways over neighbourhoods</h3><p style="font-size:17.5px; line-height:1.5;">Moses favoured the car over mass transit and drove expressways through dense communities. &lsquo;When you operate in an overbuilt metropolis,&rsquo; he said, &lsquo;you have to hack your way with a meat-axe.&rsquo; Whole neighbourhoods were uprooted in the name of progress.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1f2937, #0b1220);">
+        <div class="pageno">11 / 13 →</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 5 &middot; The turn</div><h3 style="font-size:23px; margin-bottom:10px;">From hero to cautionary tale</h3><p style="font-size:17.5px; line-height:1.5;">Caro charts an about-face: the celebrated builder of parks and beaches became, in hindsight, a warning about power exercised without accountability. Fifty years on, <em>The Power Broker</em> remains the classic study of how a city is really made.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: background: #ede4d3; color: #2d1810;;">
+        <div class="pageno">12 / 13 →</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The takeaway</h3><p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:14px;">&ldquo;&hellip;denied power within the normal framework of the democratic process, [he] stepped outside that framework to grasp power sufficient to shape a great city and to hold sway over the very texture of millions of lives.&rdquo;</p><p style="font-size:16px; line-height:1.5;">&mdash; Robert A. Caro, <em>The Power Broker</em>. The book endures because its subject is not one man but power itself.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: background: #e7ddc8; color: #2d1810;;">
+        <div class="pageno">13 / 13 ✓</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Go deeper</h3><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p><a href="https://www.robertcaro.org/the-power-broker" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Robert Caro &middot; the official page</b></a><a href="https://www.goodreads.com/en/book/show/1111.The_Power_Broker" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Goodreads &middot; The Power Broker</b></a><a href="https://www.nyhistory.org/press/new-york-historical-society-explores-the-making-of-the-power-broker" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>NY Historical &middot; making of the book</b></a></div><p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe &middot; 26 August 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
