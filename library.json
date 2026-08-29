@@ -1,7 +1,77 @@
 {
-  "updated": "2026-08-26",
-  "count": 190,
+  "updated": "2026-08-29",
+  "count": 195,
   "swipes": [
+    {
+      "file": "Swipe – The Signal in the Noise – 2026-08-29.html",
+      "title": "The Signal in the Noise",
+      "date": "2026-08-29",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Book · Philip Tetlock & Dan Gardner (2015): amateurs beat CIA analysts at prediction — forecasting is a learnable set of habits, from fox-thinking to Brier-score self-scoring.",
+      "subject": {
+        "work": "superforecasting",
+        "creator": "philip-tetlock",
+        "topic": "forecasting-judgment-probability",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Die Jahreszeiten der Kulturen – 2026-08-29.html",
+      "title": "Die Jahreszeiten der Kulturen",
+      "date": "2026-08-29",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Buch · Oswald Spengler (1918–22): Kulturen sind Organismen, die wie Jahreszeiten reifen und vergehen — die einflussreichste und umstrittenste Formel für Geschichte als Kreislauf statt Fortschritt.",
+      "subject": {
+        "work": "der-untergang-des-abendlandes",
+        "creator": "oswald-spengler",
+        "topic": "civilizational-cycles-decline",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Hidden Mathematics of Life – 2026-08-29.html",
+      "title": "The Hidden Mathematics of Life",
+      "date": "2026-08-29",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Book · Geoffrey West (2017): one power law links a mouse's heartbeat, an elephant's lifespan, a city's pace and a company's death — the hidden scaling laws of growth.",
+      "subject": {
+        "work": "scale-geoffrey-west",
+        "creator": "geoffrey-west",
+        "topic": "scaling-laws-growth",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – The Rebellion That Broke the Tang – 2026-08-29.html",
+      "title": "The Rebellion That Broke the Tang",
+      "date": "2026-08-29",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Episode · In Our Time (BBC Radio 4, 2012): the An Lushan Rebellion (755–763) — how one favoured general's revolt shattered the Tang golden age and remade medieval China.",
+      "subject": {
+        "work": "in-our-time-an-lushan-rebellion",
+        "creator": null,
+        "topic": "an-lushan-rebellion-tang-decline",
+        "source": "in-our-time"
+      }
+    },
+    {
+      "file": "Swipe – Sculpting in Time – 2026-08-29.html",
+      "title": "Sculpting in Time",
+      "date": "2026-08-29",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Film · Andrei Tarkovsky's 'Sculpting in Time': cinema's true material is time itself — its power is rhythm and 'time-pressure' within the shot, not montage.",
+      "subject": {
+        "work": "tarkovsky-sculpting-in-time",
+        "creator": "andrei-tarkovsky",
+        "topic": "cinema-time-rhythm-poetics",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – The Home-Run Business – 2026-08-26.html",
       "title": "The Home-Run Business",
