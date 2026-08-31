@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Book · Jared Diamond's 'Guns, Germs, and Steel' (1997): why history's winners were less clever than lucky — geography, not biology, handed some peoples farming, germs and steel."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Lottery of Latitudes &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 1 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;The Signal in the Noise&rdquo; (29 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What did Tetlock &amp; Gardner&rsquo;s forecasting research find?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Rank and security clearance are what make a forecast accurate</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Forecasting is a learnable habit &mdash; self-updating &lsquo;foxes&rsquo; beat the experts</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Predicting world events is impossible, so it isn&rsquo;t worth trying</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: B</b> &mdash; Trained amateurs beat CIA analysts; good forecasting is habits &mdash; fox-thinking, updating, Brier-score self-scoring &mdash; not credentials.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #334155, #0f172a);">
+        <div class="pageno">2 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 2 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;The Cataclysm Is Us&rdquo; (11 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What is the central claim of Kolbert&rsquo;s <em>The Sixth Extinction</em>?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Mass extinctions are always triggered by asteroid impacts</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Earth has never come close to losing most of its species</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A sixth mass extinction is under way now &mdash; and this time the driver is us</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: C</b> &mdash; After five natural catastrophes nearly erased life, the sixth is unfolding now &mdash; &lsquo;this time around the cataclysm is us&rsquo;.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+        <div class="pageno">3 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 3 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;Sapiens&rdquo; (24 Jun 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">According to Harari, why do humans run the planet?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Because we alone believe in shared fictions that let strangers cooperate</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Because we are individually the strongest, cleverest animals</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Because we evolved language before any other species could communicate</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: A</b> &mdash; Money, nations and gods are shared myths; believing in them lets millions of strangers act as one.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #78350f, #1c1917);">
+        <div class="pageno">4 / 14 &rarr;</div>
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:14px;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Book of the day &middot; &#128214;</div><figure style="margin:0 0 16px;"><img src="https://covers.openlibrary.org/b/isbn/9780393317558-L.jpg" alt="Cover of Guns, Germs, and Steel" style="display:block; width:130px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.35);" loading="lazy" onerror="var f=this.closest('figure'); if(f) f.remove();"><figcaption style="font-size:11px; opacity:0.6; margin-top:6px;">Cover: W. W. Norton</figcaption></figure><h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">The Lottery of Latitudes</h1><p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Why did some peoples end up with steel swords and ocean-going ships &mdash; and others with stone tools? The answer, one biologist argued, is written in the map.</p><p style="font-size:15px; opacity:0.78;">Jared Diamond &middot; <em>Guns, Germs, and Steel</em> &middot; 1997 &middot; Pulitzer Prize &middot; ~6 min read</p><p style="font-size:14px; opacity:0.6; margin-top:16px;">Swipe &rarr;</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #0b1220);">
+        <div class="pageno">5 / 14 &rarr;</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The hook</h3><p style="font-size:30px; line-height:1.24; font-weight:700; margin-bottom:16px;">&ldquo;Why do you white people have so much cargo, and we have so little?&rdquo;</p><p style="font-size:17.5px; line-height:1.5;">In 1972, on a New Guinea beach, a local politician named Yali asked Jared Diamond exactly that &mdash; why Europeans arrived with so much wealth and technology while his own people had almost none. Diamond spent the next 25 years trying to answer without any appeal to race.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #b45309, #78350f);">
+        <div class="pageno">6 / 14 &rarr;</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The core thesis</h3><p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Geography, not biology, set the course of history.</p><p style="font-size:17.5px; line-height:1.5;">The huge gaps in wealth and power between peoples, Diamond argues, grew from differences in their <b>environments</b> &mdash; not from any difference in intelligence. A few regions simply held the raw materials for farming, and cities, states, writing and armies all followed from that one head start.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4d7c0f, #1a2e05);">
+        <div class="pageno">7 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 7 &middot; Food first</div><h3 style="font-size:23px; margin-bottom:10px;">Everything grows from the farm</h3><p style="font-size:17.5px; line-height:1.5;">Food production is the master key. Where wild plants and animals could be domesticated, farmers made surpluses &mdash; and surpluses freed people to become soldiers, priests, kings, scribes and inventors. Dense, stratified societies are impossible until someone grows the extra grain.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0e7490, #083344);">
+        <div class="pageno">8 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 7 &middot; The jackpot</div><h3 style="font-size:23px; margin-bottom:10px;">Eurasia&rsquo;s biological luck</h3><p style="font-size:17.5px; line-height:1.5;">The Fertile Crescent held the richest set of domesticable wild plants on Earth. And of the world&rsquo;s 14 domesticated large mammals &mdash; the cow, pig, horse, sheep and the rest &mdash; <b>13 were native to Eurasia</b>. That windfall of food and muscle power was pure geographic luck, not merit.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3730a3, #1e1b4b);">
+        <div class="pageno">9 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 7 &middot; The axis</div><h3 style="font-size:23px; margin-bottom:10px;">Why Eurasia spread faster</h3><p style="font-size:17.5px; line-height:1.5;">Eurasia&rsquo;s main axis runs <b>east&ndash;west</b>, so a crop or animal could travel thousands of miles through the same climate and day-length. The Americas and Africa run north&ndash;south &mdash; farming there had to cross deserts and climate zones, so it spread slowly, if at all.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">10 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 7 &middot; Anna Karenina</div><h3 style="font-size:23px; margin-bottom:10px;">Why so few animals tamed</h3><p style="font-size:20px; line-height:1.3; font-weight:700; font-style:italic; margin-bottom:12px;">&ldquo;Domesticable animals are all alike; every undomesticable animal is undomesticable in its own way.&rdquo;</p><p style="font-size:17.5px; line-height:1.5;">A species must pass <em>every</em> test &mdash; diet, growth rate, breeding in captivity, temperament, a social hierarchy to hijack. Fail one and it&rsquo;s out. Zebras bite and won&rsquo;t let go; only ~14 of 148 big candidate mammals ever made the cut.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #065f46, #022c22);">
+        <div class="pageno">11 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 7 &middot; Germs</div><h3 style="font-size:23px; margin-bottom:10px;">Livestock loaded the guns</h3><p style="font-size:17.5px; line-height:1.5;">Living packed together with animals bred the crowd diseases &mdash; smallpox, measles, flu &mdash; that Eurasians grew partly resistant to. Carried to the Americas, those germs killed a huge share of native peoples <b>before the battles even began</b>. Disease, more than weapons, did the conquering.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #57534e, #1c1917);">
+        <div class="pageno">12 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 7 &middot; Downstream</div><h3 style="font-size:23px; margin-bottom:10px;">Guns, steel and writing</h3><p style="font-size:17.5px; line-height:1.5;">Dense farming societies could feed metalworkers, standing armies, ships and bureaucracies. The &lsquo;guns, germs, and steel&rsquo; of the title are <em>effects</em> of an agricultural head start &mdash; the proximate weapons, not the ultimate cause.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #9f1239, #4c0519);">
+        <div class="pageno">13 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 7 / 7 &middot; The pushback</div><h3 style="font-size:23px; margin-bottom:10px;">Is it just determinism?</h3><p style="font-size:17.5px; line-height:1.5;">Critics charge Diamond with <b>geographic determinism</b> &mdash; making environment the hero and underplaying culture, ideas, institutions and human choice. His reply: he is explaining the broad shape of history, not excusing conquest or denying that people make their own decisions.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno">14 / 14 &#10003;</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The takeaway</h3><p style="font-size:21px; line-height:1.4; font-style:italic; margin-bottom:14px;">&ldquo;History followed different courses for different peoples because of differences among peoples&rsquo; environments, not because of biological differences among peoples themselves.&rdquo;</p><p style="font-size:16px; line-height:1.5;">&mdash; Jared Diamond, <em>Guns, Germs, and Steel</em>. Comforting and unsettling at once: the winners of history were, more than anything, lucky in their latitudes.</p><div style="margin-top:16px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p><a href="https://www.goodreads.com/book/show/1842.Guns_Germs_and_Steel" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Guns, Germs, and Steel on Goodreads</b></a><a href="https://www.nationalgeographic.com/science/article/news-guns-germs-steel-jared-diamond-interview" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Diamond interview &middot; National Geographic</b></a><a href="https://jamesclear.com/book-summaries/guns-germs-and-steel" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>Chapter-by-chapter summary</b></a></div><p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe &middot; 31 August 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

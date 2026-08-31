@@ -1,7 +1,77 @@
 {
-  "updated": "2026-08-29",
-  "count": 195,
+  "updated": "2026-08-31",
+  "count": 200,
   "swipes": [
+    {
+      "file": "Swipe – The Lottery of Latitudes – 2026-08-31.html",
+      "title": "The Lottery of Latitudes",
+      "date": "2026-08-31",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Jared Diamond's 'Guns, Germs, and Steel' (1997, Pulitzer): why history's winners were less clever than lucky — geography, not biology, handed some peoples farming, domesticable animals, germs and steel.",
+      "subject": {
+        "work": "guns-germs-and-steel",
+        "creator": "jared-diamond",
+        "topic": "geography-fate-of-societies",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Der Bumerang der Moderne – 2026-08-31.html",
+      "title": "Der Bumerang der Moderne",
+      "date": "2026-08-31",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Ulrich Becks 'Risikogesellschaft' (1986): In der fortgeschrittenen Moderne erzeugt jeder Fortschritt neue, unsichtbare Risiken — 'Not ist hierarchisch, Smog ist demokratisch'.",
+      "subject": {
+        "work": "risikogesellschaft",
+        "creator": "ulrich-beck",
+        "topic": "risk-society-modernity",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Designed by Gravity – 2026-08-31.html",
+      "title": "Designed by Gravity",
+      "date": "2026-08-31",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Architecture · Antoni Gaudí's Sagrada Família: designed by hanging chains and shapes borrowed from nature — and in 2026, after 144 years, at last the tallest church in the world.",
+      "subject": {
+        "work": "sagrada-familia-gaudi",
+        "creator": "antoni-gaudi",
+        "topic": "catalan-modernist-architecture",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Fourteen Centimetres – 2026-08-31.html",
+      "title": "Fourteen Centimetres",
+      "date": "2026-08-31",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Ones and Tooze (21 Aug 2026): the Rhine has fallen to its lowest since 1880 — how one shallow gauge at Kaub turns a heatwave into a hit to German GDP.",
+      "subject": {
+        "work": "ones-tooze-rhine-drought",
+        "creator": "adam-tooze",
+        "topic": "rhine-drought-inland-shipping",
+        "source": "ones-and-tooze"
+      }
+    },
+    {
+      "file": "Swipe – Der letzte Alleinherrscher – 2026-08-31.html",
+      "title": "Der letzte Alleinherrscher",
+      "date": "2026-08-31",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Eine Stunde History (21. Aug 2026): Am 17. Januar 395 stirbt Theodosius I. — und das Römische Reich zerfällt endgültig in Ost und West, mit Folgen bis 476.",
+      "subject": {
+        "work": "esh-teilung-roemisches-reich",
+        "creator": null,
+        "topic": "roman-empire-division-395",
+        "source": "eine-stunde-history"
+      }
+    },
     {
       "file": "Swipe – The Signal in the Noise – 2026-08-29.html",
       "title": "The Signal in the Noise",

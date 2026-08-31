@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Folge · Eine Stunde History (21. Aug 2026): Am 17. Januar 395 stirbt Theodosius I. — und das Römische Reich zerfällt endgültig in Ost und West, mit Folgen bis 476 und weit darüber hinaus."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Der letzte Alleinherrscher &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 12 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 1 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;The Immortality Project&rdquo; (26 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What is the core argument of Ernest Becker&rsquo;s <em>The Denial of Death</em>?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Civilisation is a defence against the terror of death &mdash; we build &lsquo;immortality projects&rsquo;</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Humans feel no real fear of dying</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Death anxiety appears only in old age</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: A</b> &mdash; Culture as a shield against mortality: &lsquo;hero systems&rsquo; and &lsquo;immortality projects&rsquo; give life meaning &mdash; and rival heroisms can turn deadly.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+        <div class="pageno">2 / 12 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 2 von 3</div><h3 style="font-size:23px; margin-bottom:8px;">&bdquo;Der erste Deutsche&ldquo; (11. Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wie wurde Arminius zum &bdquo;ersten Deutschen&ldquo;?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Er einigte die germanischen St&auml;mme zu einem dauerhaften Staat</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Die R&ouml;mer selbst erkl&auml;rten ihn zum deutschen Nationalhelden</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Erst sp&auml;tere Epochen &mdash; Luther, Kleist, das Kaiserreich &mdash; machten den Sieger der Varusschlacht zum Nationalmythos</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Antwort: C</b> &mdash; Aus dem Sieger &uuml;ber drei Legionen (9 n. Chr.) formten sp&auml;tere Jahrhunderte den &bdquo;ersten Deutschen&ldquo; &mdash; ein Mythos, kein antikes Selbstbild.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #4c1d95, #2e1065);">
+        <div class="pageno">3 / 12 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 3 von 3</div><h3 style="font-size:23px; margin-bottom:8px;">&bdquo;Julius Caesar und der Rubikon&ldquo; (23. Jul 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wof&uuml;r steht Caesars &Uuml;berschreitung des Rubikon?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Einen geordneten R&uuml;ckzug aus Gallien</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Den Punkt ohne Umkehr &mdash; mit &bdquo;Alea iacta est&ldquo; begann der B&uuml;rgerkrieg</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Ein Friedensabkommen mit dem Senat</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Antwort: B</b> &mdash; &bdquo;Alea iacta est&ldquo;: Mit dem &Uuml;berschreiten des Grenzflusses l&ouml;ste Caesar den B&uuml;rgerkrieg aus &mdash; das Sinnbild der unumkehrbaren Entscheidung.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #1e1b4b);">
+        <div class="pageno">4 / 12 &rarr;</div>
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:14px;"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M18 12h1a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-1z"/><path d="M6 12H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1z"/></svg><div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Folge des Tages &middot; &#127911;</div><figure style="margin:0 0 16px;"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Missorium%20of%20Theodosius%20I%20(detail).png?width=320" alt="Missorium des Theodosius I." style="display:block; width:130px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.35);" loading="lazy" onerror="var f=this.closest('figure'); if(f) f.remove();"><figcaption style="font-size:11px; opacity:0.6; margin-top:6px;">Missorium des Theodosius I. (um 388). Public domain via Wikimedia Commons</figcaption></figure><h1 style="font-size:35px; line-height:1.1; margin:0 0 10px;">Der letzte Alleinherrscher</h1><p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">Ein Kaiser stirbt &mdash; und das gr&ouml;&szlig;te Reich der Antike zerbricht f&uuml;r immer in zwei H&auml;lften.</p><p style="font-size:15px; opacity:0.78;">Eine Stunde History (Deutschlandfunk Nova) &middot; 21. Aug 2026 &middot; ~5 Min. Lesezeit</p><p style="font-size:14px; opacity:0.6; margin-top:16px;">Weiterwischen &rarr;</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+        <div class="pageno">5 / 12 &rarr;</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Der Hook</h3><p style="font-size:28px; line-height:1.25; font-weight:700; margin-bottom:16px;">Am 17. Januar 395 stirbt ein Kaiser &mdash; und Rom wird nie wieder eins.</p><p style="font-size:17.5px; line-height:1.5;">Mit dem Tod des Theodosius I. wird das Imperium unter seinen beiden S&ouml;hnen aufgeteilt. Was als &uuml;bliche Erbregelung beginnt, wird zur endg&uuml;ltigen Trennung in ein westliches und ein &ouml;stliches Rom &mdash; mit Folgen, die bis heute nachwirken.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #b45309, #78350f);">
+        <div class="pageno">6 / 12 &rarr;</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Die Kernthese</h3><p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">395 ist die Weggabelung der europ&auml;ischen Geschichte.</p><p style="font-size:17.5px; line-height:1.5;">Theodosius war der letzte Kaiser, der das gesamte Reich allein regierte. Nach ihm herrschen zwei Kaiser in zwei Hauptst&auml;dten &mdash; und die beiden H&auml;lften wachsen politisch und kulturell auseinander. Anders als fr&uuml;here Teilungen blieb die von 395 dauerhaft.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #292524, #0c0a09);">
+        <div class="pageno">7 / 12 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 1 / 5 &middot; Theodosius</div><h3 style="font-size:23px; margin-bottom:10px;">Einer f&uuml;r das ganze Reich</h3><p style="font-size:17.5px; line-height:1.5;">Theodosius I. war der letzte Herrscher, der Ost und West in einer Hand hielt. Als er am 17. Januar 395 starb, hinterlie&szlig; er das Imperium seinen beiden S&ouml;hnen &mdash; dem &auml;lteren Arcadius und dem j&uuml;ngeren Honorius.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #713f12, #422006);">
+        <div class="pageno">8 / 12 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 2 / 5 &middot; Die Teilung</div><h3 style="font-size:23px; margin-bottom:12px;">Zwei Kaiser, zwei Hauptst&auml;dte</h3><figure style="margin:0 0 14px;"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/1850%20Map%20of%20the%20Roman%20Empire%20as%20Divided%20into%20East%20and%20West%20(Ancient%20Rome)%20-%20Geographicus%20-%20RomeDivided-spruneri-1850.jpg?width=820" alt="Karte des in Ost und West geteilten R&ouml;mischen Reiches" style="display:block; width:100%; max-height:240px; object-fit:cover; border-radius:12px;" loading="lazy" onerror="var f=this.closest('figure'); if(f) f.remove();"><figcaption style="font-size:11px; opacity:0.6; margin-top:6px;">Rom, geteilt in Ost und West (Karte, 1850, Spruner). Public domain via Wikimedia Commons</figcaption></figure><p style="font-size:17.5px; line-height:1.5;">Arcadius erhielt den Osten und regierte von <b>Konstantinopel</b> (395&ndash;408). Honorius bekam den Westen und residierte in Mailand, ab 404 in <b>Ravenna</b> (395&ndash;423) &mdash; Rom war da l&auml;ngst nicht mehr die Hauptstadt.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3730a3, #1e1b4b);">
+        <div class="pageno">9 / 12 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 3 / 5 &middot; Von Dauer</div><h3 style="font-size:23px; margin-bottom:10px;">Warum diese Teilung blieb</h3><p style="font-size:17.5px; line-height:1.5;">Reichsteilungen hatte es schon oft gegeben &mdash; doch diese wurde endg&uuml;ltig. Verwaltung, Heer und H&ouml;fe von Ost und West trennten sich immer weiter; die beiden Reichsh&auml;lften gingen fortan eigene politische und kulturelle Wege.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #431407);">
+        <div class="pageno">10 / 12 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 4 / 5 &middot; Ungleiche Schicksale</div><h3 style="font-size:23px; margin-bottom:10px;">Der eine f&auml;llt, der andere bleibt</h3><p style="font-size:17.5px; line-height:1.5;">Die Folgen k&ouml;nnten gr&ouml;&szlig;er kaum sein. Der Westen zerfiel im 5. Jahrhundert: <b>476</b> setzte der germanische Heerf&uuml;hrer Odoaker den letzten weströmischen Kaiser Romulus Augustulus ab und schickte die Kaiserinsignien nach Konstantinopel. Der Osten &mdash; Byzanz &mdash; bestand von dort aus noch fast ein Jahrtausend fort.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #57534e, #1c1917);">
+        <div class="pageno">11 / 12 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 5 / 5 &middot; Zeitenwende</div><h3 style="font-size:23px; margin-bottom:10px;">Das Ende der Antike</h3><p style="font-size:17.5px; line-height:1.5;">In der westlichen Geschichtsschreibung markiert das Jahr 476 oft das Ende der Antike und den Beginn des Mittelalters. Die Wurzel dieser Z&auml;sur aber liegt in der Teilung von 395 &mdash; dem Moment, in dem aus einem Reich zwei wurden.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno">12 / 12 &#10003;</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">Das Fazit</h3><p style="font-size:21px; line-height:1.4; font-style:italic; margin-bottom:14px;">Nach dem 17. Januar 395 hat kein Kaiser mehr das ganze R&ouml;mische Reich regiert.</p><p style="font-size:16px; line-height:1.5;">Aus einer Erbteilung wurden zwei Reiche mit sehr ungleichem Schicksal &mdash; der Westen zerbrach binnen achtzig Jahren, der Osten &uuml;berdauerte fast ein Jahrtausend. 395 ist der Riss, an dem die europ&auml;ische Geschichte auseinandergeht.</p><div style="margin-top:16px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">N&auml;chste Schritte</p><a href="https://de.wikipedia.org/wiki/Reichsteilung_von_395" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Reichsteilung von 395 &middot; Wikipedia</b></a><a href="https://de.wikipedia.org/wiki/Westr%C3%B6misches_Reich" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Westr&ouml;misches Reich &middot; Wikipedia</b></a><a href="https://podcasts.apple.com/de/podcast/eine-stunde-history-deutschlandfunk-nova/id1111594074" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>Eine Stunde History &middot; anh&ouml;ren</b></a></div><p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe &middot; 31. August 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zur&uuml;ck">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

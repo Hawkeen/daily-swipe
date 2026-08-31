@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Creative · Architecture · Antoni Gaudí's Sagrada Família: designed by hanging chains and shapes borrowed from nature — and in 2026, after 144 years, at last the tallest church in the world."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Designed by Gravity &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+    <section class="card">
+      <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+        <div class="pageno">1 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 1 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;Power, Not Elections&rdquo; (26 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">How did Robert Moses gain his enormous power over New York?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. By winning a long series of city and state elections</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. By inheriting a vast family real-estate fortune</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Through unelected public authorities &mdash; power without accountability</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: C</b> &mdash; Caro&rsquo;s classic: Moses was never elected, yet reshaped New York for decades by controlling unaccountable public authorities.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #0f766e, #042f2e);">
+        <div class="pageno">2 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 2 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;Music as a Gradual Process&rdquo; (9 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What idea sits at the heart of Steve Reich&rsquo;s minimalism?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Making the gradual process audible &mdash; loops slowly drifting out of phase</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Hiding the structure behind lush orchestration</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. That every performance must be fully improvised</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: A</b> &mdash; A 1965 tape accident became &lsquo;phasing&rsquo;: Reich let a slow, audible process <em>be</em> the music, from &lsquo;It&rsquo;s Gonna Rain&rsquo; to &lsquo;Music for 18 Musicians&rsquo;.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #b45309, #431407);">
+        <div class="pageno">3 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 3 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;Stone Into Light&rdquo; (1 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What did the pointed arch, rib vault and flying buttress make possible in Gothic architecture?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Squat, thick-walled churches with tiny windows</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Dissolving the wall &mdash; carrying the load on a skeleton so light could flood in</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Building an entire cathedral without any stone</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: B</b> &mdash; At Saint-Denis around 1140, Abbot Suger&rsquo;s team took the weight off the walls and filled the church with coloured light. Gaud&iacute; would later vault <em>without</em> the buttresses.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #292524, #0c0a09);">
+        <div class="pageno">4 / 14 &rarr;</div>
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:14px;"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M9 21V10"/><path d="M15 21V10"/><path d="M19 21V10"/><path d="M3 10l9-6 9 6"/><path d="M3 10h18"/></svg><div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Creative topic &middot; &#127912; Architecture</div><figure style="margin:0 0 16px;"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Antoni%20Gaudi%201878.jpg?width=300" alt="Antoni Gaud&iacute;, 1878" style="display:block; width:120px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.35);" loading="lazy" onerror="var f=this.closest('figure'); if(f) f.remove();"><figcaption style="font-size:11px; opacity:0.6; margin-top:6px;">Antoni Gaud&iacute;, 1878. Public domain via Wikimedia Commons</figcaption></figure><h1 style="font-size:36px; line-height:1.1; margin:0 0 10px;">Designed by Gravity</h1><p style="font-size:17.5px; line-height:1.45; opacity:0.92; margin-bottom:14px;">To design a cathedral, Antoni Gaud&iacute; didn&rsquo;t reach for a ruler. He hung chains from the ceiling &mdash; and let gravity draw the curves.</p><p style="font-size:15px; opacity:0.78;">Antoni Gaud&iacute; &middot; La Sagrada Fam&iacute;lia &middot; Barcelona &middot; begun 1882 &middot; ~6 min read</p><p style="font-size:14px; opacity:0.6; margin-top:16px;">Swipe &rarr;</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #0b1220);">
+        <div class="pageno">5 / 14 &rarr;</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The hook</h3><p style="font-size:30px; line-height:1.24; font-weight:700; margin-bottom:16px;">How do you design a cathedral? Gaud&iacute; hung it upside-down.</p><p style="font-size:17.5px; line-height:1.5;">To find the perfect shape for his arches and towers, Gaud&iacute; suspended chains and little weighted bags from a board on the ceiling. Gravity pulled them into elegant curves &mdash; and when he turned the whole model upside-down, those curves became the strongest possible arches in stone.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #9a3412, #431407);">
+        <div class="pageno">6 / 14 &rarr;</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The core idea</h3><p style="font-size:22px; line-height:1.35; font-weight:700; margin-bottom:14px;">Let nature and gravity do the engineering.</p><p style="font-size:17.5px; line-height:1.5;">Gaud&iacute; was convinced that the forms and forces of nature &mdash; trees, bones, hanging ropes &mdash; had already solved the problems architects struggle with. The Sagrada Fam&iacute;lia translates those natural forms into stone, trading the straight line and the right angle for the curve.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #44403c, #1c1917);">
+        <div class="pageno">7 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Idea 1 / 6 &middot; A lifetime</div><h3 style="font-size:23px; margin-bottom:12px;">One man, forty years, unfinished</h3><figure style="margin:0 0 14px;"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20en%20construcci%C3%B3n%2C%20c.%201915.jpg?width=760" alt="La Sagrada Fam&iacute;lia under construction, c. 1915" style="display:block; width:100%; max-height:230px; object-fit:cover; border-radius:12px;" loading="lazy" onerror="var f=this.closest('figure'); if(f) f.remove();"><figcaption style="font-size:11px; opacity:0.6; margin-top:6px;">The temple under construction, c. 1915. Public domain via Wikimedia Commons</figcaption></figure><p style="font-size:17.5px; line-height:1.5;">Construction began in 1882; Gaud&iacute; took over in 1883 and gave the rest of his life to it &mdash; the last dozen years almost exclusively. He died in 1926, struck by a tram, with the church far from finished.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #166534, #052e16);">
+        <div class="pageno">8 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Idea 2 / 6 &middot; Nature</div><h3 style="font-size:23px; margin-bottom:10px;">The curve is truer than the line</h3><p style="font-size:17.5px; line-height:1.5;">Gaud&iacute; studied trees, bones, shells and honeycombs and drew his geometry straight from them. Where classical architecture prized the straight line and the right angle, he insisted the curve was closer to the way the world is actually built &mdash; and closer to the divine.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #0e7490, #083344);">
+        <div class="pageno">9 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Idea 3 / 6 &middot; The chain</div><h3 style="font-size:23px; margin-bottom:10px;">Tension becomes compression</h3><p style="font-size:17.5px; line-height:1.5;">His signature tool was the hanging (funicular) model. A chain slung between two points falls into a <b>catenary</b>, in pure tension. Flip that shape upside-down and it becomes an arch in pure compression &mdash; every stone squeezed, never bent. Gaud&iacute; designed by letting gravity find the strongest line for him.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #3730a3, #1e1b4b);">
+        <div class="pageno">10 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Idea 4 / 6 &middot; Four shapes</div><h3 style="font-size:23px; margin-bottom:10px;">A whole church from four surfaces</h3><p style="font-size:17.5px; line-height:1.5;">Almost the entire building is composed from four geometric surfaces &mdash; the <b>hyperboloid, hyperbolic paraboloid, helicoid and conoid</b>. Each is a curved surface generated by straight lines, and each appears in nature: in bones, tree-trunks and leaves. Complex beauty, built from a tiny vocabulary.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #6d28d9, #2e1065);">
+        <div class="pageno">11 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Idea 5 / 6 &middot; A stone forest</div><h3 style="font-size:23px; margin-bottom:10px;">Columns that branch like trees</h3><p style="font-size:17.5px; line-height:1.5;">Because the geometry channels the loads straight down, Gaud&iacute;&rsquo;s branching, tree-like columns hold up the vaults <em>without</em> the flying buttresses Gothic cathedrals relied on &mdash; supports he reportedly dismissed as &lsquo;crutches&rsquo;. Hyperboloid openings scatter daylight through the nave like sun through a canopy.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #155e75, #083344);">
+        <div class="pageno">12 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Idea 6 / 6 &middot; Built on alms</div><h3 style="font-size:23px; margin-bottom:10px;">An expiatory temple</h3><p style="font-size:17.5px; line-height:1.5;">The Sagrada Fam&iacute;lia is a <em>Temple Expiatori</em> &mdash; funded entirely by donations and alms, not the state. Gaud&iacute; even left his own estate to the works. That reliance on gifts is a large part of why a single church has taken well over a century to build.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: linear-gradient(135deg, #b91c1c, #450a0a);">
+        <div class="pageno">13 / 14 &rarr;</div>
+        <div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.16); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Why this matters in 2026</div><h3 style="font-size:23px; margin-bottom:10px;">After 144 years, the top is on</h3><p style="font-size:17.5px; line-height:1.5;">On 20 February 2026, workers fixed the upper arm of the cross onto the central Tower of Jesus Christ &mdash; the last and tallest of the basilica&rsquo;s 18 towers &mdash; bringing it to about 172.5&nbsp;m and making the Sagrada Fam&iacute;lia the <b>tallest church in the world</b>. On 10 June 2026, the centenary of Gaud&iacute;&rsquo;s death, Pope Leo XIV was due to bless it. Interior work continues into 2027&ndash;2028.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="panel" style="background: #ede4d3; color: #2d1810;">
+        <div class="pageno">14 / 14 &#10003;</div>
+        <h3 style="font-size:23px; margin-bottom:10px;">The takeaway</h3><p style="font-size:22px; line-height:1.4; font-style:italic; margin-bottom:14px;">&ldquo;The straight line belongs to men, the curved line belongs to God.&rdquo;</p><p style="font-size:16px; line-height:1.5;">&mdash; attributed to Antoni Gaud&iacute;. A century after his death, the church he designed by hanging chains and copying trees has topped out at last &mdash; proof that the slowest way to build can also be the most radical.</p><div style="margin-top:16px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p><a href="https://sagradafamilia.org/en/antoni-gaudi" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Antoni Gaud&iacute; &middot; the official Basilica site</b></a><a href="https://en.wikipedia.org/wiki/Antoni_Gaud%C3%AD" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Antoni Gaud&iacute; &middot; life &amp; works (Wikipedia)</b></a><a href="https://www.cnn.com/2026/06/08/style/sagrada-familia-barcelona-tower-jesus-christ-intl" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>The final tower &middot; CNN (2026)</b></a></div><p style="font-size:13px; opacity:0.55; margin-top:18px;">Daily Swipe &middot; 31 August 2026</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
