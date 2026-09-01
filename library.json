@@ -1,7 +1,77 @@
 {
-  "updated": "2026-08-31",
-  "count": 200,
+  "updated": "2026-09-01",
+  "count": 205,
   "swipes": [
+    {
+      "file": "Swipe – The Class War Inside the Trade War – 2026-09-01.html",
+      "title": "The Class War Inside the Trade War",
+      "date": "2026-09-01",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Matthew C. Klein & Michael Pettis (2020): trade wars aren't clashes of national interest — inequality inside a country suppresses consumption, piles up savings, and exports the glut as somebody else's deficit.",
+      "subject": {
+        "work": "trade-wars-are-class-wars",
+        "creator": "klein-pettis",
+        "topic": "global-imbalances-trade-inequality",
+        "source": "yale-university-press"
+      }
+    },
+    {
+      "file": "Swipe – Die Achse der Weltgeschichte – 2026-09-01.html",
+      "title": "Die Achse der Weltgeschichte",
+      "date": "2026-09-01",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Karl Jaspers (1949): Zwischen 800 und 200 v. Chr. traten Konfuzius, Buddha, Zarathustra, die Propheten und die griechischen Philosophen annähernd gleichzeitig auf — ohne voneinander zu wissen. Die „Achsenzeit\" und ihre Kritiker.",
+      "subject": {
+        "work": "vom-ursprung-und-ziel-der-geschichte",
+        "creator": "karl-jaspers",
+        "topic": "axial-age-thesis",
+        "source": "piper"
+      }
+    },
+    {
+      "file": "Swipe – The Tax You Pay in Hours – 2026-09-01.html",
+      "title": "The Tax You Pay in Hours",
+      "date": "2026-09-01",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "The Ezra Klein Show (25 Aug 2026) with Annie Lowrey on 'The Time Tax': the paperwork, hold music and asset tests standing between citizens and benefits already theirs — and what that costs in trust.",
+      "subject": {
+        "work": "ezra-klein-lowrey-time-tax",
+        "creator": "annie-lowrey",
+        "topic": "administrative-burden-time-tax",
+        "source": "ezra-klein"
+      }
+    },
+    {
+      "file": "Swipe – Wenn Päpste Politik machen – 2026-09-01.html",
+      "title": "Wenn Päpste Politik machen",
+      "date": "2026-09-01",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Der Rest ist Geschichte (Deutschlandfunk, 13. Aug. 2026): von Canossa über Napoleon und die Lateranverträge bis zu Pius XII., Johannes Paul II. — und Leo XIV. im Streit mit Washington.",
+      "subject": {
+        "work": "drig-macht-der-kirche-paepste",
+        "creator": null,
+        "topic": "papacy-political-power",
+        "source": "der-rest-ist-geschichte"
+      }
+    },
+    {
+      "file": "Swipe – The Dance of Utter Darkness – 2026-09-01.html",
+      "title": "The Dance of Utter Darkness",
+      "date": "2026-09-01",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Dance · Butoh: in 1959 Tatsumi Hijikata and Kazuo Ohno built a Japanese dance from taboo, decay and the bow-legged walk of Tōhoku labourers — an art form that refuses to be defined.",
+      "subject": {
+        "work": "butoh-hijikata-ohno",
+        "creator": "tatsumi-hijikata",
+        "topic": "butoh-postwar-japanese-dance",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – The Lottery of Latitudes – 2026-08-31.html",
       "title": "The Lottery of Latitudes",

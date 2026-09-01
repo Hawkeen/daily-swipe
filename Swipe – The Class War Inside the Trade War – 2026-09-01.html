@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Book \u00b7 Matthew C. Klein & Michael Pettis, 'Trade Wars Are Class Wars' (2020): trade conflicts are not clashes of national interest but the spillover of inequality inside nations \u2014 the savings glut that has to be exported."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Class War Inside the Trade War &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+      <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+      <div class="pageno">1 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 1 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;The Lottery of Latitudes&rdquo; (31 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What did Jared Diamond argue explains why some peoples ended up with guns, germs and steel?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Innate differences in intelligence between peoples</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Geography and luck &mdash; which continents happened to offer farmable plants and domesticable animals</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. The superiority of European religious and legal institutions</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: B</b> &mdash; &lsquo;Guns, Germs, and Steel&rsquo; argues history&rsquo;s winners were less clever than lucky: geography, not biology, handed some peoples farming, animals, germs and steel.</div>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #1e3a5f, #0f2027);">
+      <div class="pageno">2 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 2 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;The Home-Run Business&rdquo; (26 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">In Sebastian Mallaby&rsquo;s account, what makes venture capital work?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Careful diversification, so that most investments return a modest profit</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Superior due diligence that lets VCs avoid backing failures</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A power law &mdash; a tiny handful of enormous winners pays for every failure</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: C</b> &mdash; &lsquo;The Power Law&rsquo;: a tiny handful of venture bets pay for every failure, and that skew is what drives Silicon Valley.</div>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #3b0764, #170b26);">
+      <div class="pageno">3 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 3 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;Imagined Communities&rdquo; (12 Jul 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What did Benedict Anderson mean by calling the nation an &lsquo;imagined community&rsquo;?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. That nationalism is a deliberate lie invented by elites</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. That nations are unreal and will soon fade away</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. That members will never meet most of their compatriots, yet share a communion built by print capitalism, census, map and museum</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: C</b> &mdash; Anderson&rsquo;s nation is an imagined political community &mdash; built by print capitalism, mapped by census, map and museum, and loyal enough to die for.</div>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #0f172a);">
+      <div class="pageno">4 / 15 &rarr;</div>
+<img src="https://covers.openlibrary.org/b/isbn/9780300244175-L.jpg" alt="Cover of Trade Wars Are Class Wars" style="display:block; width:140px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.3); margin-bottom:14px; align-self:flex-start;" loading="lazy" onerror="this.style.display='none'"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Cover: Yale University Press.</div><div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Book of the day &middot; &#128214;</div><h1 style="font-size:36px; line-height:1.12; margin:0 0 12px;">The Class War Inside the Trade War</h1><p style="font-size:19px; line-height:1.4; opacity:0.92; margin:0 0 18px;"><i>Trade Wars Are Class Wars: How Rising Inequality Distorts the Global Economy and Threatens International Peace</i></p><p style="font-size:15px; line-height:1.6; opacity:0.75; margin:0;">Matthew C. Klein &amp; Michael Pettis<br>Yale University Press, 2020 &middot; 288 pages &middot; ~6 min read</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #431407);">
+      <div class="pageno">5 / 15 &rarr;</div>
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><p style="font-size:30px; line-height:1.24; font-weight:700; margin:0 0 16px;">What if the trade war with China has almost nothing to do with China &mdash; and everything to do with who gets paid inside it?</p><p style="font-size:17.5px; line-height:1.5; opacity:0.85; margin:0;">Klein and Pettis argue that trade wars are not caused by irreconcilable national characters or interests at all. They are caused by inequality <i>within</i> nations.</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #064e3b, #052e2b);">
+      <div class="pageno">6 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">The core argument</div><h3 style="font-size:23px; margin:0 0 12px;">Distributional conflict, exported</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Rising inequality means an ever-larger portion of income goes to the rich. Because the rich have a higher propensity to save than the non-rich, savings grow excessively while consumer spending shrinks dangerously.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Production then rises faster than consumption. The resulting glut has to be dumped beyond national borders &mdash; and that is the moment a domestic class conflict becomes an international trade conflict.</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #1e1b4b);">
+      <div class="pageno">7 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 7</div><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Shipping%20containers%20in%20a%20port%20%28Unsplash%29.jpg?width=820" alt="Shipping containers stacked in a port" style="display:block; width:100%; max-height:230px; object-fit:cover; border-radius:12px; margin-bottom:14px;" loading="lazy" onerror="this.style.display='none'"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Image: Unsplash, dedicated to the public domain, via Wikimedia Commons.</div><h3 style="font-size:23px; margin:0 0 12px;">The glut has to go somewhere</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Rising inequality shifts income towards people who save rather than spend. As consumer spending shrinks and production keeps rising, a commodity glut appears.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">It must be pushed across borders. Nothing about this requires anyone to be a bad actor abroad; it is arithmetic about who inside a country receives the income.</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #713f12, #292524);">
+      <div class="pageno">8 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-5v5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Every surplus is somebody else&rsquo;s deficit</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The excess of global savings is driven chiefly by countries that run trade surpluses, such as China.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">By definition those savings have to be absorbed somewhere. The mirror image of a surplus economy is a deficit economy that borrows and buys &mdash; which is why the two sides argue about the same imbalance from opposite ends.</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #082f49);">
+      <div class="pageno">9 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-5v5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">China&rsquo;s missing consumers</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The authors&rsquo; central exhibit: &ldquo;the share of Chinese GDP consumed by Chinese households fell by 15 percentage points between the late 1980s and the bottom in 2010.&rdquo;</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">That is possibly the lowest household share of GDP ever seen in history &mdash; it made it impossible for Chinese workers and households to consume a significant portion of what they were producing.</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #831843, #3b0764);">
+      <div class="pageno">10 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-5v5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Not culture. Policy.</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The drag on consumption from inequality is exacerbated by government policies &mdash; again, such as those in China &mdash; directly intended to enrich elites by taking purchasing power away from ordinary people.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">That is what makes it a <i>class</i> war rather than a national trait: the suppressed consumer is a policy outcome, not a cultural preference for thrift.</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #14532d, #1c1917);">
+      <div class="pageno">11 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-5v5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Germany did the same thing</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The book traces how post-reunification wage suppression and fiscal austerity shifted income from workers to capital owners, producing a massive current account surplus.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Peter Hartz personifies the class-war hypothesis as the mastermind behind welfare cuts &mdash; though the authors caution that &ldquo;the impact of Hartz IV itself is often overstated&rdquo;. The Hartz IV reforms introduced by Chancellor Gerhard Schr&ouml;der in 2003 contributed to cuts in welfare benefits and stagnating real wages.</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #1c1917);">
+      <div class="pageno">12 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-5v5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Everybody loses except the elites</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The consequence of the imbalance is economic hardship for all but the elites &mdash; in surplus countries <i>and</i> in deficit countries alike.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Workers in the surplus economy are paid too little to buy what they make; workers in the deficit economy take on debt, or lose the job, so that the goods can be sold.</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e293b, #020617);">
+      <div class="pageno">13 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 7 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-5v5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Which is why globalisation is hated on both sides</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The increasing distress of the impoverished masses in surplus countries and the rising anxieties of the indebted and unemployed masses in deficit countries both fuel hostility to globalisation.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Reviewers read this as the book&rsquo;s political punchline: the backlash is not irrational nationalism arriving from nowhere, it is the domestic cost of the imbalance finding a voice.</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #581c87, #0f172a);">
+      <div class="pageno">14 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Why this matters in 2026</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><h3 style="font-size:23px; margin:0 0 12px;">The imbalance got bigger, not smaller</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">China&rsquo;s annual trade surplus hit a record $1.2 trillion in 2025 as overproduction and weak domestic consumption pushed low-priced goods into world markets. In June 2026 the monthly surplus came in at $125.62bn, above forecasts.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The surplus with the EU reached a fresh record &mdash; up 27% year-on-year to $32.9bn in June &mdash; and Brussels is weighing new measures to shield local industry, with an informal deadline for progress set for October 2026.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Brookings&rsquo; Eswar Prasad says China&rsquo;s surplus will have &ldquo;as destructive an impact on the global trading system as Trump&rsquo;s tariffs&rdquo;. Tariffs did not shrink the surplus &mdash; they rerouted the goods to Europe, emerging markets and third countries.</p>
+    </div>
+  </section>
+  <section class="card">
+    <div class="panel" style="background: #ede4d3; color: #2d1810;">
+      <div class="pageno">15 / 15 &#10003;</div>
+<p style="font-size:13px; color:#57534e; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; margin:0 0 14px;">The line to remember</p><p style="font-size:22px; line-height:1.4; font-style:italic; margin:0 0 10px;">&ldquo;The share of Chinese GDP consumed by Chinese households fell by 15 percentage points between the late 1980s and the bottom in 2010.&rdquo;</p><p style="font-size:14px; color:#57534e; margin:0 0 18px;">&mdash; Matthew C. Klein &amp; Michael Pettis, <i>Trade Wars Are Class Wars</i></p><p style="font-size:16px; line-height:1.5; margin:0 0 4px;"><b>Try this:</b> next time you read the words &ldquo;trade war&rdquo;, ask who inside each country is being paid too little for the surplus to exist. The answer usually explains more than the tariff schedule does.</p><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p><a href="https://yalebooks.co.uk/book/9780300261448/trade-wars-are-class-wars/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>The book at Yale University Press</b></a><a href="https://phenomenalworld.org/interviews/trade-wars-are-class-wars/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Interview with the authors (Phenomenal World)</b></a><a href="https://www.bruegel.org/newsletter/europes-trade-problem-china-becoming-more-measurable" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Bruegel: Europe&rsquo;s trade problem with China</b></a><a href="https://jfrieden.scholars.harvard.edu/file_url/364" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>Jeffry Frieden&rsquo;s review (Harvard)</b></a></div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
