@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Timothy Snyder's 'Bloodlands' (2010): 14 million non-combatants murdered between Berlin and Moscow, 1933-1945 - and the great majority never saw a death camp."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Lands in Between &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+      <div class="pageno">1 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 1 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;The Class War Inside the Trade War&rdquo; (1 Sep 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">According to Klein &amp; Pettis, what really drives trade imbalances?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Differences in national work ethic and productivity</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Inequality inside a country &mdash; it suppresses consumption, piles up savings, and exports the glut as somebody else&rsquo;s deficit</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Currency manipulation by central banks, and little else</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: B</b> &mdash; Trade wars are not clashes of national interest. They are the international spillover of a distributional fight happening inside each country.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #1e3a5f, #0f2027);">
+      <div class="pageno">2 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 2 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;A Distant Mirror&rdquo; (9 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Why did Barbara Tuchman call the fourteenth century a &lsquo;distant mirror&rsquo;?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Because its art and architecture already prefigured the Renaissance</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Because it was the last century before reliable written records survive</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Because plague, endless war, schism and revolt made it a &lsquo;violent, tormented&rsquo; age that reflects our own turbulent times</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: C</b> &mdash; Tuchman&rsquo;s wager was that a century of catastrophe is the most useful mirror a comfortable age can look into.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #3b0764, #170b26);">
+      <div class="pageno">3 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 3 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;Imagined Communities&rdquo; (12 Jul 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What did Benedict Anderson argue actually built the modern nation?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Ancient bloodlines and genuinely shared ethnicity</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Print capitalism &mdash; plus census, map and museum &mdash; producing an imagined political community people will die for</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Conscription, introduced across Europe after 1789</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: B</b> &mdash; The nation is imagined &mdash; you will never meet most of your countrymen &mdash; and yet real enough to command the ultimate sacrifice.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #1c1917);">
+      <div class="pageno">4 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Book of the day &middot; &#128214;</div><h1 style="font-size:36px; line-height:1.12; margin:0 0 12px;">The Lands in Between</h1><p style="font-size:19px; line-height:1.4; opacity:0.92; margin:0 0 18px;"><i>Bloodlands: Europe Between Hitler and Stalin</i> &mdash; Timothy Snyder, 2010</p><p style="font-size:15px; line-height:1.6; opacity:0.75; margin:0;">History &middot; Eastern Europe, 1933&ndash;1945 &middot; ~6 min read</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e293b, #020617);">
+      <div class="pageno">5 / 14 &rarr;</div>
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15"/><path d="M15 6v15"/></svg><p style="font-size:30px; line-height:1.24; font-weight:700; margin:0 0 16px;">Fourteen million people were murdered in one stretch of Europe between 1933 and 1945 &mdash; and the majority of them never saw a death camp.</p><p style="font-size:17.5px; line-height:1.5; opacity:0.85; margin:0;">They were shot, starved or gassed where they lived, in the lands between Berlin and Moscow.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #064e3b, #052e2b);">
+      <div class="pageno">6 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">The core idea</div><h3 style="font-size:23px; margin:0 0 12px;">One history, not two</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Snyder presents the mass murders committed by the Nazi and Stalinist regimes as two aspects of a <i>single</i> history &mdash; defined by the time and the place where they happened: between Germany and Russia, while Hitler and Stalin both held power.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">The argument goes further than adding up two sets of atrocities. In the bloodlands the two regimes, despite conflicting goals, <b>interacted</b> &mdash; each raising the suffering above what either would have inflicted on its own.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #1e1b4b);">
+      <div class="pageno">7 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15"/><path d="M15 6v15"/></svg><h3 style="font-size:23px; margin:0 0 12px;">The unit of analysis is a map</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The bloodlands run from central Poland through Ukraine, Belarus and the Baltic states to western Russia. Between 1933 and 1945 an estimated <b>14 million non-combatants</b> were killed there.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Nazi Germany was responsible for about two thirds of the total. Snyder&rsquo;s method is to hold the territory fixed and let the regimes move across it &mdash; which is why the book looks nothing like a history of Germany or a history of the USSR.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #713f12, #292524);">
+      <div class="pageno">8 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M4 20c4-8 12-8 16 0"/><path d="M12 12V4"/><path d="M8 7l4-3 4 3"/></svg><h3 style="font-size:23px; margin:0 0 12px;">It begins with farmland</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Snyder roots the explanation for political killing in <b>agriculture</b>. Stalin wanted to collectivise the farmers; Hitler wanted to eliminate them, so that Germans could colonise the land.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">In 1928 Stalin announced the first of the Five Year Plans, mandating the forced collectivisation of agricultural land. The same black soil that made the region worth taking made it worth emptying.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #082f49);">
+      <div class="pageno">9 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3 style="font-size:23px; margin:0 0 12px;">1932&ndash;33: the Ukrainian famine</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Snyder estimates that the Soviet starvation of Ukrainians in 1932&ndash;33 killed <b>3.3 million people</b>.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">This is the first of the book&rsquo;s great set pieces &mdash; and it sits eight years <i>before</i> the mass shootings and gas chambers that most readers associate with the region. The killing in the bloodlands did not begin in 1941.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #831843, #3b0764);">
+      <div class="pageno">10 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8"/><path d="M8 13h5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">1937&ndash;38: the Great Terror, seen from the edge</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Snyder estimates the Great Terror of 1937&ndash;38 killed about <b>300,000 people</b> in the bloodlands &mdash; and that the victims were <b>mostly Poles and Ukrainians</b>.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">That is a different Terror from the familiar one. The show trials of Old Bolsheviks in Moscow are the version the West remembers; the national operations against ethnic minorities on the western border killed far more people.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #14532d, #1c1917);">
+      <div class="pageno">11 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 12h18"/><path d="M6 8h12"/><path d="M8 16h8"/><path d="M12 3v18"/></svg><h3 style="font-size:23px; margin:0 0 12px;">The Hunger Plan</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The Nazis operated a <b>Hunger Plan</b>, designed by Herbert Backe, under which food was routinely denied to civilians in German-occupied territories.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Under it, <b>4.2 million people</b> in the Soviet Union were starved to death &mdash; mostly Ukrainians, Belarusians and Russians. Starvation here was not a by-product of war or bad logistics. It was the policy.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #1c1917);">
+      <div class="pageno">12 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M5 20V9l7-5 7 5v11"/><path d="M9 20v-6h6v6"/></svg><h3 style="font-size:23px; margin:0 0 12px;">The prisoners nobody counts</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">About <b>57% of Soviet prisoners of war were killed</b> in German captivity &mdash; against roughly <b>4% of American and British</b> POWs. Three million Soviet soldiers starved to death in Nazi camps.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Hold those two percentages next to each other and the point of the book comes into focus: the same war, fought by the same army, was a different event depending on which side of the map you were captured on.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e3a5f, #0f172a);">
+      <div class="pageno">13 / 14 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 7 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M12 4v16"/><path d="M6 8l-3 6h6z"/><path d="M18 8l-3 6h6z"/><path d="M5 5h14"/></svg><h3 style="font-size:23px; margin:0 0 12px;">A contested book &mdash; in both directions</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Jews make up <b>5.4 million of the 14 million</b> victims, and much of Western historiography had focused narrowly on the Holocaust &mdash; the gap <i>Bloodlands</i> was written to fill.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">But the book is argued over. Snyder declines to call the Ukrainian famine the Holodomor and uses low estimates for Stalin-era deaths compared with most other historians, concluding that the widely held assumption that more people died under Stalin&rsquo;s regime is untrue. Leading scholars &mdash; Mace, Conquest, Snyder, Naimark, Applebaum &mdash; have all concluded the famine was genocide; the German Bundestag has debated applying that label.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: #ede4d3; color: #2d1810;">
+      <div class="pageno">14 / 14 &#10003;</div>
+<p style="font-size:13px; color:#57534e; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; margin:0 0 14px;">The line to remember</p><p style="font-size:22px; line-height:1.4; font-style:italic; margin:0 0 10px;">&ldquo;The Nazi and Soviet regimes turned people into numbers&hellip; It is for us as scholars to seek those numbers and to put them into perspective. It is for us as humanists to turn the numbers back into people.&rdquo;</p><p style="font-size:14px; color:#57534e; margin:0 0 18px;">&mdash; Timothy Snyder, closing pages of <i>Bloodlands</i></p><p style="font-size:16px; line-height:1.5; margin:0 0 4px;"><b>What to carry forward:</b> the book&rsquo;s trick is a change of frame, not of facts. Fix the territory instead of the regime, and two separate national histories collapse into one catastrophe with two authors &mdash; and the numbers stop belonging to either of them.</p><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p><a href="https://www.hachettebookgroup.com/titles/timothy-snyder/bloodlands/9780465032976/?lens=basic-books" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Basic Books &mdash; the publisher&rsquo;s page</b></a><a href="https://www.nybooks.com/articles/2010/11/11/worst-madness/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Anne Applebaum, &lsquo;The Worst of the Madness&rsquo; (NYRB)</b></a><a href="https://reviews.history.ac.uk/review/2036/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Reviews in History &mdash; the scholarly debate</b></a><a href="https://en.wikipedia.org/wiki/Bloodlands" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>Wikipedia: <i>Bloodlands</i> &mdash; reception and criticism</b></a></div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

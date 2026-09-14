@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Streitkraefte und Strategien (NDR, 8. September 2026): 25 Jahre nach 9/11 - die Bundeswehr brach nach Afghanistan auf, bevor der Bundestag ueber den Einsatz abgestimmt hatte."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Zwei Tage vor dem Mandat &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+      <div class="pageno">1 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 1 von 3</div><h3 style="font-size:23px; margin-bottom:8px;">&bdquo;Wenn P&auml;pste Politik machen&ldquo; (1. Sep. 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Worum ging es in der Folge &uuml;ber die politische Macht der P&auml;pste?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Um die Finanzgeschichte der Vatikanbank</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Um die politische Rolle des Papsttums &mdash; von Canossa &uuml;ber Napoleon und die Lateranvertr&auml;ge bis zu Pius XII., Johannes Paul II. und Leo XIV. im Streit mit Washington</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Um die Entwicklung des Konklave-Wahlverfahrens seit dem Mittelalter</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Antwort: B</b> &mdash; Ein Staat ohne Armee, der seit tausend Jahren Weltpolitik betreibt &mdash; und es bis heute tut.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #1e3a5f, #0f2027);">
+      <div class="pageno">2 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 2 von 3</div><h3 style="font-size:23px; margin-bottom:8px;">&bdquo;Der Sohn des Sterns&ldquo; (11. Aug. 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was war der Bar-Kochba-Aufstand (132&ndash;136 n. Chr.)?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Ein Aufstand griechischer St&auml;dte gegen die r&ouml;mische Steuerlast</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Der letzte gro&szlig;e j&uuml;dische Aufstand gegen Rom &mdash; von Aelia Capitolina bis zur Katastrophe von Betar und &bdquo;Syria Palaestina&ldquo;</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Ein B&uuml;rgerkrieg zwischen zwei r&ouml;mischen Thronpr&auml;tendenten in Jud&auml;a</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Antwort: B</b> &mdash; Nach der Niederlage lie&szlig; Rom die Provinz umbenennen &mdash; eine Namens&auml;nderung, deren Nachwirkungen bis heute reichen.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #3b0764, #170b26);">
+      <div class="pageno">3 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 3 von 3</div><h3 style="font-size:23px; margin-bottom:8px;">&bdquo;Welt in Aufruhr&ldquo; (2. Juli 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Welches Zukunftsmodell h&auml;lt Herfried M&uuml;nkler f&uuml;r das wahrscheinlichste?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Eine bipolare Ordnung aus USA und China</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Eine R&uuml;ckkehr zur regelbasierten liberalen Weltordnung</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Eine Pentarchie aus USA, China, Russland, Indien und EU</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Antwort: C</b> &mdash; Die liberale Weltordnung ist an ihre Grenzen gekommen; M&uuml;nkler rechnet mit f&uuml;nf Ordnungsm&auml;chten statt mit zweien.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #0f172a);">
+      <div class="pageno">4 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Folge des Tages &middot; &#127911;</div><h1 style="font-size:36px; line-height:1.12; margin:0 0 12px;">Zwei Tage vor dem Mandat</h1><p style="font-size:19px; line-height:1.4; opacity:0.92; margin:0 0 18px;"><i>Streitkr&auml;fte und Strategien</i> (NDR, 8. September 2026, 48 Min.) &mdash; &bdquo;Wie 9/11 die Bundeswehr ver&auml;ndert hat&ldquo;</p><p style="font-size:15px; line-height:1.6; opacity:0.75; margin:0;">Sicherheitspolitik &middot; Zeitgeschichte &middot; ~6 Min.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #1c1917);">
+      <div class="pageno">5 / 15 &rarr;</div>
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><p style="font-size:30px; line-height:1.24; font-weight:700; margin:0 0 16px;">Am 14. November 2001 brechen zwei Bundeswehr-Offiziere unter strenger Geheimhaltung Richtung Afghanistan auf. Der Bundestag stimmt erst zwei Tage sp&auml;ter &uuml;ber den Einsatz ab.</p><p style="font-size:17.5px; line-height:1.5; opacity:0.85; margin:0;">25 Jahre danach rekonstruiert der NDR, was damals niemand wusste.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #064e3b, #052e2b);">
+      <div class="pageno">6 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Der Kerngedanke</div><h3 style="font-size:23px; margin:0 0 12px;">Eine Parlamentsarmee, die vorher losfuhr</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Die Folge nimmt den 25. Jahrestag des 11. September 2001 zum Anlass, den Beginn des deutschen Anti-Terror-Einsatzes zu rekonstruieren &mdash; mit bis dahin unbekannten Erkenntnissen.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Der Befund ist unbequem: Die Bundeswehr ist eine Parlamentsarmee; &uuml;ber ihre Eins&auml;tze entscheidet der Bundestag. In Afghanistan begann der Einsatz, bevor dieses Parlament davon wusste.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #1e1b4b);">
+      <div class="pageno">7 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 1 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M12 18v3"/><path d="M8 21h8"/><rect x="5" y="3" width="14" height="12" rx="2"/><path d="M9 9h6"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Die Folge selbst</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">NDR, 8. September 2026, 48 Minuten. NDR-Autor Christoph Heinzle spricht mit einem ehemaligen Soldaten des <b>Kommandos Spezialkr&auml;fte (KSK)</b>, der im November 2001 in S&uuml;dafghanistan eingesetzt war &mdash; der Hochburg von Taliban und al-Qaida.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Die Leitfrage von damals: Wie konnte Deutschland den Amerikanern im Anti-Terror-Kampf konkret helfen? Der Podcast wird von den ARD-Korrespondentinnen und -Korrespondenten Anna Engelke, Stefan Niemann, Kai K&uuml;stner und Astrid Corall gemacht.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #713f12, #292524);">
+      <div class="pageno">8 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 2 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 12h18"/><path d="M15 6l6 6-6 6"/></svg><h3 style="font-size:23px; margin:0 0 12px;">14. November 2001: das Vorauskommando</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Nach NDR-Recherchen brachen <b>zwei Bundeswehr-Offiziere am 14. November 2001</b> unter strenger Geheimhaltung Richtung sp&auml;teres Einsatzgebiet auf.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Niemand wusste von diesem Vorauskommando &mdash; auch der Bundestag nicht, der &uuml;ber die Anti-Terror-Operation erst zwei Tage nach ihrer Abreise abstimmte.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #082f49);">
+      <div class="pageno">9 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 3 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M4 21h16"/><path d="M6 21V8h12v13"/><path d="M9 8V5h6v3"/><path d="M10 13h4"/></svg><h3 style="font-size:23px; margin:0 0 12px;">16. November 2001: der Beschluss</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Die entscheidende parlamentarische Abstimmung folgte am <b>16. November</b>: Der Bundestag billigte den Einsatz bewaffneter deutscher Streitkr&auml;fte zur Unterst&uuml;tzung der internationalen Reaktion auf die Anschl&auml;ge in den USA.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Auch der Verteidigungsausschuss wurde offenbar nicht einmal vertraulich informiert &mdash; was schon damals bei politischen Akteuren auf Kritik stie&szlig;.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #831843, #3b0764);">
+      <div class="pageno">10 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 4 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 20h18"/><path d="M5 20V12l7-5 7 5v8"/><path d="M10 20v-5h4v5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Camp Rhino, Nacht zum 28. November</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Oberstleutnant <b>Andreas J&ouml;decke</b> war der erste deutsche Verbindungsoffizier bei der US-gef&uuml;hrten Task Force.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Er landete in der Nacht zum <b>28. November 2001</b> gemeinsam mit einem zweiten Offizier in <b>Camp Rhino</b>, s&uuml;dlich von Kandahar &mdash; dem vorgeschobenen US-St&uuml;tzpunkt mitten im Kernland der Taliban.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #14532d, #1c1917);">
+      <div class="pageno">11 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 5 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 10h8"/><path d="M8 14h5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Das Mandat: maximal 100 KSK-Soldaten</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Mit dem Bundestagsmandat f&uuml;r die Operation <b>Enduring Freedom</b> war der Einsatz von <b>maximal 100 Soldaten des Kommandos Spezialkr&auml;fte</b> in Afghanistan eingeschlossen.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Eine Obergrenze im Beschlusstext ist die klassische deutsche L&ouml;sung: Sie erlaubt den Einsatz und begrenzt ihn zugleich &mdash; und macht ihn gerade dadurch politisch tragf&auml;hig.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #1c1917);">
+      <div class="pageno">12 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 6 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M4 20V6"/><path d="M4 6h10l-2 3 2 3H4"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Woraus zwanzig Jahre wurden</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Ab <b>Dezember 2001</b> beteiligten sich deutsche Spezialkr&auml;fte am &bdquo;Krieg gegen den Terror&ldquo; im Rahmen der US-Operation Enduring Freedom. Ab <b>Januar 2002</b> wurde die Bundeswehr Teil der International Security Assistance Force (ISAF).</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Aus einem Anti-Terror-Auftrag wurde eine Stabilisierungsmission, daraus eine Ausbildungsmission &mdash; &bdquo;Resolute Support&ldquo;, die 2021 endete. Rund zwanzig Jahre, begonnen mit zwei Offizieren ohne Mandat.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e3a5f, #0f172a);">
+      <div class="pageno">13 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 7 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 8h7"/><path d="M8 12h7"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Die Bilanz</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Zeitweise waren rund <b>5.300 deutsche Soldatinnen und Soldaten</b> im Land. Mit <b>59 Toten</b> war Afghanistan der gr&ouml;&szlig;te und verlustreichste Auslandseinsatz der Bundeswehr.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Am Ende, im August 2021, evakuierte die Bundeswehr mit <b>37 Fl&uuml;gen 5.347 Menschen</b> aus 45 Staaten, darunter rund 4.100 Afghaninnen und Afghanen.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #581c87, #0f172a);">
+      <div class="pageno">14 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Warum das 2026 z&auml;hlt</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg><h3 style="font-size:23px; margin:0 0 12px;">25 Jahre &mdash; und die Akten &ouml;ffnen sich erst jetzt</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Der 11. September 2001 j&auml;hrte sich in diesem Monat zum <b>25. Mal</b>. Erst zu diesem Jahrestag werden Details des Einsatzbeginns &ouml;ffentlich, die ein Vierteljahrhundert lang nicht bekannt waren.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Die Recherche traf auf ein Publikum, das gerade &uuml;ber neue Eins&auml;tze, Wehrpflicht und Verteidigungsf&auml;higkeit streitet &mdash; und damit wieder &uuml;ber genau die Frage von 2001: Wie viel darf eine Regierung tun, bevor das Parlament zugestimmt hat?</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: #ede4d3; color: #2d1810;">
+      <div class="pageno">15 / 15 &#10003;</div>
+<p style="font-size:13px; color:#57534e; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; margin:0 0 14px;">Die Zeile zum Merken</p><p style="font-size:22px; line-height:1.4; font-style:italic; margin:0 0 10px;">&bdquo;Nach 9/11: Bundeswehr startete 2001 geheim und ohne Mandat nach Afghanistan&ldquo;</p><p style="font-size:14px; color:#57534e; margin:0 0 18px;">&mdash; NDR-Presseportal, Meldung zur Recherche f&uuml;r die Podcastfolge</p><p style="font-size:16px; line-height:1.5; margin:0 0 4px;"><b>Was h&auml;ngen bleiben sollte:</b> Der Parlamentsvorbehalt ist das Kernst&uuml;ck der deutschen Sicherheitspolitik &mdash; und im ersten Moment der ersten gro&szlig;en Kampfmission wurde er faktisch von der Ereignisgeschwindigkeit &uuml;berholt. Zwei Tage sind eine kurze Zeit und ein gro&szlig;er Unterschied.</p><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">N&auml;chste Schritte</p><a href="https://www.ardsounds.de/sendung/streitkraefte-und-strategien/urn:ard:show:794d51bd58e1747c/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>H&ouml;ren: Streitkr&auml;fte und Strategien (ARD)</b></a><a href="https://www.presseportal.de/pm/6561/6344671" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Die NDR-Recherche im Wortlaut (Presseportal)</b></a><a href="https://taz.de/Bundeswehrstart-in-Afghanistan/!6209750/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>taz: Bundeswehrstart in Afghanistan</b></a><a href="https://www.bundestag.de/resource/blob/881198/27fd4f597e1d4ee43350aafffc6f9d8c/WD-2-062-21-pdf-data.pdf" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>Bundestag, Wiss. Dienste: Der Afghanistan-Einsatz 2001&ndash;2021 (PDF)</b></a></div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zur&uuml;ck">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

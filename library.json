@@ -1,7 +1,77 @@
 {
-  "updated": "2026-09-01",
-  "count": 205,
+  "updated": "2026-09-14",
+  "count": 210,
   "swipes": [
+    {
+      "file": "Swipe – The Lands in Between – 2026-09-14.html",
+      "title": "The Lands in Between",
+      "date": "2026-09-14",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Timothy Snyder's 'Bloodlands' (2010): 14 million non-combatants murdered between Berlin and Moscow, 1933–45 — and the great majority never saw a death camp. Fix the territory, and two national histories collapse into one catastrophe with two authors.",
+      "subject": {
+        "work": "bloodlands",
+        "creator": "timothy-snyder",
+        "topic": "hitler-stalin-mass-killing-eastern-europe",
+        "source": "basic-books"
+      }
+    },
+    {
+      "file": "Swipe – Die ungeheure Warensammlung – 2026-09-14.html",
+      "title": "Die ungeheure Warensammlung",
+      "date": "2026-09-14",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Karl Marx, „Das Kapital“ Band I (Hamburg, 14. September 1867, 1000 Exemplare): Das Buch beginnt nicht mit dem Klassenkampf, sondern mit der Analyse einer einzelnen Ware — und endet bei der These, dass Ausbeutung aus der korrekten Anwendung der Regeln folgt.",
+      "subject": {
+        "work": "das-kapital-band-1",
+        "creator": "karl-marx",
+        "topic": "marx-value-surplus-value-commodity",
+        "source": "otto-meissner"
+      }
+    },
+    {
+      "file": "Swipe – Not Even Close – 2026-09-14.html",
+      "title": "Not Even Close",
+      "date": "2026-09-14",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Odd Lots (Bloomberg, 12 Sep 2026): Ivanhoe's Robert Friedland on the world's monumental copper shortage — data centres, EVs and reindustrialisation against mine supply growing barely 1.4% a year.",
+      "subject": {
+        "work": "oddlots-friedland-copper",
+        "creator": "robert-friedland",
+        "topic": "copper-supply-deficit",
+        "source": "odd-lots"
+      }
+    },
+    {
+      "file": "Swipe – Zwei Tage vor dem Mandat – 2026-09-14.html",
+      "title": "Zwei Tage vor dem Mandat",
+      "date": "2026-09-14",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Streitkräfte und Strategien (NDR, 8. Sep. 2026): 25 Jahre nach 9/11 — zwei Bundeswehr-Offiziere brachen am 14. November 2001 geheim nach Afghanistan auf, der Bundestag stimmte erst zwei Tage später ab.",
+      "subject": {
+        "work": "sus-9-11-bundeswehr",
+        "creator": null,
+        "topic": "bundeswehr-afghanistan-einsatzbeginn",
+        "source": "streitkraefte-und-strategien"
+      }
+    },
+    {
+      "file": "Swipe – At a Slight Angle to the Universe – 2026-09-14.html",
+      "title": "At a Slight Angle to the Universe",
+      "date": "2026-09-14",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Poetry · C. P. Cavafy (1863–1933) refused to publish a book, printed poems on broadsheets and gave them away, and left a canon of exactly 154 poems that remade modern Greek verse.",
+      "subject": {
+        "work": "cavafy-poems",
+        "creator": "constantine-cavafy",
+        "topic": "alexandrian-greek-poetry",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – The Class War Inside the Trade War – 2026-09-01.html",
       "title": "The Class War Inside the Trade War",
