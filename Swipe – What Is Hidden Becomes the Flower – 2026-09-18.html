@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Theatre - Zeami Motokiyo's 'Fushikaden' (c. 1400): the actor's handbook that stayed a family secret for centuries, because secrecy was the technique, not the packaging."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>What Is Hidden Becomes the Flower &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+      <div class="pageno">1 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 1 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;At a Slight Angle to the Universe&rdquo; (14 Sep 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">How did C. P. Cavafy circulate his poetry during his lifetime?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Through a major Athens publisher, in annual volumes</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. He refused to publish a book &mdash; he printed poems on broadsheets and gave them away, leaving a canon of exactly 154</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Only in literary magazines, always under a pseudonym</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: B</b> &mdash; He curated his own reputation more tightly than most editors would dare, and remade modern Greek verse without ever issuing a book.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #1e3a5f, #0f2027);">
+      <div class="pageno">2 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 2 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;The Dance of Utter Darkness&rdquo; (1 Sep 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What did Tatsumi Hijikata and Kazuo Ohno build butoh out of, from 1959?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. A codified fusion of ballet technique and kabuki staging</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Court dance revived for the postwar Japanese state</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Taboo, decay and the bow-legged walk of T&#333;hoku labourers &mdash; an art form that refuses to be defined</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: C</b> &mdash; Butoh began as a refusal &mdash; of Western modern dance, of Japanese classical form, and of refinement itself.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #3b0764, #170b26);">
+      <div class="pageno">3 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 3 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;Sculpting in Time&rdquo; (29 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What did Andrei Tarkovsky argue was cinema&rsquo;s true material?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Time itself &mdash; the power is rhythm and &ldquo;time-pressure&rdquo; <i>within</i> the shot, not montage</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. The collision of images in the cut, as Eisenstein taught</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Light, understood as painting with a camera</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: A</b> &mdash; The director&rsquo;s job is to sculpt in time: a shot carries its own pressure of duration, and the cut merely joins what is already alive.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #3f1d0b, #1c1210);">
+      <div class="pageno">4 / 15 &rarr;</div>
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ko-omote%20(Noh%20mask),%20Tokyo%20National%20Museum%20C-1551.jpg?width=500" alt="Ko-omote Noh mask, Tokyo National Museum" style="display:block; width:160px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.3); margin-bottom:12px;"><div style="font-size:11px; opacity:0.6; margin:0 0 16px; line-height:1.35;">Image: Ko-omote Noh mask (C-1551), Tokyo National Museum. Public domain, via Wikimedia Commons. <i>Ko-omote</i> is the mask for the role of a young woman.</div><div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Creative topic &middot; &#127912;</div><h1 style="font-size:36px; line-height:1.12; margin:0 0 12px;">What Is Hidden Becomes the Flower</h1><p style="font-size:19px; line-height:1.4; opacity:0.92; margin:0 0 18px;"><i>Zeami Motokiyo (1363&ndash;1443) and the <span style="font-style:normal">F&#363;shikaden</span></i></p><p style="font-size:15px; line-height:1.6; opacity:0.75; margin:0;">Theatre &middot; Noh &middot; Muromachi Japan &middot; ~6 min read</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e293b, #020617);">
+      <div class="pageno">5 / 15 &rarr;</div>
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M12 21c-4-3-7-6.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 3.5-3 7-7 10z"/></svg><p style="font-size:30px; line-height:1.24; font-weight:700; margin:0 0 16px;">The greatest handbook on acting ever written in Japan was kept secret &mdash; and the secrecy was not marketing. It was the technique.</p><p style="font-size:17.5px; line-height:1.5; opacity:0.85; margin:0;">Zeami&rsquo;s paradox, as his readers put it: the moment you teach it, the flower disappears. Value resides in the parts that cannot be fully explained.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #064e3b, #052e2b);">
+      <div class="pageno">6 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">The core idea</div><h3 style="font-size:23px; margin:0 0 12px;">A transmission, not a theory</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The <i>F&#363;shikaden</i> &mdash; roughly &ldquo;Style and the Flower&rdquo;, or in full <i>The Transmission of the Flower Through a Mastery of the Forms</i> &mdash; is not a book of criticism. It is a set of instructions for making a specific effect happen in a specific room.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">That is why it was written as <i>densho</i>, a book of secrets: initiatory knowledge, meant to be practised until the body knows what the mind cannot hold. Its two governing terms are <b>hana</b>, the flower, and <b>y&#363;gen</b>, a mysterious beauty and grace.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #1e1b4b);">
+      <div class="pageno">7 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M12 3v18"/><path d="M6 9a6 6 0 0 1 6-6"/><path d="M18 15a6 6 0 0 1-6 6"/></svg><h3 style="font-size:23px; margin:0 0 12px;">A father and a son invented it</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The actor and playwright <b>Kan&rsquo;ami (1333&ndash;1384)</b> and his son <b>Zeami (1363&ndash;1443)</b> are regarded as the inventors of Noh. They reinterpreted several existing traditional performing arts and brought Noh into its present form.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Zeami did the popularising, in the <b>Muromachi period (1336&ndash;1573)</b>, and pushed the art towards a more refined and elite form of entertainment. Roughly <b>twenty Noh plays</b> are directly attributed to him.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #713f12, #292524);">
+      <div class="pageno">8 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M5 20V9l7-5 7 5v11"/><path d="M9 20v-6h6v6"/></svg><h3 style="font-size:23px; margin:0 0 12px;">An eleven-year-old meets a shogun</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The whole career turns on a single performance. Aged <b>eleven</b>, Zeami appeared in a Noh competition at <b>Imakumano</b> and there met the young shogun <b>Ashikaga Yoshimitsu</b>.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">He received patronage in <b>1374</b> &mdash; an honour that allowed him to be a professional actor. Without the court, there is no leisure to theorise; without the theory, there is no transmissible art. Noh survives because a shogun liked a boy&rsquo;s performance.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #082f49);">
+      <div class="pageno">9 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M4 4h10l6 6v10H4z"/><path d="M14 4v6h6"/><rect x="9" y="13" width="6" height="5" rx="1"/><path d="M10.5 13v-2a1.5 1.5 0 0 1 3 0v2"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Twenty-one books of secrets</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Zeami composed the <i>F&#363;shikaden</i> around the year <b>1400</b>. It is the first of <b>21 <i>densho</i></b> &mdash; books of secrets &mdash; that he left behind, and it is built as <b>seven chapters, each functioning as a semi-independent treatise</b>.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">It was intended as a <b>secret transmission within the Kanze family</b>, to safeguard proprietary knowledge from rival schools. A technical manual, a trade secret and a work of aesthetics, all at once.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #3f0f3f, #180a18);">
+      <div class="pageno">10 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 7</div><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Stage%20of%20the%20Kyoto-Kanze%20Noh%20and%20Kyogen%20theatre%20(48885678827).jpg?width=900" alt="Stage of the Kyoto-Kanze Noh and Kyogen theatre" style="display:block; width:100%; max-height:230px; object-fit:cover; border-radius:12px; margin-bottom:14px;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Image: Maarten Heerlien, CC BY 2.0, via Wikimedia Commons. The stage of the Kyoto-Kanze Noh and Ky&#333;gen theatre.</div><h3 style="font-size:23px; margin:0 0 12px;">What is actually in the seven chapters</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The <b>first three</b> chapters are practical training: age-appropriate technique for actors from childhood through maturity, with an emphasis on physical and vocal discipline. The <b>fourth</b> takes up <b><i>monomane</i></b> &mdash; imitation &mdash; as a representational tool.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">The <b>fifth</b> goes into <b><i>y&#363;gen</i></b>, the aesthetic ideal of subtle grace. The <b>sixth</b> addresses the interplay of music and performance. The <b>seventh</b> underscores audience engagement &mdash; and the elusive quality of <b><i>hana</i></b>, the flower. The book ends where the theory runs out.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+      <div class="pageno">11 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5V5"/><path d="M12 14.5V19"/><path d="M9.5 12H5"/><path d="M14.5 12H19"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Two words that do a lot of work</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;"><b><i>Hana</i></b> is the <b>fragile, transient essence of a human being</b> &mdash; which is why it is a flower and not a jewel. It is what an audience is actually moved by, and it does not last unless the actor keeps re-earning it.</p><p style="font-size:17.5px; line-height:1.5; margin:0;"><b><i>Y&#363;gen</i></b> denotes a <b>mysterious beauty and grace</b>. It is a general term for much of the Japanese art of the 13th and 14th centuries, but in Noh it means something more precise: the profound beauty of the transcendental world &mdash; including the mournful beauty involved in sadness and loss.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #1c1917);">
+      <div class="pageno">12 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><path d="M4 4l16 16"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Secrecy as a working method</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Zeami kept the <i>F&#363;shikaden</i> secret <b>not from vanity but from necessity</b>. On this reading the deepest material in it cannot be explained at all &mdash; it can only be enacted, practised until the body knows what the mind cannot hold.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Hence the philosophy his readers summarise as <b>&ldquo;do not teach too much&rdquo;</b>. An effect that has been fully described in advance stops surprising, and a performance that cannot surprise has no flower. Secrecy here is a device for preserving the possibility of astonishment.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e3a5f, #020617);">
+      <div class="pageno">13 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 7 / 7</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 18c3-2 6-2 9 0s6 2 9 0"/><path d="M8 13h8l-1-5H9z"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Banished at seventy-one</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Court favour is not permanent. In <b>1434</b> the shogun <b>Yoshinori</b> banished Zeami, then <b>seventy-one</b>, to <b>Sado</b> &mdash; a large island off Japan&rsquo;s west coast that had long been a place of exile for important personages.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">He was certainly there for at least two years: he left a record of the exile in <i><b>Kint&#333;sho</b></i> (1436), &ldquo;the book of the golden isle&rdquo;. The man who had spent a lifetime writing about how to hold an audience spent his old age writing for none.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #581c87, #0f172a);">
+      <div class="pageno">14 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Why this matters in 2026</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M9 8h6"/><path d="M9 12h6"/></svg><h3 style="font-size:23px; margin:0 0 12px;">The 26th Grand Master is on tour in Europe</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The <b>Kanze Noh Theater</b> of Tokyo is touring Europe in 2026 &mdash; a joint initiative of the <b>Berliner Festspiele / Musikfest Berlin</b>, the Japanese-German Center Berlin, Bayerischer Rundfunk&rsquo;s <i>musica viva</i>, the <b>K&ouml;lner Philharmonie</b> and <b>Bozar</b> in Brussels, where the ensemble played on <b>26 September 2026</b> to mark 160 years of Japanese&ndash;Belgian relations.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">The lead actor is <b>Kiyokazu Kanze, the 26th Grand Master of the Kanze School</b> &mdash; a direct descendant of Kan&rsquo;ami and Zeami, and head of Japan&rsquo;s largest Noh school. The programme: <i>Hagoromo</i> (&ldquo;The Feather Robe&rdquo;, 55 min), which closely parallels the European &ldquo;Swan Maiden&rdquo; legend; the ky&#333;gen comedy <i>Kaki Yamabushi</i> (15 min); and <i>Shakky&#333;</i> (&ldquo;The Stone Bridge&rdquo;, 25 min) with its lion dance. Noh was inscribed on the <b>UNESCO List of Intangible Cultural Heritage in 2008</b>; perfected 700 years ago, it has been passed down virtually unchanged.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: #ede4d3; color: #2d1810;">
+      <div class="pageno">15 / 15 &#10003;</div>
+<p style="font-size:13px; color:#57534e; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; margin:0 0 14px;">The line to remember</p><p style="font-size:22px; line-height:1.4; font-style:italic; margin:0 0 10px;">&ldquo;What is hidden will become the flower. What is not hidden cannot become the flower.&rdquo;</p><p style="font-size:14px; color:#57534e; margin:0 0 18px;">&mdash; Zeami Motokiyo, <i>F&#363;shikaden</i>.</p><p style="font-size:16px; line-height:1.5; margin:0 0 4px;"><b>What to carry forward:</b> Zeami is the strongest case ever made that an art form&rsquo;s power lives in what it withholds. Six centuries later the same company still performs the same plays with the same masks &mdash; and the treatise that explains how still insists it cannot fully explain it.</p><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p><a href="https://www.the-noh.com/en/zeami/index.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>the-noh.com: The Words of Zeami &mdash; his dramatic life</b></a><a href="https://www.britannica.com/topic/Fushi-kaden" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Britannica on the <i>F&#363;shi kaden</i></b></a><a href="https://kanze.net/en/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>The Kanze school&rsquo;s own site</b></a><a href="https://www.bozar.be/en/calendar/kanze-noh-theater-hagoromo-kaki-yamabushi-shakkyo" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>The 2026 European tour programme (Bozar)</b></a></div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

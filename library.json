@@ -1,7 +1,77 @@
 {
-  "updated": "2026-09-14",
-  "count": 210,
+  "updated": "2026-09-18",
+  "count": 215,
   "swipes": [
+    {
+      "file": "Swipe – The Needle Inside the Cotton – 2026-09-18.html",
+      "title": "The Needle Inside the Cotton",
+      "date": "2026-09-18",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Ezra Vogel's 'Deng Xiaoping and the Transformation of China' (2011): the man Mao called 'a needle inside a ball of cotton' spent fifty years building the planned economy — then creatively destroyed it, and ordered Tiananmen anyway.",
+      "subject": {
+        "work": "deng-xiaoping-and-the-transformation-of-china",
+        "creator": "ezra-vogel",
+        "topic": "deng-reform-era-china",
+        "source": "harvard-university-press"
+      }
+    },
+    {
+      "file": "Swipe – Der Riss zwischen Erfahrung und Erwartung – 2026-09-18.html",
+      "title": "Der Riss zwischen Erfahrung und Erwartung",
+      "date": "2026-09-18",
+      "kicker": "Buch des Tages · 📖",
+      "emoji": "📖",
+      "description": "Reinhart Koselleck, „Vergangene Zukunft\" (Suhrkamp 1979): Warum Altdorfer 1529 die Jahreszahl wegließ, wie sich um 1800 der Erfahrungsraum vom Erwartungshorizont löste — und Geschichte aufhörte, Lehrmeisterin des Lebens zu sein.",
+      "subject": {
+        "work": "vergangene-zukunft",
+        "creator": "reinhart-koselleck",
+        "topic": "semantik-geschichtlicher-zeiten",
+        "source": "suhrkamp"
+      }
+    },
+    {
+      "file": "Swipe – The Twenty-Year Promise – 2026-09-18.html",
+      "title": "The Twenty-Year Promise",
+      "date": "2026-09-18",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "MacroVoices #548 (3 Sep 2026) with Dr Carly Anderson: the nuclear renaissance turns on a 20-year power contract, a Ford-style assembly line — and a uranium conversion chokepoint that still runs through Russia.",
+      "subject": {
+        "work": "macrovoices-548-carly-anderson",
+        "creator": "carly-anderson",
+        "topic": "advanced-nuclear-and-energy-technologies",
+        "source": "macrovoices"
+      }
+    },
+    {
+      "file": "Swipe – Was Mittelmächte wirklich reißen können – 2026-09-18.html",
+      "title": "Was Mittelmächte wirklich reißen können",
+      "date": "2026-09-18",
+      "kicker": "Folge des Tages · 🎧",
+      "emoji": "🎧",
+      "description": "Sicherheitshalber #111 (15. Sep. 2026): humanoide Roboter als „Verkörperung von KI\" — und, nach Kanadas Annäherung an die EU, die ehrliche Frage, was Mittelmächte in einer Welt imperialer Machtpolitik ausrichten.",
+      "subject": {
+        "work": "sicherheitshalber-111",
+        "creator": null,
+        "topic": "mittelmaechte-in-der-weltordnung",
+        "source": "sicherheitshalber"
+      }
+    },
+    {
+      "file": "Swipe – What Is Hidden Becomes the Flower – 2026-09-18.html",
+      "title": "What Is Hidden Becomes the Flower",
+      "date": "2026-09-18",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Theatre · Zeami Motokiyo's 'Fūshikaden' (c. 1400): the greatest actor's handbook in Japan stayed a Kanze family secret for centuries — because the secrecy was the technique, not the packaging.",
+      "subject": {
+        "work": "fushikaden-zeami",
+        "creator": "zeami-motokiyo",
+        "topic": "noh-theatre-aesthetics",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – The Lands in Between – 2026-09-14.html",
       "title": "The Lands in Between",
