@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Reinhart Kosellecks 'Vergangene Zukunft' (Suhrkamp 1979): Wie sich um 1800 der Erfahrungsraum vom Erwartungshorizont loesste - und Geschichte aufhoerte, Lehrmeisterin zu sein."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Der Riss zwischen Erfahrung und Erwartung &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+      <div class="pageno">1 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 1 von 3</div><h3 style="font-size:23px; margin-bottom:8px;">&bdquo;Die ungeheure Warensammlung&ldquo; (14. Sep. 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Womit beginnt Marx&rsquo; &bdquo;Das Kapital&ldquo;, Band I (Hamburg, 14. September 1867)?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Mit dem Aufruf zum Klassenkampf</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Mit der Analyse einer einzelnen Ware &mdash; und endet bei der These, dass Ausbeutung aus der korrekten Anwendung der Regeln folgt</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Mit einer Geschichte der englischen Fabrikgesetzgebung</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Antwort: B</b> &mdash; Die Pointe ist analytisch, nicht moralisch: der Mehrwert entsteht, wenn alle sich an die Regeln halten. Erstauflage: 1000 Exemplare.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #1e3a5f, #0f2027);">
+      <div class="pageno">2 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 2 von 3</div><h3 style="font-size:23px; margin-bottom:8px;">&bdquo;Die Achse der Weltgeschichte&ldquo; (1. Sep. 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was behauptet Karl Jaspers&rsquo; These von der &bdquo;Achsenzeit&ldquo; (1949)?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Dass die Weltgeschichte erst mit der europ&auml;ischen Aufkl&auml;rung ihren Angelpunkt fand</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Dass alle Hochkulturen letztlich aus einer einzigen Quelle in Mesopotamien stammen</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Dass zwischen 800 und 200 v. Chr. Konfuzius, Buddha, Zarathustra, die Propheten und die griechischen Philosophen ann&auml;hernd gleichzeitig auftraten &mdash; ohne voneinander zu wissen</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Antwort: C</b> &mdash; Eine Gleichzeitigkeit ohne Kontakt: Jaspers&rsquo; Versuch, eine Weltgeschichte zu denken, die nicht in Europa beginnt. Die Kritiker bestreiten vor allem die Gleichzeitigkeit.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #3b0764, #170b26);">
+      <div class="pageno">3 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 3 von 3</div><h3 style="font-size:23px; margin-bottom:8px;">&bdquo;Die Jahreszeiten der Kulturen&ldquo; (29. Aug. 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Welches Geschichtsbild vertritt Oswald Spengler im &bdquo;Untergang des Abendlandes&ldquo; (1918&ndash;22)?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Kulturen sind Organismen, die wie Jahreszeiten reifen und vergehen &mdash; Geschichte als Kreislauf statt Fortschritt</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Geschichte ist die stetige Ausbreitung von Vernunft und Wohlstand</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Kulturen entwickeln sich ausschlie&szlig;lich entlang geografischer Bedingungen</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Antwort: A</b> &mdash; Die einflussreichste und umstrittenste Formel f&uuml;r Geschichte als Kreislauf: Kulturen haben Fr&uuml;hling, Sommer, Herbst und Winter &mdash; und der Winter ist nicht verhandelbar.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e3a5f, #0f172a);">
+      <div class="pageno">4 / 15 &rarr;</div>
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Albrecht%20Altdorfer%20-%20Schlacht%20bei%20Issus%20(Alte%20Pinakothek,%20M%C3%BCnchen)%20-%20Google%20Art%20Project.jpg?width=900" alt="Albrecht Altdorfer, Alexanderschlacht (Schlacht bei Issus), 1529, Alte Pinakothek M&uuml;nchen" style="display:block; width:100%; max-height:240px; object-fit:cover; border-radius:12px; margin-bottom:14px;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Bild: Albrecht Altdorfer, &bdquo;Alexanderschlacht&ldquo; (1529), Alte Pinakothek M&uuml;nchen. Gemeinfrei, via Wikimedia Commons (Google Art Project).</div><div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Buch des Tages &middot; &#128214;</div><h1 style="font-size:36px; line-height:1.12; margin:0 0 12px;">Der Riss zwischen Erfahrung und Erwartung</h1><p style="font-size:19px; line-height:1.4; opacity:0.92; margin:0 0 18px;"><i>Reinhart Koselleck, &bdquo;Vergangene Zukunft. Zur Semantik geschichtlicher Zeiten&ldquo; (Suhrkamp, 1979)</i></p><p style="font-size:15px; line-height:1.6; opacity:0.75; margin:0;">Geschichtstheorie &middot; Begriffsgeschichte &middot; ~6 Min. Lesezeit</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e293b, #020617);">
+      <div class="pageno">5 / 15 &rarr;</div>
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><p style="font-size:30px; line-height:1.24; font-weight:700; margin:0 0 16px;">Zwischen Altdorfer und Schlegel liegen dreihundert Jahre. Zwischen der Schlacht bei Issos und Altdorfer liegen achtzehnhundert. F&uuml;r Altdorfer war das offenbar der k&uuml;rzere Abstand.</p><p style="font-size:17.5px; line-height:1.5; opacity:0.85; margin:0;">Genau mit dieser Beobachtung er&ouml;ffnet Koselleck sein Buch. In den dreihundert Jahren, die Schlegel von Altdorfer trennen, lag mehr Zeit &mdash; oder eine andere Art von Zeit &mdash; als in den achtzehnhundert davor.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #064e3b, #052e2b);">
+      <div class="pageno">6 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Die Kernthese</div><h3 style="font-size:23px; margin:0 0 12px;">Zeit hat eine Geschichte</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Koselleck untersucht in verschiedenen Durchg&auml;ngen geschichtliche Zeiterfahrungen und Zeitbegriffe. Er wendet sich vor allem der Neuzeit zu, zieht aber immer wieder Vergleiche mit fr&uuml;heren Perioden &mdash; und liefert, wie der Verlag es formuliert, Bausteine zu einer Theorie geschichtlicher Zeiten.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Das Werkzeug daf&uuml;r sind zwei Kategorien: <b>Erfahrungsraum</b> und <b>Erwartungshorizont</b>. Sie sind nicht Gegenstand der Geschichte, sondern deren Bedingung &mdash; metahistorische Wissenskategorien, die in das Spannungsfeld der Neuzeit eintreten.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #1e1b4b);">
+      <div class="pageno">7 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 1 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M4 4h10l6 6v10H4z"/><path d="M14 4v6h6"/><path d="M8 14h7"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Das Buch und sein Autor</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Erschienen <b>1979</b> bei Suhrkamp, Frankfurt am Main; heute Band <b>757</b> der Reihe <i>suhrkamp taschenbuch wissenschaft</i>, 389 Seiten, inzwischen in <b>13. Auflage</b> (aktuelle Auflage: 2. Juli 2025). Es ist keine Monografie, sondern eine Sammlung von Aufs&auml;tzen.</p><p style="font-size:17.5px; line-height:1.5; margin:0;"><b>Reinhart Koselleck (1923&ndash;2006)</b>, Professor in Bochum, Heidelberg und Bielefeld, Mitglied zahlreicher Akademien &mdash; bekannt f&uuml;r bahnbrechende Studien zur Geschichte der europ&auml;ischen Aufkl&auml;rung, zur Theorie der Geschichte und zur Begriffsgeschichte.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #713f12, #292524);">
+      <div class="pageno">8 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 2 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 20h18"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 20v-5h4v5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Das Bild ohne Jahreszahl</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Altdorfers <b>Alexanderschlacht</b> von <b>1529</b> zeigt die Schlacht bei Issos von 333 v. Chr. Der Maler wollte die dargestellte Geschichte statistisch beglaubigen: Er gibt die Zahl der K&auml;mpfenden in <b>zehn nummerierten Kolonnen</b> an.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Eine Angabe fehlt jedoch: <b>das Jahr</b>. Dadurch wird seine Schlacht zugleich gegenw&auml;rtig und zeitlos &mdash; Perser wie T&uuml;rken vor Wien, Makedonen wie Landsknechte. Geschichte ist hier noch nicht vergangen, sie ist ein ewiger Vorrat an Beispielen.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #082f49);">
+      <div class="pageno">9 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 3 / 8</div><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Franz%20Gareis%20Portrait%20Friedrich%20Schlegel.jpg?width=700" alt="Friedrich Schlegel, Portr&auml;t von Franz Gareis, 1801" style="display:block; width:100%; max-height:240px; object-fit:cover; border-radius:12px; margin-bottom:14px;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Bild: Franz Gareis (1775&ndash;1803), Portr&auml;t Friedrich Schlegel, 1801. Gemeinfrei, via Wikimedia Commons.</div><h3 style="font-size:23px; margin:0 0 12px;">Schlegel sieht dasselbe Bild &mdash; und etwas anderes</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Fast dreihundert Jahre sp&auml;ter steht <b>Friedrich Schlegel</b> vor demselben Gem&auml;lde und wird von grenzenlosem Erstaunen ergriffen. Er preist es als die gr&ouml;&szlig;te Heldentat des Ritteralters.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Genau darin liegt die Differenz: Schlegel hat eine <b>kritisch-historische Distanz</b> zu Altdorfers Meisterwerk gewonnen. Er sieht ein Werk seiner Epoche &mdash; nicht ein Beispiel f&uuml;r seine eigene Gegenwart. Zwischen ihnen ist die Vergangenheit vergangen geworden.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #3f0f3f, #180a18);">
+      <div class="pageno">10 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 4 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 16c4-8 14-8 18 0"/><path d="M3 20h18"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Raum und Horizont</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Das Begriffspaar bezeichnet zweierlei: der <b>Erfahrungsraum</b> ist die sedimentierte Vergangenheit &mdash; Erinnerungen, Traditionen, fr&uuml;here Ereignisse, auf die eine Gesellschaft oder ein Einzelner zur&uuml;ckgreifen kann, um die Gegenwart zu deuten.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Der <b>Erwartungshorizont</b> ist das Feld antizipierter Zukunft: die Reichweite dessen, was Menschen erhoffen, f&uuml;rchten, planen &mdash; und das reicht regelm&auml;&szlig;ig weiter, als sich aus der Erfahrung rechtfertigen lie&szlig;e. Beide zusammen orientieren die Handelnden in der Gegenwart.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #1c1917);">
+      <div class="pageno">11 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 5 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M4 20L20 4"/><path d="M14 4h6v6"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Die Beschleunigung</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Solange der Erwartungshorizont den Erfahrungsraum umschloss, war die Zukunft im Grunde mehr vom Gleichen. Die Versprechen der Neuzeit &mdash; Freiheit, Fortschritt, unendliche Vervollkommnung des Menschen &mdash; erzeugten dagegen eine Welt, die auf eine <b>unbekannte Zukunft zubeschleunigt</b>.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">In dieser Periode entsteht, so Koselleck, &bdquo;Geschichte&ldquo; als eine neue Zeitlichkeit &mdash; und damit eine deutlich neue Weise, Erfahrung &uuml;berhaupt zu verarbeiten.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #155e75, #083344);">
+      <div class="pageno">12 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 6 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 12h18"/><path d="M7 8v8"/><path d="M17 8v8"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Die Sattelzeit, 1750&ndash;1850</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;"><b>Sattelzeit</b> ist Kosellecks Name f&uuml;r die &Uuml;bergangsperiode von etwa <b>1750 bis 1850</b>, in der die europ&auml;ischen Gesellschaften ihre politisch-sozialen Grundbegriffe neu konfigurierten und eine ausgepr&auml;gt moderne Erfahrung geschichtlicher Zeit ausbildeten.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Die Grundbegriffe an der Schwelle zur Moderne fielen aus ihrem alten <b>Erfahrungsraum</b> heraus und streckten sich auf einen neuen <b>Erwartungshorizont</b> hin. Wer &bdquo;Revolution&ldquo;, &bdquo;Fortschritt&ldquo; oder &bdquo;Geschichte&ldquo; sagte, meinte danach etwas anderes als vorher.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #581c87, #0f172a);">
+      <div class="pageno">13 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 7 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M4 5h16v14H4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Als Geschichte aufh&ouml;rte, Lehrmeisterin zu sein</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Einer der ber&uuml;hmtesten Aufs&auml;tze des Bandes tr&auml;gt den Titel <b>&bdquo;Historia Magistra Vitae. &Uuml;ber die Aufl&ouml;sung des Topos im Horizont neuzeitlich bewegter Geschichte&ldquo;</b>.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Zweitausend Jahre lang war die Geschichte die Lehrmeisterin des Lebens: Man las sie nach Beispielen ab. Das funktioniert nur, solange die Zukunft der Vergangenheit &auml;hnelt. Sobald sie es nicht mehr tut, wird der Topos unbrauchbar &mdash; und die Lehrmeisterin wird zum Forschungsgegenstand.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e3a5f, #020617);">
+      <div class="pageno">14 / 15 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Befund 8 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 3v9h9"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Semantik als strenges Indiz</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Methodisch greift Koselleck auf sozialgeschichtliche Daten zur&uuml;ck &mdash; in erster Linie aber analysiert er <b>Sprachzeugnisse</b>, um die darin enthaltenen Zeiterfahrungen und Zeitbegriffe aufzudecken und zu vergleichen. Die Semantik, so der Verlag, liefert strenge Indizien, um dem Wandel der Geschichte auf die Spur zu kommen.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Der Band enth&auml;lt dazu unter anderem <i>&bdquo;Begriffsgeschichte und Sozialgeschichte&ldquo;</i>, <i>&bdquo;Zur historisch-politischen Semantik asymmetrischer Gegenbegriffe&ldquo;</i>, <i>&bdquo;Der Zufall als Motivationsrest in der Geschichtsschreibung&ldquo;</i> und <i>&bdquo;Terror und Traum. Methodologische Anmerkungen zu Zeiterfahrungen im Dritten Reich&ldquo;</i>.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: #ede4d3; color: #2d1810;">
+      <div class="pageno">15 / 15 &#10003;</div>
+<p style="font-size:13px; color:#57534e; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; margin:0 0 14px;">Der Satz zum Mitnehmen</p><p style="font-size:22px; line-height:1.4; font-style:italic; margin:0 0 10px;">&bdquo;Der Erfahrungsraum wurde seitdem nicht mehr durch den Erwartungshorizont umschlossen, die Grenzen des Erfahrungsraumes und der Horizont der Erwartung traten auseinander.&ldquo;</p><p style="font-size:14px; color:#57534e; margin:0 0 18px;">&mdash; Reinhart Koselleck, &bdquo;Vergangene Zukunft&ldquo;</p><p style="font-size:16px; line-height:1.5; margin:0 0 4px;"><b>Was bleibt:</b> Koselleck gibt einem diffusen Gef&uuml;hl ein Werkzeug. Wenn heute jemand sagt, die Welt werde unberechenbar, hei&szlig;t das in dieser Sprache: Der Erwartungshorizont hat sich vom Erfahrungsraum gel&ouml;st. Genau dieser Riss ist nach Koselleck kein Betriebsunfall der Gegenwart, sondern die Signatur der Neuzeit &mdash; seit rund zweihundertf&uuml;nfzig Jahren.</p><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">N&auml;chste Schritte</p><a href="https://www.suhrkamp.de/buch/reinhart-koselleck-vergangene-zukunft-t-9783518283578" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Suhrkamp: das Buch, mit Inhaltsverzeichnis</b></a><a href="https://res.cloudinary.com/suhrkamp/images/q_auto/v1742117940/91889/vergangene-zukunft_9783518283578_leseprobe.pdf" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Leseprobe als PDF (Suhrkamp)</b></a><a href="https://www.istitutosvizzero.it/wp-content/uploads/2018/09/ISR_StudioRoma_Koselleck_DE1.pdf" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Der Aufsatz &bdquo;Erfahrungsraum und Erwartungshorizont&ldquo; (PDF)</b></a><a href="https://www.suhrkamp.de/nachricht/zum-100-geburtstag-von-reinhart-koselleck-b-4001" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>Suhrkamp: Zum 100. Geburtstag von Reinhart Koselleck</b></a></div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zur&uuml;ck">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "MacroVoices #548 (3 Sep 2026) with Dr Carly Anderson: the nuclear renaissance turns on a 20-year power contract, a Ford-style assembly line, and a uranium conversion chokepoint that runs through Russia."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Twenty-Year Promise &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+  <section class="card">
+    <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+      <div class="pageno">1 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 1 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;Not Even Close&rdquo; (14 Sep 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">On Odd Lots, what was Robert Friedland&rsquo;s core point about copper?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Recycling will comfortably cover the shortfall this decade</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Demand is falling as electronics get smaller and more efficient</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A monumental shortage &mdash; data centres, EVs and reindustrialisation against mine supply growing barely 1.4% a year</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: C</b> &mdash; The demand curve bends up; the supply curve barely moves. Mines take a decade; the gap is arithmetic, not opinion.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #1e3a5f, #0f2027);">
+      <div class="pageno">2 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 2 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;The Tax You Pay in Hours&rdquo; (1 Sep 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What does Annie Lowrey mean by &ldquo;the time tax&rdquo;?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. The hours lost to commuting in badly planned cities</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. The paperwork, hold music and asset tests standing between citizens and benefits already theirs &mdash; and what that costs in trust</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A proposed levy on screen time to fund public broadcasting</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: B</b> &mdash; Administrative burden is a policy choice, and it is charged in hours to exactly the people with the fewest of them.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #3b0764, #170b26);">
+      <div class="pageno">3 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">&#129504; Recall &middot; 3 of 3</div><h3 style="font-size:23px; margin-bottom:8px;">&ldquo;The Home-Run Business&rdquo; (26 Aug 2026)</h3><p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What is the &ldquo;power law&rdquo; in Sebastian Mallaby&rsquo;s account of venture capital?</p><button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. A tiny handful of bets pay for every failure &mdash; the skew is the business model</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Returns scale predictably with the size of the fund</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Every portfolio company must clear a fixed hurdle rate or be shut down</button><div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">&#9989; <b>Answer: A</b> &mdash; Venture is not about avoiding losses; it is about being in the one deal whose upside is unbounded.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #0f766e, #134e4a);">
+      <div class="pageno">4 / 16 &rarr;</div>
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Construction%20at%20Vogtle%20Nuclear%20Plant.jpg?width=900" alt="Construction at the Vogtle nuclear plant, Georgia" style="display:block; width:100%; max-height:220px; object-fit:cover; border-radius:12px; margin-bottom:14px;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Image: Charles C Watson Jr, CC BY-SA 3.0, via Wikimedia Commons. Construction at the Vogtle nuclear plant &mdash; the US project Anderson cites as &ldquo;way, way over schedule and over budget&rdquo;.</div><div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Episode of the day &middot; &#127911;</div><h1 style="font-size:36px; line-height:1.12; margin:0 0 12px;">The Twenty-Year Promise</h1><p style="font-size:19px; line-height:1.4; opacity:0.92; margin:0 0 18px;"><i>MacroVoices #548 &mdash; Dr Carly Anderson, &lsquo;Emerging Energy Technologies Roundup&rsquo;</i></p><p style="font-size:15px; line-height:1.6; opacity:0.75; margin:0;">Published 3 September 2026 &middot; hosts Erik Townsend &amp; Patrick Ceresna &middot; ~6 min read</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e293b, #020617);">
+      <div class="pageno">5 / 16 &rarr;</div>
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><p style="font-size:30px; line-height:1.24; font-weight:700; margin:0 0 16px;">The thing that restarted nuclear power was not a reactor. It was a signature.</p><p style="font-size:17.5px; line-height:1.5; opacity:0.85; margin:0;">Somebody willing to commit to twenty years of power at a hundred dollars a megawatt-hour. Until a couple of years ago, Anderson says, nobody would sign that.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #064e3b, #052e2b);">
+      <div class="pageno">6 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">The core idea</div><h3 style="font-size:23px; margin:0 0 12px;">Nuclear&rsquo;s problem was never physics</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Anderson &mdash; a PhD chemical engineer whose thesis was on making miniature lightning to heal wounds, now founder and managing director of Timescale Ventures &mdash; argues the constraint is <b>time and financeability</b>, not science. Everything she is excited about compresses a schedule: mass-produced components, smaller units, faster regulatory pathways, restarting and uprating existing plants.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Her priority order is unusual: not lowest cost first, but <b>speed to a reference facility</b>. Get one plant running, then build an order book, then iterate the cost down.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #1e1b4b);">
+      <div class="pageno">7 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M4 5h16v14H4z"/><path d="M8 10h8"/><path d="M8 14h5"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Why the hyperscalers changed everything</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">US energy utilities are relatively small and hyper-local &mdash; some operate two nuclear plants, some four. None of them could underwrite a fleet.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">A hyperscaler can. It creates <b>order books for a dozen plants or more</b>, provides secure offtake, and thereby makes the project financeable. That, Anderson argues, is what opened the market and created the conditions for a nuclear renaissance &mdash; and it also creates a base from which to start exporting.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #1c1917);">
+      <div class="pageno">8 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/></svg><h3 style="font-size:23px; margin:0 0 12px;">The world is already buying &mdash; from China</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">There are roughly <b>80 reactors under construction worldwide</b>, and about <b>60 of them are Chinese designs</b>; something like <b>30 Chinese plants</b> are being built around the world right now. China will <b>double its installed capacity within five years</b>, installing <b>5&ndash;10 GW of nuclear a year</b> &mdash; and it has a ten-year plan behind it.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">India is building most of its capacity in partnership with Russian state-owned organisations. Anderson&rsquo;s blunt summary: if you are not in the US, your options right now are China or Russia. The South Koreans have not been participating in a meaningful way.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #713f12, #292524);">
+      <div class="pageno">9 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M3 18h18"/><path d="M6 18V9"/><path d="M12 18V5"/><path d="M18 18v-6"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Three markets &mdash; and only one is big</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Advanced nuclear costs more at first, so it needs customers who can pay up. Townsend names three: <b>defence</b>, <b>remote sites</b> (mining camps, Alaska &mdash; today run on diesel gensets kept alive by weekly fuel flights into the Arctic), and <b>AI data centres</b>. Anderson agrees.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">But the first two suit <b>microreactors</b> &mdash; under five megawatts, often one, sometimes 200 kilowatts &mdash; and run into export controls and a limited number of bases. As she puts it, you would need 1,001 one-megawatt turbines to equal one AP1000. The data-centre market is where the return is.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #082f49);">
+      <div class="pageno">10 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 8</div><img src="https://commons.wikimedia.org/wiki/Special:FilePath/NRC%20Classification%20for%20Types%20of%20Reactors,%20Small%20Modular%20Reactors%20(44021367912).jpg?width=900" alt="US Nuclear Regulatory Commission chart classifying reactor types, including small modular reactors" style="display:block; width:100%; max-height:230px; object-fit:cover; border-radius:12px; margin-bottom:14px;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Image: Nuclear Regulatory Commission (US), CC BY 2.0, via Wikimedia Commons. NRC classification of reactor types, including small modular reactors.</div><h3 style="font-size:23px; margin:0 0 12px;">The clock, not the core</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">A standard plant is a <b>1,000 MW</b> chunk: site works, concrete, then shipping massive metal containers to site. Vogtle ran way over schedule and budget; the best builders in the world manage <b>five years</b>. Anderson wants designs deployable in <b>under two years, ideally months</b> &mdash; because one data-centre building now goes up in about <b>nine months</b>, and the power has to match that timeline.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">On the regulatory side she singles out the NRC&rsquo;s <b>Part 57</b>, which creates a pathway for advanced reactors distinct from rules written specifically for light-water designs. Her estimate for an AP1000 started today: <b>ten years</b>, seven if lucky.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #3f0f3f, #180a18);">
+      <div class="pageno">11 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><rect x="3" y="10" width="18" height="8" rx="1.5"/><circle cx="8" cy="20" r="1.5"/><circle cx="16" cy="20" r="1.5"/><path d="M7 10V6h6v4"/></svg><h3 style="font-size:23px; margin:0 0 12px;">What Ford did for the car</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Townsend draws a sharp distinction. <b>Factory production</b> &mdash; building off-site rather than on-site &mdash; is not the point. He means <b>mass production</b>: assembly lines, robotics, repeatable precision, tight quality control, assembling reactors at a pace never previously considered. Nobody, he says, really got this until the last year and a half.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Anderson names Aalo Atomics at the small end and Radiant among microreactors, and adds her own emphasis: mass manufacturing shrinks the lead time on vessels, pumps, instruments and safety systems from years to months or weeks. She and Townsend both hope to see a microreactor online in <b>2028, maybe 2029</b>.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #78350f, #1c1917);">
+      <div class="pageno">12 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><path d="M12 3v7"/><path d="M8 10h8l-1 11H9z"/><path d="M9 6h6"/></svg><h3 style="font-size:23px; margin:0 0 12px;">The chokepoint is conversion</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The fuel cycle runs: mine, convert, enrich, deconvert, fabricate, ship. The narrow step is <b>conversion</b> &mdash; getting mined uranium into a form that can be enriched. There are about <b>five facilities in the world</b> that do it. One is in the US, and that plant is very old. A great deal of the capacity sits in <b>Russia</b>.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Executive orders state the US will be off that Russian conversion supply <b>by 2028</b>. There is currently no alternative, and multiple companies are racing to fill the gap. Aalo&rsquo;s appeal, for Anderson, is partly that it runs on <b>low-enriched uranium</b> &mdash; the same fuel as the 90 to 100 reactors already operating in the US.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #155e75, #083344);">
+      <div class="pageno">13 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 7 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg><h3 style="font-size:23px; margin:0 0 12px;">Lasers, and half the heat you throw away</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Enrichment moved from gaseous diffusion to gas centrifuges; <b>lasers</b> may be next. General Matter is updating centrifuge technology; next door in <b>Paducah, Kentucky</b>, GLE is separating uranium-235 from 238 by exciting only one isotope with lasers. <b>Hexium</b> in Texas uses a different laser route starting from lithium metal, which avoids the fluorine chemistry the conventional process depends on.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">And the turbine is a bigger prize than it looks: a steam turbine is only about <b>30%</b> thermally efficient. <b>Supercritical CO<sub>2</sub></b> as the working fluid allows higher pressures, much smaller equipment and efficiencies <b>up to 50%</b> &mdash; or, bolted onto existing plant as a &ldquo;bottoming cycle&rdquo;, another <b>10&ndash;20%</b> of output from assets already built.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #581c87, #0f172a);">
+      <div class="pageno">14 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 8 / 8</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="9" ry="4"/><ellipse cx="12" cy="12" rx="4" ry="9"/></svg><h3 style="font-size:23px; margin:0 0 12px;">The fusion argument they actually have</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Townsend is sceptical; Anderson is not. Her timing case: most new US reactors will not come online until the early-to-mid 2030s anyway &mdash; the same window in which she expects the <b>first fusion power plants</b>. Her cost case: with hydrogen as fuel you delete uranium mining, conversion, enrichment, decommissioning and storage from the bill.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">What changed is components. <b>High-temperature superconducting magnets</b> shrink a fusion device from the size of a football stadium to roughly a house &mdash; that is how Commonwealth Fusion Systems made tokamaks small. Xcimer Energy in Denver took lasers from the Star Wars programme and finished the job. Townsend counters that tritium trades at <b>$30 million per kilogram</b>; Anderson answers with the lithium &ldquo;blanket&rdquo; that breeds its own tritium, leaving deuterium &mdash; found in seawater &mdash; as the only input.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #450a0a, #1c1917);">
+      <div class="pageno">15 / 16 &rarr;</div>
+<div style="display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Why this matters in 2026</div><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.85; align-self:flex-start;"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01"/><path d="M7 17h.01"/></svg><h3 style="font-size:23px; margin:0 0 12px;">One megawatt into a single cabinet</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The scale numbers in this episode are the reason the rest of it matters. A <b>40-megawatt data centre</b> is, as somebody described it to Anderson, the size of <b>six Sam&rsquo;s Clubs</b>. NVIDIA&rsquo;s roadmap points to <b>800-volt distribution</b> inside these buildings, and the industry is now designing to push <b>one megawatt &mdash; roughly the power of 1,000 homes &mdash; into a single cabinet</b>.</p><p style="font-size:17.5px; line-height:1.5; margin:0;">Anderson expects <b>data-centre demand to double between now and 2030</b>. Meanwhile the grid wants a smooth, predictable load, and AI training runs swing from <b>80% to 20%</b> on a one-second timescale. For comparison: the US installed <b>six gigawatts of natural gas last year</b>. Getting six gigawatts of <i>new nuclear</i> deployed, on her arithmetic, lands in the early 2030s.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: #ede4d3; color: #2d1810;">
+      <div class="pageno">16 / 16 &#10003;</div>
+<p style="font-size:13px; color:#57534e; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; margin:0 0 14px;">The line to remember</p><p style="font-size:22px; line-height:1.4; font-style:italic; margin:0 0 10px;">&ldquo;You really do need somebody who&rsquo;s willing to sign a 20-year PPA for $100 per megawatt hour, and that didn&rsquo;t exist until a couple of years ago.&rdquo;</p><p style="font-size:14px; color:#57534e; margin:0 0 18px;">&mdash; Dr Carly Anderson, MacroVoices Episode 548, recorded 3 September 2026.</p><p style="font-size:16px; line-height:1.5; margin:0 0 4px;"><b>What to carry forward:</b> Deep tech became investable, she argues, when simulation got fast enough to design hardware in hours instead of years &mdash; and when engineers out of SpaceX, Rivian and Tesla decided hardware startups were worth joining. The nuclear story is really a manufacturing-and-financing story wearing a physics costume.</p><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p><a href="https://www.macrovoices.com/1548-macrovoices-548-dr-carly-anderson-emerging-energy-technologies-roundup" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>The episode page (MacroVoices #548)</b></a><a href="https://mcdn.podbean.com/mf/web/tiifm6itkxfpi5mp/Macrovoices-2026-09-03-Carly-Anderson.mp3" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Listen: the MP3</b></a><a href="https://www.macrovoices.com/guest-content/list-guest-transcripts/6219-transcript-of-the-podcast-interview-between-erik-townsend-and-dr-carly-anderson-1/file" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Full transcript (PDF, 21 pages)</b></a><a href="https://www.macrovoices.com/podcast-transcripts" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>The MacroVoices transcript archive</b></a></div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
