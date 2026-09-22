@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Eine Stunde History (11.09.2026): Justinians Corpus iuris civilis - 1517 Buchrollen, 400 Jahre verschollen, und bis zum BGB 1900 in Deutschland subsidiaer in Kraft."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Das Gesetzbuch, das Europa &uuml;berlebte &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+      <div class="pageno">1 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Wiederholung · 1 von 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Was Mittelm&auml;chte wirklich rei&szlig;en k&ouml;nnen&ldquo; (18. Sep. 2026)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Welches Muster verbindet die beiden Themen der Folge &mdash; humanoide Robotik und die Rolle der Mittelm&auml;chte?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Beide sind milit&auml;risch bereits entscheidend und werden untersch&auml;tzt</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. In beiden F&auml;llen trifft eine gro&szlig;e Erz&auml;hlung auf die n&uuml;chterne Frage, was davon tats&auml;chlich schon existiert und etwas bewirkt</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Beide sind Randthemen ohne sicherheitspolitische Bedeutung</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Antwort: B</b> — &bdquo;Bald Terminator&ldquo; und &bdquo;das Jahrzehnt der Mittelm&auml;chte&ldquo; sind zwei gro&szlig;e Erz&auml;hlungen &mdash; die Folge pr&uuml;ft sie ohne Sonntagsrhetorik, aufgeh&auml;ngt an Kanadas Ann&auml;herung an die EU.
+    </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #0f766e, #134e4a);">
+      <div class="pageno">2 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Wiederholung · 2 von 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Wenn P&auml;pste Politik machen&ldquo; (1. Sep. 2026)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wie dreht die Folge die Frage nach der Politik des Papsttums um?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Sie fragt, ab wann P&auml;pste &uuml;berhaupt begannen, politisch zu handeln</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Sie fragt, wie politisch das Papsttum &uuml;berhaupt jemals <i>nicht</i> war</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Sie argumentiert, dass P&auml;pste stets auf geistliche Fragen beschr&auml;nkt blieben</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Antwort: B</b> — Von Canossa &uuml;ber Napoleon, den Kirchenstaat, den Friedensappell von 1917 und die Lateranvertr&auml;ge bis zu Pius XII. und Johannes Paul II.: Macht und Moral geh&ouml;ren beim Papsttum seit tausend Jahren zusammen.
+    </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+      <div class="pageno">3 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Wiederholung · 3 von 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Der Zwang zum Selbstzwang&ldquo; (5. Aug. 2026)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was meint Norbert Elias mit dem Zivilisationsprozess?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Den moralischen Fortschritt Europas gegen&uuml;ber anderen Weltregionen</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Die Ausbreitung von Bildung und Lesef&auml;higkeit seit der Aufkl&auml;rung</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Dass Fremdzwang nach und nach zu Selbstzwang wird &mdash; parallel zum Umbau der Gesellschaft</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Antwort: C</b> — Elias verfolgt den Wandel der Pers&ouml;nlichkeitsstruktur in Westeuropa von etwa 800 bis 1900 &mdash; nicht als Werturteil, sondern als messbaren Prozess. Den Umbau der Affekte kann man nicht ohne den Umbau der Gesellschaft verstehen.
+    </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
+      <div class="pageno">4 / 15 →</div>
+      <img src="https://api.ardmediathek.de/image-service/images/urn:ard:image:e622d6dbcfb990be?w=448&amp;ch=b6b75388e0941835" alt="Grafik des Podcasts Eine Stunde History" style="display:block; width:100%; border-radius:12px; margin-bottom:14px; max-height:180px; object-fit:cover;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Art: Deutschlandradio / Deutschlandfunk Nova (identifizierende Nutzung).</div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Folge des Tages · 🎧</div><h1 style="font-size:36px; line-height:1.1; margin:0 0 12px;">Das Gesetzbuch, das Europa &uuml;berlebte</h1><p style="font-size:19px; line-height:1.4; opacity:0.92; margin:0 0 16px;">Eine sp&auml;tantike Sammlung, die verschwand, wiedergefunden wurde &mdash; und in Deutschland bis zum 1. Januar 1900 galt.</p><p style="font-size:15px; opacity:0.78; line-height:1.5; margin:0;">&bdquo;533 &ndash; Kaiser Justinian und die Vereinheitlichung des r&ouml;mischen Rechts&ldquo;<br>Eine Stunde History (Deutschlandfunk Nova) &middot; 11.09.2026 &middot; 48 Min. &middot; ca. 6 Min. Lesezeit</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #831843, #500724);">
+      <div class="pageno">5 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="m5 7-3 7h6Z"/><path d="m19 7-3 7h6Z"/><path d="M8 21h8"/></svg><div style="height:16px"></div><p style="font-size:30px; line-height:1.25; font-weight:600; margin:0 0 18px;">Ein Gesetzeswerk aus dem 6. Jahrhundert war rund dreizehn Jahrhunderte lang die ma&szlig;gebliche Rechtsquelle des kontinentalen Europa.</p><p style="font-size:19px; line-height:1.45; opacity:0.9; margin:0;">Dazwischen lagen etwa 400 Jahre, in denen sein wichtigster Teil schlicht verschollen war.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+      <div class="pageno">6 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Die Kernthese</div><h3 style="font-size:23px; margin-bottom:12px;">Sammeln, ordnen &mdash; und damit haltbar machen</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Der ostr&ouml;mische Kaiser Justinian lie&szlig; im 6. Jahrhundert r&ouml;mische Gesetze sammeln und systematisieren. Jahrhunderte sp&auml;ter wurde der <i>Corpus iuris civilis</i> wiederentdeckt und erforscht. Bis heute pr&auml;gt die Gesetzessammlung Europas Rechtsgeschichte.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Das Recht existierte vorher in einer verwirrenden Vielzahl von Quellen: alte Gesetze, Kaisersp&uuml;che, Juristenschriften. Justinian beschloss, die noch brauchbaren und erneuerbaren Anteile in <i>einem</i> Werk zusammenzufassen &mdash; und dadurch zu bewahren.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #3730a3, #1e1b4b);">
+      <div class="pageno">7 / 15 →</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mosaic%20of%20Justinianus%20I%20-%20Basilica%20San%20Vitale%20(Ravenna).jpg?width=900" alt="Mosaik Kaiser Justinians I., Basilica San Vitale, Ravenna" style="display:block; width:100%; border-radius:12px; margin-bottom:14px; max-height:240px; object-fit:cover;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Bild: Petar Milo&scaron;evi&cacute;, <a href="https://creativecommons.org/licenses/by-sa/4.0/" style="color:inherit">CC BY-SA 4.0</a>, via Wikimedia Commons. Justinian I., Mosaik in San Vitale, Ravenna (geweiht 547).</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 1 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Warum ausgerechnet jetzt, warum ausgerechnet er</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Den historischen Hintergrund bildete ein Einflussverlust: die r&ouml;misch-lateinische Kultur der klassischen Zeit verlor stetig an Boden im vorwiegend griechisch gepr&auml;gten Ostr&ouml;mischen Reich, das nach dem Untergang Westroms den Anspruch auf die Nachfolge des <i>Imperium Romanum</i> erhob. Zeitgenossen wie Johannes Lydos nahmen das als unaufhaltsam wahr.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Justinian war der letzte r&ouml;mische Kaiser, dessen Muttersprache Latein war. Wie weite Teile der damaligen Oberschicht betonte er seine r&ouml;mische Identit&auml;t &mdash; und kn&uuml;pfte demonstrativ an die bedeutende Rechtsliteratur der r&ouml;mischen Kaiserzeit an.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+      <div class="pageno">8 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h9a2 2 0 0 1 2 2v13a3 3 0 0 0 3 3H8"/><path d="M8 3a2 2 0 0 0-2 2v11H3a3 3 0 0 0 3 3"/><path d="M11 8h5M11 12h5"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 2 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Die Werkstatt: 1517 Buchrollen, sechs Leute</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Unter Leitung des hochgebildeten <i>quaestor sacri palatii</i> Tribonian suchte eine sechsk&ouml;pfige Kommission der Zentralb&uuml;rokratie die noch g&uuml;ltigen Kaisererlasse seit der Regierungszeit Hadrians (117&ndash;138 n. Chr.) heraus.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Zur Verf&uuml;gung standen ihnen 225 Juristenschriften unterschiedlichen Umfangs &mdash; insgesamt 1517 Buchrollen aus Papyrus. Detlef Liebs sch&auml;tzt, dass es urspr&uuml;nglich &uuml;ber 300 Juristenschriften und mehr als 2000 <i>libri</i> gab. Was widerspr&uuml;chlich, veraltet oder blo&szlig;e Wiederholung war, fiel heraus.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #155e75, #083344);">
+      <div class="pageno">9 / 15 →</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Corpus%20juris%20civilis%20(1663).jpg?width=700" alt="Titelblatt einer Ausgabe des Corpus juris civilis von 1663" style="display:block; width:100%; border-radius:12px; margin-bottom:14px; max-height:240px; object-fit:cover;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Bild: <i>Corpus juris civilis</i>, Ausgabe 1663. Gemeinfrei, via Wikimedia Commons.</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 3 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Vier Teile, zwei Jahre</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Der <i>Codex Iustinianus</i> wurde 529 erstmals ver&ouml;ffentlicht &mdash; promulgiert im Sinne der Inauguralkonstitution (<i>Constitutio Summa</i> &sect; 3), dass er ab April 529 &bdquo;f&uuml;r alle Zeiten gelten solle&ldquo;. Ende 533 erlangte eine Zweitauflage Rechtskraft, der <i>Codex repetitae praelectionis</i>; abgesehen von einigen Papyrusfragmenten ist allein sie erhalten.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Dazu kamen die <i>Institutiones</i> (533), ein Anf&auml;ngerlehrbuch in Anlehnung an Gaius, das der Gesetzgeber gleich mitver&ouml;ffentlichte; die <i>Digesten</i> oder <i>Pandekten</i> (533), der umfangreichste Teil; und ab 535 die <i>Novellae</i>, Nachtragsgesetze, meist nur griechisch &uuml;berliefert.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #2e1065);">
+      <div class="pageno">10 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 4 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Konservativ &mdash; und deshalb fortschrittlich</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Aus heutiger Sicht wirkt der <i>Corpus</i> in mancher Hinsicht geradezu fortschrittlich, etwa bei der Rechtsstellung von Frauen und Sklaven. Aus dem Blickwinkel seiner Zeit trug er jedoch recht konservative Z&uuml;ge.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Der Grund ist derselbe: gleich in mehreren Punkten wurde ein letztes Mal der r&ouml;mischen Rechtstradition der Vorrang vor den Forderungen der christlichen Kirche einger&auml;umt. Die Scheidung blieb ausdr&uuml;cklich erlaubt, und die privatrechtliche Stellung der Frau war nach dem Gesetz deutlich privilegierter als sp&auml;ter im christlichen Mittelalter.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #713f12, #422006);">
+      <div class="pageno">11 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 5 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Das Vergessen</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Nach der V&ouml;lkerwanderung fehlte dem <i>Corpus</i> die Interpretation durch versierte Juristen &mdash; und einschneidender noch: die Gesetzestexte fanden keinen gesellschaftlichen R&uuml;ckhalt mehr, weil sich die Rechtsvorstellungen ver&auml;ndert hatten. Die germanischen Nachfolgereiche st&uuml;tzten sich eher auf den &auml;lteren <i>Codex Theodosianus</i> von 438.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Im Osten verlor Latein sp&auml;testens ab dem 7. Jahrhundert den Status einer Rechtssprache; byzantinische Gelehrte verstanden den <i>Corpus</i> regelm&auml;&szlig;ig nicht mehr. Die Digesten gerieten ab Mitte des 7. Jahrhunderts in West <i>und</i> Ost in Vergessenheit &mdash; f&uuml;r Jahrhunderte waren sie verschollen.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #065f46, #022c22);">
+      <div class="pageno">12 / 15 →</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Digesto%2002.jpg?width=700" alt="Digestorum seu Pandectarum libri quinquaginta, Lyon 1581" style="display:block; width:100%; border-radius:12px; margin-bottom:14px; max-height:240px; object-fit:cover;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Bild: <i>Digestorum, seu Pandectarum libri quinquaginta</i>, Lyon 1581, Biblioteca Comunale &bdquo;Renato Fucini&ldquo; di Empoli. Gemeinfrei, via Wikimedia Commons.</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 6 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Ein Rhetoriklehrer findet die Digesten</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Mitte des 11. Jahrhunderts tauchten sie wieder auf, in Gestalt der Handschrift der sogenannten <i>Littera Florentina</i>. Als erster bearbeitete Irnerius von Bologna das Werk wissenschaftlich &mdash; vermutlich ein ausgebildeter Rhetoriklehrer mit viel Erfahrung in antiken Texten.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Er muss &uuml;ber die Qualit&auml;t der Digesten erstaunt gewesen sein: zeitgen&ouml;ssische Rechtstexte lieferten nichts Vergleichbares. Er unterrichtete sie, zun&auml;chst wohl im Rhetorik-, sp&auml;ter im Rechtsunterricht. Seine Sch&uuml;ler wurden die <b>Glossatoren</b>, und aus ihrer Rechtsschule von Bologna str&ouml;mten bald Studenten aus ganz Europa zur&uuml;ck in die Heimat &mdash; in kirchliche und weltliche &Auml;mter.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #581c87, #3b0764);">
+      <div class="pageno">13 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 7 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Die lange Wirkung &mdash; und ihre Kehrseite</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Dem Werk wohnte, so die Rezeptionsgeschichte, die <i>ratio scripta</i> inne &mdash; und damit unbeschr&auml;nktes Vertrauen. Am Reichskammergericht musste die H&auml;lfte der Assessoren gelehrte Juristen sein. In der Praxis mischten sich r&ouml;misches, kanonisches und einheimisches Recht zum <i>usus modernus</i>. Code civil, preu&szlig;isches Allgemeines Landrecht und &ouml;sterreichisches ABGB stehen in dieser Tradition; in Deutschland galt der <i>Corpus</i> subsidi&auml;r bis zum Inkrafttreten des BGB am 1. Januar 1900.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Die Kehrseite: die Interpolationenkritik &mdash; die Untersuchung, wie stark klassische Texte in der Sp&auml;tantike ver&auml;ndert wurden &mdash; setzte erst in der zweiten H&auml;lfte des 19. Jahrhunderts ein und wurde jahrzehntelang unterdr&uuml;ckt, um die Autorit&auml;t des CIC nicht zu untergraben. Ernst Levy zeigte sp&auml;ter, dass viele klassische Textfassungen schon im 3. und fr&uuml;hen 4. Jahrhundert verloren waren und Justinian gar nicht mehr vorlagen.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1f2937, #0b1120);">
+      <div class="pageno">14 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2Z"/><path d="M8 3v18"/></svg><div style="height:16px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Warum das 2026 z&auml;hlt</div><h3 style="font-size:23px; margin-bottom:10px;">Der Podcast erz&auml;hlt Europa gerade der Reihe nach</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">&bdquo;Eine Stunde History&ldquo; hat sich nach zehn Jahren neu sortiert: Seit dem 8. Mai 2026 erz&auml;hlt die Reihe die europ&auml;ische Geschichte in 100 Folgen chronologisch vom Anfang bis Jetzt &mdash; montags ab 22 Uhr im Programm, freitags schon als Podcast.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Die Justinian-Folge vom 11. September 2026 steht damit an einer sichtbaren Stelle der Erz&auml;hlung: zwischen der V&ouml;lkerwanderung (4. September) und dem Propheten Mohammed und der Verbreitung des Islam (18. September). Wer die Reihe von vorn h&ouml;rt, bekommt die Rechtsgeschichte nicht als Spezialthema, sondern als tragende Linie.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: #ede4d3; color: #2d1810;">
+      <div class="pageno">15 / 15 ✓</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d1810" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7a4 4 0 0 1-4 4"/><path d="M19 11h-3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7a4 4 0 0 1-4 4"/></svg><div style="height:16px"></div><p style="font-size:22px; line-height:1.45; font-style:italic; margin:0 0 14px;">&bdquo;Bis heute pr&auml;gt die Gesetzessammlung Europas Rechtsgeschichte.&ldquo;</p><p style="font-size:14px; color:#57534e; margin:0 0 20px;">&mdash; Deutschlandfunk Nova, Folgenbeschreibung zu &bdquo;533 &ndash; Kaiser Justinian und die Vereinheitlichung des r&ouml;mischen Rechts&ldquo;, 11.09.2026.</p><div style="border-top:1px solid rgba(0,0,0,0.12); padding-top:16px;"><p style="font-size:15px; line-height:1.5; margin:0 0 6px;"><b>Zum Mitnehmen:</b> Nicht die Kodifikation hat das r&ouml;mische Recht gerettet, sondern ein Zufallsfund plus eine Universit&auml;t. Vierhundert Jahre lagen dazwischen &mdash; Tradition ist brauchbar, aber nicht selbstt&auml;tig.</p></div><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">N&auml;chste Schritte</p><a href="https://www.ardsounds.de/episode/urn:ard:episode:1d8e89d0908ff0e6/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Folge h&ouml;ren (ARD Sounds, 48 Min.)</b></a><a href="https://www.ardsounds.de/sendung/eine-stunde-history/urn:ard:show:605e6977e8fddf2d/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Eine Stunde History &mdash; alle Folgen der 100er-Reihe</b></a><a href="https://www.leges.uni-koeln.de/lex/corpus-iuris/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Corpus Iuris Civilis &mdash; Quellen&uuml;bersicht (Uni K&ouml;ln)</b></a><a href="http://nbn-resolving.de/urn:nbn:de:hbz:061:1-28361" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>Deutsche &Uuml;bersetzung von 1830 (Digitalisat)</b></a></div>
+    </div>
+  </section>
+
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zur&uuml;ck">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

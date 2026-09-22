@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Music: Monteverdi's 'L'Orfeo' (Mantua, 4 February 1607) - the earliest opera still regularly performed, and how it took the genre out of the laboratory."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Oldest Opera Still Sung &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+  <section class="card">
+    <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+      <div class="pageno">1 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">From "At a Slight Angle to the Universe" (14 Sep 2026)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">How did C. P. Cavafy circulate his poems during his lifetime?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. He printed them on loose sheets and handed them to whoever he thought might care</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. He published a celebrated collection with an Athens house in his thirties</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. He serialised them in the Alexandrian daily press</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Answer: A</b> — He never published a book; the first appeared two years after he died. He is now one of the most translated poets of the twentieth century.
+    </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #0f766e, #134e4a);">
+      <div class="pageno">2 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">From "Designed by Gravity" (31 Aug 2026)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">How did Antoni Gaud&iacute; find the shapes for the Sagrada Fam&iacute;lia&rsquo;s arches?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. By scaling up Gothic cathedral plans with new mathematics</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. By hanging weighted chains from a board and inverting the resulting curves</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. By casting small models in plaster and testing them to destruction</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Answer: B</b> — Gravity pulled the chains into elegant curves; turned upside-down, those curves became the strongest possible arches in stone. Gaud&iacute; believed nature had already solved the problems architects struggle with.
+    </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+      <div class="pageno">3 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">From "Sculpting in Time" (29 Aug 2026)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What did Andrei Tarkovsky consider the true raw material of cinema?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. The image &mdash; composition and light above all</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. The performance the director draws from actors</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Time itself, which the director shapes as a sculptor shapes stone</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Answer: C</b> — For Tarkovsky the film image conveys time through its internal rhythm. To direct is to cut away everything that isn&rsquo;t the film from a block of captured time.
+    </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
+      <div class="pageno">4 / 15 →</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bernardo%20Strozzi%20-%20Claudio%20Monteverdi%20(c.1630).jpg?width=480" alt="Bernardo Strozzi, portrait of Claudio Monteverdi, c. 1630" style="display:block; width:100%; border-radius:12px; margin-bottom:14px; max-height:250px; object-fit:cover;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Image: Bernardo Strozzi, <i>Claudio Monteverdi</i> (c. 1630), Tiroler Landesmuseum Ferdinandeum. Public domain, via Wikimedia Commons.</div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Creative topic · 🎨 Music</div><h1 style="font-size:36px; line-height:1.1; margin:0 0 12px;">The Oldest Opera Still Sung</h1><p style="font-size:19px; line-height:1.4; opacity:0.92; margin:0 0 16px;">Mantua, Carnival, 4 February 1607. Not the first opera &mdash; the first one that worked.</p><p style="font-size:15px; opacity:0.78; line-height:1.5; margin:0;">Claudio Monteverdi &middot; <i>L&rsquo;Orfeo</i> (<i>La favola d&rsquo;Orfeo</i>), SV 318<br>Libretto by Alessandro Striggio &middot; score published Venice, 1609 &middot; ~6 min read</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #831843, #500724);">
+      <div class="pageno">5 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><div style="height:16px"></div><p style="font-size:30px; line-height:1.25; font-weight:600; margin:0 0 18px;">Three operas came before it. Two survive complete. Neither is in the repertory.</p><p style="font-size:19px; line-height:1.45; opacity:0.9; margin:0;"><i>L&rsquo;Orfeo</i> is the earliest opera that is still regularly performed &mdash; four hundred and nineteen years on.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+      <div class="pageno">6 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">The core idea</div><h3 style="font-size:23px; margin-bottom:12px;">The work that took a genre out of the laboratory</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">By the early 17th century the traditional <i>intermedio</i> &mdash; a musical sequence between the acts of a spoken play &mdash; was evolving into a complete musical drama. Monteverdi&rsquo;s <i>L&rsquo;Orfeo</i> moved that process out of its experimental era and provided the first fully developed example of the new genre.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Composed at the hinge between Renaissance and Baroque, it employs all the resources then known within the art of music, with a particularly daring use of polyphony &mdash; and it put the emphasis squarely on music, establishing the basic form European opera would keep for the next three hundred years.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #3730a3, #1e1b4b);">
+      <div class="pageno">7 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">What came first, and why it vanished</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Jacopo Peri&rsquo;s <i>Dafne</i>, composed with Jacopo Corsi and performed in Florence in 1598, is generally recognised as the first work belonging to the genre. It combined madrigal singing and monody with dancing and instrumental passages into a dramatic whole. Only fragments of its music still exist.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The Florentine circle around Corsi &mdash; successors to the renowned Camerata &mdash; produced more: Emilio de&rsquo; Cavalieri&rsquo;s <i>Rappresentatione di Anima, et di Corpo</i>, and two settings titled <i>Euridice</i>, by Peri and by Giulio Caccini. Those survive complete, and were the direct precursors of <i>L&rsquo;Orfeo</i>: the first musical treatments of the Orpheus myth as told in Ovid.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+      <div class="pageno">8 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15 9-2 6-4 2 2-6Z"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">A duke goes to a wedding</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">On 6 October 1600, visiting Florence for the wedding of Maria de&rsquo; Medici to Henry IV of France, Duke Vincenzo Gonzaga of Mantua attended the premiere of Peri&rsquo;s <i>Euridice</i>. His principal musicians, Monteverdi very likely among them, were probably there too.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The Duke quickly recognised the novelty of the new form &mdash; and its potential to bring prestige to whoever sponsored it. Monteverdi, born in Cremona in 1567, had joined the Mantuan court around 1590 as a viola player; through ability and hard work he became Gonzaga&rsquo;s <i>maestro della musica</i> in 1601.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #155e75, #083344);">
+      <div class="pageno">9 / 15 →</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Orfeo%20libretto%20prologue.jpg?width=700" alt="Prologue page from the 1607 Mantua libretto of L'Orfeo" style="display:block; width:100%; border-radius:12px; margin-bottom:14px; max-height:240px; object-fit:cover;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Image: prologue from the printed libretto of <i>L&rsquo;Orfeo</i>. Public domain, via Wikimedia Commons.</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Thirteen lines of Ovid</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The librettist was Alessandro Striggio &mdash; a young lawyer and career diplomat at the Gonzaga court, himself a talented musician, and a member of Mantua&rsquo;s exclusive intellectual society, the Accademia degli Invaghiti, which was the city&rsquo;s chief outlet for theatrical works.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">His sources were Books 10 and 11 of Ovid&rsquo;s <i>Metamorphoses</i> and Book 4 of Virgil&rsquo;s <i>Georgics</i>. They gave him the material but not the structure: the events of acts 1 and 2 are covered by a mere thirteen lines in the <i>Metamorphoses</i>. For dramatic form he drew on Poliziano&rsquo;s 1480 play, Guarini&rsquo;s <i>Il pastor fido</i>, and Rinuccini&rsquo;s libretto for Peri.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #2e1065);">
+      <div class="pageno">10 / 15 →</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Frontispiece%20of%20L'Orfeo.jpg?width=700" alt="Frontispiece of Monteverdi's L'Orfeo" style="display:block; width:100%; border-radius:12px; margin-bottom:14px; max-height:240px; object-fit:cover;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Image: frontispiece of Monteverdi&rsquo;s <i>L&rsquo;Orfeo</i>. Public domain, via Wikimedia Commons.</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Two endings, and a room too small</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The libretto printed in Mantua in 1607 to coincide with the premiere keeps Striggio&rsquo;s ambiguous close: the Bacchantes threaten Orfeo&rsquo;s destruction, but his actual fate is left in doubt &mdash; a muted version of the myth&rsquo;s bloody finale. Rinuccini, writing for a Medici wedding, had been obliged to supply a happy ending; Striggio, not writing for a formal celebration, could stay closer to the myth.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Monteverdi&rsquo;s score, published in Venice in 1609 by Ricciardo Amadino, resolves it entirely differently: Apollo carries Orpheus to the heavens. The musicologist Nino Pirrotta argues the Apollo ending was always the plan, but the small room hosting the premiere could not hold the theatrical machinery it required.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #713f12, #422006);">
+      <div class="pageno">11 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">The orchestra <i>is</i> the scenery</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">In his published score Monteverdi lists around 41 instruments, with distinct groups used to depict particular scenes and characters. Strings, harpsichords, harp, organs, recorders and chitarroni represent the pastoral fields of Thrace with their nymphs and shepherds; the heavy brass &mdash; trombones, trumpets, cornetts &mdash; illustrates the underworld and its denizens.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">But the work is not orchestrated as such. Monteverdi states the requirements without specifying their exact usage: in the Renaissance tradition instrumentalists followed general instructions with considerable freedom to improvise. As Nikolaus Harnoncourt points out, the players would all have been composers, and would have expected to collaborate creatively at each performance rather than play a set text.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #065f46, #022c22);">
+      <div class="pageno">12 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">A fanfare, and an early leitmotiv</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The opera opens with a martial-sounding toccata for trumpets, repeated twice. Such flourishes were the standard signal for the start of a performance at the Mantuan court &mdash; a salute to the Duke; the same fanfare opens Monteverdi&rsquo;s 1610 Vespers. Hans Redlich calls the sound on period instruments &ldquo;shattering&rdquo;.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">As the brass fades, a gentler strings <i>ritornello</i> introduces La musica&rsquo;s prologue, returning in shortened form between each of its five verses. Its function in the work as a whole is to represent the power of music &mdash; and it comes back at the end of act 2 and again at the start of act 5, one of the earliest examples of an operatic leitmotiv. It is temporally structured as a palindrome.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #581c87, #3b0764);">
+      <div class="pageno">13 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 7 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Lost for two and a half centuries</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">After Monteverdi&rsquo;s death in 1643 the opera went unperformed for many years. It was still admired across Italy in the 1650s, but was then forgotten &mdash; as, largely, was Monteverdi &mdash; until a revival of interest in the late 19th century. In 1881 Robert Eitner published a truncated score in Berlin, intended for study rather than performance.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">In 1904 Vincent d&rsquo;Indy produced a French edition of parts of the work, and on 25 February 1904 his Schola Cantorum gave the first public performance in two and a half centuries. Romain Rolland, who was there, commended d&rsquo;Indy for returning the opera &ldquo;to the beauty it once had, freeing it from the clumsy restorations which have disfigured it&rdquo;. The first modern staging followed at the Th&eacute;&acirc;tre R&eacute;jane, Paris, on 2 May 1911.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1f2937, #0b1120);">
+      <div class="pageno">14 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18"/><path d="M5 5v6a7 7 0 0 0 14 0V5"/><path d="M9 11h.01M15 11h.01"/><path d="M9 15a4 4 0 0 0 6 0"/></svg><div style="height:16px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Why this matters in 2026</div><h3 style="font-size:23px; margin-bottom:10px;">It is being staged in three countries this season</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The 2007 quatercentenary was celebrated with performances worldwide, and the work has not gone quiet since. At Glyndebourne, <i>L&rsquo;Orfeo</i> ran 14 June &ndash; 25 July 2026 in a new staging by the Olivier Award-winning director William Kentridge.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">In Italy, the Sabbioneta Chamber Opera Festival opened its concert season with <i>L&rsquo;Orfeo</i> on 19 September 2026 at the Teatro all&rsquo;Antica, with a second performance on 20 September at Villa Pisani Bonetti in Bagnolo di Lonigo. In Chicago, Haymarket Opera Company and The Newberry Consort stage it 24&ndash;27 September 2026 at DePaul University &mdash; following their 2025 presentation of Peri&rsquo;s <i>Euridice</i>, the opera that started it.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: #ede4d3; color: #2d1810;">
+      <div class="pageno">15 / 15 ✓</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d1810" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7a4 4 0 0 1-4 4"/><path d="M19 11h-3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7a4 4 0 0 1-4 4"/></svg><div style="height:16px"></div><p style="font-size:22px; line-height:1.45; font-style:italic; margin:0 0 14px;">&ldquo;He blended the entire stock of newest and older possibilities into a unity that was indeed new.&rdquo;</p><p style="font-size:14px; color:#57534e; margin:0 0 20px;">&mdash; Nikolaus Harnoncourt on Monteverdi&rsquo;s first opera score. The aria, the strophic song, recitative, choruses, dances and dramatic interludes were none of them his invention.</p><div style="border-top:1px solid rgba(0,0,0,0.12); padding-top:16px;"><p style="font-size:15px; line-height:1.5; margin:0 0 6px;"><b>One thing to carry:</b> originality here is not new parts but a new assembly &mdash; and because the score leaves so much to the players, every performance of <i>L&rsquo;Orfeo</i> is, as Mark Ringer puts it, a unique experience rather than a reading of a fixed text.</p></div><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p><a href="https://www.glyndebourne.com/events/lorfeo/" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Glyndebourne: Kentridge&rsquo;s L&rsquo;Orfeo</b></a><a href="https://en.wikipedia.org/wiki/L%27Orfeo" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>L&rsquo;Orfeo &mdash; full background and synopsis</b></a><a href="https://commons.wikimedia.org/wiki/File:L'Orfeo,_favola_in_musica,_SV_318_(IA_imslp-favola-in-musica-sv-318-monteverdi-claudio).pdf" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Read the score (public-domain facsimile)</b></a><a href="http://www.haymarketopera.org/lorfeo" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>Haymarket Opera, Chicago &mdash; 24&ndash;27 Sept 2026</b></a></div>
+    </div>
+  </section>
+
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zur&uuml;ck">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

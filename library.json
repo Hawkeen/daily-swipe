@@ -1,7 +1,77 @@
 {
-  "updated": "2026-09-18",
-  "count": 215,
+  "updated": "2026-09-22",
+  "count": 220,
   "swipes": [
+    {
+      "file": "Swipe – Two Thousand Miles to Twenty – 2026-09-22.html",
+      "title": "Two Thousand Miles to Twenty",
+      "date": "2026-09-22",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Peter Hopkirk's 'The Great Game' (1990): when play began the two empires' frontiers lay 2,000 miles apart — by 1907 only twenty. Conolly coined the phrase, then lost his head at Bokhara.",
+      "subject": {
+        "work": "the-great-game-hopkirk",
+        "creator": "peter-hopkirk",
+        "topic": "anglo-russian-rivalry-central-asia",
+        "source": "john-murray"
+      }
+    },
+    {
+      "file": "Swipe – Wenn die letzten Zeugen gehen – 2026-09-22.html",
+      "title": "Wenn die letzten Zeugen gehen",
+      "date": "2026-09-22",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Jan Assmann, „Das kulturelle Gedächtnis“ (C.H. Beck 1992): Das kommunikative Gedächtnis hält rund 80 Jahre — danach entscheidet der Kanon, was eine Gesellschaft von sich weiß.",
+      "subject": {
+        "work": "das-kulturelle-gedaechtnis",
+        "creator": "jan-assmann",
+        "topic": "kulturelles-gedaechtnis-theorie",
+        "source": "ch-beck"
+      }
+    },
+    {
+      "file": "Swipe – Three Shocks, One Harvest – 2026-09-22.html",
+      "title": "Three Shocks, One Harvest",
+      "date": "2026-09-22",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "ECFR's 'The geopolitics of global hunger' (11 Sep 2026): Cary Fowler and Jim O'Brien on war in the Black Sea, a blocked Hormuz and a super El Niño converging — and who could still convene a fix.",
+      "subject": {
+        "work": "ecfr-fowler-obrien-global-hunger",
+        "creator": "cary-fowler",
+        "topic": "global-food-security-crisis",
+        "source": "mark-leonards-world-in-30-minutes"
+      }
+    },
+    {
+      "file": "Swipe – Das Gesetzbuch, das Europa überlebte – 2026-09-22.html",
+      "title": "Das Gesetzbuch, das Europa überlebte",
+      "date": "2026-09-22",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Eine Stunde History (11.09.2026): Justinians Corpus iuris civilis — 1517 Buchrollen in wenigen Jahren, 400 Jahre verschollen, und in Deutschland subsidiär in Kraft bis zum BGB 1900.",
+      "subject": {
+        "work": "esh-justinian-roemisches-recht",
+        "creator": null,
+        "topic": "corpus-iuris-civilis-rechtsgeschichte",
+        "source": "eine-stunde-history"
+      }
+    },
+    {
+      "file": "Swipe – The Oldest Opera Still Sung – 2026-09-22.html",
+      "title": "The Oldest Opera Still Sung",
+      "date": "2026-09-22",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Music · Monteverdi's 'L'Orfeo' (Mantua, 4 February 1607): not the first opera, but the first that worked — 41 instruments, a ritornello that works like a leitmotiv, and two different endings.",
+      "subject": {
+        "work": "monteverdi-lorfeo",
+        "creator": "claudio-monteverdi",
+        "topic": "birth-of-opera-seconda-pratica",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – The Needle Inside the Cotton – 2026-09-18.html",
       "title": "The Needle Inside the Cotton",

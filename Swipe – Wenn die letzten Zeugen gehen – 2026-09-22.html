@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Jan Assmann, 'Das kulturelle Gedaechtnis' (C.H. Beck 1992): kommunikatives Gedaechtnis haelt rund 80 Jahre - danach entscheidet der Kanon, was bleibt."
+}
+</script>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Wenn die letzten Zeugen gehen &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+      <div class="pageno">1 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Wiederholung · 1 von 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Der Riss zwischen Erfahrung und Erwartung&ldquo; (18. Sep. 2026)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Mit welchen zwei Kategorien untersucht Koselleck die Geschichte der Zeiterfahrung?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Fortschritt und Verfall</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Erfahrungsraum und Erwartungshorizont</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Struktur und Ereignis</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Antwort: B</b> — Die beiden Kategorien sind nicht Gegenstand der Geschichte, sondern deren Bedingung &mdash; metahistorische Wissenskategorien. Um 1800 ri&szlig; der Erwartungshorizont vom Erfahrungsraum ab.
+    </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #0f766e, #134e4a);">
+      <div class="pageno">2 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Wiederholung · 2 von 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Die Achse der Weltgeschichte&ldquo; (1. Sep. 2026)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was bezeichnet Karl Jaspers als &bdquo;Achsenzeit&ldquo;?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Die Zeit zwischen etwa 800 und 200 v. Chr., in der die geistige Grundlegung der Menschheit erfolgte</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Die Epoche der europ&auml;ischen Aufkl&auml;rung im 18. Jahrhundert</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Die Jahrhunderte der industriellen Revolution</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Antwort: A</b> — In vier voneinander unabh&auml;ngigen Kulturr&auml;umen &mdash; China, Indien, Iran und der &ouml;stlichen Mittelmeerwelt &mdash; entstanden gleichzeitig jene Grundkategorien, in denen der Mensch bis heute denkt.
+    </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+      <div class="pageno">3 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Wiederholung · 3 von 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">Aus &bdquo;Die Jahreszeiten der Kulturen&ldquo; (29. Aug. 2026)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was ist Spenglers Kernthese im &bdquo;Untergang des Abendlandes&ldquo;?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Geschichte ist ein stetiger Fortschritt, den einzelne Kulturen unterschiedlich schnell durchlaufen</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Kulturen sind Organismen, die wie ein Mensch Kindheit, Reife und Alter durchlaufen</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Kulturen vergehen, sobald ihre wirtschaftliche Basis zusammenbricht</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Antwort: B</b> — Spengler entwirft eine &bdquo;Morphologie der Weltgeschichte&ldquo;: acht Hochkulturen, jede eine geschlossene Gestalt mit eigenem Lebenslauf &mdash; und das Abendland habe seinen Herbst l&auml;ngst hinter sich.
+    </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
+      <div class="pageno">4 / 15 →</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/BD%20Hunefer.jpg?width=900" alt="Totenbuch des Hunefer, 19. Dynastie, British Museum" style="display:block; width:100%; border-radius:12px; margin-bottom:14px; max-height:190px; object-fit:cover;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Bild: Totenbuch des Hunefer (19. Dynastie, 13. Jh. v. Chr.), British Museum. Gemeinfrei, via Wikimedia Commons.</div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Buch des Tages · 📖</div><h1 style="font-size:36px; line-height:1.1; margin:0 0 12px;">Wenn die letzten Zeugen gehen</h1><p style="font-size:19px; line-height:1.4; opacity:0.92; margin:0 0 16px;">Warum Gesellschaften nach rund achtzig Jahren anfangen m&uuml;ssen, ihre Vergangenheit zu <i>machen</i> statt sie zu erz&auml;hlen.</p><p style="font-size:15px; opacity:0.78; line-height:1.5; margin:0;">Jan Assmann &middot; <i>Das kulturelle Ged&auml;chtnis. Schrift, Erinnerung und politische Identit&auml;t in fr&uuml;hen Hochkulturen</i><br>C.H. Beck, M&uuml;nchen 1992 &middot; ca. 6 Min. Lesezeit</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #831843, #500724);">
+      <div class="pageno">5 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div style="height:16px"></div><p style="font-size:30px; line-height:1.25; font-weight:600; margin:0 0 18px;">Eine Erinnerung, die nur erz&auml;hlt wird, h&auml;lt rund achtzig Jahre. Dann stirbt sie mit ihren Tr&auml;gern.</p><p style="font-size:19px; line-height:1.45; opacity:0.9; margin:0;">Assmann nennt das &bdquo;strukturelle Amnesie&ldquo;. Die Frage seines Buches: Was tritt an ihre Stelle?</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+      <div class="pageno">6 / 15 →</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Die Kernthese</div><h3 style="font-size:23px; margin-bottom:12px;">Das kollektive Ged&auml;chtnis hat zwei Aggregatzust&auml;nde</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Assmanns theoretischer Kernbeitrag ist eine Unterscheidung: <b>kommunikatives</b> und <b>kulturelles Ged&auml;chtnis</b> sind die beiden Bestandteile des kollektiven Ged&auml;chtnisses.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Das eine ist m&uuml;ndlich, alltagsnah und zeitlich eng begrenzt. Das andere umfasst den arch&auml;ologischen und schriftlichen Nachlass der Menschheit und bezieht sich auf eine mythische Urzeit. 1992 war das die erste bedeutende Monographie zur Ged&auml;chtnistheorie &mdash; und machte Assmann zum f&uuml;hrenden Vertreter der kulturwissenschaftlichen Ged&auml;chtnisforschung.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #3730a3, #1e1b4b);">
+      <div class="pageno">7 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 1 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Das kommunikative Ged&auml;chtnis: drei Generationen</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Das kommunikative Ged&auml;chtnis meint die m&uuml;ndliche &Uuml;berlieferung pers&ouml;nlicher Erfahrungen. Es ist auf etwa drei Generationen begrenzt &mdash; nach Assmann rund 80 Jahre.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Es ist alltagsnah und gruppengebunden, von geringer Formalit&auml;t, ohne feste Struktur: verbale Erz&auml;hlungen, fl&uuml;chtig und ver&auml;nderlich, aber von starker Vitalit&auml;t. Nach dieser Frist tritt ein, was Assmann &bdquo;strukturelle Amnesie&ldquo; nennt.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+      <div class="pageno">8 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 2 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Das kulturelle Ged&auml;chtnis: geh&auml;rtete Tradition</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Demgegen&uuml;ber steht das kulturelle Ged&auml;chtnis. Assmann definiert es als &bdquo;die Tradition in uns, die &uuml;ber Generationen, in jahrhunderte-, ja teilweise jahrtausendelanger Wiederholung geh&auml;rteten Texte, Bilder und Riten, die unser Zeit- und Geschichtsbewu&szlig;tsein, unser Selbst- und Weltbild pr&auml;gen&ldquo;.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Weitergegeben wird es m&uuml;ndlich, schriftlich, normativ und narrativ. Gegen&uuml;ber dem kommunikativen Ged&auml;chtnis zeichnet es sich durch ein gesteigertes Ma&szlig; an Formalit&auml;t und Geformtheit aus. Seine zentralen Begriffe: Tradition und Wiederholung.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #155e75, #083344);">
+      <div class="pageno">9 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 0 0-6 0 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 1Z"/><path d="M12 5a3 3 0 0 1 6 0 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-6 1Z"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 3 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Drei Dinge, die es zugleich leistet</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Das kulturelle Ged&auml;chtnis umfasst nach Assmann drei Aspekte. Erstens den blo&szlig;en Tatbestand der Erinnerung und des Vergangenheitsbezugs.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Zweitens die Ausbildung kultureller Identit&auml;t und politischer Imagination &mdash; ein Zugeh&ouml;rigkeitsgef&uuml;hl zwischen Einzelnen. Drittens kulturelle Kontinuit&auml;t beziehungsweise Traditionsbildung: die institutionalisierte Auswahl und Deutung dessen, was bewahrt werden soll. Erinnern hei&szlig;t hier immer auch: organisiert vergessen.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #2e1065);">
+      <div class="pageno">10 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h9a2 2 0 0 1 2 2v13a3 3 0 0 0 3 3H8"/><path d="M8 3a2 2 0 0 0-2 2v11H3a3 3 0 0 0 3 3"/><path d="M11 8h5M11 12h5"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 4 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Wer es tr&auml;gt &mdash; und womit</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">In oralen Gesellschaften wird das kulturelle Ged&auml;chtnis von Ged&auml;chtnisexperten weitergegeben; es manifestiert sich in Gedenktagen und religi&ouml;sen Festen. Individuell wird es als Bildungsbesitz erworben.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Aleida Assmann hat auf die entscheidende Rolle der Medien hingewiesen &mdash; &bdquo;externer Speichermedien und kultureller Praktiken&ldquo;. Und: &bdquo;Mit dem wandelnden Entwicklungsstand dieser Medien [wird] auch die Verfasstheit des Ged&auml;chtnisses notwendig mitver&auml;ndert.&ldquo; Das Ged&auml;chtnis h&auml;ngt an seiner Technik.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #713f12, #422006);">
+      <div class="pageno">11 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2Z"/><path d="M8 3v18"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 5 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Das Prinzip Kanon</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Assmann behandelt das kulturelle Ged&auml;chtnis ausdr&uuml;cklich als <i>normative</i> Erinnerung &mdash; unter dem Titel &bdquo;Das Prinzip &lsquo;Kanon&rsquo; in der Erinnerungskultur &Auml;gyptens und Israels&ldquo;.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Besonders eindrucksvoll ist sein Nachweis, dass in Krisenzeiten eine gesteigerte, besonders rigide Kanonisierung des kulturellen Ged&auml;chtnisses stattfindet. Wer sich bedroht f&uuml;hlt, schlie&szlig;t den Kanon.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #065f46, #022c22);">
+      <div class="pageno">12 / 15 →</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Book%20of%20the%20Dead%20of%20Hunefer%20sheet%205.jpg?width=900" alt="Blatt 5 des Totenbuchs des Hunefer, British Museum" style="display:block; width:100%; border-radius:12px; margin-bottom:14px; max-height:220px; object-fit:cover;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Bild: Totenbuch des Hunefer, Blatt 5 (19. Dynastie), British Museum. Gemeinfrei, via Wikimedia Commons. Schrift und Bild als Tr&auml;ger normativer &Uuml;berlieferung.</div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 6 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Drei Kulturen als Testfall</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Das Buch vergleicht drei Mittelmeerkulturen des Altertums: &Auml;gypten, Israel und Griechenland. Es zeigt, welche Bedeutung gerade die Erfindung und der Gebrauch der Schrift f&uuml;r die Entstehung fr&uuml;her Staaten hatten.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Die beiden gro&szlig;en Kapitel tragen die Programmtitel &bdquo;&Auml;gypten und die Erfindung des Staates&ldquo; und &bdquo;Israel und die Erfindung der Religion&ldquo;. Schrift ist hier nicht Verwaltungstechnik, sondern die Bedingung daf&uuml;r, dass eine Gruppe sich &uuml;ber Jahrhunderte hinweg als dieselbe verstehen kann.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #581c87, #3b0764);">
+      <div class="pageno">13 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg><div style="height:14px"></div>
+      <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Erkenntnis 7 / 7</div>
+      <h3 style="font-size:23px; margin-bottom:10px;">Mythomotorik: wenn Erinnerung handelt</h3>
+      <p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Assmanns eigener Begriff f&uuml;r die kollektiv handlungsleitende Wirkung von Mythen lautet <b>Mythomotorik</b>. Er untersucht &bdquo;fr&uuml;he Formen politischer Mythomotorik&ldquo; und unterscheidet dabei fundierende, kontrapr&auml;sentische und revolution&auml;re Mythen.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Die Vorl&auml;ufer benennt er offen: Aby Warburg sprach vom sozialen Ged&auml;chtnis, Maurice Halbwachs pr&auml;gte die <i>m&eacute;moire collective</i> (1925, 1950). Abzugrenzen ist das Ganze von C.G. Jungs st&auml;rker psychologistisch-biologistischer Archetypenlehre und seinem kollektiven Unbewussten.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: linear-gradient(135deg, #1f2937, #0b1120);">
+      <div class="pageno">14 / 15 →</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div style="height:16px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Warum das 2026 z&auml;hlt</div><h3 style="font-size:23px; margin-bottom:10px;">Die Achtzig-Jahre-Schwelle ist jetzt</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Assmanns Frist ist gerade keine Theorie mehr. Zum Holocaust-Gedenktag am 27. Januar 2026 er&ouml;ffnete in Essen das Projekt <i>Holo-Voices</i>, in dem Erinnerungen von Zeitzeugen als Hologramme aufbereitet wurden; in Berlin wurde die internationale Bildungsplattform <i>Shoah Stories</i> vorgestellt, die kurze Videos von Gedenkst&auml;tten, Museen und Bildungseinrichtungen weltweit sammelt.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Bei der zentralen Gedenkveranstaltung der Stiftung Haus der Geschichte im Berliner Tr&auml;nenpalast wurde die &Uuml;berlebende Tova Friedman von Kulturstaatsminister Wolfram Weimer geehrt. Genau dieser &Uuml;bergang &mdash; vom lebendigen Erz&auml;hlen zum geformten, medial gespeicherten Kanon &mdash; ist der Vorgang, den Assmann 1992 beschrieben hat.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="panel" style="background: #ede4d3; color: #2d1810;">
+      <div class="pageno">15 / 15 ✓</div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d1810" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7a4 4 0 0 1-4 4"/><path d="M19 11h-3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7a4 4 0 0 1-4 4"/></svg><div style="height:16px"></div><p style="font-size:22px; line-height:1.45; font-style:italic; margin:0 0 14px;">&bdquo;Die Tradition in uns, die &uuml;ber Generationen, in jahrhunderte-, ja teilweise jahrtausendelanger Wiederholung geh&auml;rteten Texte, Bilder und Riten, die unser Zeit- und Geschichtsbewu&szlig;tsein, unser Selbst- und Weltbild pr&auml;gen.&ldquo;</p><p style="font-size:14px; color:#57534e; margin:0 0 20px;">&mdash; Jan Assmann (7. Juli 1938 &ndash; 19. Februar 2024), Definition des kulturellen Ged&auml;chtnisses. Den Begriff entwickelte er gemeinsam mit seiner Frau Aleida Assmann.</p><div style="border-top:1px solid rgba(0,0,0,0.12); padding-top:16px;"><p style="font-size:15px; line-height:1.5; margin:0 0 6px;"><b>Zum Mitnehmen:</b> Erinnerung ist kein Speicher, sondern eine Praxis. Sobald niemand mehr aus eigener Erfahrung erz&auml;hlen kann, entscheidet eine Gesellschaft aktiv, was sie zum Kanon macht &mdash; und was sie fallen l&auml;sst.</p></div><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">N&auml;chste Schritte</p><a href="https://de.wikipedia.org/wiki/Kulturelles_Ged%C3%A4chtnis" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Kulturelles Ged&auml;chtnis &mdash; &Uuml;berblick</b></a><a href="http://archiv.ub.uni-heidelberg.de/propylaeumdok/1895/1/Assmann_Kollektives_Gedaechtnis_1988.pdf" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Assmann: &bdquo;Kollektives Ged&auml;chtnis und kulturelle Identit&auml;t&ldquo; (PDF, 11 S.)</b></a><a href="https://www.uni-heidelberg.de/fakultaeten/philosophie/zaw/aegy/institut/assmann_publ.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">&rarr; <b>Publikationsverzeichnis Jan Assmann (Uni Heidelberg)</b></a><a href="https://kulturstaatsminister.de/erinnerung-braucht-stimmen" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">&rarr; <b>&bdquo;Erinnerung braucht Stimmen&ldquo; &mdash; Gedenktag 2026</b></a></div>
+    </div>
+  </section>
+
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zur&uuml;ck">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
