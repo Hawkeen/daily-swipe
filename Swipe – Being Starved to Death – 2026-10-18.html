@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Book: Frank Dikötter's 'Mao's Great Famine' (2010) - the Great Leap Forward as a man-made catastrophe decided at the top, reconstructed from China's provincial archives."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Being Starved to Death &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+<section class="card">
+  <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+    <div class="pageno">1 / 15 →</div>
+    <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">From "Two Thousand Miles to Twenty" (2026-09-22)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">In Peter Hopkirk’s <i>The Great Game</i>, what was Britain ultimately trying to protect?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Its access to Persian oil fields</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. India — key to the wealth of the Empire — shielded by buffer states such as Afghanistan, Persia, Khiva and Bukhara</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A trade monopoly on Chinese tea through Kashgar</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">✅ <b>Answer: B</b> — a 19th-century contest fought by surveyors, envoys and spies; when it began the two empires’ frontiers lay 2,000 miles apart, by the end only twenty.</div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+    <div class="pageno">2 / 15 →</div>
+    <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">Aus „Die Achse der Weltgeschichte“ (2026-09-01)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Was ist Karl Jaspers’ Kernthese zur „Achsenzeit“ (ca. 800–200 v. Chr.)?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Die großen Lehren entstanden in Griechenland und verbreiteten sich von dort über die Handelswege nach Osten</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Die Religionen der Achsenzeit waren eine Reaktion auf den Zusammenbruch Roms</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. In China, Indien, Iran und der östlichen Mittelmeerwelt erfolgte annähernd gleichzeitig – ohne voneinander zu wissen – die geistige Grundlegung der Menschheit</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">✅ <b>Antwort: C</b> — Konfuzius, Buddha, Zarathustra, die Propheten Israels und die griechischen Philosophen wirkten fast zeitgleich in vier unabhängigen Kulturräumen.</div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #4c1d95, #2e1065);">
+    <div class="pageno">3 / 15 →</div>
+    <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">From "The Origins of Political Order" (2026-07-03)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">According to Francis Fukuyama, what does a working political order require?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. A strong state, the rule of law and accountable government — the “miracle” is balancing all three</button><button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Free markets first; democracy then follows automatically</button><button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A shared religion, a common language and a written constitution</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">✅ <b>Answer: A</b> — most societies get one or two of the three disproportionately strong; “getting to Denmark” means holding all three in balance.</div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
+    <div class="pageno">4 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Book of the day · 📖</div><h1 style="font-size:36px; line-height:1.1; margin:0 0 12px;">Being Starved to Death</h1><p style="font-size:19px; line-height:1.4; opacity:0.92; margin:0 0 16px;">How Mao’s Great Leap Forward became the deadliest famine on record — reconstructed from the Party’s own archives.</p><p style="font-size:15px; opacity:0.78; line-height:1.5; margin:0;">Frank Dikötter · <i>Mao’s Great Famine: The History of China’s Most Devastating Catastrophe, 1958–62</i><br>Walker &amp; Co. / Bloomsbury, 2010 · 448 pp. · BBC Samuel Johnson Prize 2011 · ~6 min read</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+    <div class="pageno">5 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">The hook</div><p style="font-size:30px; line-height:1.25; font-weight:700; margin:0 0 16px;">“Take Pol Pot and multiply by ten and you get close to the horror.”</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">That is how Frank Dikötter summed up his subject when the book won the 2011 Samuel Johnson Prize, the UK’s largest award for non-fiction. His estimate: at least 45 million premature deaths in four years.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #065f46, #022c22);">
+    <div class="pageno">6 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">The core thesis</div><h3 style="font-size:23px; margin-bottom:10px;">Not an accident. A decision.</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Dikötter argues that the Great Chinese Famine of 1958–62 was a man-made catastrophe caused by decisions of the top leadership in Beijing — not a natural disaster, and not a problem officials were unaware of. It was the product of Mao’s campaign to accelerate industrial production.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">His summary is blunt: “In most cases the party knew very well that it was starving its own people to death.”</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #581c87, #2e1065);">
+    <div class="pageno">7 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 7</div><h3 style="font-size:23px; margin-bottom:10px;">A race to overtake Britain</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">After Khrushchev claimed the Soviet Union would overtake the United States economically, Mao promised that China would surpass Britain’s steel output within fifteen years. The Great Leap Forward followed.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Villagers were pushed into collective farms and people’s communes, made to give up private property, and pulled off the fields for vast irrigation projects. The plan also aimed to repay China’s Soviet debts early.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #9f1239, #4c0519);">
+    <div class="pageno">8 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-3 2-4 2-7 2 1 3 3 3 5 1-2 0-6 0-9z"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 7</div><h3 style="font-size:23px; margin-bottom:10px;">Melting the farm to make steel</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Farm equipment was thrown into makeshift backyard furnaces. In Henan alone, the book records, “more than 140,000 tonnes of farming tools had been thrown into the backyard furnaces.”</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The destruction went far beyond tools: by Dikötter’s account 30–40 percent of rural housing was demolished, and in some provinces up to half of all trees were cut down.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #155e75, #083344);">
+    <div class="pageno">9 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 6 4-4 8 8"/><path d="M21 11v6h-6"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 7</div><h3 style="font-size:23px; margin-bottom:10px;">Quotas built on lies</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Officials inflated targets and promised more than they could deliver. After the summer of 1959, setting a low target was treated as sabotage. Cadres assumed farmers were hiding grain — and seized it.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">At a meeting in Shanghai in March 1959, Dikötter writes, Mao ordered grain procurement of up to one-third of the harvest. Famine was widespread by 1959 and worse in 1960.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #3730a3, #1e1b4b);">
+    <div class="pageno">10 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20c2 1 4 1 6 0s4-1 6 0 4 1 6 0"/><path d="M4 17l-1-5h18l-1 5"/><path d="M12 3v9"/><path d="M8 7h8"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 7</div><h3 style="font-size:23px; margin-bottom:10px;">Exporting food during a famine</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Beijing raised procurement quotas in the countryside to pay for imports — and kept exporting food to allies, along with economic aid and low-interest loans, while its own villagers starved.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">After the 1960 Sino-Soviet split, prestige came first and repayment of Soviet loans was accelerated. Mao even asked whether meat should be banned domestically “and that all of it should be exported.”</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #854d0e, #422006);">
+    <div class="pageno">11 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 7</div><h3 style="font-size:23px; margin-bottom:10px;">Hunger as a weapon</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Most victims starved, but Dikötter counts some 2.5 million people tortured or summarily executed, and one to three million suicides. Local cadres controlled the food supply and could withhold it from anyone they disapproved of; the old, the sick and the weak were treated as expendable.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">In the Xinyang region more than a million people died in 1960, 67,000 of them clubbed to death. In Guangshan county, about one in four of half a million inhabitants died.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #334155, #0f172a);">
+    <div class="pageno">12 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 7</div><h3 style="font-size:23px; margin-bottom:10px;">Silencing the alarm</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">In the summer of 1959 senior officials raised the alarm about the famine. Mao treated this as a challenge to his power: the dissenters were purged, and an anti-party campaign that followed killed thousands.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Only in the spring of 1961 did Liu Shaoqi see the devastation in Hunan for himself.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #86198f, #4a044e);">
+    <div class="pageno">13 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v12h16V8"/><path d="M10 12h4"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 7 / 7</div><h3 style="font-size:23px; margin-bottom:10px;">A window that has closed</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The book rests on four years in newly opened provincial, county and city archives; Dikötter was one of very few historians allowed in. He worked with Zhou Xun, whose documents and survivor testimonies the book also uses. Beijing’s central archives stayed shut.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Access tightened around the 2008 Olympics. “I don’t think it would be possible to research the book now,” he said — and noted an irony: “So through some very bizarre twists, that catastrophe gives the party some credit today.”</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #166534, #052e16);">
+    <div class="pageno">14 / 15 →</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 21h14"/><path d="M3 9l4-6 4 6a4 4 0 0 1-8 0z"/><path d="M13 9l4-6 4 6a4 4 0 0 1-8 0z"/></svg><div style="height:14px"></div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">The debate</div><h3 style="font-size:23px; margin-bottom:10px;">How many — and how deliberate?</h3><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">The 45 million figure is contested. Other estimates include Yang Jisheng’s 36 million, Chen Yizi’s 43 million and Yu Xiguang’s 55 million; government figures from the 1980s point to about 30 million. Critics such as Ó Gráda and Walder dispute the baseline mortality Dikötter used.</p><p style="font-size:17.5px; line-height:1.5; margin:0 0 12px;">Others question his reading of a remark by Mao about letting half the people die, which Garnaut and Bernstein take as hyperbole. One reviewer concludes Mao’s guilt lay in ignorance, arrogance and refusal to admit error — a different kind of evil, not a lesser one.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: #ede4d3; color: #2d1810;">
+    <div class="pageno">15 / 15 ✓</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d1810" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7a4 4 0 0 1-4 4"/><path d="M19 11h-3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7a4 4 0 0 1-4 4"/></svg><div style="height:14px"></div><p style="font-size:22px; line-height:1.45; font-style:italic; margin:0 0 14px;">“There is a difference between starving to death and being starved to death.”</p><p style="font-size:14px; color:#57534e; margin:0 0 20px;">— Frank Dikötter, answering comparisons with earlier famines (as quoted by the historian Wemheuer)</p><div style="border-top:1px solid rgba(0,0,0,0.12); padding-top:16px;"><p style="font-size:15px; line-height:1.5; margin:0 0 6px;"><b>One thing to carry:</b> the Great Leap was a planning failure turned into mass death by politics — quotas no one dared lower, warnings that were punished, and grain shipped abroad for prestige.</p></div><div style="margin-top:14px"><p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p><a href="https://en.wikipedia.org/wiki/Mao%27s_Great_Famine" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Wikipedia · the book, estimates and criticism</b></a><a href="https://www.thebookseller.com/news/dik-tter-scoops-samuel-johnson-prize" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>The Bookseller · Samuel Johnson Prize 2011</b></a><a href="https://www4.hku.hk/pubunit/Bulletin/2011_Jan_Vol.12_No.1/books/page2.html" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>HKU Bulletin · Dikötter on the archives</b></a><a href="https://ethanedwards.substack.com/p/maos-great-famine" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>A critical review · Ethan Edwards</b></a></div>
+  </div>
+</section>
+
+
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Zur&uuml;ck">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Weiter">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>

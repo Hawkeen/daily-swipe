@@ -1,7 +1,77 @@
 {
-  "updated": "2026-09-22",
-  "count": 220,
+  "updated": "2026-10-18",
+  "count": 225,
   "swipes": [
+    {
+      "file": "Swipe – Being Starved to Death – 2026-10-18.html",
+      "title": "Being Starved to Death",
+      "date": "2026-10-18",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Frank Dikötter's 'Mao's Great Famine' (2010): the Great Leap Forward as a man-made catastrophe decided at the top — at least 45 million dead, reconstructed from China's provincial archives.",
+      "subject": {
+        "work": "maos-great-famine",
+        "creator": "frank-dikotter",
+        "topic": "great-leap-forward-famine",
+        "source": "bloomsbury"
+      }
+    },
+    {
+      "file": "Swipe – The Worldly Philosophers – 2026-10-18.html",
+      "title": "The Worldly Philosophers",
+      "date": "2026-10-18",
+      "kicker": "Book of the day · 📖",
+      "emoji": "📖",
+      "description": "Robert Heilbroner's 1953 classic: Smith, Malthus, Ricardo, Marx, Veblen, Keynes and Schumpeter — the great economists as products of the crises they tried to explain.",
+      "subject": {
+        "work": "the-worldly-philosophers",
+        "creator": "robert-heilbroner",
+        "topic": "history-of-economic-thought",
+        "source": null
+      }
+    },
+    {
+      "file": "Swipe – Broken China – 2026-10-18.html",
+      "title": "Broken China",
+      "date": "2026-10-18",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "ChinaTalk (30 Sep 2026): Rhodium's Logan Wright and CFR's Brad Setser on 'Broken China' — the financial system that powered the miracle is now the constraint, and the binding limit is fiscal.",
+      "subject": {
+        "work": "chinatalk-logan-wright-broken-china",
+        "creator": "logan-wright",
+        "topic": "china-financial-system-fiscal-constraint",
+        "source": "chinatalk"
+      }
+    },
+    {
+      "file": "Swipe – If Cows Had Litters – 2026-10-18.html",
+      "title": "If Cows Had Litters",
+      "date": "2026-10-18",
+      "kicker": "Episode of the day · 🎧",
+      "emoji": "🎧",
+      "description": "Freakonomics Radio No. 689 (2 Oct 2026): why ground beef costs 50% more than five years ago — the 10-year cattle cycle, a herd at its low, imports, and the Big Four packers.",
+      "subject": {
+        "work": "freakonomics-689-hamburger-prices",
+        "creator": "derrell-peel",
+        "topic": "us-beef-prices-cattle-cycle",
+        "source": "freakonomics"
+      }
+    },
+    {
+      "file": "Swipe – Menschen des 20. Jahrhunderts – 2026-10-18.html",
+      "title": "Menschen des 20. Jahrhunderts",
+      "date": "2026-10-18",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Fotografie · August Sanders Porträtwerk: sieben Gruppen, 45 geplante Mappen, ein von den Nazis gestopptes Buch und ein Feuer, das 25.000 Negative vernichtete.",
+      "subject": {
+        "work": "menschen-des-20-jahrhunderts",
+        "creator": "august-sander",
+        "topic": "typological-portrait-photography",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – Two Thousand Miles to Twenty – 2026-09-22.html",
       "title": "Two Thousand Miles to Twenty",
