@@ -1,7 +1,21 @@
 {
   "updated": "2026-10-18",
-  "count": 225,
+  "count": 226,
   "swipes": [
+    {
+      "file": "Swipe – Four Witnesses, No Truth – 2026-10-18.html",
+      "title": "Four Witnesses, No Truth",
+      "date": "2026-10-18",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Film · Akira Kurosawa's 'Rashomon' (1950): one death in a forest, four testimonies that cannot all be true — shot into the sun, rained on with ink, rejected at home and crowned in Venice.",
+      "subject": {
+        "work": "rashomon",
+        "creator": "akira-kurosawa",
+        "topic": "rashomon-effect-unreliable-testimony-film",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – Being Starved to Death – 2026-10-18.html",
       "title": "Being Starved to Death",

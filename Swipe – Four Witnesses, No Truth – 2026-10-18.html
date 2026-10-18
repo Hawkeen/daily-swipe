@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Swipe Summary",
+  "description": "Film: Akira Kurosawa's Rashomon (1950) - four conflicting testimonies, a camera pointed at the sun, ink-black rain, and the Golden Lion that put Japanese cinema on the world stage."
+}
+</script>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Four Witnesses, No Truth &mdash; Daily Swipe</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  .swipe {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 540px; margin: 0 auto;
+    background: #0b0b0d;
+  }
+  .dots {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    height: 5px; flex: 1 1 0; min-width: 6px; max-width: 38px;
+    border-radius: 100px; background: rgba(255,255,255,0.22);
+    transition: background .25s ease; cursor: pointer;
+  }
+  .dot.active { background: rgba(255,255,255,0.92); }
+  .track {
+    flex: 1; min-height: 0;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .card {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: center;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    display: flex;
+    padding: 4px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+  .card::-webkit-scrollbar { display: none; }
+  .panel {
+    width: 100%; margin: auto; min-height: 100%;
+    border-radius: 26px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; box-shadow: 0 12px 44px rgba(0,0,0,0.38);
+  }
+  .pageno {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 12px; opacity: 0.7; letter-spacing: 1.5px;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 100px;
+    background: rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; opacity: 0; transition: opacity .2s ease;
+    color: #fff; user-select: none;
+  }
+  .swipe:hover .nav { opacity: 0.9; }
+  .nav.prev { left: 16px; } .nav.next { right: 16px; }
+  .nav.hidden { display: none; }
+  @media (hover: none) { .nav { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="swipe">
+  <div class="dots" id="dots"></div>
+
+  <div class="track" id="track">
+
+<section class="card">
+  <div class="panel quiz" data-correct="b" style="background: linear-gradient(135deg, #312e81, #1e1b4b);">
+    <div class="pageno">1 / 15 →</div>
+    <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 1 of 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">Aus „Wenn die letzten Zeugen gehen“ (22.09.2026)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">Wie lange hält nach Jan Assmann das <i>kommunikative</i> Gedächtnis — die mündliche Überlieferung persönlicher Erfahrungen?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. Eine Generation, rund 30 Jahre — danach übernimmt die Schrift</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Etwa drei Generationen, rund 80 Jahre</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Jahrhunderte, gehärtet durch ständige Wiederholung von Texten und Riten</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Antwort: B</b> — Das kommunikative Gedächtnis ist auf etwa drei Generationen (rund 80 Jahre) begrenzt; was darüber hinaus bleiben soll, muss ins kulturelle Gedächtnis überführt werden — Texte, Bilder und Riten, die über Jahrhunderte gehärtet werden.
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel quiz" data-correct="c" style="background: linear-gradient(135deg, #134e4a, #042f2e);">
+    <div class="pageno">2 / 15 →</div>
+    <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 2 of 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">From "The Dance of Utter Darkness" (2026-09-01)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">What was Tatsumi Hijikata reacting against when he built <i>ankoku butō</i>?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. The rigid technique of American modern dance, which he wanted to replace with classical Noh</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Censorship of Mishima's novels by the post-war Japanese state</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. A Japanese dance scene he felt was overly based on imitating the West and on following traditional forms like Noh</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Answer: C</b> — Butoh began as a refusal: Hijikata turned away from Western ballet and modern dance and from traditional forms, building a dance of crude gestures and darkness that famously “resists fixity”.
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel quiz" data-correct="a" style="background: linear-gradient(135deg, #7c2d12, #431407);">
+    <div class="pageno">3 / 15 →</div>
+    <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">🧠 Recall · 3 of 3</div>
+    <h3 style="font-size:23px; margin-bottom:8px;">From "Why Nations Fail" (2026-06-24)</h3>
+    <p style="font-size:17.5px; line-height:1.45; margin-bottom:16px;">According to Acemoglu and Robinson, what best explains why Nogales, Arizona is far richer than Nogales, Sonora?</p>
+    <button type="button" data-a="a" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">A. The institutions each half lives under — inclusive vs extractive</button>
+    <button type="button" data-a="b" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">B. Differences in climate and natural resources across the border</button>
+    <button type="button" data-a="c" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">C. Cultural differences between the two populations</button>
+    <button type="button" data-a="d" onmousedown="event.stopPropagation()" onclick="qPick(this)" style="display:block; width:100%; text-align:left; margin-bottom:10px; padding:13px 15px; border:1px solid rgba(255,255,255,0.18); border-radius:12px; background:rgba(255,255,255,0.05); color:#fff; font-size:15.5px; cursor:pointer;">D. Better economic policy advice from international experts</button>
+    <div class="qfeedback" style="display:none; margin-top:14px; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.10); border-radius:12px; padding:14px;">
+      ✅ <b>Answer: A</b> — Same geography, climate and ancestry; only the institutions differ. Inclusive institutions spread power and opportunity; extractive ones funnel wealth to a narrow elite and lock in poverty.
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #1c1917, #44403c);">
+    <div class="pageno">4 / 15 →</div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Rashomon_poster.jpg" alt="Original 1950 Japanese poster for Rashomon" style="display:block; width:140px; height:auto; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.3); margin-bottom:18px;"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Poster: Daiei Motion Picture Co., 1950. Public domain via Wikimedia Commons.</div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Creative topic · 🎨</div><h1 style="font-size:36px; margin:0 0 10px; line-height:1.1;">Four Witnesses, No Truth</h1><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Akira Kurosawa’s <i>Rashomon</i> (1950): one death in a forest, four accounts that cannot all be true — and the film that put Japanese cinema on the world stage.</p><p style="font-size:14px; opacity:0.75; margin:6px 0 0;">Film · Daiei, Tokyo premiere 25 Aug 1950 · 88 min · ~6 min read</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #0f172a, #334155);">
+    <div class="pageno">5 / 15 →</div>
+    <p style="font-size:30px; line-height:1.3; font-weight:700; margin:0 0 18px;">A samurai is dead. Four people tell what happened. Their stories do not match.</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Kurosawa’s three assistant directors asked him to explain the script. He told them the film was about “the impossibility of truly understanding human psychology.” Two went off to reread it. The third was eventually asked to resign.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #3f1d0b, #78350f);">
+    <div class="pageno">6 / 15 →</div>
+    <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">The core idea</div><h3 style="font-size:23px; margin:0 0 12px; line-height:1.25;">Not a whodunit — a study in self-serving memory</h3><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;"><i>Rashomon</i> stages one event — a samurai’s death and his wife’s assault in a forest — through four conflicting testimonies, framed by three men sheltering from rain under a ruined city gate.</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Kurosawa’s own reading, as he gave it to his assistants: “Human beings are unable to be honest with themselves about themselves. They cannot talk about themselves without embellishing.” He called the film “a strange picture scroll that is unrolled and displayed by the ego.”</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
+    <div class="pageno">7 / 15 →</div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Akutagawa_Ryunosuke_photo.jpg/960px-Akutagawa_Ryunosuke_photo.jpg" alt="Portrait photograph of Ryūnosuke Akutagawa" style="display:block; width:100%; max-height:240px; object-fit:cover; object-position:top; border-radius:12px; margin-bottom:14px;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Ryūnosuke Akutagawa. Unknown author, public domain via Wikimedia Commons.</div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 1 / 7</div><h3 style="font-size:23px; margin:0 0 12px; line-height:1.25;">Two short stories, one film</h3><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">The plot and characters come from Ryūnosuke Akutagawa’s 1922 short story “In a Grove”; the title and the framing story at the gate come from his earlier story “Rashōmon”.</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">The script began as a draft by Shinobu Hashimoto based on “In a Grove”; Kurosawa added “Rashōmon” and co-wrote the screenplay with him.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #581c87, #2e1065);">
+    <div class="pageno">8 / 15 →</div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Rashomon_%281950%29_Press_Photo_of_Toshiro_Mifune_and_Machiko_Ky%C5%8D.jpg/960px-Rashomon_%281950%29_Press_Photo_of_Toshiro_Mifune_and_Machiko_Ky%C5%8D.jpg" alt="Press photo of Toshiro Mifune and Machiko Kyō in Rashomon" style="display:block; width:100%; max-height:240px; object-fit:cover; object-position:top; border-radius:12px; margin-bottom:14px;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Toshiro Mifune and Machiko Kyō. Press photo, Daiei Studios, 1950. Public domain via Wikimedia Commons.</div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 2 / 7</div><h3 style="font-size:23px; margin:0 0 12px; line-height:1.25;">Four testimonies, four versions</h3><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">The witnesses: the bandit Tajōmaru (Toshiro Mifune), the wife Masago (Machiko Kyō), the dead samurai (Masayuki Mori) — speaking through a medium — and the woodcutter (Takashi Shimura).</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Each account contradicts the others. Even the dead man’s testimony, delivered from beyond the grave, is not treated as neutral.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #713f12, #422006);">
+    <div class="pageno">9 / 15 →</div>
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 3 / 7</div><h3 style="font-size:23px; margin:0 0 12px; line-height:1.25;">Pointing the camera at the sun</h3><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Filming sunlight directly was considered taboo; Kurosawa wanted it anyway, and cinematographer Kazuo Miyagawa agreed to take the risk. In the forest, where electric lights couldn’t be used, eight mirrors bounced sunlight onto the actors, and leaves on a net overhead cast shadows across their faces.</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Miyagawa chose Fujifilm stock — considered inferior to Kodak — for its strong contrast. Kurosawa, who had studied French avant-garde silent films, described the result as a “play of light and shadow”: “I like silent pictures and I always have.”</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #14532d, #052e16);">
+    <div class="pageno">10 / 15 →</div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Rashomon_%281950%29_Press_Photo_of_Minoru_Chiaki%2C_Kichijiro_Ueda%2C_and_Takashi_Shimura.jpg/960px-Rashomon_%281950%29_Press_Photo_of_Minoru_Chiaki%2C_Kichijiro_Ueda%2C_and_Takashi_Shimura.jpg" alt="Press photo of Minoru Chiaki, Kichijirō Ueda and Takashi Shimura at the gate" style="display:block; width:100%; max-height:240px; object-fit:cover; object-position:top; border-radius:12px; margin-bottom:14px;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Minoru Chiaki, Kichijirō Ueda and Takashi Shimura — the chorus at the gate. Press photo, Daiei Studios, 1950. Public domain via Wikimedia Commons.</div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 4 / 7</div><h3 style="font-size:23px; margin:0 0 12px; line-height:1.25;">Three sets, half a roof, black rain</h3><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Only three sets were built: the gate, the forest, and the police courtyard. The gate was so immense, Kurosawa said, that “a complete roof would have buckled the support pillars” — so the crew built half a roof and justified it as dilapidation.</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Rain from fire hoses didn’t register on camera against the sky, so the water was tinted with black ink. Under the gate, critic Alexander Sesonske wrote, “time hangs heavily, dead, empty, idle”; in the forest, “time is charged with passion and anxiety.”</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #0c4a6e, #082f49);">
+    <div class="pageno">11 / 15 →</div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Rashomon_%281950%29_Press_Photo_of_Masayuki_Mori_and_Toshiro_Mifune.jpg/960px-Rashomon_%281950%29_Press_Photo_of_Masayuki_Mori_and_Toshiro_Mifune.jpg" alt="Press photo of Masayuki Mori and Toshiro Mifune in Rashomon" style="display:block; width:100%; max-height:240px; object-fit:cover; object-position:top; border-radius:12px; margin-bottom:14px;" loading="lazy"><div style="font-size:11px; opacity:0.6; margin:-8px 0 14px; line-height:1.35;">Masayuki Mori and Toshiro Mifune. Press photo, Daiei Studios, 1950. Public domain via Wikimedia Commons.</div><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 5 / 7</div><h3 style="font-size:23px; margin:0 0 12px; line-height:1.25;">A grammar of rule-breaking</h3><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Sesonske’s Criterion essay tracks the formal audacity: the woodcutter’s walk into the forest runs “sixteen shots of continuous varied movement while the story waits in abeyance”.</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Kurosawa “breaks the 180-degree rule, thus reversing spatial relationships,” uses camera movement as “cinematic punctuation,” and revives the wipe — which “becomes and remains for Kurosawa an element of style.” The three men at the gate act as “a chorus commenting on the action in the clearing.”</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #7f1d1d, #450a0a);">
+    <div class="pageno">12 / 15 →</div>
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px;"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 6 / 7</div><h3 style="font-size:23px; margin:0 0 12px; line-height:1.25;">Rejected at home, crowned in Venice</h3><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Toho declined the project; Daiei first turned it down before agreeing. After a preview, Daiei president Masaichi Nagata said: “I don’t really get it, but it’s a noble photograph.” Japanese companies objected it wasn’t representative of Japanese cinema and preferred Ozu.</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Giuliana Stramigioli of Italifilm recommended it to Venice anyway. It won the Golden Lion in 1951 and an honorary Academy Award on 20 March 1952. Japanese critics still disliked it; Kurosawa believed his countrymen distrusted a Japanese film that Western audiences enjoyed.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #1f2937, #111827);">
+    <div class="pageno">13 / 15 →</div>
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px;"><path d="M3 15a4 4 0 0 0 4 4h9a5 5 0 1 0-.9-9.9A6 6 0 0 0 3 12"/><path d="M8 21l1-2M12 21l1-2"/></svg><div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Finding 7 / 7</div><h3 style="font-size:23px; margin:0 0 12px; line-height:1.25;">A baby, the rain stops — and a new word</h3><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">The woodcutter finally admits he lied and had hidden the dagger. The film ends with him taking an abandoned baby home as the rain stops. Sesonske notes that the Western music dominant through the film gives way to traditional Japanese music at the close.</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">The title outlived the film: the “Rashomon effect” now names any situation where several people give contradictory accounts of the same event — as <i>Time Out New York</i> put it, the title “has become synonymous with its chief narrative conceit.”</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: linear-gradient(135deg, #4c1d95, #1e1b4b);">
+    <div class="pageno">14 / 15 →</div>
+    <div style="display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.14); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Why this matters in 2026</div><h3 style="font-size:23px; margin:0 0 12px; line-height:1.25;">Still on the big screen, 76 years on</h3><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">In 2026 the Academy Museum in Los Angeles ran <i>Darkness and Humanity: The Complete Akira Kurosawa</i>, screening <i>Rashomon</i> in 35mm on 29 March; Brisbane’s Queensland Art Gallery | Gallery of Modern Art showed it in February.</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 12px;">Its museum blurb still leads with the same legacy: “A samurai’s death unfolds through conflicting witness accounts, pioneering the ‘Rashomon effect.’”</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="panel" style="background: #ede4d3; color: #2d1810;">
+    <div class="pageno">15 / 15 ✓</div>
+    <div style="font-size:22px; line-height:1.4; font-style:italic; margin:0 0 12px;">“Human beings are unable to be honest with themselves about themselves. They cannot talk about themselves without embellishing.”</div><p style="font-size:15px; color:#57534e; margin:0 0 16px;">— Akira Kurosawa, explaining the script to his assistant directors (quoted in Alexander Sesonske’s Criterion essay, 1989)</p><p style="font-size:17.5px; line-height:1.55; margin:0 0 6px;"><b>Try this:</b> watch the four testimonies back to back and note what each witness gains from their version — the film never tells you who is right.</p><div style="margin-top:14px">
+  <p style="font-size:13px; color:#57534e; font-weight:700; margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase">Next steps</p>
+  <a href="https://www.criterion.com/current/posts/920-rashomon" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Alexander Sesonske, “Rashomon” — Criterion essay</b></a>
+  <a href="https://www.rogerebert.com/reviews/great-movie-rashomon-1950" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>Roger Ebert — Great Movies: Rashomon</b></a>
+  <a href="https://www.tcm.com/articles/136021/rashomon-1950" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1); font-size:15px;">→ <b>TCM — Rashomon (1950) article</b></a>
+  <a href="https://en.wikipedia.org/wiki/Rashomon" style="display:block; color:#1c1917; text-decoration:none; padding:10px 0; font-size:15px;">→ <b>Rashomon on Wikipedia</b></a>
+</div>
+  </div>
+</section>
+
+  </div>
+
+  <div class="nav prev hidden" id="prev" aria-label="Back">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="nav next" id="next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </div>
+</div>
+
+<script>
+function qPick(btn){
+  var p = btn.closest('.quiz');
+  if (p.dataset.done) return;
+  p.dataset.done = '1';
+  var correct = p.dataset.correct;
+  p.querySelectorAll('button').forEach(function(b){
+    var ok = b.dataset.a === correct;
+    b.style.background  = ok ? 'rgba(34,197,94,0.30)' : (b === btn ? 'rgba(239,68,68,0.30)' : 'rgba(255,255,255,0.05)');
+    b.style.borderColor = ok ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.18)';
+    b.disabled = true;
+  });
+  p.querySelector('.qfeedback').style.display = 'block';
+}
+</script>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
+  var dotsWrap = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var n = cards.length;
+  var current = 0;
+
+  for (var i = 0; i < n; i++) {
+    (function (idx) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', function () { goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === current) return;
+    current = i;
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === i);
+    prevBtn.classList.toggle('hidden', i === 0);
+    nextBtn.classList.toggle('hidden', i === n - 1);
+  }
+  function goTo(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    setActive(i);
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+
+  track.addEventListener('scroll', function () {
+    setActive(Math.round(track.scrollLeft / track.clientWidth));
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  var wheelLock = false;
+  track.addEventListener('wheel', function (e) {
+    var card = cards[current];
+    var canScrollY = card.scrollHeight > card.clientHeight + 2;
+    if (canScrollY && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+    setTimeout(function () { wheelLock = false; }, 450);
+  }, { passive: false });
+
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('mousedown', function (e) {
+    if (e.target.closest('a')) return;
+    down = true; moved = false; startX = e.pageX; startLeft = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!down) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', function () {
+    if (!down) return;
+    down = false; track.style.scrollBehavior = 'smooth';
+    if (moved) goTo(Math.round(track.scrollLeft / track.clientWidth));
+  });
+
+  window.addEventListener('resize', function () {
+    track.scrollLeft = current * track.clientWidth;
+  });
+
+  setActive(0);
+})();
+</script>
+</body>
+</html>
