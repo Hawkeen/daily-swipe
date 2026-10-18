@@ -1,7 +1,21 @@
 {
   "updated": "2026-10-18",
-  "count": 226,
+  "count": 227,
   "swipes": [
+    {
+      "file": "Swipe – The Ending They Couldn’t Bear – 2026-10-18.html",
+      "title": "The Ending They Couldn’t Bear",
+      "date": "2026-10-18",
+      "kicker": "Creative topic · 🎨",
+      "emoji": "🎨",
+      "description": "Theatre · Shakespeare’s King Lear: a tragedy so bleak that England rewrote it with a happy ending — and kept that version on stage for 157 years.",
+      "subject": {
+        "work": "king-lear",
+        "creator": "william-shakespeare",
+        "topic": "king-lear-tragedy-and-reception",
+        "source": null
+      }
+    },
     {
       "file": "Swipe – Four Witnesses, No Truth – 2026-10-18.html",
       "title": "Four Witnesses, No Truth",
